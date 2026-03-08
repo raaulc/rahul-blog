@@ -31,6 +31,9 @@ body {
   color: var(--text);
   background: var(--bg);
   margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Header */
@@ -94,6 +97,7 @@ nav a:hover {
 
 /* Layout */
 .page-layout {
+  flex: 1;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 3rem 1.5rem;
