@@ -11,6 +11,7 @@
     "publish": "bash scripts/publish.sh"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.6.1",
     "astro": "^4.0.0",
     "chokidar": "^5.0.0"
   }
