@@ -1,0 +1,54 @@
+name: Build and Deploy Blog
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the blog pipeline repo
+      - name: Checkout blog pipeline
+        uses: actions/checkout@v4
+
+      # 2. Checkout the Obsidian vault repo into ./vault
+      #    Set VAULT_REPO in repo secrets as "owner/repo-name"
+      - name: Checkout Obsidian vault
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ secrets.VAULT_REPO }}
+          token: ${{ secrets.VAULT_ACCESS_TOKEN }}
+          path: vault
+
+      # 3. Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 4. Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # 5. Run transform script
+      #    Reads from ./vault, writes to src/content/posts/ and public/images/
+      - name: Transform vault notes
+        run: node scripts/transform.js --vault ./vault --attachments attachments
+
+      # 6. Build Astro site
+      - name: Build Astro site
+        run: npm run build
+
+      # 7. Deploy to Vercel
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+          working-directory: .
