@@ -4,6 +4,13 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('posts')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+
+const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
+
+function readingTime(post) {
+  const words = post.body.split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200));
+}
 ---
 
 <!doctype html>
@@ -11,27 +18,68 @@ const posts = (await getCollection('posts')).sort(
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog</title>
+    <title>Rahul -- AI Engineering & Building in Public</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/styles/global.css" />
   </head>
   <body>
-    <main>
-      <h1>Blog</h1>
-      <ul class="post-list">
-        {posts.map((post) => (
-          <li>
-            <a href={`/posts/${post.slug}`}>{post.data.title}</a>
-            <time datetime={post.data.date.toISOString()}>
-              {post.data.date.toLocaleDateString('en-GB', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </time>
-          </li>
-        ))}
-      </ul>
-      {posts.length === 0 && <p>No posts yet.</p>}
-    </main>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="/" class="site-name">Rahul</a>
+        <nav>
+          <a href="/">Writing</a>
+          <a href="/about">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="page-layout">
+      <main>
+        <ul class="post-list">
+          {posts.map((post) => (
+            <li class="post-item">
+              <a href={`/posts/${post.slug}`} class="post-title">{post.data.title}</a>
+              {post.data.description && (
+                <p class="post-description">{post.data.description}</p>
+              )}
+              <div class="post-meta">
+                <time datetime={post.data.date.toISOString()}>
+                  {post.data.date.toLocaleDateString('en-GB', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </time>
+                <span class="dot">·</span>
+                <span>{readingTime(post)} min read</span>
+              </div>
+            </li>
+          ))}
+          {posts.length === 0 && <p class="empty">No posts yet.</p>}
+        </ul>
+      </main>
+
+      <aside>
+        <div class="sidebar-card">
+          <p class="bio">
+            Software engineer and indie developer. Writing about agentic AI, building products, and everything in between.
+          </p>
+          <a href="/about" class="subscribe-btn">About me</a>
+        </div>
+
+        {allTags.length > 0 && (
+          <div class="sidebar-card">
+            <h3 class="sidebar-heading">Topics</h3>
+            <div class="tags">
+              {allTags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        )}
+      </aside>
+    </div>
   </body>
 </html>

@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "transform": "node scripts/transform.js",
-    "watch": "node scripts/transform.js --watch"
+    "watch": "node scripts/transform.js --watch",
+    "publish": "bash scripts/publish.sh"
   },
   "dependencies": {
     "astro": "^4.0.0",

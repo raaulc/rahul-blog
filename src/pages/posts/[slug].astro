@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -11,6 +11,9 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+const words = post.body.split(/\s+/).length;
+const readingTime = Math.max(1, Math.round(words / 200));
 ---
 
 <!doctype html>
@@ -18,26 +21,45 @@ const { Content } = await post.render();
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{post.data.title}</title>
+    <title>{post.data.title} -- Rahul</title>
     {post.data.description && <meta name="description" content={post.data.description} />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/styles/global.css" />
   </head>
   <body>
-    <main>
-      <a href="/" class="back">&larr; All posts</a>
-      <article>
-        <header>
-          <h1>{post.data.title}</h1>
-          <time datetime={post.data.date.toISOString()}>
-            {post.data.date.toLocaleDateString('en-GB', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </time>
-        </header>
-        <Content />
-      </article>
-    </main>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="/" class="site-name">Rahul</a>
+        <nav>
+          <a href="/">Writing</a>
+          <a href="/about">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="page-layout single">
+      <main>
+        <a href="/" class="back">&larr; All posts</a>
+        <article>
+          <header>
+            <h1>{post.data.title}</h1>
+            <div class="post-meta">
+              <time datetime={post.data.date.toISOString()}>
+                {post.data.date.toLocaleDateString('en-GB', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
+              <span class="dot">·</span>
+              <span>{readingTime} min read</span>
+            </div>
+          </header>
+          <Content />
+        </article>
+      </main>
+    </div>
   </body>
 </html>
