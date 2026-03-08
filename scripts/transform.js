@@ -292,6 +292,7 @@ function run() {
       slug,
       ...(cleanFm.description ? { description: cleanFm.description } : {}),
       ...(cleanFm.tags && cleanFm.tags.length > 0 ? { tags: cleanFm.tags } : {}),
+      ...(cleanFm.type ? { type: cleanFm.type } : {}),
     };
 
     const output = `${serializeFrontmatter(outputFm)}\n\n${transformed}\n`;
