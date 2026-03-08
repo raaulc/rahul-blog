@@ -98,9 +98,11 @@ nav a:hover {
 /* Layout */
 .page-layout {
   flex: 1;
+  width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 3rem 1.5rem;
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: 1fr 300px;
   gap: 4rem;
