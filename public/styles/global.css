@@ -148,7 +148,8 @@ nav a:hover {
   color: #ccc;
 }
 
-.empty {
+.empty,
+.coming-soon {
   color: var(--muted);
   padding: 2rem 0;
 }
