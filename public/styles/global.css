@@ -298,13 +298,51 @@ article pre code {
 
 /* Responsive */
 @media (max-width: 768px) {
+  /* Header: stack name + nav vertically */
+  .site-header {
+    padding: 0 1rem;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding: 0.75rem 0;
+    gap: 0.5rem;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  nav a {
+    font-size: 0.875rem;
+  }
+
+  .theme-toggle {
+    margin-left: 0;
+  }
+
+  /* Layout: single column */
   .page-layout {
     grid-template-columns: 1fr;
     gap: 2rem;
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
   }
 
+  /* Sidebar below posts on home, hidden on mobile to keep it clean */
   aside {
-    order: -1;
+    display: none;
+  }
+
+  /* Single post */
+  article header h1 {
+    font-size: 1.5rem;
+  }
+
+  .post-title {
+    font-size: 1.05rem;
   }
 }
