@@ -2,7 +2,6 @@
 title: About
 date: 2026-03-08
 slug: about
-type: page
 ---
 
 # About me
@@ -19,7 +18,7 @@ I build apps and agentic AI workflows, and I write about what I learn along the 
 
 ## Background
 
-I have been writing software for years, but I am now going all-in on building products independently. No team, no employer -- just shipping things and learning fast.
+I have been writing software for years, but I am now I am also building products.Shipping things and learning fast using AI. 
 
 ## Get in touch
 

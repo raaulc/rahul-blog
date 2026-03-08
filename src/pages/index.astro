@@ -23,6 +23,12 @@ function readingTime(post) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/styles/global.css" />
+    <script>
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    </script>
   </head>
   <body>
     <header class="site-header">
@@ -31,9 +37,25 @@ function readingTime(post) {
         <nav>
           <a href="/">Writing</a>
           <a href="/about">About</a>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☀</button>
         </nav>
       </div>
     </header>
+    <script>
+      const btn = document.getElementById('theme-toggle');
+      const root = document.documentElement;
+      function update() {
+        const dark = root.getAttribute('data-theme') === 'dark';
+        btn.textContent = dark ? '☀' : '☾';
+      }
+      update();
+      btn.addEventListener('click', () => {
+        const dark = root.getAttribute('data-theme') === 'dark';
+        root.setAttribute('data-theme', dark ? 'light' : 'dark');
+        localStorage.setItem('theme', dark ? 'light' : 'dark');
+        update();
+      });
+    </script>
 
     <div class="page-layout">
       <main>
