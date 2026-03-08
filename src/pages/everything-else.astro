@@ -1,4 +1,5 @@
 ---
+import Analytics from '@vercel/analytics/astro';
 ---
 
 <!doctype html>
@@ -12,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="stylesheet" href="/styles/global.css" />
+    <Analytics />
     <script>
       const saved = localStorage.getItem('theme');
       if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
