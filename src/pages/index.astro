@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('posts')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
+const posts = (await getCollection('posts'))
+  .filter((p) => p.data.type !== 'page')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
 
