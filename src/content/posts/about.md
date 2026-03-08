@@ -23,4 +23,4 @@ I have been writing software for years, but I am now I am also building products
 
 ## Get in touch
 
-Find me on [GitHub](https://github.com/raaulc).
+Find me on [GitHub](https://github.com/raaulc) and [Linkedin](https://www.linkedin.com/in/raaulc/).
