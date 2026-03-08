@@ -296,6 +296,25 @@ article pre code {
   padding: 0;
 }
 
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.site-footer a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: var(--text);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   /* Header: stack name + nav vertically */

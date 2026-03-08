@@ -1,4 +1,9 @@
 ---
+import { getCollection } from 'astro:content';
+
+const all = await getCollection('posts');
+const page = all.find((p) => p.slug === 'privacy');
+const { Content } = page ? await page.render() : { Content: null };
 ---
 
 <!doctype html>
@@ -6,7 +11,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projects -- Rahul</title>
+    <title>Privacy Policy -- Rahul</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -51,12 +56,10 @@
     <div class="page-layout single">
       <main>
         <article>
-          <h1>Projects</h1>
-          <p class="coming-soon">Coming soon.</p>
+          {Content ? <Content /> : <p>Privacy policy coming soon.</p>}
         </article>
       </main>
     </div>
-    <footer class="site-footer"><a href="/privacy">Privacy Policy</a></footer>
     <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>
