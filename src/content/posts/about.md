@@ -15,7 +15,6 @@ I build apps and agentic AI workflows, and I write about what I learn along the 
 
 - Shipping my first AI-powered product
 - Going deep on agentic AI and LLM engineering
-- Solving 400+ DSA problems
 - Building in public
 
 ## Background
