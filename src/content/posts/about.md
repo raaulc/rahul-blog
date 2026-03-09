@@ -1,25 +1,24 @@
 ---
 title: About
-date: 2026-03-08
+date: 2026-03-09
 slug: about
 type: page
 ---
 
 # About me
 
-I am Rahul -- a software engineer and solo indie developer based in Sheffield, UK.
+I am Rahul -- a software engineer based in Sheffield, UK.
 
-I build apps and agentic AI workflows, and I write about what I learn along the way.
+I like build apps and agentic AI workflows, and I write about what I learn along the way.
 
 ## What I am working on
 
-- Shipping my first AI-powered product
+- Learn how to ship faster in AI era
 - Going deep on agentic AI and LLM engineering
-- Building in public
 
 ## Background
 
-I have been writing software for years, but I am now I am also building products.Shipping things and learning fast using AI. 
+I have been writing software for years, but I am now I am also learning AI. So sharing notes here along the way. 
 
 ## Get in touch
 
