@@ -91,11 +91,11 @@ const readingTime = Math.max(1, Math.round(words / 200));
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: false, theme: 'neutral' });
-      document.querySelectorAll('pre > code.language-mermaid').forEach((el) => {
+      document.querySelectorAll('pre[data-language="mermaid"]').forEach((pre) => {
         const container = document.createElement('div');
         container.className = 'mermaid';
-        container.textContent = el.textContent;
-        el.parentElement.replaceWith(container);
+        container.textContent = pre.querySelector('code').textContent;
+        pre.replaceWith(container);
       });
       await mermaid.run();
     </script>
