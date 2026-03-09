@@ -88,5 +88,16 @@ const readingTime = Math.max(1, Math.round(words / 200));
     </div>
     <footer class="site-footer"><a href="/privacy">Privacy Policy</a></footer>
     <script defer src="/_vercel/insights/script.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: false, theme: 'neutral' });
+      document.querySelectorAll('pre > code.language-mermaid').forEach((el) => {
+        const container = document.createElement('div');
+        container.className = 'mermaid';
+        container.textContent = el.textContent;
+        el.parentElement.replaceWith(container);
+      });
+      await mermaid.run();
+    </script>
   </body>
 </html>
