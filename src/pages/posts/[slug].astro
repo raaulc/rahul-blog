@@ -14,6 +14,10 @@ const { Content } = await post.render();
 
 const words = post.body.split(/\s+/).length;
 const readingTime = Math.max(1, Math.round(words / 200));
+
+function fmtDate(d) {
+  return d.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: '2-digit' });
+}
 ---
 
 <!doctype html>
@@ -21,76 +25,60 @@ const readingTime = Math.max(1, Math.round(words / 200));
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{post.data.title} -- Rahul</title>
+    <title>{post.data.title} -- rahul</title>
     {post.data.description && <meta name="description" content={post.data.description} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="stylesheet" href="/styles/global.css" />
-    <script>
-      const saved = localStorage.getItem('theme');
-      if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    </script>
   </head>
   <body>
-    <header class="site-header">
-      <div class="header-inner">
-        <a href="/" class="site-name"><img src="/logo.svg" alt="Rahul" />Rahul</a>
-        <nav>
-          <a href="/">Blogs</a>
-          <a href="/projects">Projects</a>
-          <a href="/everything-else">Everything Else</a>
-          <a href="/about">About</a>
-          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☀</button>
-        </nav>
-      </div>
-    </header>
-    <script>
-      const btn = document.getElementById('theme-toggle');
-      const root = document.documentElement;
-      function update() {
-        const dark = root.getAttribute('data-theme') === 'dark';
-        btn.textContent = dark ? '☀' : '☾';
-      }
-      update();
-      btn.addEventListener('click', () => {
-        const dark = root.getAttribute('data-theme') === 'dark';
-        root.setAttribute('data-theme', dark ? 'light' : 'dark');
-        localStorage.setItem('theme', dark ? 'light' : 'dark');
-        update();
-      });
-    </script>
+    <nav class="navbar">
+      <span class="navbar-path">
+        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
+      </span>
+      <ul class="navbar-nav">
+        <li><a href="/" class="active">blog</a></li>
+        <li><a href="/projects">projects</a></li>
+        <li><a href="/everything-else">everything-else</a></li>
+        <li><a href="/about">about</a></li>
+      </ul>
+    </nav>
 
-    <div class="page-layout single">
-      <main>
-        <a href="/" class="back">&larr; All posts</a>
-        <article>
-          <header>
-            <h1>{post.data.title}</h1>
-            <div class="post-meta">
-              <time datetime={post.data.date.toISOString()}>
-                {post.data.date.toLocaleDateString('en-GB', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </time>
-              <span class="dot">·</span>
-              <span>{readingTime} min read</span>
-            </div>
-          </header>
-          <Content />
-        </article>
-      </main>
-    </div>
-    <footer class="site-footer"><a href="/privacy">Privacy Policy</a></footer>
+    <main class="container">
+      <a href="/" class="back-link">← cd ..</a>
+
+      <p class="cmd">
+        <span class="dollar">$</span>
+        <span class="command"> cat</span>
+        <span class="arg"> ./blog/{post.slug}.md</span>
+      </p>
+
+      <div class="post-meta-line">
+        <span>{fmtDate(post.data.date)}</span>
+        <span class="post-meta-sep">·</span>
+        <span>{readingTime} min read</span>
+        {post.data.tags && post.data.tags.length > 0 && (
+          <>
+            <span class="post-meta-sep">·</span>
+            <span>{post.data.tags.join(', ')}</span>
+          </>
+        )}
+      </div>
+
+      <article class="post-content">
+        <Content />
+      </article>
+    </main>
+
+    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
+
     <script defer src="/_vercel/insights/script.js"></script>
+
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: false, theme: 'neutral' });
+      mermaid.initialize({ startOnLoad: false, theme: 'dark' });
       document.querySelectorAll('pre[data-language="mermaid"]').forEach((pre) => {
         const container = document.createElement('div');
         container.className = 'mermaid';

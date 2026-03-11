@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140">
+  <rect width="140" height="140" fill="#111111"/>
+  <rect width="140" height="140" fill="none" stroke="#1e1e1e" stroke-width="1"/>
+  <!-- grid lines -->
+  <line x1="0" y1="35" x2="140" y2="35" stroke="#1e1e1e" stroke-width="0.5"/>
+  <line x1="0" y1="70" x2="140" y2="70" stroke="#1e1e1e" stroke-width="0.5"/>
+  <line x1="0" y1="105" x2="140" y2="105" stroke="#1e1e1e" stroke-width="0.5"/>
+  <line x1="35" y1="0" x2="35" y2="140" stroke="#1e1e1e" stroke-width="0.5"/>
+  <line x1="70" y1="0" x2="70" y2="140" stroke="#1e1e1e" stroke-width="0.5"/>
+  <line x1="105" y1="0" x2="105" y2="140" stroke="#1e1e1e" stroke-width="0.5"/>
+  <!-- center circle -->
+  <circle cx="70" cy="70" r="32" fill="none" stroke="#2a2a2a" stroke-width="1"/>
+  <!-- R initial -->
+  <text x="70" y="78" font-family="'IBM Plex Mono', monospace" font-size="32" font-weight="500" fill="#7eb8f7" text-anchor="middle">R</text>
+  <!-- bottom label -->
+  <text x="70" y="128" font-family="'IBM Plex Mono', monospace" font-size="8" letter-spacing="3" fill="#3a3a3a" text-anchor="middle">NO PHOTO</text>
+</svg>

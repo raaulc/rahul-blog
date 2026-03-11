@@ -5,11 +5,13 @@ const posts = (await getCollection('posts'))
   .filter((p) => p.data.type !== 'page')
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const allTags = [...new Set(posts.flatMap((p) => p.data.tags ?? []))];
-
 function readingTime(post) {
   const words = post.body.split(/\s+/).length;
   return Math.max(1, Math.round(words / 200));
+}
+
+function fmtDate(d) {
+  return d.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: '2-digit' });
 }
 ---
 
@@ -18,95 +20,145 @@ function readingTime(post) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rahul -- AI Engineering & Building in Public</title>
+    <title>rahul -- ai engineering & building in public</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="stylesheet" href="/styles/global.css" />
-    <script>
-      const saved = localStorage.getItem('theme');
-      if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    </script>
   </head>
   <body>
-    <header class="site-header">
-      <div class="header-inner">
-        <a href="/" class="site-name"><img src="/logo.svg" alt="Rahul" />Rahul</a>
-        <nav>
-          <a href="/">Blogs</a>
-          <a href="/projects">Projects</a>
-          <a href="/everything-else">Everything Else</a>
-          <a href="/about">About</a>
-          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☀</button>
-        </nav>
+    <nav class="navbar">
+      <span class="navbar-path">
+        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
+      </span>
+      <ul class="navbar-nav">
+        <li><a href="/" class="active">blog</a></li>
+        <li><a href="/projects">projects</a></li>
+        <li><a href="/everything-else">everything-else</a></li>
+        <li><a href="/about">about</a></li>
+      </ul>
+    </nav>
+
+    <main class="container">
+
+      <!-- Boot -->
+      <div class="boot">
+        <span class="boot-label">output</span>
+        <div class="boot-line"><span class="ok">[  OK  ]</span><span class="boot-msg">Started <span class="hi">raaulc.com</span> — personal site and second brain</span></div>
+        <div class="boot-line"><span class="ok">[  OK  ]</span><span class="boot-msg">Loaded user profile: <span class="hi">software engineer, indie dev, sheffield uk</span></span></div>
+        <div class="boot-line"><span class="info-tag">[ INFO ]</span><span class="boot-msg">Status: pre-revenue — building toward first launch</span></div>
+        <div class="boot-line"><span class="info-tag">[ INFO ]</span><span class="boot-msg">Focus: agentic AI, app development, DSA grind</span></div>
       </div>
-    </header>
-    <script>
-      const btn = document.getElementById('theme-toggle');
-      const root = document.documentElement;
-      function update() {
-        const dark = root.getAttribute('data-theme') === 'dark';
-        btn.textContent = dark ? '☀' : '☾';
-      }
-      update();
-      btn.addEventListener('click', () => {
-        const dark = root.getAttribute('data-theme') === 'dark';
-        root.setAttribute('data-theme', dark ? 'light' : 'dark');
-        localStorage.setItem('theme', dark ? 'light' : 'dark');
-        update();
-      });
-    </script>
 
-    <div class="page-layout">
-      <main>
-        <ul class="post-list">
-          {posts.map((post) => (
-            <li class="post-item">
-              <a href={`/posts/${post.slug}`} class="post-title">{post.data.title}</a>
-              {post.data.description && (
-                <p class="post-description">{post.data.description}</p>
-              )}
-              <div class="post-meta">
-                <time datetime={post.data.date.toISOString()}>
-                  {post.data.date.toLocaleDateString('en-GB', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </time>
-                <span class="dot">·</span>
-                <span>{readingTime(post)} min read</span>
-              </div>
-            </li>
-          ))}
-          {posts.length === 0 && <p class="empty">No posts yet.</p>}
-        </ul>
-      </main>
-
-      <aside>
-        <div class="sidebar-card">
-          <p class="bio">
-            Software engineer and indie developer. Writing about agentic AI, building products, and everything in between.
-          </p>
-          <a href="/about" class="subscribe-btn">About me</a>
-        </div>
-
-        {allTags.length > 0 && (
-          <div class="sidebar-card">
-            <h3 class="sidebar-heading">Topics</h3>
-            <div class="tags">
-              {allTags.map((tag) => (
-                <span class="tag">{tag}</span>
-              ))}
+      <!-- Whois -->
+      <div class="section">
+        <p class="cmd">
+          <span class="dollar">$</span>
+          <span class="command"> whois</span>
+          <span class="arg"> rahul</span>
+        </p>
+        <div class="bio-layout">
+          <div class="bio-photo">
+            <img src="/avatar.svg" alt="Rahul" />
+          </div>
+          <div class="bio-fields">
+            <div class="bio-field">
+              <span class="bio-key">name</span>
+              <span class="bio-sep">:</span>
+              <span class="bio-val bright">Rahul</span>
+            </div>
+            <div class="bio-field">
+              <span class="bio-key">role</span>
+              <span class="bio-sep">:</span>
+              <span class="bio-val orange">software engineer · indie developer</span>
+            </div>
+            <div class="bio-field">
+              <span class="bio-key">location</span>
+              <span class="bio-sep">:</span>
+              <span class="bio-val">Sheffield, UK</span>
+            </div>
+            <div class="bio-field">
+              <span class="bio-key">focus</span>
+              <span class="bio-sep">:</span>
+              <span class="bio-val">agentic AI, building apps, shipping in public</span>
+            </div>
+            <div class="bio-field">
+              <span class="bio-key">status</span>
+              <span class="bio-sep">:</span>
+              <span class="bio-val">pre-revenue — working toward first launch</span>
+            </div>
+            <div class="chips">
+              <a class="chip" href="https://github.com/raaulc" target="_blank" rel="noopener">◈ github</a>
+              <a class="chip" href="/about">✦ about me</a>
+              <a class="chip" href="/projects">⬡ projects</a>
             </div>
           </div>
-        )}
-      </aside>
-    </div>
-    <footer class="site-footer"><a href="/privacy">Privacy Policy</a></footer>
+        </div>
+      </div>
+
+      <!-- Blog posts -->
+      <div class="section">
+        <p class="cmd">
+          <span class="dollar">$</span>
+          <span class="command"> ls</span>
+          <span class="flag"> -lt</span>
+          <span class="arg"> ./blog/</span>
+          <span class="pipe"> | head</span>
+        </p>
+        <ul class="post-list">
+          {posts.map((post) => (
+            <li class="post-entry">
+              <span class="post-date">{fmtDate(post.data.date)}</span>
+              <a href={`/posts/${post.slug}`} class="post-link">{post.data.title}</a>
+              <span class="post-mins">{readingTime(post)}m</span>
+            </li>
+          ))}
+          {posts.length === 0 && <p class="empty-msg">// no posts yet — check back soon</p>}
+        </ul>
+      </div>
+
+      <!-- Terminal -->
+      <div class="terminal-section">
+        <div class="t-row">
+          <span class="t-prompt">rahul@home:~$</span>
+          <input class="t-input" type="text" placeholder="type 'help'" autocomplete="off" spellcheck="false" id="t-input" />
+        </div>
+        <div class="t-output" id="t-output"></div>
+      </div>
+
+    </main>
+
+    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
+
     <script defer src="/_vercel/insights/script.js"></script>
+
+    <script>
+      const input = document.getElementById('t-input');
+      const output = document.getElementById('t-output');
+
+      const cmds = {
+        help: '  available commands: help, about, blog, projects, clear',
+        about: '  → /about — software engineer based in sheffield building agentic AI apps',
+        blog: '  → /     — read all blog posts',
+        projects: '  → /projects — coming soon',
+        clear: '__clear__',
+      };
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter') return;
+        const val = input.value.trim().toLowerCase();
+        input.value = '';
+        if (!val) return;
+        const res = cmds[val];
+        if (res === '__clear__') {
+          output.textContent = '';
+        } else if (res) {
+          output.textContent = res;
+        } else {
+          output.textContent = `  command not found: ${val}. type 'help' for options.`;
+        }
+      });
+    </script>
   </body>
 </html>
