@@ -2,6 +2,7 @@
 title: Privacy Policy
 date: 2026-03-10
 slug: privacy
+type: page
 ---
 
 # Privacy Policy
