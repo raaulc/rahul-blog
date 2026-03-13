@@ -1,17 +1,15 @@
 ---
+import Head from '../../components/Head.astro';
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>morning briefing — system design</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-    <link rel="stylesheet" href="/styles/presentation.css" />
+    <Head
+      title="morning briefing — system design"
+      description="System design walkthrough of the daily morning briefing pipeline — GPT-4o, OpenAI TTS, Kling v3, Astro, and Agent River."
+      stylesheet="/styles/presentation.css"
+    />
   </head>
   <body>
     <div class="deck" id="deck">

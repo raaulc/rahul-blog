@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import Head from '../../components/Head.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -23,15 +24,12 @@ function fmtDate(d) {
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{post.data.title} -- rahul</title>
-    {post.data.description && <meta name="description" content={post.data.description} />}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-    <link rel="stylesheet" href="/styles/global.css" />
+    <Head
+      title={post.data.title}
+      description={post.data.description}
+      type="article"
+      publishedAt={post.data.date}
+    />
   </head>
   <body>
     <nav class="navbar">
@@ -42,6 +40,7 @@ function fmtDate(d) {
         <li><a href="/" class="active">blog</a></li>
         <li><a href="/projects">projects</a></li>
         <li><a href="/everything-else">everything-else</a></li>
+        <li><a href="/presentations">presentations</a></li>
         <li><a href="/about">about</a></li>
       </ul>
     </nav>

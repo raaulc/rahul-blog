@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://raaulc.com/sitemap-index.xml

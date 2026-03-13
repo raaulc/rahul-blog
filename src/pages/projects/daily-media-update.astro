@@ -1,19 +1,16 @@
 ---
 import briefings from '../../data/briefings.json';
+import Head from '../../components/Head.astro';
 const entries = [...briefings].reverse(); // newest first
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>daily media update -- rahul</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-    <link rel="stylesheet" href="/styles/global.css" />
+    <Head
+      title="daily media update"
+      description="Daily morning briefing — GPT-4o writes a John Oliver-style monologue from emails, AI news, and reminders. Read aloud by OpenAI TTS."
+    />
   </head>
   <body>
     <nav class="navbar">

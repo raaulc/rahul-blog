@@ -11,6 +11,8 @@
     "publish": "bash scripts/publish.sh"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
     "@vercel/analytics": "^1.6.1",
     "astro": "^4.0.0",
     "chokidar": "^5.0.0"

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import Head from '../components/Head.astro';
 
 const all = await getCollection('posts');
 const aboutPost = all.find((p) => p.slug === 'about');
@@ -9,14 +10,10 @@ const { Content } = aboutPost ? await aboutPost.render() : { Content: null };
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>about -- rahul</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-    <link rel="stylesheet" href="/styles/global.css" />
+    <Head
+      title="about"
+      description="Software engineer in Sheffield building agentic AI apps. About Rahul — goals, stack, and what I am working on."
+    />
   </head>
   <body>
     <nav class="navbar">
