@@ -1,0 +1,571 @@
+---
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>morning briefing — system design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+
+      :root {
+        --bg: #0d0d0d;
+        --surface: #111111;
+        --border: #1e1e1e;
+        --text: #c8c8c8;
+        --bright: #e8e8e8;
+        --muted: #666666;
+        --dim: #3a3a3a;
+        --accent: #7eb8f7;
+        --accent2: #f0a060;
+        --green: #6fcf7a;
+        --font: 'IBM Plex Mono', 'Courier New', monospace;
+      }
+
+      html, body {
+        margin: 0; padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font);
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .deck {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      /* Top bar */
+      .topbar {
+        height: 38px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        flex-shrink: 0;
+      }
+
+      .topbar-left {
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .topbar-left span { color: var(--accent); }
+
+      .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .slide-counter { color: var(--accent2); }
+
+      .btn-fullscreen {
+        background: none;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        font-family: var(--font);
+        font-size: 11px;
+        padding: 3px 10px;
+        cursor: pointer;
+        transition: color 0.15s, border-color 0.15s;
+      }
+
+      .btn-fullscreen:hover {
+        color: var(--bright);
+        border-color: var(--dim);
+      }
+
+      /* Slide area */
+      .slide-area {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 48px;
+        overflow: hidden;
+      }
+
+      .slide {
+        display: none;
+        max-width: 860px;
+        width: 100%;
+        animation: fadeIn 0.2s ease;
+      }
+
+      .slide.active { display: block; }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      .slide-tag {
+        font-size: 10px;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+
+      .slide-tag .num { color: var(--accent2); margin-right: 8px; }
+
+      h1.slide-title {
+        font-size: 28px;
+        font-weight: 400;
+        color: var(--bright);
+        margin: 0 0 8px;
+        line-height: 1.3;
+      }
+
+      h2.slide-title {
+        font-size: 20px;
+        font-weight: 400;
+        color: var(--bright);
+        margin: 0 0 28px;
+        line-height: 1.4;
+      }
+
+      .slide-subtitle {
+        font-size: 13px;
+        color: var(--muted);
+        margin: 0 0 40px;
+      }
+
+      .slide-body {
+        font-size: 13px;
+        line-height: 1.9;
+        color: var(--text);
+      }
+
+      .slide-body pre {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        padding: 20px 24px;
+        font-family: var(--font);
+        font-size: 12px;
+        line-height: 1.8;
+        color: var(--text);
+        overflow-x: auto;
+        white-space: pre;
+      }
+
+      .hl  { color: var(--accent); }
+      .hl2 { color: var(--accent2); }
+      .hlg { color: var(--green); }
+      .dim { color: var(--muted); }
+
+      .divider {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 24px 0;
+      }
+
+      .cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+
+      .col-label {
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .tag {
+        font-size: 11px;
+        padding: 3px 10px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+      }
+
+      .tag.blue  { border-color: #2a4a6e; color: var(--accent); }
+      .tag.amber { border-color: #5e3c10; color: var(--accent2); }
+      .tag.green { border-color: #1e4a26; color: var(--green); }
+
+      /* Bottom bar */
+      .bottombar {
+        height: 52px;
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        flex-shrink: 0;
+      }
+
+      .progress {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+      }
+
+      .dot {
+        width: 5px; height: 5px;
+        background: var(--dim);
+        border-radius: 50%;
+        transition: background 0.2s;
+      }
+
+      .dot.active { background: var(--accent); }
+
+      .nav-btns {
+        display: flex;
+        gap: 10px;
+      }
+
+      .btn-nav {
+        background: none;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        font-family: var(--font);
+        font-size: 12px;
+        padding: 6px 18px;
+        cursor: pointer;
+        transition: color 0.15s, border-color 0.15s, background 0.15s;
+      }
+
+      .btn-nav:hover:not(:disabled) {
+        color: var(--bright);
+        border-color: var(--accent);
+        background: rgba(126, 184, 247, 0.06);
+      }
+
+      .btn-nav:disabled {
+        opacity: 0.25;
+        cursor: default;
+      }
+
+      .hint {
+        font-size: 10px;
+        color: var(--dim);
+      }
+
+      /* Fullscreen tweaks */
+      :fullscreen .topbar,
+      :-webkit-full-screen .topbar,
+      :-moz-full-screen .topbar {
+        background: #000;
+      }
+
+      :fullscreen body,
+      :-webkit-full-screen body,
+      :-moz-full-screen body {
+        background: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="deck" id="deck">
+
+      <!-- Top bar -->
+      <div class="topbar">
+        <div class="topbar-left">
+          ~/rahul / <span>presentations</span> / morning-briefing
+        </div>
+        <div class="topbar-right">
+          <span class="slide-counter" id="counter">1 / 8</span>
+          <button class="btn-fullscreen" id="btnFullscreen">[ fullscreen ]</button>
+        </div>
+      </div>
+
+      <!-- Slides -->
+      <div class="slide-area">
+
+        <!-- Slide 1: Title -->
+        <div class="slide active" data-slide="0">
+          <div class="slide-tag"><span class="num">01</span> intro</div>
+          <h1 class="slide-title">daily morning briefing</h1>
+          <p class="slide-subtitle">system design — an agentic AI pipeline</p>
+          <hr class="divider" />
+          <div class="slide-body">
+            <p>Every morning at <span class="hl">7:00 AM</span>, an automated pipeline:</p>
+            <pre>
+  fetches real emails  →  pulls live AI news  →  reads reminders
+         ↓
+  GPT-4o generates a John Oliver-style monologue
+         ↓
+  OpenAI TTS converts it to audio  (fable voice)
+         ↓
+  published to blog  →  Vercel auto-deploys  →  live in &lt;2 min
+         ↓
+  Kling v3 generates a video version (optional)</pre>
+          </div>
+        </div>
+
+        <!-- Slide 2: Data sources -->
+        <div class="slide" data-slide="1">
+          <div class="slide-tag"><span class="num">02</span> data sources</div>
+          <h2 class="slide-title">three inputs, zero manual work</h2>
+          <div class="slide-body">
+            <pre>
+  <span class="hl">emails</span>       AgentMail inbox  (supersalt6@agentmail.to)
+               important emails forwarded here
+               fetched via AgentMail SDK
+
+  <span class="hl2">AI news</span>      RSS feeds — parsed with feedparser
+               · The Verge / AI
+               · VentureBeat / AI
+               · Hacker News (AI, 100+ points)
+
+  <span class="hlg">reminders</span>    Agent River tasks
+               gym, appointments, one-off reminders
+               set manually or via Agent River API</pre>
+          </div>
+        </div>
+
+        <!-- Slide 3: Script generation -->
+        <div class="slide" data-slide="2">
+          <div class="slide-tag"><span class="num">03</span> script generation</div>
+          <h2 class="slide-title">GPT-4o as a speechwriter</h2>
+          <div class="slide-body">
+            <pre>
+  model       gpt-4o
+  prompt      John Oliver — Last Week Tonight style
+  rules       · open with date observation
+              · treat emails like geopolitical crises
+              · mock AI news with genuine incredulity
+              · end with exhausted pep talk
+              · <span class="hl2">never mention DSA or interview prep</span>
+              · 150-200 words, punchy sentences
+              · [PAUSE] markers for TTS pacing
+
+  output      full script  +  clean TTS version
+              (bracket markers stripped for audio)</pre>
+          </div>
+        </div>
+
+        <!-- Slide 4: Audio pipeline -->
+        <div class="slide" data-slide="3">
+          <div class="slide-tag"><span class="num">04</span> audio pipeline</div>
+          <h2 class="slide-title">generate_audio.py → publish.py</h2>
+          <div class="slide-body">
+            <pre>
+  <span class="hl">primary</span>     OpenAI TTS
+               model: tts-1-hd  |  voice: fable
+               streams MP3 directly to file
+
+  <span class="dim">fallback</span>    ElevenLabs REST API
+               voice: Daniel (onwK4e9ZLuTAKqWW03F9)
+               model: eleven_turbo_v2_5
+
+  <span class="hlg">publish.py</span>
+    1. generate_audio()        → briefing_YYYY-MM-DD.mp3
+    2. copy mp3 to blog        → public/audio/
+    3. update briefings.json   → adds date, label, transcript
+    4. git commit + push       → Vercel deploys automatically</pre>
+          </div>
+        </div>
+
+        <!-- Slide 5: Blog -->
+        <div class="slide" data-slide="4">
+          <div class="slide-tag"><span class="num">05</span> blog</div>
+          <h2 class="slide-title">Astro + Vercel static site</h2>
+          <div class="slide-body">
+            <pre>
+  framework    Astro (static site generator)
+  host         Vercel  (auto-deploy on push)
+
+  <span class="hl">briefings.json</span>   src/data/briefings.json
+    [
+      {
+        "date":       "2026-03-13",
+        "label":      "Friday, March 13, 2026",
+        "audio":      "/audio/briefing-2026-03-13.mp3",
+        "transcript": "Good morning, Rahul..."
+      }
+    ]
+
+  page         /projects/daily-media-update
+               → audio player per entry
+               → collapsible transcript</pre>
+          </div>
+        </div>
+
+        <!-- Slide 6: Video pipeline -->
+        <div class="slide" data-slide="5">
+          <div class="slide-tag"><span class="num">06</span> video pipeline</div>
+          <h2 class="slide-title">generate_video.py — Kling v3</h2>
+          <div class="slide-body">
+            <pre>
+  <span class="hl">1. script</span>    GPT-4o (tighter prompt — 120-150 words)
+               SCENE_PREFIX prepended to each chunk
+               "Late-night studio, British anchor..."
+
+  <span class="hl">2. split</span>     split into 25-word chunks
+               each chunk → 1 Kling clip
+               word count → clip duration (5s or 10s)
+
+  <span class="hl">3. Kling</span>     POST /v1/videos/text2video
+               model_name: kling-v3
+               mode: pro  |  sound: on  |  16:9
+
+  <span class="hl">4. concat</span>    ffmpeg -f concat -c copy
+               all clips → briefing_final_YYYY-MM-DD.mp4</pre>
+          </div>
+        </div>
+
+        <!-- Slide 7: Scheduling -->
+        <div class="slide" data-slide="6">
+          <div class="slide-tag"><span class="num">07</span> scheduling</div>
+          <h2 class="slide-title">Agent River — 7AM daily cron</h2>
+          <div class="slide-body">
+            <pre>
+  Agent River  personal OpenClaw dashboard
+               REST API at localhost:3999
+
+  <span class="hlg">morning briefing task</span>
+    schedule:  0 7 * * *   (7am daily)
+    type:      recurring
+    command:   python3 .../morning-briefing/publish.py
+    assignee:  main  (OpenClaw agent)
+
+  <span class="hl2">other tasks</span>
+    gym session         0 7 10 * 1-5   (weekdays 7:10am)
+    book flight         one-time  Mar 15 9am
+    brother's birthday  one-time  Mar 16 10am</pre>
+          </div>
+        </div>
+
+        <!-- Slide 8: Stack -->
+        <div class="slide" data-slide="7">
+          <div class="slide-tag"><span class="num">08</span> full stack</div>
+          <h2 class="slide-title">everything used to build this</h2>
+          <div class="slide-body">
+            <div class="cols">
+              <div>
+                <div class="col-label">AI / APIs</div>
+                <div class="tag-row">
+                  <span class="tag blue">GPT-4o</span>
+                  <span class="tag blue">OpenAI TTS</span>
+                  <span class="tag blue">Kling v3</span>
+                  <span class="tag blue">ElevenLabs</span>
+                  <span class="tag blue">AgentMail</span>
+                </div>
+                <div class="col-label" style="margin-top:20px">data</div>
+                <div class="tag-row">
+                  <span class="tag amber">RSS / feedparser</span>
+                  <span class="tag amber">AgentMail SDK</span>
+                  <span class="tag amber">Agent River API</span>
+                </div>
+              </div>
+              <div>
+                <div class="col-label">infra / tooling</div>
+                <div class="tag-row">
+                  <span class="tag green">Python</span>
+                  <span class="tag green">ffmpeg</span>
+                  <span class="tag green">Astro</span>
+                  <span class="tag green">Vercel</span>
+                  <span class="tag green">Agent River</span>
+                  <span class="tag green">git</span>
+                </div>
+                <div class="col-label" style="margin-top:20px">pipeline files</div>
+                <div class="tag-row">
+                  <span class="tag">generate_script.py</span>
+                  <span class="tag">generate_audio.py</span>
+                  <span class="tag">generate_video.py</span>
+                  <span class="tag">publish.py</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /slide-area -->
+
+      <!-- Bottom bar -->
+      <div class="bottombar">
+        <div class="progress" id="dots"></div>
+        <span class="hint">← → arrow keys to navigate</span>
+        <div class="nav-btns">
+          <button class="btn-nav" id="btnPrev" disabled>← prev</button>
+          <button class="btn-nav" id="btnNext">next →</button>
+        </div>
+      </div>
+
+    </div><!-- /deck -->
+
+    <script>
+      const slides = document.querySelectorAll('.slide');
+      const total = slides.length;
+      let current = 0;
+
+      const counter  = document.getElementById('counter');
+      const btnPrev  = document.getElementById('btnPrev');
+      const btnNext  = document.getElementById('btnNext');
+      const dotsEl   = document.getElementById('dots');
+      const btnFs    = document.getElementById('btnFullscreen');
+
+      // Build dots
+      for (let i = 0; i < total; i++) {
+        const d = document.createElement('div');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        d.addEventListener('click', () => goTo(i));
+        d.style.cursor = 'pointer';
+        dotsEl.appendChild(d);
+      }
+
+      function goTo(n) {
+        slides[current].classList.remove('active');
+        dotsEl.children[current].classList.remove('active');
+        current = Math.max(0, Math.min(n, total - 1));
+        slides[current].classList.add('active');
+        dotsEl.children[current].classList.add('active');
+        counter.textContent = (current + 1) + ' / ' + total;
+        btnPrev.disabled = current === 0;
+        btnNext.disabled = current === total - 1;
+      }
+
+      btnPrev.addEventListener('click', () => goTo(current - 1));
+      btnNext.addEventListener('click', () => goTo(current + 1));
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown')  goTo(current + 1);
+        if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')    goTo(current - 1);
+        if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+      });
+
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
+          btnFs.textContent = '[ exit fullscreen ]';
+        } else {
+          document.exitFullscreen();
+          btnFs.textContent = '[ fullscreen ]';
+        }
+      }
+
+      btnFs.addEventListener('click', toggleFullscreen);
+
+      document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement) {
+          btnFs.textContent = '[ fullscreen ]';
+        }
+      });
+    </script>
+  </body>
+</html>

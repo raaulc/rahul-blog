@@ -6,7 +6,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>everything else -- rahul</title>
+    <title>presentations -- rahul</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
@@ -21,8 +21,8 @@
       <ul class="navbar-nav">
         <li><a href="/">blog</a></li>
         <li><a href="/projects">projects</a></li>
-        <li><a href="/everything-else" class="active">everything-else</a></li>
-        <li><a href="/presentations">presentations</a></li>
+        <li><a href="/everything-else">everything-else</a></li>
+        <li><a href="/presentations" class="active">presentations</a></li>
         <li><a href="/about">about</a></li>
       </ul>
     </nav>
@@ -32,13 +32,18 @@
 
       <p class="cmd">
         <span class="dollar">$</span>
-        <span class="command"> cat</span>
-        <span class="arg"> everything-else.log</span>
+        <span class="command"> ls</span>
+        <span class="flag"> -la</span>
+        <span class="arg"> ./presentations/</span>
       </p>
 
       <div class="content-block">
-        <p>// health, habits, books, random thoughts</p>
-        <p>// coming soon</p>
+        <div class="project-entry">
+          <p class="project-name"><a href="/presentations/morning-briefing">morning-briefing/</a></p>
+          <p class="project-desc">// system design walkthrough — how the daily morning briefing is built. covers data sources, script generation, audio pipeline, blog publishing, and Kling video generation.</p>
+          <p class="project-meta">// stack: gpt-4o &middot; openai tts &middot; kling ai &middot; astro &middot; agent river &middot; python</p>
+          <p class="project-status">// 8 slides</p>
+        </div>
       </div>
     </main>
 
