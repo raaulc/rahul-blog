@@ -52,6 +52,8 @@ body {
   font-size: 11px;
   color: var(--muted);
   letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .navbar-path .p-tilde { color: var(--dim); }
