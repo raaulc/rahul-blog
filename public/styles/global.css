@@ -149,9 +149,18 @@ body {
 /* Project entries */
 .project-entry { margin-bottom: 24px; }
 .project-entry:last-child { margin-bottom: 0; }
-.project-name { color: var(--accent); font-weight: 500; margin-bottom: 4px !important; }
+.project-name { font-weight: 500; margin-bottom: 4px !important; }
+.project-name a { color: var(--accent); text-decoration: none; }
+.project-name a:hover { color: var(--accent2); }
 .project-meta { color: var(--text-muted, #666); }
 .project-status { color: var(--text-muted, #666); }
+
+/* Briefing entries */
+.briefing-entry { border-left: 2px solid var(--border); padding: 10px 0 10px 18px; margin-bottom: 32px; font-size: 12.5px; }
+.briefing-date { color: var(--accent); margin: 0 0 10px; }
+.briefing-audio { display: block; width: 100%; margin-bottom: 10px; }
+.briefing-transcript summary { cursor: pointer; color: var(--text-muted, #666); margin-bottom: 8px; }
+.briefing-transcript p { line-height: 1.8; white-space: pre-line; }
 
 /* Section */
 .section { margin-bottom: 36px; }
