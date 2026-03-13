@@ -24,6 +24,7 @@ const entries = [...briefings].reverse(); // newest first
         <li><a href="/">blog</a></li>
         <li><a href="/projects" class="active">projects</a></li>
         <li><a href="/everything-else">everything-else</a></li>
+        <li><a href="/presentations">presentations</a></li>
         <li><a href="/about">about</a></li>
       </ul>
     </nav>
@@ -49,6 +50,11 @@ const entries = [...briefings].reverse(); // newest first
           <audio controls class="briefing-audio">
             <source src={entry.audio} type="audio/mpeg" />
           </audio>
+          {entry.video && (
+            <video controls style="width: 100%; margin-bottom: 10px; border: 1px solid var(--border);">
+              <source src={entry.video} type="video/mp4" />
+            </video>
+          )}
           <details class="briefing-transcript">
             <summary>transcript</summary>
             <p>{entry.transcript}</p>
