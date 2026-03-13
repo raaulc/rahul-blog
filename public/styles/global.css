@@ -146,6 +146,13 @@ body {
 .content-block a { color: var(--accent); text-decoration: none; }
 .content-block a:hover { color: var(--accent2); }
 
+/* Project entries */
+.project-entry { margin-bottom: 24px; }
+.project-entry:last-child { margin-bottom: 0; }
+.project-name { color: var(--accent); font-weight: 500; margin-bottom: 4px !important; }
+.project-meta { color: var(--text-muted, #666); }
+.project-status { color: var(--text-muted, #666); }
+
 /* Section */
 .section { margin-bottom: 36px; }
 
