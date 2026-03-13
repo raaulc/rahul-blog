@@ -39,6 +39,8 @@ html, body {
   justify-content: space-between;
   padding: 0 20px;
   flex-shrink: 0;
+  position: relative;
+  z-index: 100;
 }
 
 .topbar-left {
@@ -60,6 +62,8 @@ html, body {
   color: var(--muted);
   text-decoration: none;
   transition: color 0.15s;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .breadcrumb:hover { color: var(--accent); }
