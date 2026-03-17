@@ -1,0 +1,63 @@
+---
+import Head from '../../components/Head.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head
+      title="next word prediction — lstm"
+      description="Next word prediction from scratch using an LSTM in PyTorch, trained on Medium article titles."
+    />
+    <style>
+      .notebook-frame {
+        width: 100%;
+        height: 85vh;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        background: #fff;
+        margin-top: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/" class="navbar-path">
+        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="/">blog</a></li>
+        <li><a href="/projects" class="active">projects</a></li>
+        <li><a href="/llm-architecture">llm-architecture</a></li>
+        <li><a href="/everything-else">everything-else</a></li>
+        <li><a href="/presentations">presentations</a></li>
+        <li><a href="/about">about</a></li>
+      </ul>
+    </nav>
+
+    <main class="container">
+      <a href="/projects" class="back-link">← cd ..</a>
+
+      <p class="cmd">
+        <span class="dollar">$</span>
+        <span class="command"> jupyter</span>
+        <span class="arg"> notebook next-word-prediction-lstm.ipynb</span>
+      </p>
+
+      <div class="content-block" style="margin-bottom: 12px;">
+        <p>// next word prediction using lstm — pytorch · trained on medium article titles</p>
+        <p>// stack: pytorch · nltk · pandas · numpy</p>
+        <a href="/notebooks/next-word-prediction-lstm.html" target="_blank" style="font-size: 13px; color: var(--green);">↗ open in full tab</a>
+      </div>
+
+      <iframe
+        src="/notebooks/next-word-prediction-lstm.html"
+        class="notebook-frame"
+        title="Next Word Prediction LSTM Notebook"
+      ></iframe>
+    </main>
+
+    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
