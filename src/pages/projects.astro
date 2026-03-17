@@ -19,6 +19,7 @@ import Head from '../components/Head.astro';
         <li><a href="/">blog</a></li>
         <li><a href="/projects" class="active">projects</a></li>
         <li><a href="/llm-architecture">llm-architecture</a></li>
+        <li><a href="/rag-system">rag-system</a></li>
         <li><a href="/everything-else">everything-else</a></li>
         <li><a href="/presentations">presentations</a></li>
         <li><a href="/about">about</a></li>
@@ -64,6 +65,18 @@ import Head from '../components/Head.astro';
           <p class="project-name"><a href="/projects/variational-autoencoders-mnist">variational-autoencoders-mnist/</a></p>
           <p class="project-desc">// conditional vae on mnist — generate any handwritten digit on demand. reparameterisation trick + kl divergence from scratch.</p>
           <p class="project-meta">// stack: pytorch &middot; torchvision &middot; matplotlib</p>
+          <p class="project-status">// status: complete</p>
+        </div>
+        <div class="project-entry">
+          <p class="project-name"><a href="/projects/ai-anime-chatbot-with-rag">ai-anime-chatbot-with-rag/</a></p>
+          <p class="project-desc">// anime chatbot that scrapes any url, builds a faiss vector store, augments with duckduckgo search, and answers via groq llama 3.3 — every answer cites [rag] or [search].</p>
+          <p class="project-meta">// stack: langchain &middot; faiss &middot; huggingface &middot; groq &middot; duckduckgo &middot; streamlit</p>
+          <p class="project-status">// status: complete</p>
+        </div>
+        <div class="project-entry">
+          <p class="project-name"><a href="/projects/quiz-generator-with-llama">quiz-generator-with-llama/</a></p>
+          <p class="project-desc">// paste any text, pick a difficulty — llama 4 generates 5 mcqs as structured json, rendered as an interactive quiz with auto-scoring.</p>
+          <p class="project-meta">// stack: groq &middot; llama 4 scout &middot; streamlit &middot; python</p>
           <p class="project-status">// status: complete</p>
         </div>
       </div>

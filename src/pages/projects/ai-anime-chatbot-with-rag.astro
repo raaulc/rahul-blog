@@ -1,0 +1,84 @@
+---
+import Head from '../../components/Head.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head
+      title="AI Anime Chatbot with RAG"
+      description="Anime chatbot that scrapes any URL, embeds with FAISS, augments with DuckDuckGo search, and answers via Groq's Llama 3.3. Full RAG pipeline with source citations."
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/" class="navbar-path">
+        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="/">blog</a></li>
+        <li><a href="/projects" class="active">projects</a></li>
+        <li><a href="/llm-architecture">llm-architecture</a></li>
+        <li><a href="/rag-system">rag-system</a></li>
+        <li><a href="/everything-else">everything-else</a></li>
+        <li><a href="/presentations">presentations</a></li>
+        <li><a href="/about">about</a></li>
+      </ul>
+    </nav>
+
+    <main class="container">
+      <a href="/projects" class="back-link">← cd ..</a>
+
+      <p class="cmd">
+        <span class="dollar">$</span>
+        <span class="command"> cat</span>
+        <span class="arg"> ./ai-anime-chatbot-with-rag/README.md</span>
+      </p>
+
+      <div class="content-block">
+        <p>// anime chatbot that scrapes any url, builds a faiss vector store, augments with duckduckgo, and answers via groq llama 3.3 — every answer cites [rag] or [search]</p>
+        <p>// stack: langchain &middot; faiss &middot; huggingface sentence-transformers &middot; groq &middot; duckduckgo &middot; streamlit</p>
+
+        <div style="margin-top: 24px;">
+          <p style="font-size: 13px; color: var(--comment); margin-bottom: 12px;">// pipeline</p>
+          <pre style="font-size: 12px; color: var(--text); line-height: 1.6; overflow-x: auto;">
+user enters anime url
+        ↓
+webbaseloader scrapes the page
+        ↓
+recursivetextsplitter chunks it (1000 chars, 200 overlap)
+        ↓
+huggingface minilm embeds each chunk → 384-dim vectors
+        ↓
+faiss indexes all vectors in memory
+        ↓
+user asks a question
+        ↓
+faiss retrieves top-5 similar chunks   [rag]
+duckduckgo fetches live web snippet    [search]
+        ↓
+groq (llama 3.3 70b) answers in bullets with source tags
+          </pre>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <p style="font-size: 13px; color: var(--comment); margin-bottom: 12px;">// demo</p>
+          <img src="/images/anime-chatbot-1.png" alt="AnimeSensei chatbot UI" style="width: 100%; border: 1px solid var(--border); border-radius: 4px; margin-bottom: 12px;" />
+          <img src="/images/anime-chatbot-2.png" alt="AnimeSensei chatbot answer" style="width: 100%; border: 1px solid var(--border); border-radius: 4px;" />
+        </div>
+
+        <div style="margin-top: 24px;">
+          <p style="font-size: 13px; color: var(--comment); margin-bottom: 12px;">// source</p>
+          <a
+            href="https://github.com/raaulc/anime-RAG-chatbot"
+            target="_blank"
+            style="font-size: 13px; color: var(--green);"
+          >↗ view on github</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>

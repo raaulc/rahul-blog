@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Head from '../components/Head.astro';
 
 const posts = (await getCollection('posts'))
-  .filter((p) => p.data.type === 'llm-architecture')
+  .filter((p) => p.data.type === 'rag-system')
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 function readingTime(post) {
@@ -20,8 +20,8 @@ function fmtDate(d) {
 <html lang="en">
   <head>
     <Head
-      title="llm architecture"
-      description="Deep dives into LLM architecture — building language models from scratch with PyTorch."
+      title="rag system"
+      description="Building RAG systems from scratch — retrieval augmented generation, vector stores, and agentic pipelines."
     />
   </head>
   <body>
@@ -32,8 +32,8 @@ function fmtDate(d) {
       <ul class="navbar-nav">
         <li><a href="/">blog</a></li>
         <li><a href="/projects">projects</a></li>
-        <li><a href="/llm-architecture" class="active">llm-architecture</a></li>
-        <li><a href="/rag-system">rag-system</a></li>
+        <li><a href="/llm-architecture">llm-architecture</a></li>
+        <li><a href="/rag-system" class="active">rag-system</a></li>
         <li><a href="/everything-else">everything-else</a></li>
         <li><a href="/presentations">presentations</a></li>
         <li><a href="/about">about</a></li>
@@ -47,7 +47,7 @@ function fmtDate(d) {
         <span class="dollar">$</span>
         <span class="command"> ls</span>
         <span class="flag"> -lt</span>
-        <span class="arg"> ./llm-architecture/</span>
+        <span class="arg"> ./rag-system/</span>
       </p>
 
       <ul class="post-list">

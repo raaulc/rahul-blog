@@ -1,0 +1,66 @@
+---
+import Head from '../../components/Head.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head
+      title="Quiz Generator with LLaMA 4"
+      description="MCQ quiz generator — paste any text, pick a difficulty, and LLaMA 4 via Groq returns 5 multiple choice questions as structured JSON. Auto-scoring included."
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/" class="navbar-path">
+        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="/">blog</a></li>
+        <li><a href="/projects" class="active">projects</a></li>
+        <li><a href="/llm-architecture">llm-architecture</a></li>
+        <li><a href="/rag-system">rag-system</a></li>
+        <li><a href="/everything-else">everything-else</a></li>
+        <li><a href="/presentations">presentations</a></li>
+        <li><a href="/about">about</a></li>
+      </ul>
+    </nav>
+
+    <main class="container">
+      <a href="/projects" class="back-link">← cd ..</a>
+
+      <p class="cmd">
+        <span class="dollar">$</span>
+        <span class="command"> cat</span>
+        <span class="arg"> ./quiz-generator-with-llama/README.md</span>
+      </p>
+
+      <div class="content-block">
+        <p>// paste any text, pick a difficulty — llama 4 via groq generates 5 mcqs as structured json, rendered as an interactive quiz with auto-scoring</p>
+        <p>// stack: groq &middot; llama 4 scout 17b &middot; streamlit &middot; python</p>
+
+        <div style="margin-top: 24px;">
+          <p style="font-size: 13px; color: var(--comment); margin-bottom: 12px;">// pipeline</p>
+          <pre style="font-size: 12px; color: var(--text); line-height: 1.6; overflow-x: auto;">
+user pastes text + picks difficulty (easy / medium / hard)
+        ↓
+structured prompt with json schema sent to llama 4 via groq
+        ↓
+llama 4 returns 5 mcqs as json (temperature=0.3)
+        ↓
+strip code fences → json.loads → list of question dicts
+        ↓
+5 radio groups rendered in streamlit
+        ↓
+submit → compare answers → show score
+        ↓
+@st.cache_data — same input? no api call
+          </pre>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
