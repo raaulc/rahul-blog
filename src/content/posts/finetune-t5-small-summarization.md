@@ -10,7 +10,7 @@ type: llm-architecture
 
 ## Your model has no idea what a conversation looks like. Yet.
 
-![confused robot gif](https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif)
+![confused robot gif](https://media.giphy.com/media/fvx95jkua2uRa/giphy.gif)
 
 Out of the box, T5-Small can do a lot. Translation. Q&A. Classification. It's been pre-trained on a massive chunk of the internet.
 
@@ -26,7 +26,7 @@ This post walks through the entire process, from loading the model to generating
 
 ## 1. What is T5? And Why Fine-Tune It?
 
-![explaining gif](https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif)
+![explaining gif](https://media.giphy.com/media/kaq6GnxDlJaBq/giphy.gif)
 
 **T5 (Text-to-Text Transfer Transformer)** treats every NLP task as a text-to-text problem.
 
@@ -45,7 +45,7 @@ The trick is the **task prefix**. T5 figures out what to do from the prefix you 
 
 ## 2. The Dataset — SAMSum
 
-![chatting gif](https://media.giphy.com/media/l0IykOsxLECVejOzm/giphy.gif)
+![chatting gif](https://media.giphy.com/media/3oz8xLd9OZIhygQPa4/giphy.gif)
 
 We're using **SAMSum** — a dataset of ~16,000 messenger-style conversations, each paired with a human-written summary.
 
@@ -71,7 +71,7 @@ dataset = load_dataset("knkarthick/samsum")
 
 ## 3. Tokenization — Teaching the Model to Read
 
-![reading fast gif](https://media.giphy.com/media/WoWm8YzFQJg5i/giphy.gif)
+![reading fast gif](https://media.giphy.com/media/l41lZccR0xOY4S3Lo/giphy.gif)
 
 Before training, every piece of text needs to become numbers. But for a seq2seq model like T5, we tokenize **both the input and the output**.
 
@@ -96,7 +96,7 @@ The output is three things: `input_ids`, `attention_mask`, and `labels` (the tar
 
 ## 4. Data Collator — The Smart Batcher
 
-![stacking gif](https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif)
+![stacking gif](https://media.giphy.com/media/xT5LMzIK1AdZJ4cYW4/giphy.gif)
 
 `DataCollatorForSeq2Seq` handles padding dynamically at batch time — padding each batch only to the length of its longest sequence, not the entire dataset's max length. More efficient, less memory wasted.
 
@@ -110,7 +110,7 @@ One line. It just works.
 
 ## 5. Training Arguments — Configuring the Run
 
-![settings gif](https://media.giphy.com/media/3o7TKSjRrfIPjeiVyM/giphy.gif)
+![settings gif](https://media.giphy.com/media/26n6WywJyh39n1pBu/giphy.gif)
 
 This is where you control how training behaves. Let's break down the important ones:
 
@@ -131,7 +131,7 @@ training_args = TrainingArguments(
 
 ## 6. The Trainer — Everything in One Place
 
-![assembling gif](https://media.giphy.com/media/6fScAIQR0P0xW/giphy.gif)
+![assembling gif](https://media.giphy.com/media/3oKIPsx2VAYAgEHC12/giphy.gif)
 
 HuggingFace's `Trainer` takes everything we've built and runs the full training loop for us.
 
@@ -179,7 +179,7 @@ The `pipeline` handles tokenization, model call, and decoding — all under the 
 
 ## 8. Does It Work?
 
-![drumroll gif](https://media.giphy.com/media/7wk6RQYXDDytXalsL4/giphy.gif)
+![drumroll gif](https://media.giphy.com/media/26u4cqiYI30juCOGY/giphy.gif)
 
 Let's test it on something the model has never seen — a conversation between Luffy and Naruto:
 
@@ -204,7 +204,7 @@ The model produces a clean, coherent summary of a dialogue it has never encounte
 
 ## The Big Picture
 
-![mind blown gif](https://media.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy.gif)
+![mind blown gif](https://media.giphy.com/media/26ufdipQqU84NBPQOY/giphy.gif)
 
 Here's what happened end to end:
 
