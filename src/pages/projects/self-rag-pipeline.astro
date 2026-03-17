@@ -1,0 +1,72 @@
+---
+import Head from '../../components/Head.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head
+      title="Self-RAG Pipeline with LangGraph"
+      description="A self-evaluating RAG pipeline built with LangGraph — the LLM grades its own retrieved docs, checks for hallucinations, and validates its answers before returning them."
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/" class="navbar-path">
+        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="/">blog</a></li>
+        <li><a href="/projects" class="active">projects</a></li>
+        <li><a href="/llm-architecture">llm-architecture</a></li>
+        <li><a href="/rag-system">rag-system</a></li>
+        <li><a href="/everything-else">everything-else</a></li>
+        <li><a href="/presentations">presentations</a></li>
+        <li><a href="/about">about</a></li>
+      </ul>
+    </nav>
+
+    <main class="container">
+      <a href="/projects" class="back-link">← cd ..</a>
+
+      <p class="cmd">
+        <span class="dollar">$</span>
+        <span class="command"> cat</span>
+        <span class="arg"> ./self-rag-pipeline/README.md</span>
+      </p>
+
+      <div class="content-block">
+        <p>// self-evaluating rag pipeline — the llm grades its own retrieved docs, checks for hallucinations, and validates its answer before returning it. built as a stateful langgraph workflow.</p>
+        <p>// stack: langgraph &middot; langchain &middot; groq &middot; chroma &middot; huggingface &middot; python</p>
+
+        <div style="margin-top: 24px;">
+          <p style="font-size: 13px; color: var(--comment); margin-bottom: 12px;">// graph</p>
+          <pre style="font-size: 12px; color: var(--text); line-height: 1.6; overflow-x: auto;">
+START
+  ↓
+init_groq_model          // load llama 3.3 70b via groq
+  ↓
+prepare_vector_database  // scrape urls → chunk → embed → chroma
+  ↓
+fetch_relevant_docs      // vector similarity search
+  ↓
+filter_docs_by_relevance // llm grades each doc: yes or no
+  ↓ (conditional)
+  ├── no relevant docs → END
+  └── docs found ↓
+        produce_answer       // rag prompt → answer draft
+          ↓
+        detect_hallucination // is answer grounded in facts?
+          ↓
+        validate_answer      // does answer address the question?
+          ↓
+        END
+          </pre>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
