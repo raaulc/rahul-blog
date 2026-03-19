@@ -1,6 +1,6 @@
 ---
 title: AI Anime Chatbot with RAG
-date: 2026-03-17
+date: 2025-12-22
 description: Build an anime chatbot that scrapes any URL, embeds it with FAISS, augments with DuckDuckGo search, and answers via Groq's Llama 3.3. Full RAG pipeline with source citations.
 tags: ["rag-system", "rag", "langchain", "faiss", "groq", "streamlit"]
 type: rag-system

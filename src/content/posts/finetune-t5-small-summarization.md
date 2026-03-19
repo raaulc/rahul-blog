@@ -1,6 +1,6 @@
 ---
 title: Fine-tuning Google T5-Small on Summarization
-date: 2026-03-17
+date: 2025-04-20
 description: Fine-tune T5-Small on the SAMSum dialogue dataset using HuggingFace Transformers. Covers tokenization, Trainer API, gradient accumulation, and inference with pipeline.
 tags: ["llm-architecture", "fine-tuning", "t5", "huggingface", "transformers"]
 type: llm-architecture

@@ -1,6 +1,6 @@
 ---
 title: Fine-Tuning GPT-2 with PEFT-LoRA
-date: 2026-03-17
+date: 2025-07-08
 description: Fine-tune GPT-2 on English quotes using LoRA adapters — only 0.24% of parameters trained. Covers LoRA theory, PEFT setup, FP16 training, and inference.
 tags: ["llm-architecture", "fine-tuning", "lora", "peft", "gpt2"]
 type: llm-architecture

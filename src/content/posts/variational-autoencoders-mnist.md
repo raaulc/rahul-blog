@@ -1,6 +1,6 @@
 ---
 title: Variational Autoencoders on MNIST
-date: 2026-03-17
+date: 2025-10-14
 description: Build a Conditional VAE in PyTorch that generates handwritten digits on demand. Covers the reparameterisation trick, KL divergence loss, and conditional generation.
 tags: ["llm-architecture", "vae", "generative-models", "pytorch", "mnist"]
 type: llm-architecture

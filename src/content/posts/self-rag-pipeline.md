@@ -1,6 +1,6 @@
 ---
 title: Self-RAG Pipeline with LangGraph
-date: 2026-03-17
+date: 2026-02-11
 description: Build a self-evaluating RAG pipeline with LangGraph — the LLM grades its own retrieved documents, checks for hallucinations, and validates its answers before returning them.
 tags: ["rag-system", "langgraph", "self-rag", "groq", "chroma"]
 type: rag-system

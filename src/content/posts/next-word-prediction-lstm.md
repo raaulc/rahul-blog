@@ -1,6 +1,6 @@
 ---
 title: Next Word Prediction using LSTM
-date: 2026-03-17
+date: 2025-01-15
 description: Build a next word prediction model from scratch using an LSTM in PyTorch, trained on Medium article titles. The same core idea behind every language model.
 tags: ["llm-architecture", "pytorch", "lstm", "deep-learning"]
 type: llm-architecture

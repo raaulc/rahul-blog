@@ -1,6 +1,6 @@
 ---
 title: Quiz Generator with LLaMA 4
-date: 2026-03-17
+date: 2026-01-18
 description: Build an MCQ quiz generator in ~100 lines — paste any text, pick a difficulty, and LLaMA 4 via Groq returns 5 multiple choice questions as structured JSON. Auto-scoring included.
 tags: ["rag-system", "llama", "groq", "streamlit", "prompt-engineering"]
 type: rag-system
