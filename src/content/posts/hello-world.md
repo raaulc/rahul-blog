@@ -2,6 +2,7 @@
 title: Hello World
 date: 2026-03-07
 slug: hello-world
+type: page
 description: First post from Obsidian to Blog pipeline.
 tags: ["ai-engineering"]
 ---
