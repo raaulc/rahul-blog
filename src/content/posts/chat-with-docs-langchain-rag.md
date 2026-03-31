@@ -22,7 +22,7 @@ That's what we're building. A complete RAG pipeline using LangChain, OpenAI, and
 
 ## 1. Wait — Why Can't I Just Paste It Into ChatGPT?
 
-![shrug gif](https://media.giphy.com/media/y3QOaBpspJt3a/giphy.gif)
+![why not chatgpt gif](https://media.giphy.com/media/3o7TKnO6Wve6502iJ2/giphy.gif)
 
 Good question. You can. But think about what happens:
 
@@ -46,7 +46,7 @@ That's the whole idea. Now let's build it.
 
 ## 2. Load Your Documents
 
-![filing cabinet gif](https://media.giphy.com/media/l2JejmmO0U1oNSOL6/giphy.gif)
+![loading documents gif](https://media.giphy.com/media/xTiTnxpQ3ghPiB2Hp6/giphy.gif)
 
 First problem: how do you get text out of a PDF? Or a .txt file? Or a CSV? Each format needs different parsing logic.
 
@@ -207,7 +207,7 @@ The LLM isn't guessing. It's reading your document and answering from it. That's
 
 ## 6. Memory — The Thing That Makes Follow-Ups Work
 
-![elephant memory gif](https://media.giphy.com/media/l3q2SH4Cmhh8F40ww/giphy.gif)
+![remember everything gif](https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif)
 
 Without memory, every question exists in a vacuum. Try this conversation without it:
 
