@@ -207,7 +207,7 @@ The LLM isn't guessing. It's reading your document and answering from it. That's
 
 ## 6. Memory — The Thing That Makes Follow-Ups Work
 
-![remember everything gif](https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif)
+![memory brain gif](https://media.giphy.com/media/xT9C25UNTwfZuk85WP/giphy.gif)
 
 Without memory, every question exists in a vacuum. Try this conversation without it:
 
