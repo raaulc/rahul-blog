@@ -10,7 +10,7 @@ type: talk-to-pr
 
 ## What if you could just *ask* a PR what it does?
 
-![Developer drowning in PR reviews](https://media.giphy.com/media/l2JehQ2GitHGdVG9Y/giphy.gif)
+![Developer drowning in PR reviews](https://media.giphy.com/media/l1KVaj5UcbHwrBMqI/giphy.gif)
 
 You know that feeling. You're tagged on a PR. You open it. **47 files changed.** Your heart sinks. You start scrolling. By file 12, you've forgotten what file 3 was about. By file 30, you're just clicking "Approve" and hoping for the best.
 
@@ -28,7 +28,7 @@ That's what we're building. **Talk to PR** — a RAG-powered chat interface that
 
 Sure, paste a diff into ChatGPT. Now do it for a PR with 40 files. You just hit the token limit. And even if it fits, the model has no idea what repo it's looking at. It doesn't know your codebase. It doesn't know the context.
 
-![Copy pasting code into ChatGPT](https://media.giphy.com/media/3o7btNa0RUYa5E7yl2/giphy.gif)
+![Copy pasting code into ChatGPT](https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif)
 
 What we need is:
 1. **Fetch the PR diff automatically** from GitHub
@@ -137,7 +137,7 @@ Why individual files and not the raw diff? Because we want to **chunk by file**,
 
 ## Step 2: Chunking the Diff — The Part Everyone Gets Wrong
 
-![Cutting things precisely](https://media.giphy.com/media/3o6Zt6Jdnh4pbBqBHi/giphy.gif)
+![Cutting things precisely](https://media.giphy.com/media/l0IylOPCNkiqOgMyA/giphy.gif)
 
 Here's where most RAG tutorials fail. They'd just split the entire diff into 500-token chunks. That's terrible for code. You'd get half a function in one chunk and the other half in another.
 
