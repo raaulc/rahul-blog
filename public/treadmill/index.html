@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Treadmill Dashboard — Topture TP8</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #2f81f7;
+    --good: #3fb950;
+    --bad: #f85149;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .sub { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button.secondary { background: var(--panel); border: 1px solid var(--border); color: var(--text); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--bad); }
+  .dot.on { background: var(--good); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .card .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .card .value { font-size: 30px; font-weight: 700; margin-top: 6px; }
+  .card .unit { font-size: 14px; color: var(--muted); font-weight: 400; }
+
+  .log-wrap { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+  .log-wrap h2 { font-size: 14px; margin: 0 0 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  pre#log {
+    margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--muted);
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  .warn { background: #21262d; border: 1px solid var(--border); border-left: 3px solid #d29922; padding: 12px 14px; border-radius: 8px; font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+  code { background: #21262d; padding: 1px 5px; border-radius: 4px; }
+
+  .controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 24px; }
+  .controls button { min-width: 90px; }
+  button.start { background: var(--good); }
+  button.stop  { background: var(--bad); }
+  .speedctl { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; }
+  .speedctl .big { font-size: 18px; padding: 8px 14px; }
+  #targetSpeed { font-size: 16px; font-weight: 700; min-width: 70px; text-align: center; }
+
+  .voice { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; }
+  .voice-status { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
+  .voice-heard { font-size: 14px; color: var(--muted); }
+  .voice-heard b { color: var(--text); }
+  .voice-hint { font-size: 12px; color: var(--muted); margin-left: auto; }
+  .dot.listen { background: var(--accent); animation: pulse 1.2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .chart-card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+  .chart-card.wide { grid-column: 1 / -1; }
+  .chart-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .chart-total { color: var(--text); font-size: 15px; font-weight: 700; text-transform: none; letter-spacing: 0; }
+  @media (max-width: 640px) { .charts { grid-template-columns: 1fr; } }
+
+  .history { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .history .wide { grid-column: 1 / -1; }
+  .hrow { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .hrow label { font-size: 13px; color: var(--muted); display: inline-flex; gap: 6px; align-items: center; }
+  input[type=date] { background: #21262d; border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 8px 10px; font-size: 14px; }
+  .range-result { margin-top: 14px; font-size: 14px; line-height: 1.7; }
+  .range-result b { color: var(--accent); font-size: 18px; }
+  .days-list { display: flex; flex-direction: column; gap: 6px; max-height: 260px; overflow-y: auto; }
+  .day-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #21262d; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; cursor: pointer; }
+  .day-item:hover { border-color: var(--accent); }
+  .day-item .d { color: var(--text); font-weight: 600; }
+  .day-item .s { color: var(--muted); }
+  @media (max-width: 640px) { .history { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <h1>Treadmill Dashboard</h1>
+  <div class="sub">Topture TP8 — Bluetooth Low Energy (Web Bluetooth)</div>
+
+  <div id="compat" class="warn" style="display:none;">
+    Web Bluetooth is not available in this browser. Use <strong>Chrome</strong> or <strong>Edge</strong> on desktop or Android. Safari and iOS are not supported.
+  </div>
+
+  <div class="bar">
+    <button id="connect">Connect treadmill</button>
+    <button id="disconnect" class="secondary" disabled>Disconnect</button>
+    <span class="status"><span id="dot" class="dot"></span><span id="statusText">Disconnected</span></span>
+  </div>
+
+  <div class="controls" id="controls" style="display:none;">
+    <button id="btnStart" class="start">Start</button>
+    <button id="btnPause" class="secondary">Pause</button>
+    <button id="btnStop" class="stop">Stop</button>
+    <div class="speedctl">
+      <button id="btnSlower" class="secondary big">-</button>
+      <span id="targetSpeed">-- km/h</span>
+      <button id="btnFaster" class="secondary big">+</button>
+    </div>
+  </div>
+
+  <div class="voice" id="voice">
+    <button id="voiceToggle" class="secondary">Start voice control</button>
+    <span class="voice-status"><span id="voiceDot" class="dot"></span><span id="voiceState">Voice off</span></span>
+    <span class="voice-heard">Heard: <b id="voiceHeard">--</b></span>
+    <span class="voice-hint">Say: start · stop · pause · faster · slower · "speed 3"</span>
+  </div>
+
+  <div class="grid">
+    <div class="card"><div class="label">Speed (live)</div><div class="value"><span id="speed">0.0</span> <span class="unit">km/h</span></div></div>
+    <div class="card"><div class="label">Distance today</div><div class="value"><span id="distance">0</span> <span class="unit">m</span></div></div>
+    <div class="card"><div class="label">Active time today</div><div class="value" id="time">0:00</div></div>
+    <div class="card"><div class="label">Calories today</div><div class="value"><span id="calories">0</span> <span class="unit">kcal</span></div></div>
+    <div class="card"><div class="label">Steps today</div><div class="value" id="steps">0</div></div>
+    <div class="card"><div class="label">Pace (live)</div><div class="value" id="pace">--</div></div>
+  </div>
+
+  <div class="charts">
+    <div class="chart-card">
+      <div class="chart-head"><span>Steps today by hour</span><span id="totSteps" class="chart-total">0 steps</span></div>
+      <canvas id="chartSteps" height="140"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-head"><span>Active minutes by hour</span><span id="totMins" class="chart-total">0 min</span></div>
+      <canvas id="chartMins" height="140"></canvas>
+    </div>
+    <div class="chart-card wide">
+      <div class="chart-head"><span>Live speed (this session)</span><span id="curSpeed" class="chart-total">0.0 km/h</span></div>
+      <canvas id="chartSpeed" height="120"></canvas>
+    </div>
+  </div>
+
+  <div class="bar" style="margin-top:-8px;">
+    <button id="resetDay" class="secondary">Reset today</button>
+    <span id="viewingLabel" class="status" style="margin-left:8px;"></span>
+  </div>
+
+  <div class="history">
+    <div class="chart-card">
+      <div class="chart-head"><span>View a day</span></div>
+      <div class="hrow">
+        <input type="date" id="viewDay" />
+        <button id="btnToday" class="secondary">Back to today (live)</button>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-head"><span>Range analysis</span></div>
+      <div class="hrow">
+        <label>From <input type="date" id="rangeFrom" /></label>
+        <label>To <input type="date" id="rangeTo" /></label>
+        <button id="btnAnalyze">Analyze</button>
+      </div>
+      <div id="rangeResult" class="range-result">Pick a start and end date, then Analyze.</div>
+    </div>
+
+    <div class="chart-card wide">
+      <div class="chart-head"><span>Recorded days</span><span id="daysCount" class="chart-total">0 days</span></div>
+      <div id="daysList" class="days-list">No days recorded yet. Walk a bit and history builds up here.</div>
+    </div>
+  </div>
+
+  <div class="log-wrap">
+    <h2>Connection log</h2>
+    <pre id="log">Ready. Click "Connect treadmill" and pick your TP8 from the list.</pre>
+  </div>
+
+<script>
+// ---- Standard BLE Fitness Machine Service (FTMS) ----
+const FTMS_SERVICE      = 0x1826;
+const TREADMILL_DATA     = 0x2acd; // notify: live metrics
+const FTMS_FEATURE       = 0x2acc; // read: what the machine supports
+const FTMS_CONTROL_POINT = 0x2ad9; // write: start/stop/set speed
+
+// Some cheap treadmills expose FTMS under these too, so we request them as optional.
+const OPTIONAL_SERVICES = [
+  FTMS_SERVICE,
+  0x180a,             // Device Information
+  0x1816,             // Cycling Speed and Cadence (some belts reuse this)
+  '0000fff0-0000-1000-8000-00805f9b34fb', // very common proprietary service
+  '0000ffe0-0000-1000-8000-00805f9b34fb', // common HM-10 serial service
+  '0000fe00-0000-1000-8000-00805f9b34fb'
+];
+
+const el = id => document.getElementById(id);
+const logBox = el('log');
+function log(msg) {
+  const t = new Date().toLocaleTimeString();
+  logBox.textContent += `\n[${t}] ${msg}`;
+  logBox.scrollTop = logBox.scrollHeight;
+}
+
+let device = null;
+let server = null;
+let controlPoint = null;   // FTMS Control Point characteristic (write)
+let targetSpeed = 1.0;     // km/h, what we ask the belt to run at
+const MIN_SPEED = 1.0, MAX_SPEED = 10.0, SPEED_STEP = 0.1;
+const STRIDE_M = 0.70;     // stride from height: 1.69 m * 0.415 ≈ 0.70 m per step
+let realStepsSeen = false; // set true if a real step characteristic is found
+
+function setConnected(on) {
+  el('dot').classList.toggle('on', on);
+  el('statusText').textContent = on ? 'Connected' : 'Disconnected';
+  el('connect').disabled = on;
+  el('disconnect').disabled = !on;
+}
+
+if (!navigator.bluetooth) {
+  el('compat').style.display = 'block';
+  el('connect').disabled = true;
+}
+
+el('connect').addEventListener('click', connect);
+el('disconnect').addEventListener('click', () => { if (device && device.gatt.connected) device.gatt.disconnect(); });
+
+// ---- FTMS Control Point (0x2AD9) commands ----
+async function sendControl(bytes) {
+  if (!controlPoint) { log('No control point available.'); return; }
+  try {
+    await controlPoint.writeValue(new Uint8Array(bytes));
+  } catch (err) {
+    log('control write failed: ' + (err.message || err));
+  }
+}
+
+function enableControls(on) {
+  el('controls').style.display = on ? 'flex' : 'none';
+  ['btnStart','btnPause','btnStop','btnSlower','btnFaster'].forEach(id => el(id).disabled = !on);
+}
+
+function updateTargetSpeed(kmh) {
+  targetSpeed = Math.min(MAX_SPEED, Math.max(MIN_SPEED, Math.round(kmh * 10) / 10));
+  el('targetSpeed').textContent = targetSpeed.toFixed(1) + ' km/h';
+}
+
+async function setSpeed(kmh) {
+  updateTargetSpeed(kmh);
+  const raw = Math.round(targetSpeed * 100); // 0.01 km/h units
+  await sendControl([0x02, raw & 0xff, (raw >> 8) & 0xff]); // Set Target Speed
+  log('set speed -> ' + targetSpeed.toFixed(1) + ' km/h');
+}
+
+el('btnStart').addEventListener('click', async () => { await sendControl([0x07]); log('Start / Resume'); });
+el('btnPause').addEventListener('click', async () => { await sendControl([0x08, 0x02]); log('Pause'); });
+el('btnStop').addEventListener('click',  async () => { await sendControl([0x08, 0x01]); log('Stop'); });
+el('btnFaster').addEventListener('click', () => setSpeed(targetSpeed + SPEED_STEP));
+el('btnSlower').addEventListener('click', () => setSpeed(targetSpeed - SPEED_STEP));
+
+async function connect() {
+  try {
+    log('Opening device picker...');
+    device = await navigator.bluetooth.requestDevice({
+      // acceptAllDevices lets us see the TP8 even if it does not advertise FTMS.
+      acceptAllDevices: true,
+      optionalServices: OPTIONAL_SERVICES
+    });
+
+    log(`Selected: ${device.name || '(unnamed device)'} [${device.id}]`);
+    device.addEventListener('gattserverdisconnected', onDisconnected);
+
+    log('Connecting to GATT server...');
+    server = await device.gatt.connect();
+    setConnected(true);
+    log('Connected. Discovering services...');
+
+    await discover(server);
+  } catch (err) {
+    if (err && err.name === 'NotFoundError') {
+      log('No device chosen (picker cancelled).');
+    } else {
+      log(`ERROR: ${err && err.message ? err.message : err}`);
+    }
+  }
+}
+
+async function discover(server) {
+  // First try the standard treadmill profile.
+  try {
+    const svc = await server.getPrimaryService(FTMS_SERVICE);
+    log('Found standard Fitness Machine Service (FTMS). Great — this is the easy path.');
+
+    try {
+      const feat = await svc.getCharacteristic(FTMS_FEATURE);
+      const v = await feat.readValue();
+      log('FTMS Feature bitmap: ' + hex(v));
+    } catch (_) { /* optional */ }
+
+    const data = await svc.getCharacteristic(TREADMILL_DATA);
+    await data.startNotifications();
+    data.addEventListener('characteristicvaluechanged', e => parseTreadmillData(e.target.value));
+    log('Subscribed to live treadmill data. Start walking to see numbers move.');
+
+    // Wire up start/pause/stop/speed if the machine allows control.
+    try {
+      controlPoint = await svc.getCharacteristic(FTMS_CONTROL_POINT);
+      await controlPoint.startNotifications();
+      controlPoint.addEventListener('characteristicvaluechanged', e => {
+        log('control response: ' + hex(e.target.value));
+      });
+      await sendControl([0x00]); // Request Control — must be first
+      enableControls(true);
+      updateTargetSpeed(targetSpeed);
+      log('Control enabled: Start / Pause / Stop / speed are live.');
+    } catch (_) {
+      log('This machine exposes data but no writable control point. Buttons stay disabled.');
+    }
+    return;
+  } catch (_) {
+    log('No standard FTMS service found. Falling back to discovery mode.');
+  }
+
+  // Fallback: dump everything so we can reverse the proprietary protocol.
+  await dumpEverything(server);
+}
+
+async function dumpEverything(server) {
+  try {
+    const services = await server.getPrimaryServices();
+    log(`Device exposes ${services.length} service(s):`);
+    for (const svc of services) {
+      log(`  service ${svc.uuid}`);
+      let chars = [];
+      try { chars = await svc.getCharacteristics(); } catch (_) {}
+      for (const c of chars) {
+        const p = c.properties;
+        const flags = [
+          p.read && 'read', p.write && 'write',
+          p.writeWithoutResponse && 'writeNR',
+          p.notify && 'notify', p.indicate && 'indicate'
+        ].filter(Boolean).join(',');
+        log(`    char ${c.uuid}  [${flags}]`);
+
+        // Auto-subscribe to any notifying characteristic and log raw bytes.
+        if (p.notify || p.indicate) {
+          try {
+            await c.startNotifications();
+            c.addEventListener('characteristicvaluechanged', e => {
+              log(`    <- ${c.uuid.slice(4, 8)}: ${hex(e.target.value)}`);
+            });
+            log(`    subscribed to ${c.uuid.slice(4, 8)} (raw bytes will stream below)`);
+          } catch (_) {}
+        }
+      }
+    }
+    log('Discovery done. Walk on the treadmill and watch which line changes — that is your speed/distance feed.');
+  } catch (err) {
+    log(`Discovery error: ${err.message}`);
+  }
+}
+
+// ---- FTMS Treadmill Data parser (characteristic 0x2ACD) ----
+function parseTreadmillData(dv) {
+  let i = 0;
+  const flags = dv.getUint16(i, true); i += 2;
+
+  const has = bit => (flags & (1 << bit)) !== 0;
+  const moreData = has(0);
+
+  let curSpeed = 0;
+  let curDist = null;
+
+  // Instantaneous speed is present unless "More Data" is set. uint16, 0.01 km/h.
+  if (!moreData) {
+    curSpeed = dv.getUint16(i, true) / 100; i += 2;
+    el('speed').textContent = curSpeed.toFixed(1);
+  }
+  if (has(1)) { i += 2; }                         // Average speed
+  if (has(2)) {                                    // Total distance, uint24 metres
+    curDist = dv.getUint8(i) | (dv.getUint8(i+1) << 8) | (dv.getUint8(i+2) << 16);
+    i += 3;
+    // Card values come from today's stored totals, not this live field.
+  }
+  if (has(3)) { i += 4; }                          // Inclination + ramp angle
+  if (has(4)) { i += 4; }                          // Elevation gain
+  if (has(5)) {                                     // Instantaneous pace, uint8 0.1 km/min
+    const pace = dv.getUint8(i) / 10; i += 1;
+    el('pace').textContent = pace > 0 ? (60 / pace).toFixed(1) + ' min/km' : '--';
+  }
+  if (has(6)) { i += 1; }                           // Average pace
+  if (has(7)) { i += 5; }                             // Expended energy (ignored; we estimate)
+  if (has(8)) { i += 1; }                             // Heart rate
+  if (has(9)) { i += 1; }                             // Metabolic equivalent
+  if (has(10)) { i += 2; }                            // Elapsed time (ignored; we track active time)
+  // Remaining time (bit 11) and force/power (bit 12) ignored.
+
+  recordSample(curSpeed);
+}
+
+// ================== History, storage and charts ==================
+const KEY_PREFIX = 'tp8_hourly_';
+function localDateStr(d = new Date()) {
+  // Local calendar date (not UTC), so hours land on the right day.
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+const todayStr = () => localDateStr();
+let viewDate = todayStr();   // which day the hourly charts are showing
+let lastSample = null;       // { t: ms, dist: metres }
+let stepsChart, minsChart, speedChart;
+
+// 24 hourly buckets: { steps, dist, seconds }
+function emptyDay() { return Array.from({ length: 24 }, () => ({ steps: 0, dist: 0, seconds: 0 })); }
+function loadDay(date) {
+  try {
+    const raw = localStorage.getItem(KEY_PREFIX + date);
+    if (raw) return JSON.parse(raw);
+  } catch (_) {}
+  return emptyDay();
+}
+function saveDay(date, day) {
+  try { localStorage.setItem(KEY_PREFIX + date, JSON.stringify(day)); } catch (_) {}
+}
+function recordedDates() {
+  const out = [];
+  for (let k = 0; k < localStorage.length; k++) {
+    const key = localStorage.key(k);
+    if (key && key.startsWith(KEY_PREFIX)) out.push(key.slice(KEY_PREFIX.length));
+  }
+  return out.sort();
+}
+function dayTotals(day) {
+  return {
+    steps: day.reduce((a, h) => a + h.steps, 0),
+    mins: day.reduce((a, h) => a + h.seconds, 0) / 60,
+    dist: day.reduce((a, h) => a + h.dist, 0)
+  };
+}
+
+function recordSample(speed) {
+  const now = Date.now();
+  const hour = new Date().getHours();
+  const today = todayStr();
+  const day = loadDay(today);
+
+  if (lastSample) {
+    const dtSec = (now - lastSample.t) / 1000;
+    // Integrate speed over wall-clock time. Speed is the one field every
+    // treadmill reports, so distance/steps work even with no distance field.
+    // Guard against long gaps (tab asleep) and stale samples.
+    if (speed > 0.1 && dtSec > 0 && dtSec < 30) {
+      day[hour].seconds += dtSec;
+      const metres = speed * dtSec / 3.6;      // km/h * s -> metres
+      day[hour].dist += metres;
+      day[hour].steps += metres / STRIDE_M;
+    }
+  }
+  lastSample = { t: now };
+
+  saveDay(today, day);
+  if (viewDate === today) { renderCharts(day); updateTodayCards(day); }
+  renderDaysList();
+  el('curSpeed').textContent = speed.toFixed(1) + ' km/h';
+  pushSpeedPoint(speed);
+}
+
+// The big cards show today's running totals, read from storage, so they
+// survive a page refresh instead of resetting to zero.
+function updateTodayCards(day) {
+  const t = dayTotals(day || loadDay(todayStr()));
+  el('distance').textContent = Math.round(t.dist).toLocaleString();
+  el('steps').textContent = Math.round(t.steps).toLocaleString();
+  el('time').textContent = fmtTime(Math.round(t.mins * 60));
+  el('calories').textContent = Math.round(t.dist * 0.05); // ~50 kcal per km walking
+}
+
+const HOUR_LABELS = Array.from({ length: 24 }, (_, h) => String(h).padStart(2, '0'));
+const gridColor = 'rgba(139,148,158,0.15)';
+const tickColor = '#8b949e';
+
+function baseOpts(fmt) {
+  return {
+    responsive: true,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => fmt(c.parsed.y) } } },
+    scales: {
+      x: { grid: { color: gridColor }, ticks: { color: tickColor, maxRotation: 0, autoSkip: true, maxTicksLimit: 12 } },
+      y: { grid: { color: gridColor }, ticks: { color: tickColor }, beginAtZero: true }
+    }
+  };
+}
+
+function initCharts() {
+  if (!window.Chart) return;
+  const day = loadDay(viewDate);
+  stepsChart = new Chart(el('chartSteps'), {
+    type: 'bar',
+    data: { labels: HOUR_LABELS, datasets: [{ data: day.map(h => Math.round(h.steps)), backgroundColor: '#2f81f7', borderRadius: 4 }] },
+    options: baseOpts(v => v + ' steps')
+  });
+  minsChart = new Chart(el('chartMins'), {
+    type: 'bar',
+    data: { labels: HOUR_LABELS, datasets: [{ data: day.map(h => +(h.seconds / 60).toFixed(1)), backgroundColor: '#3fb950', borderRadius: 4 }] },
+    options: baseOpts(v => v + ' min')
+  });
+  speedChart = new Chart(el('chartSpeed'), {
+    type: 'line',
+    data: { labels: [], datasets: [{ data: [], borderColor: '#d29922', backgroundColor: 'rgba(210,153,34,0.15)', fill: true, tension: 0.35, pointRadius: 0, borderWidth: 2 }] },
+    options: {
+      responsive: true, animation: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { display: false },
+        y: { grid: { color: gridColor }, ticks: { color: tickColor }, beginAtZero: true, suggestedMax: 6 }
+      }
+    }
+  });
+  renderCharts(day);
+}
+
+function renderCharts(day) {
+  if (!stepsChart) return;
+  stepsChart.data.datasets[0].data = day.map(h => Math.round(h.steps));
+  stepsChart.update('none');
+  minsChart.data.datasets[0].data = day.map(h => +(h.seconds / 60).toFixed(1));
+  minsChart.update('none');
+  const totalSteps = day.reduce((a, h) => a + h.steps, 0);
+  const totalMins = day.reduce((a, h) => a + h.seconds, 0) / 60;
+  el('totSteps').textContent = Math.round(totalSteps).toLocaleString() + ' steps';
+  el('totMins').textContent = totalMins.toFixed(0) + ' min';
+}
+
+const SPEED_WINDOW = 120; // keep last ~120 samples
+function pushSpeedPoint(speed) {
+  if (!speedChart) return;
+  const d = speedChart.data;
+  d.labels.push('');
+  d.datasets[0].data.push(+speed.toFixed(1));
+  if (d.labels.length > SPEED_WINDOW) { d.labels.shift(); d.datasets[0].data.shift(); }
+  speedChart.update('none');
+}
+
+el('resetDay').addEventListener('click', () => {
+  localStorage.removeItem(KEY_PREFIX + todayStr());
+  lastSample = null;
+  viewDate = todayStr();
+  el('viewDay').value = todayStr();
+  if (speedChart) { speedChart.data.labels = []; speedChart.data.datasets[0].data = []; speedChart.update('none'); }
+  renderCharts(loadDay(viewDate));
+  renderDaysList();
+  updateViewingLabel();
+  log('Today reset.');
+});
+
+// -------- Day viewing --------
+function updateViewingLabel() {
+  const isToday = viewDate === todayStr();
+  el('viewingLabel').textContent = isToday ? 'Viewing: today (live)' : 'Viewing: ' + viewDate;
+}
+function showDay(date) {
+  viewDate = date;
+  el('viewDay').value = date;
+  renderCharts(loadDay(date));
+  updateViewingLabel();
+}
+el('viewDay').addEventListener('change', e => { if (e.target.value) showDay(e.target.value); });
+el('btnToday').addEventListener('click', () => showDay(todayStr()));
+
+// -------- Recorded days list --------
+function renderDaysList() {
+  const dates = recordedDates();
+  el('daysCount').textContent = dates.length + (dates.length === 1 ? ' day' : ' days');
+  const box = el('daysList');
+  if (!dates.length) { box.textContent = 'No days recorded yet. Walk a bit and history builds up here.'; return; }
+  box.innerHTML = '';
+  dates.slice().reverse().forEach(date => {
+    const t = dayTotals(loadDay(date));
+    const row = document.createElement('div');
+    row.className = 'day-item';
+    row.innerHTML = `<span class="d">${date}${date === todayStr() ? ' (today)' : ''}</span>` +
+      `<span class="s">${Math.round(t.steps).toLocaleString()} steps · ${t.mins.toFixed(0)} min · ${(t.dist/1000).toFixed(2)} km</span>`;
+    row.addEventListener('click', () => showDay(date));
+    box.appendChild(row);
+  });
+}
+
+// -------- Range analysis --------
+function eachDateInRange(from, to) {
+  const out = [];
+  let d = new Date(from + 'T00:00:00');
+  const end = new Date(to + 'T00:00:00');
+  if (end < d) return out;
+  while (d <= end) { out.push(localDateStr(d)); d.setDate(d.getDate() + 1); }
+  return out;
+}
+el('btnAnalyze').addEventListener('click', () => {
+  const from = el('rangeFrom').value, to = el('rangeTo').value;
+  if (!from || !to) { el('rangeResult').textContent = 'Pick both a start and end date.'; return; }
+  const dates = eachDateInRange(from, to);
+  if (!dates.length) { el('rangeResult').textContent = 'End date is before start date.'; return; }
+
+  let steps = 0, mins = 0, dist = 0, active = 0, best = null;
+  dates.forEach(date => {
+    const t = dayTotals(loadDay(date));
+    steps += t.steps; mins += t.mins; dist += t.dist;
+    if (t.steps > 0) active++;
+    if (!best || t.steps > best.steps) best = { date, steps: t.steps };
+  });
+  const avg = active ? steps / active : 0;
+  el('rangeResult').innerHTML =
+    `<b>${Math.round(steps).toLocaleString()}</b> steps from ${from} to ${to}<br>` +
+    `${(dist/1000).toFixed(2)} km · ${mins.toFixed(0)} active minutes<br>` +
+    `${active} of ${dates.length} days walked · avg ${Math.round(avg).toLocaleString()} steps/active day` +
+    (best && best.steps > 0 ? `<br>Best day: ${best.date} (${Math.round(best.steps).toLocaleString()} steps)` : '');
+});
+
+// -------- Init --------
+(function initHistoryUI() {
+  const t = todayStr();
+  el('viewDay').value = t;
+  el('rangeFrom').value = t;
+  el('rangeTo').value = t;
+  updateViewingLabel();
+  renderDaysList();
+  updateTodayCards();   // restore today's totals after a refresh
+})();
+
+initCharts();
+
+function fmtTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = String(s % 60).padStart(2, '0');
+  return `${m}:${sec}`;
+}
+
+function hex(dv) {
+  const b = new Uint8Array(dv.buffer);
+  return Array.from(b).map(x => x.toString(16).padStart(2, '0')).join(' ');
+}
+
+function onDisconnected() {
+  setConnected(false);
+  enableControls(false);
+  controlPoint = null;
+  log('Device disconnected.');
+}
+
+// ================== Voice control (Web Speech API) ==================
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recog = null;
+let voiceOn = false;
+
+if (!SR) {
+  el('voiceToggle').disabled = true;
+  el('voiceState').textContent = 'Voice not supported (use Chrome)';
+} else {
+  el('voiceToggle').addEventListener('click', () => voiceOn ? stopVoice() : startVoice());
+}
+
+function setVoiceUI(state, listening) {
+  el('voiceState').textContent = state;
+  el('voiceDot').classList.toggle('listen', !!listening);
+  el('voiceToggle').textContent = voiceOn ? 'Stop voice control' : 'Start voice control';
+}
+
+function startVoice() {
+  recog = new SR();
+  recog.continuous = true;
+  recog.interimResults = false;
+  recog.lang = 'en-GB';
+  recog.onresult = e => {
+    for (let k = e.resultIndex; k < e.results.length; k++) {
+      if (e.results[k].isFinal) handlePhrase(e.results[k][0].transcript.toLowerCase().trim());
+    }
+  };
+  recog.onerror = ev => {
+    log('voice error: ' + ev.error);
+    if (ev.error === 'not-allowed') { voiceOn = false; setVoiceUI('Mic blocked — allow it in the address bar', false); }
+  };
+  recog.onend = () => { if (voiceOn) { try { recog.start(); } catch (_) {} } }; // keep listening
+  voiceOn = true;
+  try { recog.start(); } catch (_) {}
+  setVoiceUI('Listening...', true);
+  log('Voice control on. Say start, stop, pause, faster, slower, or "speed 3".');
+}
+
+function stopVoice() {
+  voiceOn = false;
+  if (recog) { try { recog.stop(); } catch (_) {} }
+  setVoiceUI('Voice off', false);
+  log('Voice control off.');
+}
+
+function handlePhrase(text) {
+  el('voiceHeard').textContent = text;
+  if (!controlPoint) { log('heard "' + text + '" but treadmill is not connected.'); return; }
+
+  // "speed 3" / "speed to 2.5" / "set speed 4"
+  const m = text.match(/speed\s*(?:to\s*)?(\d+(?:\.\d+)?)/);
+  if (m) { setSpeed(parseFloat(m[1])); flash('speed ' + m[1]); return; }
+
+  if (/\b(start|go|begin|resume|play)\b/.test(text))      { sendControl([0x07]); flash('start'); }
+  else if (/\b(stop|end|halt)\b/.test(text))              { sendControl([0x08, 0x01]); flash('stop'); }
+  else if (/\b(pause|wait|hold)\b/.test(text))            { sendControl([0x08, 0x02]); flash('pause'); }
+  else if (/\b(faster|quicker|speed up|increase)\b/.test(text)) { setSpeed(targetSpeed + SPEED_STEP); flash('faster'); }
+  else if (/\b(slower|slow down|decrease)\b/.test(text))  { setSpeed(targetSpeed - SPEED_STEP); flash('slower'); }
+  else { log('no command matched in "' + text + '"'); }
+}
+
+function flash(cmd) { log('voice command: ' + cmd); }
+</script>
+</body>
+</html>
