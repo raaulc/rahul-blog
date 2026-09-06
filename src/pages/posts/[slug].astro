@@ -85,5 +85,24 @@ function fmtDate(d) {
       });
       await mermaid.run();
     </script>
+
+    <script>
+      // gentle scroll-reveal for figures, headings and images
+      document.body.classList.add('reveal-ready');
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+      document
+        .querySelectorAll('article.post-content .fig, article.post-content h2, article.post-content img')
+        .forEach((el) => io.observe(el));
+    </script>
   </body>
 </html>

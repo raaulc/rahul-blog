@@ -8,6 +8,20 @@ type: llm-architecture
 
 ---
 
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 88" role="img" aria-label="Tokens generated one at a time: how to build a ___">
+  <g class="fx-tok">
+    <g><rect x="16" y="26" width="92" height="36" rx="4"/><text x="62" y="49">how</text></g>
+    <g><rect x="116" y="26" width="92" height="36" rx="4"/><text x="162" y="49">to</text></g>
+    <g><rect x="216" y="26" width="92" height="36" rx="4"/><text x="262" y="49">build</text></g>
+    <g><rect x="316" y="26" width="92" height="36" rx="4"/><text x="362" y="49">a</text></g>
+    <g><rect x="416" y="26" width="92" height="36" rx="4"/><text x="462" y="49">___</text></g>
+  </g>
+  <rect class="fx-caret" x="516" y="26" width="3" height="36"/>
+</svg>
+<figcaption>predict the next token, then feed it back in</figcaption>
+</figure>
+
 ## Your phone is reading your mind. Or is it?
 
 You start typing *"I'll be there in a..."* and your keyboard immediately suggests **minute**. **sec**. **bit**.
@@ -163,6 +177,17 @@ class LSTMModel(nn.Module):
 ```
 
 ---
+
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 150" role="img" aria-label="Training loss curve descending over steps">
+  <path class="fx-axis" d="M46,18 V128 H520"/>
+  <path class="fx-curve" d="M46,28 C150,44 200,110 300,120 S470,132 520,134"/>
+  <circle class="fx-dot" r="5"><animateMotion dur="4s" repeatCount="indefinite" path="M46,28 C150,44 200,110 300,120 S470,132 520,134"/></circle>
+  <text class="fx-lab" x="30" y="20">loss</text>
+  <text class="fx-lab" x="516" y="146" text-anchor="end">steps</text>
+</svg>
+<figcaption>loss falls as the LSTM picks up title patterns</figcaption>
+</figure>
 
 ## 6. Training — Letting the Model Learn
 

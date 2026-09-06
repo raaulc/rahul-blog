@@ -8,6 +8,17 @@ type: llm-architecture
 
 ---
 
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 150" role="img" aria-label="Training loss curve descending over steps">
+  <path class="fx-axis" d="M46,18 V128 H520"/>
+  <path class="fx-curve" d="M46,28 C150,44 200,110 300,120 S470,132 520,134"/>
+  <circle class="fx-dot" r="5"><animateMotion dur="4s" repeatCount="indefinite" path="M46,28 C150,44 200,110 300,120 S470,132 520,134"/></circle>
+  <text class="fx-lab" x="30" y="20">loss</text>
+  <text class="fx-lab" x="516" y="146" text-anchor="end">steps</text>
+</svg>
+<figcaption>training loss over ~4 minutes on one GPU</figcaption>
+</figure>
+
 ## Fine-tuning a 117M parameter model. On a budget. In 4 minutes.
 
 Full fine-tuning GPT-2 means updating every single one of its 117 million parameters. That's expensive. Slow. And honestly, overkill.
@@ -125,6 +136,23 @@ model = get_peft_model(model, lora_config)
 Only **0.24%** of parameters are being trained. Everything else is frozen.
 
 ---
+
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 150" role="img" aria-label="LoRA: a frozen weight matrix plus small trainable adapters">
+  <rect class="fx-frozen" x="55" y="30" width="90" height="90" rx="3"/>
+  <text class="fx-lab" x="100" y="138" text-anchor="middle">W  frozen</text>
+  <path class="fx-arrow" d="M160,75 H245"/>
+  <g class="fx-adapt">
+    <rect x="262" y="44" width="66" height="26" rx="3"/>
+    <rect x="262" y="80" width="66" height="26" rx="3"/>
+  </g>
+  <text class="fx-lab" x="295" y="138" text-anchor="middle">A · B  0.24%</text>
+  <path class="fx-arrow" d="M345,75 H430"/>
+  <rect class="fx-out" x="440" y="30" width="90" height="90" rx="3"/>
+  <text class="fx-lab" x="485" y="138" text-anchor="middle">W + BA</text>
+</svg>
+<figcaption>train the tiny adapters, keep GPT-2 frozen</figcaption>
+</figure>
 
 ## 6. Training
 

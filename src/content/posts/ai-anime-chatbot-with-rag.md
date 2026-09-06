@@ -8,6 +8,21 @@ type: rag-system
 
 ---
 
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 150" role="img" aria-label="Nearest-neighbour search in embedding space">
+  <g class="fx-pts">
+    <circle cx="70" cy="40" r="4"/><circle cx="120" cy="98" r="4"/><circle cx="185" cy="55" r="4"/>
+    <circle cx="235" cy="122" r="4"/><circle cx="305" cy="30" r="4"/><circle cx="365" cy="92" r="4"/>
+    <circle cx="415" cy="46" r="4"/><circle cx="475" cy="112" r="4"/><circle cx="505" cy="62" r="4"/>
+    <circle cx="150" cy="132" r="4"/><circle cx="335" cy="136" r="4"/><circle cx="445" cy="30" r="4"/>
+  </g>
+  <circle class="fx-radius" cx="282" cy="78"/>
+  <g class="fx-near"><circle cx="247" cy="70" r="4.5"/><circle cx="305" cy="30" r="4.5"/><circle cx="332" cy="96" r="4.5"/></g>
+  <circle class="fx-query" cx="282" cy="78" r="6"/>
+</svg>
+<figcaption>scraped chunks, embedded, searched by the question</figcaption>
+</figure>
+
 ## What if you could interrogate any anime page — and get real answers?
 
 Not summaries. Not Wikipedia. A chatbot that **reads the actual page**, understands the content, cross-checks the web, and answers your questions — in bullet points, with sources.
@@ -68,6 +83,22 @@ split_docs = text_splitter.split_documents(docs)
 The recursive splitter tries to split on `\n\n`, then `\n`, then spaces — preserving natural paragraph structure wherever possible.
 
 ---
+
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 100" role="img" aria-label="Pipeline: scrape to chunk to embed to search to answer">
+  <line class="fx-track" x1="40" y1="54" x2="520" y2="54"/>
+  <line class="fx-dash" x1="40" y1="54" x2="520" y2="54"/>
+  <circle class="fx-dot" r="5"><animateMotion dur="3s" repeatCount="indefinite" path="M40,54 H520"/></circle>
+  <g class="fx-nodes">
+    <g><circle cx="40" cy="54" r="8"/><text x="40" y="84">scrape</text></g>
+    <g><circle cx="160" cy="54" r="8"/><text x="160" y="84">chunk</text></g>
+    <g><circle cx="280" cy="54" r="8"/><text x="280" y="84">embed</text></g>
+    <g><circle cx="400" cy="54" r="8"/><text x="400" y="84">search</text></g>
+    <g><circle cx="520" cy="54" r="8"/><text x="520" y="84">answer</text></g>
+  </g>
+</svg>
+<figcaption>scrape any URL, then answer from it</figcaption>
+</figure>
 
 ## 4. Step 3 — Embed + Store in FAISS
 

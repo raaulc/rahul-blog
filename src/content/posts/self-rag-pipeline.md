@@ -8,6 +8,22 @@ type: rag-system
 
 ---
 
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 100" role="img" aria-label="Pipeline: retrieve to grade to generate to check to validate">
+  <line class="fx-track" x1="40" y1="54" x2="520" y2="54"/>
+  <line class="fx-dash" x1="40" y1="54" x2="520" y2="54"/>
+  <circle class="fx-dot" r="5"><animateMotion dur="3s" repeatCount="indefinite" path="M40,54 H520"/></circle>
+  <g class="fx-nodes">
+    <g><circle cx="40" cy="54" r="8"/><text x="40" y="84">retrieve</text></g>
+    <g><circle cx="160" cy="54" r="8"/><text x="160" y="84">grade</text></g>
+    <g><circle cx="280" cy="54" r="8"/><text x="280" y="84">generate</text></g>
+    <g><circle cx="400" cy="54" r="8"/><text x="400" y="84">check</text></g>
+    <g><circle cx="520" cy="54" r="8"/><text x="520" y="84">validate</text></g>
+  </g>
+</svg>
+<figcaption>a RAG loop that inspects its own work</figcaption>
+</figure>
+
 ## What if the AI graded its own answers before giving them to you?
 
 Normal RAG retrieves docs and answers. That's it. It doesn't check if the docs were even relevant. It doesn't check if the answer is hallucinated. It just fires and forgets.
@@ -56,6 +72,21 @@ state["retriever"] = vector_db.as_retriever()
 `all-mpnet-base-v2` — higher quality embeddings than MiniLM, 768-dimensional. Chunk size 250 with no overlap keeps chunks tight and focused.
 
 ---
+
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 150" role="img" aria-label="Nearest-neighbour search in embedding space">
+  <g class="fx-pts">
+    <circle cx="70" cy="40" r="4"/><circle cx="120" cy="98" r="4"/><circle cx="185" cy="55" r="4"/>
+    <circle cx="235" cy="122" r="4"/><circle cx="305" cy="30" r="4"/><circle cx="365" cy="92" r="4"/>
+    <circle cx="415" cy="46" r="4"/><circle cx="475" cy="112" r="4"/><circle cx="505" cy="62" r="4"/>
+    <circle cx="150" cy="132" r="4"/><circle cx="335" cy="136" r="4"/><circle cx="445" cy="30" r="4"/>
+  </g>
+  <circle class="fx-radius" cx="282" cy="78"/>
+  <g class="fx-near"><circle cx="247" cy="70" r="4.5"/><circle cx="305" cy="30" r="4.5"/><circle cx="332" cy="96" r="4.5"/></g>
+  <circle class="fx-query" cx="282" cy="78" r="6"/>
+</svg>
+<figcaption>grade each retrieved chunk before trusting it</figcaption>
+</figure>
 
 ## 3. Grading Retrieved Docs — The "Self" in Self-RAG
 

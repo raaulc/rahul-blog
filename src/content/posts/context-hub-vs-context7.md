@@ -14,6 +14,21 @@ Why? Because your AI was working from memory -- and memory goes stale.
 
 ---
 
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 100" role="img" aria-label="Pipeline: your prompt to stale memory to guessed API to broken code">
+  <line class="fx-track" x1="40" y1="54" x2="520" y2="54"/>
+  <line class="fx-dash" x1="40" y1="54" x2="520" y2="54"/>
+  <circle class="fx-dot" r="5"><animateMotion dur="3s" repeatCount="indefinite" path="M40,54 H520"/></circle>
+  <g class="fx-nodes">
+    <g><circle cx="40" cy="54" r="8"/><text x="40" y="84">your prompt</text></g>
+    <g><circle cx="200" cy="54" r="8"/><text x="200" y="84">stale memory</text></g>
+    <g><circle cx="360" cy="54" r="8"/><text x="360" y="84">guessed API</text></g>
+    <g><circle cx="520" cy="54" r="8"/><text x="520" y="84">broken code</text></g>
+  </g>
+</svg>
+<figcaption>what the model writes without current docs</figcaption>
+</figure>
+
 ## The Problem Nobody Talks About
 
 Every AI coding assistant -- Copilot, Cursor, Claude -- was trained on data up to a certain date.
@@ -40,6 +55,21 @@ That method does not exist anymore. Deprecated. Gone.
 You just shipped a bug because your AI was reading from an old textbook.
 
 ---
+
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 100" role="img" aria-label="Pipeline: your prompt to fetch live docs to grounded context to working code">
+  <line class="fx-track" x1="40" y1="54" x2="520" y2="54"/>
+  <line class="fx-dash" x1="40" y1="54" x2="520" y2="54"/>
+  <circle class="fx-dot" r="5"><animateMotion dur="3s" repeatCount="indefinite" path="M40,54 H520"/></circle>
+  <g class="fx-nodes">
+    <g><circle cx="40" cy="54" r="8"/><text x="40" y="84">your prompt</text></g>
+    <g><circle cx="200" cy="54" r="8"/><text x="200" y="84">fetch live docs</text></g>
+    <g><circle cx="360" cy="54" r="8"/><text x="360" y="84">grounded context</text></g>
+    <g><circle cx="520" cy="54" r="8"/><text x="520" y="84">working code</text></g>
+  </g>
+</svg>
+<figcaption>inject current docs before it writes</figcaption>
+</figure>
 
 ## The Fix: Give Your AI Current Docs Before It Writes Code
 

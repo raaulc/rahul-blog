@@ -8,6 +8,20 @@ type: llm-architecture
 
 ---
 
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 88" role="img" aria-label="Tokens generated one at a time: Amanda: baked cookies. Jerry: summary">
+  <g class="fx-tok">
+    <g><rect x="16" y="26" width="92" height="36" rx="4"/><text x="62" y="49">Amanda:</text></g>
+    <g><rect x="116" y="26" width="92" height="36" rx="4"/><text x="162" y="49">baked</text></g>
+    <g><rect x="216" y="26" width="92" height="36" rx="4"/><text x="262" y="49">cookies.</text></g>
+    <g><rect x="316" y="26" width="92" height="36" rx="4"/><text x="362" y="49">Jerry:</text></g>
+    <g><rect x="416" y="26" width="92" height="36" rx="4"/><text x="462" y="49">summary</text></g>
+  </g>
+  <rect class="fx-caret" x="516" y="26" width="3" height="36"/>
+</svg>
+<figcaption>dialogue in, a short summary out</figcaption>
+</figure>
+
 ## Your model has no idea what a conversation looks like. Yet.
 
 Out of the box, T5-Small can do a lot. Translation. Q&A. Classification. It's been pre-trained on a massive chunk of the internet.
@@ -116,6 +130,17 @@ training_args = TrainingArguments(
 **Gradient accumulation** is the clever trick here. The GPU can only fit 1 sample at a time, but we accumulate gradients over 16 steps before updating — simulating a batch size of 16 without needing the memory for it.
 
 ---
+
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 150" role="img" aria-label="Training loss curve descending over steps">
+  <path class="fx-axis" d="M46,18 V128 H520"/>
+  <path class="fx-curve" d="M46,28 C150,44 200,110 300,120 S470,132 520,134"/>
+  <circle class="fx-dot" r="5"><animateMotion dur="4s" repeatCount="indefinite" path="M46,28 C150,44 200,110 300,120 S470,132 520,134"/></circle>
+  <text class="fx-lab" x="30" y="20">loss</text>
+  <text class="fx-lab" x="516" y="146" text-anchor="end">steps</text>
+</svg>
+<figcaption>cross-entropy drops as T5 learns to summarise</figcaption>
+</figure>
 
 ## 6. The Trainer — Everything in One Place
 

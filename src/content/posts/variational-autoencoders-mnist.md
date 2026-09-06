@@ -8,6 +8,23 @@ type: llm-architecture
 
 ---
 
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 150" role="img" aria-label="Sample a latent vector from a Gaussian, decode a new digit">
+  <ellipse class="fx-blob" cx="110" cy="72" rx="72" ry="52"/>
+  <circle class="fx-sample" r="4"><animateMotion dur="3.6s" repeatCount="indefinite" path="M110,72 m-34,-6 a34,22 0 1,0 68,12 a34,22 0 1,0 -68,-12"/></circle>
+  <text class="fx-lab" x="110" y="140" text-anchor="middle">z ~ N(0, I)</text>
+  <path class="fx-arrow" d="M198,72 H292"/>
+  <text class="fx-lab" x="245" y="60" text-anchor="middle">decoder</text>
+  <g class="fx-grid" transform="translate(322,34)">
+    <rect x="0" y="0" width="24" height="24"/><rect x="28" y="0" width="24" height="24"/><rect x="56" y="0" width="24" height="24"/>
+    <rect x="0" y="28" width="24" height="24"/><rect x="28" y="28" width="24" height="24"/><rect x="56" y="28" width="24" height="24"/>
+    <rect x="0" y="56" width="24" height="24"/><rect x="28" y="56" width="24" height="24"/><rect x="56" y="56" width="24" height="24"/>
+  </g>
+  <text class="fx-lab" x="362" y="140" text-anchor="middle">new digit</text>
+</svg>
+<figcaption>sample a point in latent space, decode a digit</figcaption>
+</figure>
+
 ## What if you could just… invent new handwriting?
 
 Not copy it. Not trace it. Genuinely **generate** a brand new handwritten digit that has never existed before — but looks completely real.
@@ -134,6 +151,17 @@ loss = BCE + KLD
 The two terms are in tension — BCE wants to memorise, KLD wants to generalise. The balance between them is what creates a smooth, generative latent space.
 
 ---
+
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 150" role="img" aria-label="Training loss curve descending over steps">
+  <path class="fx-axis" d="M46,18 V128 H520"/>
+  <path class="fx-curve" d="M46,28 C150,44 200,110 300,120 S470,132 520,134"/>
+  <circle class="fx-dot" r="5"><animateMotion dur="4s" repeatCount="indefinite" path="M46,28 C150,44 200,110 300,120 S470,132 520,134"/></circle>
+  <text class="fx-lab" x="30" y="20">loss</text>
+  <text class="fx-lab" x="516" y="146" text-anchor="end">steps</text>
+</svg>
+<figcaption>reconstruction + KL, minimised together</figcaption>
+</figure>
 
 ## 7. Training
 

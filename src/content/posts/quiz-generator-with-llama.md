@@ -8,6 +8,22 @@ type: rag-system
 
 ---
 
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 100" role="img" aria-label="Pipeline: text to prompt to LLaMA 4 to JSON to quiz">
+  <line class="fx-track" x1="40" y1="54" x2="520" y2="54"/>
+  <line class="fx-dash" x1="40" y1="54" x2="520" y2="54"/>
+  <circle class="fx-dot" r="5"><animateMotion dur="3s" repeatCount="indefinite" path="M40,54 H520"/></circle>
+  <g class="fx-nodes">
+    <g><circle cx="40" cy="54" r="8"/><text x="40" y="84">text</text></g>
+    <g><circle cx="160" cy="54" r="8"/><text x="160" y="84">prompt</text></g>
+    <g><circle cx="280" cy="54" r="8"/><text x="280" y="84">LLaMA 4</text></g>
+    <g><circle cx="400" cy="54" r="8"/><text x="400" y="84">JSON</text></g>
+    <g><circle cx="520" cy="54" r="8"/><text x="520" y="84">quiz</text></g>
+  </g>
+</svg>
+<figcaption>text in, structured quiz out</figcaption>
+</figure>
+
 ## What if an AI could turn any text into a quiz in seconds?
 
 Paste any content — a Wikipedia paragraph, a study note, a textbook excerpt — and get 5 multiple choice questions with difficulty control, auto-scoring, and instant feedback.
@@ -36,6 +52,20 @@ prompt = f"""
 The model is constrained to output structured JSON — no explanation, no preamble. That's the entire engine.
 
 ---
+
+<figure class="fig">
+<svg class="fig-svg" viewBox="0 0 560 88" role="img" aria-label="Tokens generated one at a time: { "q" "options" "answer" }">
+  <g class="fx-tok">
+    <g><rect x="16" y="26" width="92" height="36" rx="4"/><text x="62" y="49">{</text></g>
+    <g><rect x="116" y="26" width="92" height="36" rx="4"/><text x="162" y="49">"q"</text></g>
+    <g><rect x="216" y="26" width="92" height="36" rx="4"/><text x="262" y="49">"options"</text></g>
+    <g><rect x="316" y="26" width="92" height="36" rx="4"/><text x="362" y="49">"answer"</text></g>
+    <g><rect x="416" y="26" width="92" height="36" rx="4"/><text x="462" y="49">}</text></g>
+  </g>
+  <rect class="fx-caret" x="516" y="26" width="3" height="36"/>
+</svg>
+<figcaption>the model must emit valid JSON, field by field</figcaption>
+</figure>
 
 ## 2. The JSON Schema — Forcing Structured Output
 
