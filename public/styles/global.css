@@ -47,7 +47,11 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) var(--bg);
+  -webkit-text-size-adjust: 100%;
 }
+
+html, body { overflow-x: hidden; max-width: 100%; }
+img, svg, video, iframe, canvas { max-width: 100%; height: auto; }
 
 body {
   font-family: var(--font-sans);
@@ -423,22 +427,73 @@ article.post-content ul, article.post-content ol { margin: 0 0 18px; padding-lef
 article.post-content li { margin-bottom: 6px; }
 article.post-content hr { border: none; border-top: 1px solid var(--rule); margin: 36px 0; }
 
+/* Never let long strings or wide blocks push the page sideways on mobile */
+article.post-content,
+.content-block { overflow-wrap: break-word; word-break: break-word; }
+article.post-content pre { -webkit-overflow-scrolling: touch; }
+
+/* Tables: readable, and scroll inside their own box instead of the page */
+article.post-content table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  margin: 22px 0;
+  -webkit-overflow-scrolling: touch;
+}
+article.post-content th,
+article.post-content td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+article.post-content th { color: var(--bright); background: var(--surface); font-weight: 600; }
+
+/* Mermaid / embedded SVG diagrams */
+.mermaid { overflow-x: auto; margin: 20px 0; }
+.mermaid svg { max-width: 100%; height: auto; }
+
 /* Responsive */
-@media (max-width: 640px) {
-  body { font-size: 15.5px; }
-  .container { padding: 68px 18px 64px; }
+@media (max-width: 720px) {
   .navbar { padding: 0 16px; }
   .navbar-path { display: none; }
-  .navbar-nav { gap: 16px; }
-  .navbar-nav a { font-size: 12px; }
+  .navbar-nav { gap: 18px; width: 100%; justify-content: space-between; }
+}
 
-  .bio-layout { flex-direction: column; gap: 16px; }
-  .bio-photo { width: 104px; height: 104px; }
+@media (max-width: 640px) {
+  body { font-size: 15.5px; }
+  .container { padding: 64px 16px 56px; }
+  .navbar-nav { gap: 12px; }
+  .navbar-nav a { font-size: 12px; letter-spacing: 0.01em; }
 
-  .post-entry { gap: 10px; flex-wrap: wrap; }
-  .post-date { min-width: 78px; font-size: 11px; }
+  .intro { font-size: 14.5px; margin-bottom: 32px; }
+  .section { margin-bottom: 36px; }
+
+  .bio-layout { flex-direction: column; gap: 14px; padding-left: 14px; }
+  .bio-photo { width: 96px; height: 96px; }
+  .bio-field { font-size: 14px; }
+  .bio-key { min-width: 62px; }
+
+  .content-block { padding-left: 14px; }
+
+  .post-entry { gap: 4px 12px; flex-wrap: wrap; padding: 12px 0; }
+  .post-date { min-width: 0; font-size: 11px; }
+  .post-link { flex-basis: 100%; font-size: 15px; }
   .post-mins { display: none; }
 
-  article.post-content h1 { font-size: 25px; }
-  article.post-content h2 { font-size: 19px; }
+  .chips { gap: 6px; }
+  .chip { font-size: 11px; padding: 4px 10px; }
+
+  article.post-content { font-size: 15.5px; }
+  article.post-content h1 { font-size: 24px; }
+  article.post-content h2 { font-size: 18px; margin-top: 36px; }
+  article.post-content h3 { font-size: 16px; }
+  article.post-content pre { font-size: 12.5px; padding: 12px 14px; }
+  article.post-content table { font-size: 12px; }
+
+  .terminal-section { margin-top: 48px; }
 }
