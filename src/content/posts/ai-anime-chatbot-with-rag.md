@@ -10,8 +10,6 @@ type: rag-system
 
 ## What if you could interrogate any anime page — and get real answers?
 
-![anime excited gif](https://media.giphy.com/media/XMVsIvkUjZUqc/giphy.gif)
-
 Not summaries. Not Wikipedia. A chatbot that **reads the actual page**, understands the content, cross-checks the web, and answers your questions — in bullet points, with sources.
 
 That's AnimeSensei. And in this post, we're going to build it from scratch using RAG, FAISS, Groq, and DuckDuckGo.
@@ -19,8 +17,6 @@ That's AnimeSensei. And in this post, we're going to build it from scratch using
 ---
 
 ## 1. What Even Is RAG?
-
-![robot thinking gif](https://media.giphy.com/media/JZjTmfiY6hNgCPJUVe/giphy.gif)
 
 LLMs have a problem. They know a lot — but they can't know *everything*, especially recent or niche content. And they hallucinate.
 
@@ -42,8 +38,6 @@ Instead of the model guessing, it reads. That's the whole trick.
 
 ## 2. Step 1 — Scrape the Anime Page
 
-![database search gif](https://media.giphy.com/media/13chvmRrJkgyWc/giphy.gif)
-
 We use LangChain's `WebBaseLoader` to pull down the raw content from any anime URL (e.g., a MyAnimeList page):
 
 ```python
@@ -58,8 +52,6 @@ One URL in, a list of `Document` objects out — each one carrying the page's te
 ---
 
 ## 3. Step 2 — Chunk It Up
-
-![anime chatbot gif](https://media.giphy.com/media/S60CrN9iMxFlyp7uM8/giphy.gif)
 
 A full web page is too big to stuff into a single context window. We split it into overlapping chunks:
 
@@ -78,8 +70,6 @@ The recursive splitter tries to split on `\n\n`, then `\n`, then spaces — pres
 ---
 
 ## 4. Step 3 — Embed + Store in FAISS
-
-![loading searching gif](https://media.giphy.com/media/emySgWo0iBKWqni1wR/giphy.gif)
 
 Every chunk gets converted to a dense vector using a sentence transformer model, then stored in a FAISS index:
 
@@ -102,8 +92,6 @@ This is the core of RAG. Semantically similar chunks float to the top, even if t
 
 ## 5. Step 4 — Augment with DuckDuckGo
 
-![ninja sneaky gif](https://media.giphy.com/media/14q6mynyPhNJ4I/giphy.gif)
-
 The scraped page is great — but what about things not on that page? Episode recaps, community discussions, recent news?
 
 We augment with a live DuckDuckGo search:
@@ -122,8 +110,6 @@ No API key. No rate limits. Just a search query in, a text snippet out. The resu
 ---
 
 ## 6. Step 5 — Ask Llama 3.3 via Groq
-
-![artificial intelligence gif](https://media.giphy.com/media/CVtNe84hhYF9u/giphy.gif)
 
 Both sources — RAG context and web search — get merged and sent to Llama 3.3 70B running on Groq's inference API:
 
@@ -151,8 +137,6 @@ The prompt enforces bullet point answers, source citations, and an honest fallba
 
 ## 7. The Streamlit UI
 
-![mind blown anime gif](https://media.giphy.com/media/NRRnPQEdY2cIo/giphy.gif)
-
 Everything wraps into a clean Streamlit app with session state:
 
 ```python
@@ -168,8 +152,6 @@ Session state caches the vector store per URL — no rebuilds on every keystroke
 ---
 
 ## The Full Pipeline
-
-![magic spell gif](https://media.giphy.com/media/tnHzL0nyqVnQBZVGhq/giphy.gif)
 
 | Component | Role |
 |-----------|------|

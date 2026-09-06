@@ -10,8 +10,6 @@ type: llm-architecture
 
 ## Your phone is reading your mind. Or is it?
 
-![typing on phone gif](https://media.giphy.com/media/13rQ7rrTrvZXlm/giphy.gif)
-
 You start typing *"I'll be there in a..."* and your keyboard immediately suggests **minute**. **sec**. **bit**.
 
 How does it know?
@@ -25,8 +23,6 @@ That's it. That's the whole idea. And in this post, we are going to build exactl
 ---
 
 ## Wait. What even IS next word prediction?
-
-![confused gif](https://media.giphy.com/media/lHfxDepSGlzom6f65K/giphy.gif)
 
 Think of it like this.
 
@@ -43,8 +39,6 @@ That's exactly what we're training our model to do. Read thousands of sentences.
 ## 1. The Data — Medium Article Titles
 
 We're not training on Shakespeare. We're training on **6,508 Medium article titles**.
-
-![reading articles gif](https://media.giphy.com/media/8dYmJ6Buo3lYY/giphy.gif)
 
 Titles like:
 
@@ -65,8 +59,6 @@ Simple. Now we have one massive string of text to learn from.
 ---
 
 ## 2. Tokenization — Breaking Text into Pieces
-
-![chopping gif](https://media.giphy.com/media/YAnpMSHcurJVS/giphy.gif)
 
 Neural networks don't understand words. They understand **numbers**.
 
@@ -92,8 +84,6 @@ After scanning all titles → **8,347 unique tokens** in our vocabulary.
 
 ## 3. Building Training Sequences — The Secret Sauce
 
-![brain working gif](https://media.giphy.com/media/wrmVCNbpOyqgJ9zQTn/giphy.gif)
-
 This is where the magic happens. Pay attention.
 
 For every sentence, we don't just use it once. We break it into **every possible prefix**:
@@ -116,8 +106,6 @@ From 6,508 titles we squeeze out **55,467 training sequences**. That's 8x more d
 
 ## 4. Padding — Making Everything the Same Size
 
-![everything the same gif](https://media.giphy.com/media/BBkKEBJkmFbTG/giphy.gif)
-
 Our sequences have different lengths. The longest is **51 tokens**. Neural networks need fixed-size inputs.
 
 Solution? **Left-pad with zeros.**
@@ -137,8 +125,6 @@ y = padded[:, -1]   # only the last token            → what to predict
 ---
 
 ## 5. The LSTM Model — Here's the Brain
-
-![brain gif](https://media.giphy.com/media/VDQ2Z8GiHaAo/giphy.gif)
 
 Three layers. That's all.
 
@@ -180,8 +166,6 @@ class LSTMModel(nn.Module):
 
 ## 6. Training — Letting the Model Learn
 
-![training montage gif](https://media.giphy.com/media/zIOdLMZDcBDc2gk6vV/giphy.gif)
-
 **50 epochs. Adam optimizer. CrossEntropyLoss.**
 
 For every batch the loop does four things:
@@ -213,15 +197,11 @@ Epoch 25 → Loss: 1022
 Epoch 50 → Loss: 879
 ```
 
-![numbers going down gif](https://media.giphy.com/media/5VKbvrjxpVJCM/giphy.gif)
-
 The model is learning. Fast.
 
 ---
 
 ## 7. Making Predictions
-
-![drumroll gif](https://media.giphy.com/media/Xg6MhjKhDwoBwni45d/giphy.gif)
 
 The `prediction` function takes any text, tokenizes and pads it, runs it through the model, and returns the input with the predicted next word appended.
 
@@ -238,8 +218,6 @@ It works.
 ---
 
 ## 8. Autoregressive Generation — The Full Loop
-
-![domino effect gif](https://media.giphy.com/media/YAnpMSHcurJVS/giphy.gif)
 
 Now the fun part. We feed each prediction back as the next input — this is called **autoregressive generation**. The same trick used by GPT.
 
@@ -266,8 +244,6 @@ One word at a time. Just like your keyboard. Just like ChatGPT.
 ---
 
 ## The Big Picture
-
-![mind blown gif](https://media.giphy.com/media/l0IypeKl9NJhPFMrK/giphy.gif)
 
 Here's what you just built:
 

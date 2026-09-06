@@ -10,8 +10,6 @@ type: rag-system
 
 ## What if the AI graded its own answers before giving them to you?
 
-![detective gif](https://media.giphy.com/media/3oriO8vwmRIZO6kcNO/giphy.gif)
-
 Normal RAG retrieves docs and answers. That's it. It doesn't check if the docs were even relevant. It doesn't check if the answer is hallucinated. It just fires and forgets.
 
 **Self-RAG** adds a self-evaluation loop. The LLM grades its own retrieved documents, checks its own answer for hallucinations, and validates whether it actually answered the question. Built as a stateful graph with LangGraph.
@@ -19,8 +17,6 @@ Normal RAG retrieves docs and answers. That's it. It doesn't check if the docs w
 ---
 
 ## 1. The LangGraph StateGraph
-
-![graph network gif](https://media.giphy.com/media/3oz8xWilW3071V3BKM/giphy.gif)
 
 The entire pipeline is a `StateGraph` — a directed graph where each node is a function that reads and writes shared state:
 
@@ -43,8 +39,6 @@ Every node takes `WorkflowState` in and returns `WorkflowState` out. The state f
 
 ## 2. The Knowledge Base — Chroma + Embeddings
 
-![pipeline gif](https://media.giphy.com/media/C0yPwLH7vggdwT79Kr/giphy.gif)
-
 Two URLs scraped, chunked, embedded, and stored in a Chroma vector database:
 
 ```python
@@ -64,8 +58,6 @@ state["retriever"] = vector_db.as_retriever()
 ---
 
 ## 3. Grading Retrieved Docs — The "Self" in Self-RAG
-
-![robot judge gif](https://media.giphy.com/media/X8M8IALeMOugBTf5aL/giphy.gif)
 
 After retrieval, every document is graded for relevance by the LLM itself using structured output:
 
@@ -87,8 +79,6 @@ for doc in state["retrieved_docs"]:
 
 ## 4. Conditional Routing — Answer or Stop
 
-![think smart gif](https://media.giphy.com/media/d3mlE7uhX8KFgEmY/giphy.gif)
-
 After filtering, if no relevant docs remain — the graph routes to `END` instead of generating:
 
 ```python
@@ -108,8 +98,6 @@ Clean, explicit branching. No if/else spaghetti — just a routing function that
 
 ## 5. Generate the Answer
 
-![fact check gif](https://media.giphy.com/media/lVrwaz7p7aSoCiPLHl/giphy.gif)
-
 A standard RAG prompt pulled from LangChain Hub:
 
 ```python
@@ -126,8 +114,6 @@ The answer goes into `answer_draft` — not final yet. It still has to pass two 
 ---
 
 ## 6. Hallucination Detection
-
-![hallucination gif](https://media.giphy.com/media/xT9IgAlOUngqoa77ZS/giphy.gif)
 
 The LLM checks its own answer against the retrieved facts:
 
@@ -147,8 +133,6 @@ state["has_hallucination"] = (result.binary_score.lower() != "yes")
 ---
 
 ## 7. Answer Validation
-
-![approved gif](https://media.giphy.com/media/eoFJSruUWf7qq1zNHD/giphy.gif)
 
 One final check — does the answer actually address the question?
 

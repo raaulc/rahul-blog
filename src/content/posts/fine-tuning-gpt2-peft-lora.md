@@ -10,8 +10,6 @@ type: llm-architecture
 
 ## Fine-tuning a 117M parameter model. On a budget. In 4 minutes.
 
-![efficient gif](https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif)
-
 Full fine-tuning GPT-2 means updating every single one of its 117 million parameters. That's expensive. Slow. And honestly, overkill.
 
 What if you could get 90% of the result by only training **0.1% of the parameters**?
@@ -21,8 +19,6 @@ That's exactly what **LoRA** does. And in this post, we're going to use it to fi
 ---
 
 ## 1. What is LoRA?
-
-![confused but curious gif](https://media.giphy.com/media/y3QOvy7xxMwKI/giphy.gif)
 
 **LoRA (Low-Rank Adaptation)** is a technique for fine-tuning large models without touching their original weights.
 
@@ -46,8 +42,6 @@ After training, you just save `A` and `B`. The base model is untouched. You can 
 
 ## 2. The Dataset — English Quotes
 
-![quotes gif](https://media.giphy.com/media/OQxmEv6imvBdu/giphy.gif)
-
 We're using the **English Quotes** dataset — 2,508 famous quotes from authors, philosophers, and thinkers.
 
 Lines like:
@@ -66,8 +60,6 @@ dataset_split = dataset["train"].train_test_split(test_size=0.1, seed=42)
 ---
 
 ## 3. Tokenizer — One Quirk to Know
-
-![gotcha gif](https://media.giphy.com/media/mJFW5AnlPMvkaolNYj/giphy.gif)
 
 GPT-2 has no pad token by default. Batching requires all sequences to be the same length, which means padding — so we assign the `eos_token` as a fake pad token:
 
@@ -90,8 +82,6 @@ def tokenize(batch):
 
 ## 4. Load GPT-2 in FP16
 
-![loading gif](https://media.giphy.com/media/Syx3ywM7EDpLqHLWTD/giphy.gif)
-
 We load GPT-2 in **half precision (FP16)** — uses half the memory of FP32, trains faster on modern GPUs.
 
 ```python
@@ -107,8 +97,6 @@ model = AutoModelForCausalLM.from_pretrained(
 ---
 
 ## 5. LoRA Config — The Key Settings
-
-![settings gif](https://media.giphy.com/media/H1eVHxFk781UxUNMul/giphy.gif)
 
 This is where we define the adapter:
 
@@ -140,8 +128,6 @@ Only **0.24%** of parameters are being trained. Everything else is frozen.
 
 ## 6. Training
 
-![training gif](https://media.giphy.com/media/GAswW56INoritODhiB/giphy.gif)
-
 **5 epochs. Learning rate 2e-4. Batch size 8 (4 × grad accumulation 2). FP16.**
 
 ```python
@@ -156,8 +142,6 @@ Compare that to full fine-tuning which would take hours on the same hardware.
 
 ## 7. Save Only the Adapter
 
-![saving gif](https://media.giphy.com/media/EwW7Jc7KCJWURNthBK/giphy.gif)
-
 This is the beauty of LoRA. When you save, you only save the adapter — not the full 548MB GPT-2 base model.
 
 ```python
@@ -170,8 +154,6 @@ The `lora-gpt2/` folder contains just a few MB of adapter weights. The base mode
 ---
 
 ## 8. Inference — Load Base + Adapter
-
-![drumroll gif](https://media.giphy.com/media/CLCT8BXR1T2oyBYilM/giphy.gif)
 
 To run inference, reload the base model and attach the adapter with `PeftModel`:
 
@@ -198,8 +180,6 @@ Sounds like something you'd read on a motivational poster. The quotes dataset is
 ---
 
 ## The Big Picture
-
-![mind blown gif](https://media.giphy.com/media/5aLrlDiJPMPFS/giphy.gif)
 
 | Step | What we did |
 |------|-------------|

@@ -10,8 +10,6 @@ type: rag-system
 
 ## What if your PDFs could talk back?
 
-![reading documents gif](https://media.giphy.com/media/WoWm8YzFQJg5i/giphy.gif)
-
 You've got a 100-page report sitting on your desktop. Your boss asks, "What did the Q3 section say about churn?" You open it. You scroll. You ctrl+F. You give up and skim.
 
 What if you could just *ask* the document? And it answered — with the exact paragraph and page number?
@@ -21,8 +19,6 @@ That's what we're building. A complete RAG pipeline using LangChain, OpenAI, and
 ---
 
 ## 1. Wait — Why Can't I Just Paste It Into ChatGPT?
-
-![why not chatgpt gif](https://media.giphy.com/media/3o7TKnO6Wve6502iJ2/giphy.gif)
 
 Good question. You can. But think about what happens:
 
@@ -46,8 +42,6 @@ That's the whole idea. Now let's build it.
 
 ## 2. Load Your Documents
 
-![loading documents gif](https://media.giphy.com/media/xTiTnxpQ3ghPiB2Hp6/giphy.gif)
-
 First problem: how do you get text out of a PDF? Or a .txt file? Or a CSV? Each format needs different parsing logic.
 
 LangChain says: don't worry about it. It has **100+ document loaders** built in. We use `DirectoryLoader` — point it at a folder, it reads everything:
@@ -67,8 +61,6 @@ Drop your files in `/docs`. That's literally it. No file-reading boilerplate. La
 ---
 
 ## 3. Chunk It Up
-
-![slicing gif](https://media.giphy.com/media/3oriO8vwmRIZO6kcNO/giphy.gif)
 
 Here's a problem you might not see coming. You can't embed a whole document as one vector — it's too big and the meaning gets diluted. You need to break it into **chunks**. Small enough to be precise, big enough to carry a complete thought.
 
@@ -104,8 +96,6 @@ Our sample document split into **14 chunks**. A 100-page PDF might produce 500+.
 
 ## 4. Turn Text Into Numbers
 
-![math numbers gif](https://media.giphy.com/media/APqEbxBsVlkWSuFpth/giphy.gif)
-
 This is the part that makes RAG actually work. Every chunk gets converted into an **embedding** — a list of numbers that captures what the text *means*:
 
 ```python
@@ -135,8 +125,6 @@ Vector search:   ✅ embeddings are nearly identical — match found
 ---
 
 ## 5. Wire It All Together — The Chain
-
-![connecting puzzle gif](https://media.giphy.com/media/3o7btNa0RUYa5E7iiQ/giphy.gif)
 
 You've got documents loaded, chunked, and embedded. Now you need something that takes a question, finds the right chunks, and asks the LLM to answer using *only* those chunks. Plus — it should remember what you asked before.
 
@@ -207,8 +195,6 @@ The LLM isn't guessing. It's reading your document and answering from it. That's
 
 ## 6. Memory — The Thing That Makes Follow-Ups Work
 
-![memory brain gif](https://media.giphy.com/media/xT9C25UNTwfZuk85WP/giphy.gif)
-
 Without memory, every question exists in a vacuum. Try this conversation without it:
 
 ```
@@ -236,8 +222,6 @@ Conversations feel natural. That's the point.
 ---
 
 ## 7. Does It Actually Work?
-
-![suspense gif](https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif)
 
 We loaded a sample document about the History of AI and asked three questions:
 
@@ -277,8 +261,6 @@ Sources cited. Memory working. Answers pulled from the actual document, not the 
 ---
 
 ## The Full Pipeline
-
-![assembly line gif](https://media.giphy.com/media/3oKIPEqDGUULpEU0aQ/giphy.gif)
 
 ```
 User drops PDFs/text files in /docs

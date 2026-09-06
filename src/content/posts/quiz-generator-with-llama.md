@@ -10,8 +10,6 @@ type: rag-system
 
 ## What if an AI could turn any text into a quiz in seconds?
 
-![quiz excited gif](https://media.giphy.com/media/YwN32FEspx881B8TxE/giphy.gif)
-
 Paste any content — a Wikipedia paragraph, a study note, a textbook excerpt — and get 5 multiple choice questions with difficulty control, auto-scoring, and instant feedback.
 
 That's what we're building. One prompt, one JSON response, one Streamlit app.
@@ -19,8 +17,6 @@ That's what we're building. One prompt, one JSON response, one Streamlit app.
 ---
 
 ## 1. The Idea — Prompt Engineering as the Core Logic
-
-![thinking hard gif](https://media.giphy.com/media/DfSXiR60W9MVq/giphy.gif)
 
 There's no fine-tuning here. No training. The entire "quiz generation" is a single, carefully constructed prompt sent to LLaMA 4 via Groq:
 
@@ -42,8 +38,6 @@ The model is constrained to output structured JSON — no explanation, no preamb
 ---
 
 ## 2. The JSON Schema — Forcing Structured Output
-
-![writing test gif](https://media.giphy.com/media/WUZShKJSZsc6untjmD/giphy.gif)
 
 The prompt includes an explicit sample format the model must match:
 
@@ -70,8 +64,6 @@ Every question has four options and a `correct` key pointing to the right letter
 
 ## 3. LLaMA 4 via Groq — Fast Inference
 
-![fast speed gif](https://media.giphy.com/media/DlXbiu2ZgpHlC/giphy.gif)
-
 Groq runs LLaMA 4 Scout on custom LPU hardware — inference is orders of magnitude faster than standard GPU serving:
 
 ```python
@@ -94,8 +86,6 @@ content = response.choices[0].message.content.strip()
 
 ## 4. Parsing the Response — Stripping Code Fences
 
-![correct answer gif](https://media.giphy.com/media/ummeQH0c3jdm2o3Olp/giphy.gif)
-
 LLMs sometimes wrap JSON in markdown code fences. Strip those before parsing:
 
 ```python
@@ -110,8 +100,6 @@ If `json.loads` fails, the app surfaces an error — no silent failures.
 ---
 
 ## 5. The Quiz UI — Radio Buttons + Submit
-
-![score results gif](https://media.giphy.com/media/6u6F5XIZlQP6GXMppy/giphy.gif)
 
 Each question renders as a Streamlit radio group. Answers are collected, then checked on submit:
 
@@ -135,8 +123,6 @@ if st.button("Submit Answers"):
 ---
 
 ## 6. Caching — Don't Regenerate on Every Rerun
-
-![brain explode gif](https://media.giphy.com/media/F458eKi7tpSqQ/giphy.gif)
 
 Streamlit reruns the entire script on every interaction. Without caching, every button click would re-call the LLM:
 

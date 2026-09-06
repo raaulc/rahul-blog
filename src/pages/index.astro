@@ -30,12 +30,8 @@ function fmtDate(d) {
         <span class="p-tilde">~/</span><span class="p-name">rahul</span>
       </a>
       <ul class="navbar-nav">
-        <li><a href="/" class="active">blog</a></li>
+        <li><a href="/">blog</a></li>
         <li><a href="/projects">projects</a></li>
-        <li><a href="/llm-architecture">llm-architecture</a></li>
-        <li><a href="/rag-system">rag-system</a></li>
-        <li><a href="/everything-else">everything-else</a></li>
-        <li><a href="/presentations">presentations</a></li>
         <li><a href="/deck">deck</a></li>
         <li><a href="/about">about</a></li>
       </ul>
@@ -43,13 +39,11 @@ function fmtDate(d) {
 
     <main class="container">
 
-      <!-- Boot -->
-      <div class="boot">
-        <span class="boot-label">output</span>
-        <div class="boot-line"><span class="ok">[  OK  ]</span><span class="boot-msg">Started <span class="hi">raaulc.com</span> — personal site and second brain</span></div>
-        <div class="boot-line"><span class="ok">[  OK  ]</span><span class="boot-msg">Loaded user profile: <span class="hi">software engineer, sheffield uk</span></span></div>
-        <div class="boot-line"><span class="info-tag">[ INFO ]</span><span class="boot-msg">Learning: agentic AI, AI engineering, LLMs</span></div>
-      </div>
+      <!-- Intro -->
+      <p class="intro">
+        <span class="hi">Rahul</span> — software engineer in Sheffield, UK. I build apps and agentic
+        AI workflows, and write about AI engineering as I go.
+      </p>
 
       <!-- Whois -->
       <div class="section">
@@ -113,11 +107,12 @@ function fmtDate(d) {
         </ul>
       </div>
 
-      <!-- Terminal -->
+      <!-- Shell launcher -->
       <div class="terminal-section">
+        <span class="t-label">shell</span>
         <div class="t-row">
           <span class="t-prompt">rahul@home:~$</span>
-          <input class="t-input" type="text" placeholder="type 'help'" autocomplete="off" spellcheck="false" id="t-input" />
+          <input class="t-input" type="text" placeholder="type 'help' — or a page name to jump" autocomplete="off" spellcheck="false" id="t-input" />
         </div>
         <div class="t-output" id="t-output"></div>
       </div>
@@ -132,27 +127,38 @@ function fmtDate(d) {
       const input = document.getElementById('t-input');
       const output = document.getElementById('t-output');
 
-      const cmds = {
-        help: '  available commands: help, about, blog, projects, clear',
-        about: '  → /about — software engineer based in sheffield building agentic AI apps',
-        blog: '  → /     — read all blog posts',
-        projects: '  → /projects — coming soon',
-        clear: '__clear__',
+      // page name -> path
+      const routes = {
+        blog: '/',
+        home: '/',
+        projects: '/projects',
+        deck: '/deck',
+        about: '/about',
+        presentations: '/presentations',
+        'llm-architecture': '/llm-architecture',
+        'rag-system': '/rag-system',
+        github: 'https://github.com/raaulc',
+        linkedin: 'https://www.linkedin.com/in/raaulc/',
       };
+
+      const help =
+        "  jump: " + Object.keys(routes).join(', ') + "\n" +
+        "  other: help, clear";
 
       input.addEventListener('keydown', (e) => {
         if (e.key !== 'Enter') return;
         const val = input.value.trim().toLowerCase();
         input.value = '';
         if (!val) return;
-        const res = cmds[val];
-        if (res === '__clear__') {
-          output.textContent = '';
-        } else if (res) {
-          output.textContent = res;
-        } else {
-          output.textContent = `  command not found: ${val}. type 'help' for options.`;
+
+        if (val === 'clear') { output.textContent = ''; return; }
+        if (val === 'help') { output.textContent = help; return; }
+        if (routes[val]) {
+          output.textContent = '  → ' + routes[val];
+          window.location.href = routes[val];
+          return;
         }
+        output.textContent = "  not found: " + val + " — type 'help'";
       });
     </script>
   </body>

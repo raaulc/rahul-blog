@@ -6,8 +6,6 @@ description: How Context Hub and Context7 fix the silent bug that every AI codin
 tags: ["ai-engineering"]
 ---
 
-![AI coding](https://media.giphy.com/media/1oF1KAEYvmXBMo6uTS/giphy.gif)
-
 You ask your AI coding assistant to write some code.
 
 It looks great. You ship it. It breaks in production.
@@ -39,8 +37,6 @@ openai.ChatCompletion.create(model="gpt-3.5-turbo", ...)
 
 That method does not exist anymore. Deprecated. Gone.
 
-![broken code](https://media.giphy.com/media/l3dj2SxUWVPWBJwiY/giphy.gif)
-
 You just shipped a bug because your AI was reading from an old textbook.
 
 ---
@@ -58,8 +54,6 @@ That is it. Nothing more complicated.
 ---
 
 ## Context Hub -- The Manual Way
-
-![reading docs](https://media.giphy.com/media/pOEbLRT4SwD35IELiQ/giphy.gif)
 
 ```mermaid
 flowchart TD
@@ -95,8 +89,6 @@ Now every time anyone on the team fetches those docs, that warning shows up auto
 ---
 
 ## Context7 -- The Automatic Way
-
-![robot working](https://media.giphy.com/media/RjqjA4Jh4a6ovZ5Jgs/giphy.gif)
 
 ```mermaid
 flowchart LR
@@ -191,8 +183,6 @@ flowchart TD
 ---
 
 ## The Bigger Picture
-
-![AI agent](https://media.giphy.com/media/MKBkSuomv1CnmHC8kh/giphy.gif)
 
 This is not just about fixing broken imports.
 

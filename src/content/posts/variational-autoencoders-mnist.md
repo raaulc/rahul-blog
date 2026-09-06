@@ -10,8 +10,6 @@ type: llm-architecture
 
 ## What if you could just… invent new handwriting?
 
-![excited gif](https://media.giphy.com/media/PUBxelwT57jsQ/giphy.gif)
-
 Not copy it. Not trace it. Genuinely **generate** a brand new handwritten digit that has never existed before — but looks completely real.
 
 That's what a Variational Autoencoder does. And in this post, we're going to build one from scratch in PyTorch, trained on MNIST, that can generate any digit on demand.
@@ -19,8 +17,6 @@ That's what a Variational Autoencoder does. And in this post, we're going to bui
 ---
 
 ## 1. What Even Is an Autoencoder?
-
-![thinking gif](https://media.giphy.com/media/toXKzaJP3WIgM/giphy.gif)
 
 Before we get to the *variational* part, let's understand the base concept.
 
@@ -41,8 +37,6 @@ The problem? The latent space is **patchy**. Points between encoded examples dec
 ---
 
 ## 2. The Variational Trick
-
-![settings gif](https://media.giphy.com/media/ArCYM3Lw29e2nE1K1O/giphy.gif)
 
 Instead of encoding an image to a **single point** `z`, a VAE encodes it to a **distribution**: a mean `μ` and a variance `σ²`.
 
@@ -66,8 +60,6 @@ Because training forces the distributions to overlap and stay close to a standar
 
 ## 3. Making It Conditional
 
-![reading gif](https://media.giphy.com/media/g2lH60ZcvUGL6/giphy.gif)
-
 A standard VAE generates random digits — you have no control over which one comes out.
 
 A **Conditional VAE (CVAE)** fixes this. We append a one-hot class label to both the encoder input and the decoder input:
@@ -83,8 +75,6 @@ Now the model knows *which digit* it's encoding and which one it should generate
 
 ## 4. The Dataset — MNIST
 
-![loading gif](https://media.giphy.com/media/GQty4dYXeVkOeMzqVx/giphy.gif)
-
 60,000 grayscale images of handwritten digits, 28×28 pixels, 10 classes.
 
 ```python
@@ -97,8 +87,6 @@ Each pixel value is between 0 and 1 (after ToTensor). This is important — the 
 ---
 
 ## 5. The CVAE Architecture
-
-![robot gif](https://media.giphy.com/media/o2ITDLRkP2oGk/giphy.gif)
 
 Three parts. Clean and simple.
 
@@ -131,8 +119,6 @@ The label is concatenated at *both* ends — encoder and decoder — so the mode
 
 ## 6. The Loss Function — Two Terms
 
-![training gif](https://media.giphy.com/media/HMzHH3J2RbHzPbRJH5/giphy.gif)
-
 The VAE loss is the sum of two things:
 
 ```python
@@ -150,8 +136,6 @@ The two terms are in tension — BCE wants to memorise, KLD wants to generalise.
 ---
 
 ## 7. Training
-
-![working gif](https://media.giphy.com/media/Jl1Q9APSZVA3ATKrdM/giphy.gif)
 
 100 epochs. Adam. lr=1e-3. Batch size 128.
 
@@ -180,8 +164,6 @@ Epoch  91  → Loss:  95.72
 
 ## 8. Generate on Demand
 
-![wow gif](https://media.giphy.com/media/99tK62nC8tb9e/giphy.gif)
-
 Sample a random `z` from `N(0,1)`, condition on a digit, decode:
 
 ```python
@@ -200,8 +182,6 @@ The model has learned the *concept* of each digit — not just the training imag
 ---
 
 ## The Big Picture
-
-![mind blown gif](https://media.giphy.com/media/3OSo3PPaXdw0U/giphy.gif)
 
 | Step | What we did |
 |------|-------------|
