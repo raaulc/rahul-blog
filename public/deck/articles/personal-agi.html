@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>(function(){try{var t=localStorage.getItem('deck-theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark');}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<title>Personal AGI — Own Your Context — Inspiration Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/deck/assets/site.css" />
+</head>
+<body>
+<div id="progress"></div>
+
+<header class="topbar">
+  <div class="in">
+    <a class="wordmark" href="/deck/">the&nbsp;<span class="blk">deck</span></a>
+    <nav>
+      <a href="/deck/">Library</a>
+      <a href="#essay">Essay</a>
+      <a href="#apply16">Apply · 16 yrs</a>
+      <a href="#fresh">Apply · fresh</a>
+      <a href="/">raaulc.com&nbsp;↗</a>
+      <button id="themeToggle" class="tglbtn" type="button">☾ Dark</button>
+    </nav>
+  </div>
+</header>
+
+<div class="article-head wrap">
+  <div class="eyebrow">AI workflow · Garry Tan · via The AI Corner</div>
+  <h1>Personal AGI: own your context, rent the models</h1>
+  <p class="dek">Garry Tan (YC president) claims a ~400× output multiplier from an 80,000-page personal knowledge system. The point isn't a smarter model — it's that <em>your context</em> is an asset you build, while the model is a commodity you rent.</p>
+  <div class="byline">Written by Ruben Dominguez · The AI Corner · 31 Aug 2026 — on Garry Tan's "personal AGI" · reformatted for internal use</div>
+</div>
+
+<nav class="tabbar">
+  <div class="in">
+    <button data-tab="essay" class="on">The essay</button>
+    <button data-tab="apply16">Apply · 16 yrs in tech</button>
+    <button data-tab="fresh">Apply · starting fresh</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ================================================= ESSAY ================================================= -->
+<article class="panel on prose" data-panel="essay">
+
+  <section>
+    <div class="eyebrow reveal">Idea I</div>
+    <h2 class="reveal d1">One you consume. One you build.</h2>
+    <blockquote class="reveal d1">Frontier models are a product you consume. Your context is an asset you build.</blockquote>
+    <p class="reveal">Every lab ships a better model every few months, and everyone gets it at once — so the model itself is a commodity. What isn't commodity is the <strong>accumulated context</strong> around <em>your</em> work: your history, your decisions, your conventions, your procedures. Rent the model; own that.</p>
+
+    <figure class="viz reveal" data-tag="fig. 1 — consume vs compound">
+      <div class="stage">
+      <svg viewBox="0 0 560 220" role="img" aria-label="Left: a sawtooth line that resets on each model release. Right: a staircase that compounds upward. Same frontier models feed both.">
+        <text x="280" y="26" text-anchor="middle" fill="#c7c7cf" font-family="Archivo" font-size="10">same frontier models</text>
+        <line x1="40" y1="182" x2="258" y2="182" stroke="#3a3a42" stroke-width="1.5"/>
+        <polyline points="40,172 78,120 88,166 126,112 136,170 176,104 186,172 226,110 236,176" fill="none" stroke="#ff6b6b" stroke-width="2"/>
+        <circle r="4" fill="#ff6b6b"><animateMotion dur="3.4s" repeatCount="indefinite" path="M40,172 L78,120 L88,166 L126,112 L136,170 L176,104 L186,172 L226,110 L236,176"/></circle>
+        <text x="150" y="206" text-anchor="middle" fill="#ff6b6b" font-family="Archivo" font-size="9">rented — resets each release</text>
+        <line x1="300" y1="182" x2="520" y2="182" stroke="#3a3a42" stroke-width="1.5"/>
+        <path id="pa-stair" d="M300,176 H340 V150 H382 V122 H424 V92 H466 V58 H520" fill="none" stroke="#3ddc97" stroke-width="2"/>
+        <circle r="5" fill="#22d3ee"><animateMotion dur="4.2s" repeatCount="indefinite"><mpath href="#pa-stair"/></animateMotion></circle>
+        <text x="410" y="206" text-anchor="middle" fill="#3ddc97" font-family="Archivo" font-size="9">owned — compounds daily</text>
+      </svg>
+      </div>
+      <figcaption>Same models feed both curves. The difference is what you keep.</figcaption>
+    </figure>
+
+    <div class="callout callout--volt reveal">
+      <h4>What this section means</h4>
+      <p>If your AI setup would reset to zero when you switch vendors, you've been renting everything. The moat is the part that survives the switch.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow reveal">Idea II</div>
+    <h2 class="reveal d1">What "personal AGI" actually is</h2>
+    <p class="reveal d1">Not a model. A private, plain-text repository — usually markdown — in two halves:</p>
+    <ul class="points reveal d2">
+      <li><span class="n">M</span><span class="t"><b>Memory</b> — facts, decisions, project history, people, your conventions. It accumulates.</span></li>
+      <li><span class="n">S</span><span class="t"><b>Skills</b> — reusable step-by-step procedures the agent can execute ("how I design an eval", "how I run a release"). Judgment, written down once.</span></li>
+    </ul>
+    <p class="reveal">It gets sharper <strong>every day</strong>, because it's fed your specific history — not every few months when a vendor ships. Tan reports an 80,000+ page system and a claimed ~400× multiplier.</p>
+
+    <figure class="viz reveal" data-tag="fig. 2 — memory + skills">
+      <div class="stage">
+      <svg viewBox="0 0 460 250" role="img" aria-label="A memory/ folder and a skills/ folder feed a central 'your AGI' node, which produces output; a dashed ring orbits it.">
+        <g style="transform-origin:230px 125px;animation:orbit 38s linear infinite"><circle cx="230" cy="125" r="94" fill="none" stroke="#3a3a42" stroke-width="1.5" stroke-dasharray="3 9"/></g>
+        <circle cx="230" cy="125" r="34" fill="#4b28ff" opacity="0.22" style="animation:steadyGlow 2.4s ease-in-out infinite"/>
+        <circle cx="230" cy="125" r="34" fill="none" stroke="#4b28ff" stroke-width="2"/>
+        <text x="230" y="121" text-anchor="middle" fill="#f2f1ec" font-family="Archivo" font-size="10" font-weight="700">YOUR</text>
+        <text x="230" y="135" text-anchor="middle" fill="#f2f1ec" font-family="Archivo" font-size="10" font-weight="700">AGI</text>
+        <g font-family="Archivo" font-size="10" fill="#c7c7cf" text-anchor="middle">
+          <g><rect x="36" y="66" width="94" height="34" fill="#1c2030" stroke="#4b28ff"/><text x="83" y="88">memory/</text></g>
+          <g><rect x="36" y="150" width="94" height="34" fill="#1c2030" stroke="#4b28ff"/><text x="83" y="172">skills/</text></g>
+          <g><rect x="330" y="108" width="94" height="34" fill="#1c2030" stroke="#3ddc97"/><text x="377" y="130">output</text></g>
+        </g>
+        <g stroke="#4b28ff" stroke-width="1.5" fill="none" stroke-dasharray="4 6" style="animation:dashMove 4s linear infinite">
+          <path d="M130,83 C182,88 190,112 198,120"/>
+          <path d="M130,167 C182,162 190,138 198,130"/>
+        </g>
+        <path d="M264,125 H330" stroke="#3ddc97" stroke-width="1.5" fill="none" stroke-dasharray="4 6" style="animation:dashMove 3s linear infinite"/>
+      </svg>
+      </div>
+      <figcaption>Two folders and an agent. That's the whole architecture.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <div class="eyebrow reveal">Idea III</div>
+    <h2 class="reveal d1">The gap is workflow discipline, not model quality</h2>
+    <p class="reveal d1">Everyone has the same frontier model. Yet some people get 2× out of it and some get 100×. That spread is <strong>process</strong> — capture discipline, skill files, a clean division of labour — not access to a better model.</p>
+
+    <figure class="viz reveal" data-tag="fig. 3 — same models, different slope">
+      <div class="stage">
+      <svg viewBox="0 0 560 190" role="img" aria-label="Two lines from the same origin: a shallow one to 2x and a steep one to 100x. The gap is workflow.">
+        <circle cx="58" cy="150" r="4" fill="#c7c7cf"/>
+        <path d="M58,150 L520,124" stroke="#ff6b6b" stroke-width="2" fill="none"/>
+        <path d="M58,150 L520,30" stroke="#3ddc97" stroke-width="2" fill="none"/>
+        <circle r="4" fill="#ff6b6b"><animateMotion dur="3s" repeatCount="indefinite" path="M58,150 L520,124"/></circle>
+        <circle r="4" fill="#3ddc97"><animateMotion dur="3s" repeatCount="indefinite" path="M58,150 L520,30"/></circle>
+        <text x="530" y="127" fill="#ff6b6b" font-family="Archivo" font-size="11">2×</text>
+        <text x="528" y="33" fill="#3ddc97" font-family="Archivo" font-size="11">100×</text>
+        <text x="280" y="182" text-anchor="middle" fill="#8c8c95" font-family="Archivo" font-size="9">same models · the gap is workflow discipline</text>
+      </svg>
+      </div>
+      <figcaption>25% of YC's W25 batch shipped 95%-AI codebases — and grew fastest.</figcaption>
+    </figure>
+
+    <div class="callout callout--volt reveal">
+      <h4>What this section means</h4>
+      <p>Stop waiting for the next model to change your output. The lever you actually control is the workflow around it.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow reveal">Idea IV</div>
+    <h2 class="reveal d1">Write the skill file before you'd hire for it</h2>
+    <p class="reveal d1">Any task you repeat is a candidate. If you'd consider hiring someone to do a thing, you already know the procedure well enough to write it down — so write it as a <strong>skill file</strong> the agent can run. Repeated task → reusable skill. The library becomes your leverage.</p>
+    <div class="callout callout--volt reveal">
+      <h4>What this section means</h4>
+      <p>Every annoying task you solve twice without writing it down is leverage you threw away.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow reveal">Idea V</div>
+    <h2 class="reveal d1">Separate judgment from computation</h2>
+    <p class="reveal d1">You decide <em>what</em> matters and <em>why</em>. The model does the volume work. Keep that line clean and you scale without handing over the part that's actually you.</p>
+
+    <figure class="viz reveal" data-tag="fig. 5 — the division of labour">
+      <div class="stage">
+      <svg viewBox="0 0 560 180" role="img" aria-label="A loop between 'you: judgment' and 'model: computation' — you send what and why, the model returns a result to check.">
+        <path id="pa-jc" d="M150,58 H410 A40,40 0 0 1 410,122 H150 A40,40 0 0 1 150,58 Z" fill="none" stroke="#4b28ff" stroke-width="2" stroke-dasharray="4 8" style="animation:dashMove 5s linear infinite"/>
+        <circle r="6" fill="#22d3ee"><animateMotion dur="3.4s" repeatCount="indefinite"><mpath href="#pa-jc"/></animateMotion></circle>
+        <g font-family="Archivo" font-size="11" fill="#f2f1ec" text-anchor="middle">
+          <g><circle cx="150" cy="90" r="32" fill="#1c2030" stroke="#4b28ff" stroke-width="1.5"/><text x="150" y="86">you</text><text x="150" y="101" font-size="8" fill="#8c8c95">judgment</text></g>
+          <g><circle cx="410" cy="90" r="32" fill="#1c2030" stroke="#4b28ff" stroke-width="1.5"/><text x="410" y="86">model</text><text x="410" y="101" font-size="8" fill="#8c8c95">computation</text></g>
+        </g>
+        <text x="280" y="44" text-anchor="middle" fill="#8c8c95" font-family="Archivo" font-size="9">what &amp; why  →</text>
+        <text x="280" y="150" text-anchor="middle" fill="#8c8c95" font-family="Archivo" font-size="9">←  result to check</text>
+      </svg>
+      </div>
+      <figcaption>Hand over the volume, keep the direction.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <div class="eyebrow reveal">Idea VI</div>
+    <h2 class="reveal d1">Keep control of the repository</h2>
+    <p class="reveal d1">Plain text. Version-controlled. Portable. If your memory and skills live inside one vendor's product, you don't own them — and the compounding stops the day you leave. Markdown + git is the whole requirement.</p>
+    <div class="callout callout--volt reveal">
+      <h4>The five principles</h4>
+      <p>1 · own context, rent models &nbsp;·&nbsp; 2 · skill files precede hiring &nbsp;·&nbsp; 3 · separate judgment from computation &nbsp;·&nbsp; 4 · repeated task → reusable skill &nbsp;·&nbsp; 5 · retain control of your repo.</p>
+    </div>
+  </section>
+
+  <section class="closing">
+    <h2 class="reveal">The tools already exist</h2>
+    <p class="reveal d1">Nothing here is waiting on a better model. Ownership and discipline are what separate compounding growth from marginal gains.</p>
+    <div class="sig reveal d2">Ruben Dominguez · The AI Corner · on Garry Tan's "personal AGI"</div>
+  </section>
+
+</article>
+
+<!-- ================================================= APPLY · 16 YOE ================================================= -->
+<article class="panel prose" data-panel="apply16">
+
+  <div class="intro reveal">
+    <div class="eyebrow">Apply it · 16 years in tech</div>
+    <h2>16 years of judgment, most of it unwritten</h2>
+    <p class="dek">You already have the context Tan is talking about — it's in your head, not in a repo. Structuring it into memory + skills turns a decade and a half of instinct into a compounding, portable, <em>demonstrable</em> asset.</p>
+  </div>
+
+  <section>
+    <div class="eyebrow reveal">Idea I → applied</div>
+    <h2 class="reveal d1">Own the part that survives a job change</h2>
+    <p class="reveal d1">Your value right now is largely trapped in one employer's context. A private repo of how <em>you</em> do AI engineering is the version of that which moves with you — into a frontier lab, a startup, or your own thing.</p>
+    <div class="callout callout--volt reveal"><h4>The move</h4><p>Start <code>brain/</code> today: <code>memory/</code>, <code>skills/</code>, <code>log/</code>, one <code>MEMORY.md</code> index, <code>git init</code>.</p></div>
+  </section>
+
+  <section>
+    <div class="eyebrow reveal">Idea II + IV → applied</div>
+    <h2 class="reveal d1">Turn your judgment into skill files</h2>
+    <ul class="points reveal d1">
+      <li><span class="n">1</span><span class="t"><code>eval-design.md</code> — how you decide what to measure and why.</span></li>
+      <li><span class="n">2</span><span class="t"><code>pr-review-for-safety.md</code>, <code>rag-regression-debug.md</code>, <code>incident-runbook.md</code>, <code>paper-repro-checklist.md</code>.</span></li>
+      <li><span class="n">3</span><span class="t">Rule: any task you did 3× this month becomes a skill file this week.</span></li>
+    </ul>
+    <div class="callout callout--volt reveal"><h4>Why it matters for the lab goal</h4><p>These files <em>are</em> judgment on display — exactly what a frontier lab screens for, and far more distinctive than another tutorial.</p></div>
+  </section>
+
+  <section>
+    <div class="eyebrow reveal">Idea III → applied</div>
+    <h2 class="reveal d1">Use the workflow to ship the flagship solo</h2>
+    <p class="reveal d1">The eval suite / paper repro / OSS contribution you keep meaning to build — the personal-AGI workflow is what lets one person produce lab-quality work at pace. You direct; the model executes against your skill files.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow reveal">Idea V → applied</div>
+    <h2 class="reveal d1">Narrate the judgment / computation split</h2>
+    <p class="reveal d1">In every public writeup, show the line: "I decided this benchmark matters because X; the harness was generated." That division <em>is</em> the senior skill — make it visible.</p>
+    <div class="vs reveal d1">
+      <div class="col bad">
+        <h4>Renting everything</h4>
+        <ul>
+          <li>Prompts live in a chat history you can't export</li>
+          <li>Judgment re-improvised every time</li>
+          <li>Nothing to show a hiring manager but a CV</li>
+          <li>Output tracks whatever model shipped last</li>
+        </ul>
+      </div>
+      <div class="col good">
+        <h4>Owning the context</h4>
+        <ul>
+          <li>memory + skills in git, vendor-agnostic</li>
+          <li>Judgment written once, reused and refined</li>
+          <li>A public playbook that reads as seniority</li>
+          <li>Output compounds regardless of release cycle</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing">
+    <h2 class="reveal">Write down what you already know</h2>
+    <p class="reveal d1">Sixteen years of judgment is the asset. It only compounds once it leaves your head and enters a repo you own.</p>
+    <div class="sig reveal d2">framework: Garry Tan / Ruben Dominguez · application: yours to run</div>
+  </section>
+
+</article>
+
+<!-- ================================================= APPLY · STARTING FRESH ================================================= -->
+<article class="panel prose" data-panel="fresh">
+
+  <div class="intro reveal">
+    <div class="eyebrow">Apply it · starting fresh</div>
+    <h2>Start the repo before you feel qualified to</h2>
+    <p class="dek">You don't need 16 years to own context. Every project you debug and every setup you figure out is a skill file waiting to be written — and that repo doubles as your portfolio and your learning engine.</p>
+  </div>
+
+  <section>
+    <div class="eyebrow reveal">Idea I → applied</div>
+    <h2 class="reveal d1">Own it in git, not in a chatbot</h2>
+    <p class="reveal d1">If your "AI workflow" is a pile of chat threads, you own nothing. Plain markdown + git from day one. Cost: five minutes. Payoff: it compounds instead of scrolling away.</p>
+    <div class="callout callout--volt reveal"><h4>The move</h4><p><code>mkdir brain/{memory,skills,log}</code> · <code>git init</code> · one <code>MEMORY.md</code>.</p></div>
+  </section>
+
+  <section>
+    <div class="eyebrow reveal">Idea II + IV → applied</div>
+    <h2 class="reveal d1">Every "how do I…" you solve becomes a skill</h2>
+    <ul class="points reveal d1">
+      <li><span class="n">1</span><span class="t"><code>set-up-a-python-project.md</code>, <code>debug-an-api-error.md</code>, <code>ship-a-small-app.md</code>.</span></li>
+      <li><span class="n">2</span><span class="t">Beginner procedures are still procedures. Writing them is how you learn them properly.</span></li>
+      <li><span class="n">3</span><span class="t">A sanitized subset → blog posts. That's the "learn in public" trail hiring managers want.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="eyebrow reveal">Idea III → applied</div>
+    <h2 class="reveal d1">The gap you can close now is discipline</h2>
+    <p class="reveal d1">You can't out-model anyone — but capture discipline is free. Write the note <em>at the moment of friction</em>. Most people don't, which is exactly why 2× and 100× users run the same model.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow reveal">Idea V → applied</div>
+    <h2 class="reveal d1">You keep the judgment even as a beginner</h2>
+    <p class="reveal d1">Decide what to build and why; let the model handle the boilerplate. Practising that split now is the habit that scales later.</p>
+    <div class="vs reveal d1">
+      <div class="col bad">
+        <h4>Tutorial-hell workflow</h4>
+        <ul>
+          <li>Answers vanish into chat history</li>
+          <li>Re-Googling the same fix monthly</li>
+          <li>Nothing to show but "I'm learning"</li>
+          <li>Waiting for a better model to help</li>
+        </ul>
+      </div>
+      <div class="col good">
+        <h4>Personal-AGI workflow</h4>
+        <ul>
+          <li>Every fix → a skill file in git</li>
+          <li>Solve once, reuse forever</li>
+          <li>A growing public playbook + projects</li>
+          <li>Compounding from the model you already have</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing">
+    <h2 class="reveal">Capture at the moment of friction</h2>
+    <p class="reveal d1">Own the repo, write the skill, keep the judgment. The compounding starts on day one.</p>
+    <div class="sig reveal d2">framework: Garry Tan / Ruben Dominguez · application: yours to run</div>
+  </section>
+
+</article>
+
+</main>
+
+<footer class="foot wrap">
+  <a href="/deck/">← back to the deck</a> · essay © Ruben Dominguez / The AI Corner · reformatted for internal use.
+</footer>
+
+<script src="/deck/assets/site.js"></script>
+</body>
+</html>
