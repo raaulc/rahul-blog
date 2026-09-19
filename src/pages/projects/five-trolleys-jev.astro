@@ -1,0 +1,62 @@
+---
+import Head from '../../components/Head.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head
+      title="five trolleys — jev decision model"
+      description="Five famous ethical dilemmas run through Jev's typed-decision API — urgency, framework, difficulty, and an actual yes/no verdict for each."
+    />
+    <style>
+      .notebook-frame {
+        width: 100%;
+        height: 85vh;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        background: #fff;
+        margin-top: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/" class="navbar-path">
+        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="/">blog</a></li>
+        <li><a href="/projects" class="active">projects</a></li>
+        <li><a href="/deck">deck</a></li>
+        <li><a href="/career-game">career</a></li>
+        <li><a href="/about">about</a></li>
+      </ul>
+    </nav>
+
+    <main class="container">
+      <a href="/projects" class="back-link">← cd ..</a>
+
+      <p class="cmd">
+        <span class="dollar">$</span>
+        <span class="command"> python3</span>
+        <span class="arg"> ethics_classifier.py</span>
+      </p>
+
+      <div class="content-block" style="margin-bottom: 12px;">
+        <p>// five famous ethical dilemmas, run through jev's typed-decision api — is it a real dilemma, which ethical framework fits, how contested is it, and what should actually happen</p>
+        <p>// stack: jev (typesafe ai) &middot; python &middot; vanilla html/css/js</p>
+        <a href="/experiments/five-trolleys-jev.html" target="_blank" style="font-size: 13px; color: var(--green);">↗ open in full tab</a>
+      </div>
+
+      <iframe
+        src="/experiments/five-trolleys-jev.html"
+        class="notebook-frame"
+        title="Five Trolleys — Jev Decision Model"
+      ></iframe>
+    </main>
+
+    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>

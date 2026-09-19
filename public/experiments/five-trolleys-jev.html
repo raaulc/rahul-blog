@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Five Trolleys</title>
+<meta name="description" content="Five famous ethical dilemmas, classified by the Jev decision model for urgency, framework, and moral difficulty.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --surface-1:      #fcfcfb;
+    --page-plane:     #f9f9f7;
+    --card-surface:   #ffffff;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --gridline:       #e1e0d9;
+    --baseline:       #c3c2b7;
+    --border:         rgba(11,11,11,0.10);
+
+    --accent:         #4a3aa7;
+    --accent-soft:    #efecfa;
+
+    --f-util:         #2a78d6;
+    --f-deo:          #eb6834;
+    --f-virt:         #1baf7a;
+    --f-cont:         #eda100;
+
+    --seq-100: #cde2fb; --seq-250: #86b6ef; --seq-400: #3987e5;
+    --seq-450: #2a78d6; --seq-500: #256abf; --seq-600: #184f95;
+
+    --serif: "Newsreader", Georgia, serif;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --surface-1:      #1a1a19;
+      --page-plane:     #0d0d0d;
+      --card-surface:   #141413;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #898781;
+      --gridline:       #2c2c2a;
+      --baseline:       #383835;
+      --border:         rgba(255,255,255,0.10);
+      --accent:         #9085e9;
+      --accent-soft:    #201c3a;
+      --f-util:         #3987e5;
+      --f-deo:          #d95926;
+      --f-virt:         #199e70;
+      --f-cont:         #c98500;
+      --seq-100: #104281; --seq-250: #184f95; --seq-400: #256abf;
+      --seq-450: #2a78d6; --seq-500: #3987e5; --seq-600: #5598e7;
+    }
+  }
+  :root[data-theme="dark"]{
+    --surface-1:      #1a1a19;
+    --page-plane:     #0d0d0d;
+    --card-surface:   #141413;
+    --text-primary:   #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted:     #898781;
+    --gridline:       #2c2c2a;
+    --baseline:       #383835;
+    --border:         rgba(255,255,255,0.10);
+    --accent:         #9085e9;
+    --accent-soft:    #201c3a;
+    --f-util:         #3987e5;
+    --f-deo:          #d95926;
+    --f-virt:         #199e70;
+    --f-cont:         #c98500;
+    --seq-100: #104281; --seq-250: #184f95; --seq-400: #256abf;
+    --seq-450: #2a78d6; --seq-500: #3987e5; --seq-600: #5598e7;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--page-plane);
+    color:var(--text-primary);
+    font-family:var(--sans);
+    padding-inline:20px;
+    padding-block:48px;
+  }
+  .wrap{max-width:920px;margin:0 auto;}
+
+  /* ---------- Hero ---------- */
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:flex;align-items:center;gap:8px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);}
+  h1{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(34px,6vw,56px);
+    line-height:1.04;
+    letter-spacing:-0.01em;
+    text-wrap:balance;
+    margin:0 0 16px;
+  }
+  h1 em{font-style:italic;color:var(--accent);}
+  .lede{
+    font-size:17px;
+    line-height:1.55;
+    color:var(--text-secondary);
+    max-width:62ch;
+    margin:0 0 40px;
+  }
+  .lede code{font-family:var(--mono);font-size:14px;background:var(--accent-soft);color:var(--accent);padding:1px 6px;border-radius:4px;}
+
+  /* ---------- Pipeline diagram ---------- */
+  .pipeline{
+    display:grid;
+    grid-template-columns:1fr auto 1fr auto 1fr;
+    align-items:stretch;
+    gap:10px;
+    background:var(--card-surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:22px;
+    margin-bottom:20px;
+  }
+  .pipe-step{
+    display:flex;flex-direction:column;gap:6px;
+    padding:14px;
+    border-radius:10px;
+    background:var(--page-plane);
+  }
+  .pipe-step .k{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);}
+  .pipe-step .v{font-size:14px;font-weight:600;line-height:1.3;}
+  .pipe-step .d{font-size:12.5px;color:var(--text-secondary);line-height:1.4;}
+  .pipe-step.accent{background:var(--accent-soft);}
+  .pipe-step.accent .v{color:var(--accent);}
+  .pipe-arrow{display:flex;align-items:center;justify-content:center;color:var(--baseline);}
+  .pipe-arrow svg{width:22px;height:22px;}
+  @media (max-width:640px){
+    .pipeline{grid-template-columns:1fr;}
+    .pipe-arrow{transform:rotate(90deg);width:100%;}
+  }
+  .caption{font-size:12px;color:var(--text-muted);margin:10px 2px 40px;}
+
+  /* ---------- Framework legend ---------- */
+  .legend{
+    display:flex;flex-wrap:wrap;gap:14px 22px;
+    padding:14px 18px;
+    background:var(--card-surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    margin-bottom:28px;
+  }
+  .legend-item{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--text-secondary);}
+  .legend-swatch{width:10px;height:10px;border-radius:2px;flex:none;}
+
+  /* ---------- Section heading ---------- */
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 16px;}
+  .section-head h2{font-family:var(--serif);font-weight:500;font-size:22px;margin:0;}
+  .section-head .count{font-family:var(--mono);font-size:11px;color:var(--text-muted);}
+
+  /* ---------- Dilemma cards ---------- */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:52px;}
+  @media (max-width:680px){.grid{grid-template-columns:1fr;}}
+
+  /* ---------- Flip card ---------- */
+  .flip-card{
+    perspective:1400px;
+    min-height:430px;
+  }
+  .flip-inner{
+    position:relative;
+    width:100%;height:100%;min-height:430px;
+    transition:transform .55s cubic-bezier(.4,.2,.2,1);
+    transform-style:preserve-3d;
+    cursor:pointer;
+  }
+  .flip-card.flipped .flip-inner{transform:rotateY(180deg);}
+  .flip-card:focus-visible .flip-inner{outline:2px solid var(--accent);outline-offset:3px;}
+  @media (prefers-reduced-motion:reduce){ .flip-inner{transition:none;} }
+
+  .face{
+    position:absolute;inset:0;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+    background:var(--card-surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+    display:flex;flex-direction:column;
+    overflow-y:auto;
+  }
+  .face-back{transform:rotateY(180deg);gap:16px;}
+
+  .flip-hint{
+    display:flex;align-items:center;gap:6px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--accent);margin-top:auto;padding-top:14px;
+  }
+  .flip-hint svg{width:13px;height:13px;flex:none;}
+
+  .face-front .icon{width:100%;max-width:236px;height:140px;margin:2px auto 4px;}
+  .face-front .icon svg{width:calc(100% - 24px);height:calc(100% - 24px);}
+  .face-front .card-title{text-align:center;margin-top:2px;}
+  .face-front .layman{
+    font-size:14.5px;line-height:1.55;color:var(--text-secondary);
+    text-align:center;max-width:34ch;margin:4px auto 0;
+  }
+  .decision-badge{
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    margin:12px auto 0;padding:10px 18px;
+    border-radius:12px;
+    background:var(--accent-soft);
+    border:1px solid var(--border);
+  }
+  .decision-badge .q{font-size:11px;color:var(--text-muted);}
+  .decision-badge .a{
+    font-family:var(--serif);font-weight:600;font-size:19px;
+    color:var(--accent);text-align:center;line-height:1.2;
+  }
+  .decision-badge .c{font-family:var(--mono);font-size:10.5px;color:var(--text-muted);}
+
+  .card{
+    background:var(--card-surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px 20px 18px;
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .card-head{display:flex;gap:16px;align-items:flex-start;}
+  .icon{
+    flex:none;width:72px;height:72px;border-radius:4px;
+    background:#fffdf3;
+    border:1px solid rgba(11,11,11,0.08);
+    box-shadow:0 3px 8px rgba(11,11,11,0.10);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    transform:rotate(var(--tilt,-2deg));
+  }
+  .icon::before{
+    content:"";
+    position:absolute;top:-7px;left:50%;
+    width:26px;height:12px;
+    margin-left:-13px;
+    background:rgba(233,201,90,0.55);
+    border:1px solid rgba(11,11,11,0.06);
+    transform:rotate(-4deg);
+  }
+  .icon svg{width:56px;height:56px;}
+  .flip-card:nth-child(5n+1) .icon{--tilt:-3deg;}
+  .flip-card:nth-child(5n+2) .icon{--tilt:2deg;}
+  .flip-card:nth-child(5n+3) .icon{--tilt:-1.5deg;}
+  .flip-card:nth-child(5n+4) .icon{--tilt:3deg;}
+  .flip-card:nth-child(5n+5) .icon{--tilt:-2.5deg;}
+  .card-title{font-family:var(--serif);font-size:19px;font-weight:600;line-height:1.2;margin:0 0 4px;}
+  .card-scenario{font-size:13px;line-height:1.5;color:var(--text-secondary);}
+
+  .metric{display:flex;flex-direction:column;gap:6px;}
+  .metric-label{display:flex;justify-content:space-between;align-items:baseline;}
+  .metric-label .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);}
+  .metric-label .r{font-size:12.5px;font-weight:600;font-variant-numeric:tabular-nums;}
+
+  /* dilemma-probability bar */
+  .bar-track{height:8px;border-radius:4px;background:var(--gridline);overflow:hidden;}
+  .bar-fill{height:100%;border-radius:4px;background:var(--seq-450);}
+  .verdict-row{display:flex;align-items:center;gap:8px;}
+  .verdict-pill{
+    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.04em;
+    padding:2px 9px;border-radius:20px;
+    border:1px solid currentColor;
+  }
+  .verdict-pill.yes{color:var(--accent);}
+  .verdict-pill.no{color:var(--text-muted);}
+  .verdict-note{font-size:11px;color:var(--text-muted);}
+
+  /* framework grouped bar */
+  .fw-bars{display:flex;flex-direction:column;gap:5px;}
+  .fw-row{display:grid;grid-template-columns:84px 1fr 34px;align-items:center;gap:8px;}
+  .fw-row .fw-name{font-size:11px;color:var(--text-secondary);}
+  .fw-row.winner .fw-name{color:var(--text-primary);font-weight:600;}
+  .fw-track{height:7px;border-radius:4px;background:var(--gridline);position:relative;overflow:hidden;}
+  .fw-fill{height:100%;border-radius:4px;}
+  .fw-row .fw-pct{font-size:11px;font-variant-numeric:tabular-nums;color:var(--text-secondary);text-align:right;}
+  .fw-row.winner .fw-pct{color:var(--text-primary);font-weight:600;}
+
+  /* difficulty ordinal track */
+  .diff-track{position:relative;height:26px;}
+  .diff-rail{position:absolute;top:12px;left:0;right:0;height:3px;border-radius:2px;background:var(--gridline);}
+  .diff-ticks{position:absolute;top:6px;left:0;right:0;display:flex;justify-content:space-between;}
+  .diff-tick{width:2px;height:14px;background:var(--baseline);}
+  .diff-dot{position:absolute;top:2px;width:22px;height:22px;margin-left:-11px;border-radius:50%;border:3px solid var(--card-surface);box-shadow:0 0 0 1px var(--border);}
+  .diff-legend{display:flex;justify-content:space-between;font-size:9.5px;color:var(--text-muted);margin-top:4px;}
+  .diff-legend span:first-child{text-align:left;}
+  .diff-legend span:last-child{text-align:right;}
+
+  details.raw{margin-top:2px;}
+  details.raw summary{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);cursor:pointer;list-style:none;}
+  details.raw summary::-webkit-details-marker{display:none;}
+  details.raw summary::before{content:"▸ ";}
+  details.raw[open] summary::before{content:"▾ ";}
+  details.raw pre{
+    margin:8px 0 0;
+    padding:10px 12px;
+    background:var(--page-plane);
+    border:1px solid var(--border);
+    border-radius:8px;
+    font-family:var(--mono);
+    font-size:11px;
+    line-height:1.5;
+    color:var(--text-secondary);
+    overflow-x:auto;
+  }
+
+  /* ---------- Comparison chart ---------- */
+  .compare{
+    background:var(--card-surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:22px 22px 16px;
+    margin-bottom:36px;
+  }
+  .compare-row{display:grid;grid-template-columns:150px 1fr 40px;align-items:center;gap:10px;padding:7px 0;}
+  .compare-row + .compare-row{border-top:1px dashed var(--gridline);}
+  .compare-name{font-size:13px;color:var(--text-secondary);}
+  .compare-track{height:14px;border-radius:4px;background:var(--gridline);position:relative;}
+  .compare-fill{height:100%;border-radius:4px;background:var(--seq-450);position:relative;}
+  .compare-val{font-size:12.5px;font-weight:600;text-align:right;font-variant-numeric:tabular-nums;}
+  .compare-axis{display:grid;grid-template-columns:150px 1fr 40px;gap:10px;margin-top:6px;}
+  .compare-axis .ticks{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--text-muted);}
+
+  footer{font-size:12px;color:var(--text-muted);border-top:1px solid var(--border);padding-top:18px;line-height:1.6;}
+  footer a{color:var(--accent);}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+
+  <div class="eyebrow">Jev &middot; System One Model</div>
+  <h1>Five classic dilemmas,<br>judged by a model that<br>can only <em>decide</em>.</h1>
+  <p class="lede">
+    Jev never writes prose back &mdash; it reads a scenario (<code>state</code>) and answers
+    typed <code>questions</code> with calibrated probabilities. We fed it five famous
+    thought experiments and asked three things of each: is this a real dilemma, which
+    ethical framework fits it best, and how contested is it.
+  </p>
+
+  <div class="pipeline">
+    <div class="pipe-step">
+      <span class="k">Input</span>
+      <span class="v">state + questions</span>
+      <span class="d">A scenario, plus typed asks: noul, choice, score.</span>
+    </div>
+    <div class="pipe-arrow"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="pipe-step accent">
+      <span class="k">Model</span>
+      <span class="v">jev&#8209;latest</span>
+      <span class="d">POST /v1/systemone &middot; 70&ndash;500ms, no generated text.</span>
+    </div>
+    <div class="pipe-arrow"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="pipe-step">
+      <span class="k">Output</span>
+      <span class="v">typed answers</span>
+      <span class="d">A probability, a choice + distribution, a score + confidence.</span>
+    </div>
+  </div>
+  <p class="caption">Every card below shows the same three questions run against a different scenario.</p>
+
+  <div class="legend" aria-label="Ethical framework color key">
+    <div class="legend-item"><span class="legend-swatch" style="background:var(--f-util)"></span>Utilitarian &mdash; maximize overall well&#8209;being</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:var(--f-deo)"></span>Deontological &mdash; duties &amp; rights</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:var(--f-virt)"></span>Virtue ethics &mdash; character</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:var(--f-cont)"></span>Contractualist &mdash; what we'd agree to</div>
+  </div>
+
+  <div class="section-head">
+    <h2>The dilemmas</h2>
+    <span class="count">5 scenarios</span>
+  </div>
+
+  <div class="grid" id="cards"></div>
+
+  <div class="section-head">
+    <h2>Moral difficulty, compared</h2>
+    <span class="count">0&ndash;3 scale</span>
+  </div>
+  <div class="compare" id="compare"></div>
+  <div class="compare-axis">
+    <span></span>
+    <div class="ticks"><span>0 &middot; not contested</span><span>3 &middot; deeply divisive</span></div>
+    <span></span>
+  </div>
+
+  <footer>
+    Source data: <code>project-1/ethics_classifier.py</code> against the live Jev API (<code>jev-latest</code>).
+    Difficulty dot color deepens with score; framework bars use a fixed category order so the same hue always means the same framework across cards.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* --- tiny stick-figure helper, reused across every scene --- */
+  function person(x, y, s, color, mood){
+    const eyes = mood === "worried"
+      ? `<path d="M${x-3*s} ${y-2.3*s}l2 1.1M${x+3*s} ${y-2.3*s}l-2 1.1" stroke="#241f1a" stroke-width="${0.9*s}" stroke-linecap="round"/>`
+      : mood === "sad"
+      ? `<path d="M${x-2.4*s} ${y-2.6*s}q2.4 -1.4 4.8 0" fill="none" stroke="#241f1a" stroke-width="${0.8*s}" stroke-linecap="round"/>`
+      : `<circle cx="${x-1.8*s}" cy="${y-2.4*s}" r="${0.5*s}" fill="#241f1a"/><circle cx="${x+1.8*s}" cy="${y-2.4*s}" r="${0.5*s}" fill="#241f1a"/>`;
+    return `<g>
+      <circle cx="${x}" cy="${y-3.6*s}" r="${1.9*s}" fill="${color}" stroke="#241f1a" stroke-width="${0.5*s}"/>
+      ${eyes}
+      <path d="M${x} ${y-1.7*s}v${5*s}" stroke="#241f1a" stroke-width="${0.75*s}" stroke-linecap="round"/>
+      <path d="M${x} ${y-0.6*s}l${-2.3*s} ${2.2*s}M${x} ${y-0.6*s}l${2.3*s} ${2.2*s}" stroke="#241f1a" stroke-width="${0.6*s}" stroke-linecap="round"/>
+      <path d="M${x} ${y+3.3*s}l${-1.7*s} ${2.4*s}M${x} ${y+3.3*s}l${1.7*s} ${2.4*s}" stroke="#241f1a" stroke-width="${0.6*s}" stroke-linecap="round"/>
+    </g>`;
+  }
+  const SKIN = ["#f7d27a","#f2a65a","#e8c39a","#d99a6c","#f4c6a8"];
+
+  /* hand-drawn "kid crayon" pictures, one per dilemma -- full scene, not just a symbol. viewBox 0 0 160 100 */
+  const ICONS = {
+
+    trolley: `
+      <path d="M4 82c26-2 56-2 84 0" fill="none" stroke="#8a8a8a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M88 82q20 0 30 16" fill="none" stroke="#8a8a8a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M12 76 10 88M28 75 26 89M44 75 42 89M60 76 59 90M76 77 75 91M96 87 92 99M112 92 108 103M126 97 122 108"
+            stroke="#8a8a8a" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M88 80V60" stroke="#7a5a3a" stroke-width="2.6" stroke-linecap="round"/>
+      <circle cx="88" cy="57" r="4.2" fill="#e8543c" stroke="#7a2a1c" stroke-width="2"/>
+      <path d="M12 78c0-9 3-15 13-15h6c9 0 12 6 12 15-10 2-21 2-31 0z" fill="#e8543c" stroke="#7a2a1c" stroke-width="2.4" stroke-linejoin="round"/>
+      <circle cx="18" cy="80" r="4" fill="#3a3a3a" stroke="#151515" stroke-width="1.6"/>
+      <circle cx="34" cy="80" r="4" fill="#3a3a3a" stroke="#151515" stroke-width="1.6"/>
+      ${[98,110,122,134,146].map((x,i)=>person(x,80,1.9,SKIN[i%SKIN.length],"worried")).join("")}
+      <path d="M92 80h58" stroke="#7a2a1c" stroke-width="1.6" stroke-dasharray="1 4" stroke-linecap="round"/>
+      ${person(128,98,1.9,SKIN[3],"worried")}
+      <text x="24" y="18" font-family="Comic Sans MS, cursive" font-size="10" fill="#7a2a1c">5</text>
+      <text x="128" y="86" font-family="Comic Sans MS, cursive" font-size="10" fill="#7a2a1c">1</text>`,
+
+    heart: `
+      <rect x="8" y="52" width="46" height="30" rx="6" fill="#f0efe8" stroke="#6b3d16" stroke-width="2.4"/>
+      <path d="M10 52c2-10 8-16 20-16h4c12 0 18 6 20 16" fill="none" stroke="#6b3d16" stroke-width="2.2"/>
+      <path d="M11 62h9l3-7 4 12 3-9 3 4h8" fill="none" stroke="#e8543c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      ${person(28,80,2.1,"#f2a65a","sad")}
+      <rect x="98" y="48" width="52" height="34" rx="5" fill="#e4dcc8" stroke="#6b3d16" stroke-width="2.4"/>
+      <rect x="98" y="48" width="52" height="9" fill="#c98a4e" stroke="#6b3d16" stroke-width="2"/>
+      <g transform="translate(122 40) rotate(-6)">
+        <rect x="-8" y="-14" width="16" height="26" rx="6" fill="#f4f4f4" stroke="#241f1a" stroke-width="2.2"/>
+        <rect x="-8" y="-14" width="16" height="10" rx="6" fill="#6fa8e8" stroke="#241f1a" stroke-width="2.2"/>
+      </g>
+      <path d="M123 63q2-3 5 0" stroke="#6b3d16" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <circle cx="123" cy="66" r="1.6" fill="#6b3d16"/>
+      ${person(76,86,2,"#f7d27a","worried")}
+      <path d="M64 82q6-2 10-2" fill="none" stroke="#7a2a1c" stroke-width="1.6" stroke-dasharray="1 4" stroke-linecap="round"/>
+      <path d="M86 82q6-2 12-2" fill="none" stroke="#7a2a1c" stroke-width="1.6" stroke-dasharray="1 4" stroke-linecap="round"/>`,
+
+    ring: `
+      <g opacity="0.5">
+        <path d="M18 92c0-24 4-40 22-40" fill="none" stroke="#7a5a3a" stroke-width="2.4" stroke-dasharray="3 3" stroke-linecap="round"/>
+        ${person(24,86,2.3,"#f2a65a","calm")}
+      </g>
+      <ellipse cx="30" cy="68" rx="7" ry="5" fill="none" stroke="#caa022" stroke-width="2.6" opacity="0.65"/>
+      <path d="M18 30l3 6M13 34l6 1" stroke="#8a5a19" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M28 20l2 6M23 24l6 1" stroke="#8a5a19" stroke-width="1.8" stroke-linecap="round"/>
+      <rect x="112" y="70" width="30" height="12" rx="3" fill="#8f6a44" stroke="#6b3d16" stroke-width="2.2"/>
+      <path d="M112 70l3-8h24l3 8z" fill="#a67c52" stroke="#6b3d16" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M118 62l4-9 5 6 5-8 5 8 5-6 4 9z" fill="#f4d35e" stroke="#8a5a19" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="127" cy="55" r="1.6" fill="#e8543c"/>
+      ${person(94,86,2.1,"#e8c39a","calm")}
+      <path d="M90 76q3-3 3-7" fill="none" stroke="#6b3d16" stroke-width="1.6" stroke-linecap="round"/>`,
+
+    lifeboat: `
+      <path d="M4 66c10 16 26 24 56 24s46-8 56-24" fill="none" stroke="#3f8ecb" stroke-width="3" stroke-linecap="round"/>
+      <path d="M0 74c8 5 12 5 18 0 6 5 10 5 16 0 6 5 10 5 16 0 6 5 10 5 16 0 6 5 10 5 16 0 6 5 10 5 18 0 6 5 10 5 16 0"
+            fill="none" stroke="#8fc4ea" stroke-width="2.6" stroke-linecap="round"/>
+      <g transform="rotate(-4 80 54)">
+        <path d="M14 62c5-20 18-28 46-28s41 8 46 28c-18 6-74 6-92 0z" fill="#c98a4e" stroke="#6b3d16" stroke-width="2.8" stroke-linejoin="round"/>
+        <path d="M18 59h84" stroke="#6b3d16" stroke-width="1.8" stroke-linecap="round"/>
+        ${[30,42,54,66,78,90,102].map((x,i)=>person(x,52,1.55,SKIN[i%SKIN.length],i%3===0?"worried":"calm")).join("")}
+        ${[36,48,60,72,84,96].map((x,i)=>`<circle cx="${x}" cy="45" r="3.1" fill="${SKIN[(i+2)%SKIN.length]}" stroke="#241f1a" stroke-width="1.2"/>`).join("")}
+      </g>
+      <text x="6" y="16" font-family="Comic Sans MS, cursive" font-size="9" fill="#184f95">14 aboard</text>
+      <text x="110" y="16" font-family="Comic Sans MS, cursive" font-size="9" fill="#184f95">10 seats</text>`,
+
+    scale: `
+      <rect x="4" y="10" width="66" height="70" rx="6" fill="none" stroke="#c3c2b7" stroke-width="1.4" stroke-dasharray="2 4"/>
+      <rect x="90" y="10" width="66" height="70" rx="6" fill="none" stroke="#c3c2b7" stroke-width="1.4" stroke-dasharray="2 4"/>
+      <g>
+        <rect x="16" y="30" width="20" height="42" rx="2" fill="#2b2b2b" opacity="0.08"/>
+        ${person(26,64,3.4,"#e8c39a","sad")}
+        <path d="M17 58h4M35 58h-4M20 52v18M32 52v18" stroke="#5a5450" stroke-width="1.6" stroke-linecap="round"/>
+      </g>
+      <text x="8" y="20" font-family="Comic Sans MS, cursive" font-size="9" fill="#5a5450">1 person, torture</text>
+      <g>
+        ${[102,114,126,138,102,114,126,138].map((x,i)=>person(x, i<4?45:66, 1.15, SKIN[i%SKIN.length], "calm")).join("")}
+        ${[102,114,126,138,102,114,126,138].map((x,i)=>`<circle cx="${x+2}" cy="${(i<4?45:66)-6.5}" r="0.7" fill="#7a5a3a"/>`).join("")}
+      </g>
+      <text x="96" y="20" font-family="Comic Sans MS, cursive" font-size="9" fill="#5a5450">billions, one speck each</text>`
+  };
+
+  const FW_ORDER = ["utilitarian","deontological","virtue_ethics","contractualist"];
+  const FW_META = {
+    utilitarian:    {label:"Utilitarian",    color:"var(--f-util)"},
+    deontological:  {label:"Deontological",  color:"var(--f-deo)"},
+    virtue_ethics:  {label:"Virtue ethics",  color:"var(--f-virt)"},
+    contractualist: {label:"Contractualist", color:"var(--f-cont)"}
+  };
+  const DIFF_LABELS = ["Not contested","Mildly contested","Genuinely hard","Deeply divisive"];
+  const DIFF_COLORS = ["var(--seq-100)","var(--seq-250)","var(--seq-400)","var(--seq-600)"];
+
+  const DATA = [
+    {
+      name: "The Trolley Problem",
+      icon: "trolley",
+      scenario: "Pull a lever to divert a runaway trolley from five people onto a track with one.",
+      laymen: "A train is about to kill 5 people. You can pull a lever so it kills 1 person instead. Do you pull it?",
+      decisionQuestion: "Pull the lever?",
+      yesLabel: "Pull it", noLabel: "Don't pull it",
+      decision: 0.74,
+      is_dilemma: 0.83,
+      framework: {choice:"utilitarian", probabilities:{utilitarian:1.0, deontological:0.0, virtue_ethics:0.0, contractualist:0.0}},
+      difficulty: {score:2.3, confidence:0.53}
+    },
+    {
+      name: "The Heinz Dilemma",
+      icon: "heart",
+      scenario: "Steal an unaffordable drug to save a dying spouse, or respect the inventor's price?",
+      laymen: "Your spouse will die without a medicine you can't afford. The seller won't budge on price. Do you steal it?",
+      decisionQuestion: "Steal the drug?",
+      yesLabel: "Steal it", noLabel: "Don't steal it",
+      decision: 0.55,
+      is_dilemma: 0.87,
+      framework: {choice:"utilitarian", probabilities:{utilitarian:0.73, deontological:0.24, virtue_ethics:0.01, contractualist:0.02}},
+      difficulty: {score:2.62, confidence:0.62}
+    },
+    {
+      name: "The Ring of Gyges",
+      icon: "ring",
+      scenario: "Given a ring of invisibility and total impunity, would a just person still act justly?",
+      laymen: "A magic ring makes you invisible so no one could ever catch you doing wrong. Would you still be good?",
+      decisionQuestion: "Would a just person act differently (misuse the ring)?",
+      yesLabel: "They'd misuse it", noLabel: "They'd stay just",
+      decision: 0.08,
+      is_dilemma: 0.60,
+      framework: {choice:"virtue_ethics", probabilities:{virtue_ethics:0.90, deontological:0.09, contractualist:0.01, utilitarian:0.0}},
+      difficulty: {score:1.76, confidence:0.36}
+    },
+    {
+      name: "The Lifeboat Dilemma",
+      icon: "lifeboat",
+      scenario: "A sinking lifeboat holds 14 for 10 seats. Someone must go overboard, but who decides?",
+      laymen: "A lifeboat built for 10 people has 14 on it and is sinking. Someone has to go overboard. Who picks?",
+      decisionQuestion: "Should someone be forced overboard?",
+      yesLabel: "Force someone off", noLabel: "Don't force anyone off",
+      decision: 0.53,
+      is_dilemma: 0.90,
+      framework: {choice:"utilitarian", probabilities:{utilitarian:0.89, contractualist:0.10, deontological:0.01, virtue_ethics:0.0}},
+      difficulty: {score:2.79, confidence:0.79}
+    },
+    {
+      name: "Torture vs. Dust Specks",
+      icon: "scale",
+      scenario: "One person tortured 50 years, or a googolplex of people each get one speck of dust in the eye?",
+      laymen: "Would you rather one person suffer terribly for 50 years, or a huge number of people each feel one tiny, forgettable itch?",
+      decisionQuestion: "Pick the torture (over the dust specks)?",
+      yesLabel: "Pick the torture", noLabel: "Pick the dust specks",
+      decision: 0.31,
+      is_dilemma: 0.54,
+      framework: {choice:"utilitarian", probabilities:{utilitarian:0.93, deontological:0.06, contractualist:0.01, virtue_ethics:0.0}},
+      difficulty: {score:1.99, confidence:0.27}
+    }
+  ];
+
+  function pct(x){ return Math.round(x*100) + "%"; }
+
+  function diffColorIndex(score){
+    if(score < 0.75) return 0;
+    if(score < 1.5) return 1;
+    if(score < 2.25) return 2;
+    return 3;
+  }
+
+  function cardHTML(d){
+    const fwRows = FW_ORDER.map(key=>{
+      const meta = FW_META[key];
+      const p = d.framework.probabilities[key] ?? 0;
+      const isWinner = key === d.framework.choice;
+      return `<div class="fw-row${isWinner ? " winner" : ""}">
+        <span class="fw-name">${meta.label}</span>
+        <div class="fw-track"><div class="fw-fill" style="width:${Math.max(p*100,2)}%;background:${meta.color};opacity:${isWinner ? 1 : 0.55}"></div></div>
+        <span class="fw-pct">${pct(p)}</span>
+      </div>`;
+    }).join("");
+
+    const dPct = d.difficulty.score/3*100;
+    const dIdx = diffColorIndex(d.difficulty.score);
+
+    const flipIcon = `<svg viewBox="0 0 24 24"><path d="M17 2.1l4 4-4 4M3 12.6a9 9 0 0 1 15-6.7l3 3.2M7 21.9l-4-4 4-4M21 11.4a9 9 0 0 1-15 6.7l-3-3.2" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+    return `<div class="flip-card" tabindex="0" role="button" aria-pressed="false" aria-label="${d.name}. Press to flip between the plain-English version and Jev's verdict.">
+      <div class="flip-inner">
+
+        <div class="face face-front">
+          <div class="icon"><svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid meet">${ICONS[d.icon]}</svg></div>
+          <h3 class="card-title">${d.name}</h3>
+          <p class="layman">${d.laymen}</p>
+          <div class="decision-badge">
+            <span class="q">Jev's decision &mdash; ${d.decisionQuestion}</span>
+            <span class="a">${d.decision >= 0.5 ? d.yesLabel : d.noLabel}</span>
+            <span class="c">${pct(d.decision >= 0.5 ? d.decision : 1 - d.decision)} confidence</span>
+          </div>
+          <div class="flip-hint">${flipIcon} Flip for the full breakdown</div>
+        </div>
+
+        <div class="face face-back">
+          <div class="card-head">
+            <div class="icon" style="width:72px;height:46px;margin:0;"><svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid meet">${ICONS[d.icon]}</svg></div>
+            <div>
+              <h3 class="card-title" style="text-align:left;">${d.name}</h3>
+              <p class="card-scenario">${d.scenario}</p>
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label"><span class="l">Jev's decision</span></div>
+            <div class="verdict-row">
+              <span class="verdict-pill ${d.decision >= 0.5 ? "yes" : "no"}">${d.decision >= 0.5 ? d.yesLabel : d.noLabel}</span>
+              <span class="verdict-note">${pct(d.decision >= 0.5 ? d.decision : 1 - d.decision)} confidence</span>
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label"><span class="l">Genuine dilemma?</span></div>
+            <div class="verdict-row">
+              <span class="verdict-pill ${d.is_dilemma >= 0.5 ? "yes" : "no"}">${d.is_dilemma >= 0.5 ? "Yes" : "No"}</span>
+              <span class="verdict-note">${pct(d.is_dilemma)} confidence${d.is_dilemma > 0.4 && d.is_dilemma < 0.6 ? " — close call" : ""}</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:${d.is_dilemma*100}%"></div></div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label"><span class="l">Framework</span><span class="r">${FW_META[d.framework.choice].label}</span></div>
+            <div class="fw-bars">${fwRows}</div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label"><span class="l">Difficulty</span><span class="r">${d.difficulty.score.toFixed(1)} / 3 &middot; ${pct(d.difficulty.confidence)} conf.</span></div>
+            <div class="diff-track">
+              <div class="diff-rail"></div>
+              <div class="diff-ticks">${DIFF_LABELS.map(()=>'<span class="diff-tick"></span>').join("")}</div>
+              <div class="diff-dot" style="left:${dPct}%;background:${DIFF_COLORS[dIdx]}"></div>
+            </div>
+            <div class="diff-legend"><span>Not contested</span><span>Deeply divisive</span></div>
+          </div>
+
+          <details class="raw">
+            <summary>Raw response</summary>
+            <pre>${JSON.stringify({
+              decision:{type:"noul", noul:d.decision},
+              is_dilemma:{type:"noul", noul:d.is_dilemma},
+              framework:{type:"choice", choice:d.framework.choice, probabilities:d.framework.probabilities},
+              difficulty:{type:"score", score:d.difficulty.score, confidence:d.difficulty.confidence}
+            }, null, 2)}</pre>
+          </details>
+
+          <div class="flip-hint">${flipIcon} Flip back</div>
+        </div>
+
+      </div>
+    </div>`;
+  }
+
+  function compareHTML(data){
+    const sorted = [...data].sort((a,b)=> b.difficulty.score - a.difficulty.score);
+    return sorted.map(d=>{
+      const w = d.difficulty.score/3*100;
+      const idx = diffColorIndex(d.difficulty.score);
+      return `<div class="compare-row">
+        <span class="compare-name">${d.name}</span>
+        <div class="compare-track"><div class="compare-fill" style="width:${w}%;background:${DIFF_COLORS[idx]}"></div></div>
+        <span class="compare-val">${d.difficulty.score.toFixed(1)}</span>
+      </div>`;
+    }).join("");
+  }
+
+  try{
+    const cardsEl = document.getElementById("cards");
+    cardsEl.innerHTML = DATA.map(cardHTML).join("");
+    document.getElementById("compare").innerHTML = compareHTML(DATA);
+
+    function toggleFlip(card){
+      const flipped = card.classList.toggle("flipped");
+      card.setAttribute("aria-pressed", flipped ? "true" : "false");
+    }
+
+    cardsEl.addEventListener("click", (e)=>{
+      if(e.target.closest("details.raw")) return; // let the disclosure toggle work without flipping
+      const card = e.target.closest(".flip-card");
+      if(card) toggleFlip(card);
+    });
+    cardsEl.addEventListener("keydown", (e)=>{
+      if(e.key !== "Enter" && e.key !== " ") return;
+      const card = e.target.closest(".flip-card");
+      if(!card) return;
+      e.preventDefault();
+      toggleFlip(card);
+    });
+  }catch(e){
+    document.getElementById("cards").textContent = "Could not render results.";
+  }
+})();
+</script>
+
+</body>
+</html>
