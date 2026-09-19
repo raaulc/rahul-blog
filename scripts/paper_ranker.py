@@ -1,7 +1,8 @@
 """
 AI Paper Radar — pulls the newest papers across several arXiv AI categories,
 ranks them against a fixed interest area using the Jev API (TypeSafe AI),
-and writes the result to src/data/papers.json for the Astro site to render.
+and writes the result to src/data/papers/<date>.json (one file per day) so the
+Astro site can render both today's ranking and the full history.
 
 Ranking = 0.7 * worth_reading (Jev's yes/no confidence) + 0.3 * (novelty / 3)
 Both signals come from Jev; the weighting is the only thing decided in Python.
@@ -26,7 +27,7 @@ MODEL = "jev-latest"
 
 REPO_ROOT = os.path.join(os.path.dirname(__file__), "..")
 ENV_PATH = os.path.join(REPO_ROOT, ".env")
-OUTPUT_PATH = os.path.join(REPO_ROOT, "src", "data", "papers.json")
+OUTPUT_DIR = os.path.join(REPO_ROOT, "src", "data", "papers")
 
 INTEREST = "LLM agents, tool use, and structured/typed model outputs"
 ARXIV_CATEGORIES = ["cs.AI", "cs.CL", "cs.LG", "cs.MA"]
@@ -149,18 +150,22 @@ def main():
     scored.sort(key=lambda p: p["priority"], reverse=True)
     top = scored[:TOP_N]
 
+    now = datetime.datetime.now(datetime.timezone.utc)
     output = {
-        "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "date": now.strftime("%Y-%m-%d"),
+        "generated_at": now.isoformat(),
         "interest": INTEREST,
         "categories": ARXIV_CATEGORIES,
         "papers": top,
     }
 
-    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
-    with open(OUTPUT_PATH, "w") as f:
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    output_path = os.path.join(OUTPUT_DIR, f"{output['date']}.json")
+    # re-running on the same day (e.g. a manual trigger) overwrites that day's file
+    with open(output_path, "w") as f:
         json.dump(output, f, indent=2)
 
-    print(f"Wrote {len(top)} ranked papers to {OUTPUT_PATH}")
+    print(f"Wrote {len(top)} ranked papers to {output_path}")
 
 
 if __name__ == "__main__":

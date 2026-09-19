@@ -1,0 +1,85 @@
+---
+import Head from '../../../components/Head.astro';
+import PaperList from '../../../components/PaperList.astro';
+
+export async function getStaticPaths() {
+  const modules = import.meta.glob('../../../data/papers/*.json', { eager: true }) as Record<string, { default: any }>;
+  const days = Object.entries(modules).map(([path, mod]) => {
+    const date = path.match(/(\d{4}-\d{2}-\d{2})\.json$/)![1];
+    return { ...mod.default, date };
+  });
+  days.sort((a, b) => b.date.localeCompare(a.date));
+
+  return days.map((d, i) => ({
+    params: { date: d.date },
+    props: { day: d, prev: days[i + 1] ?? null, next: days[i - 1] ?? null, isLatest: i === 0 },
+  }));
+}
+
+const { day, prev, next, isLatest } = Astro.props;
+const generated = new Date(day.generated_at);
+const generatedLabel = generated.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head
+      title={`ai paper radar — ${day.date}`}
+      description={`arXiv AI papers ranked by Jev for ${day.date} — relevance and novelty, no manual curation.`}
+    />
+    <style>
+      .day-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12.5px;
+        margin-bottom: 12px;
+      }
+      .day-nav a { color: var(--green); text-decoration: none; }
+      .day-nav a:hover { text-decoration: underline; }
+      .day-nav .disabled { color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/" class="navbar-path">
+        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="/">blog</a></li>
+        <li><a href="/projects" class="active">projects</a></li>
+        <li><a href="/deck">deck</a></li>
+        <li><a href="/career-game">career</a></li>
+        <li><a href="/about">about</a></li>
+      </ul>
+    </nav>
+
+    <main class="container">
+      <a href="/projects/ai-paper-radar" class="back-link">← cd ..</a>
+
+      <p class="cmd">
+        <span class="dollar">$</span>
+        <span class="command"> cat</span>
+        <span class="arg"> ./papers/{day.date}.json</span>
+      </p>
+
+      <div class="content-block" style="padding: 14px 20px; margin-bottom: 20px;">
+        <p style="color: var(--green); font-weight: bold; margin-bottom: 6px;">// {day.date} {isLatest ? '· latest' : ''} · generated {generatedLabel}</p>
+        <p style="margin-bottom: 4px;">// ranked against: "{day.interest}"</p>
+        <p>// categories: {day.categories.join(', ')}</p>
+      </div>
+
+      <div class="day-nav">
+        {prev ? <a href={`/projects/ai-paper-radar/${prev.date}`}>← {prev.date}</a> : <span class="disabled">← (start of archive)</span>}
+        <a href="/projects/ai-paper-radar">latest ↑</a>
+        {next ? <a href={`/projects/ai-paper-radar/${next.date}`}>{next.date} →</a> : <span class="disabled">(most recent) →</span>}
+      </div>
+
+      <PaperList papers={day.papers} />
+    </main>
+
+    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>

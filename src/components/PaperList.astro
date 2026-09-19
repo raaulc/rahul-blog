@@ -1,0 +1,60 @@
+---
+interface Paper {
+  title: string;
+  link: string;
+  worth_reading: number;
+  novelty: number;
+  kind: string;
+  category: string;
+}
+interface Props { papers: Paper[]; }
+const { papers } = Astro.props;
+
+const KIND_LABEL: Record<string, string> = {
+  new_method: 'new method',
+  benchmark_or_eval: 'benchmark/eval',
+  survey_or_position: 'survey/position',
+  applied_system: 'applied system',
+};
+---
+
+<style>
+  .paper-entry {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+  }
+  .paper-entry:last-child { border-bottom: none; }
+  .paper-rank {
+    color: var(--muted);
+    font-size: 13px;
+    margin-right: 6px;
+  }
+  .paper-title a {
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .paper-title a:hover { color: var(--green); text-decoration: underline; }
+  .paper-meta {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .paper-meta .stat { color: var(--green); }
+</style>
+
+<div class="content-block">
+  {papers.map((p, i) => (
+    <div class="paper-entry">
+      <p class="paper-title">
+        <span class="paper-rank">{String(i + 1).padStart(2, '0')}.</span>
+        <a href={p.link} target="_blank" rel="noopener">{p.title}</a>
+      </p>
+      <p class="paper-meta">
+        <span class="stat">{Math.round(p.worth_reading * 100)}%</span> worth reading &middot;
+        novelty <span class="stat">{p.novelty.toFixed(1)}/3</span> &middot;
+        {KIND_LABEL[p.kind] ?? p.kind} &middot;
+        {p.category}
+      </p>
+    </div>
+  ))}
+</div>
