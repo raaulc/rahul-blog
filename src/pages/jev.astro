@@ -1,0 +1,79 @@
+---
+import Head from '../components/Head.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head
+      title="jev"
+      description="Projects built with Jev, TypeSafe AI's typed-decision model — no text generation, just calibrated yes/no, choice, and score answers in ~100-300ms."
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/" class="navbar-path">
+        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="/">blog</a></li>
+        <li><a href="/projects">projects</a></li>
+        <li><a href="/deck">deck</a></li>
+        <li><a href="/jev" class="active">jev</a></li>
+        <li><a href="/about">about</a></li>
+      </ul>
+    </nav>
+
+    <main class="container">
+      <a href="/" class="back-link">← cd ..</a>
+
+      <p class="cmd">
+        <span class="dollar">$</span>
+        <span class="command"> man</span>
+        <span class="arg"> jev</span>
+      </p>
+
+      <div class="content-block" style="border: 1px solid var(--green); padding: 16px 20px; margin-bottom: 28px;">
+        <p style="color: var(--green); font-weight: bold; margin-bottom: 8px;">// what is jev</p>
+        <p style="margin-bottom: 10px;">
+          <a href="https://typesafe.ai" target="_blank" style="color: var(--green);">Jev</a> is TypeSafe AI's
+          "System One" model. It doesn't generate text — you give it a <code>state</code> (some text or JSON)
+          plus a set of typed <code>questions</code> (yes/no, multiple choice, or a score), and it returns
+          calibrated answers in roughly 100&ndash;300ms.
+        </p>
+        <p style="margin-bottom: 10px;">// why it's interesting:</p>
+        <ul style="list-style: none; padding: 0; margin: 0 0 10px 0;">
+          <li style="margin-bottom: 4px;"><span style="color: var(--green);">→</span> 20&ndash;200&times; faster than a normal LLM call, since it's not writing prose</li>
+          <li style="margin-bottom: 4px;"><span style="color: var(--green);">→</span> fractions of a cent per call — cheap enough to run on hundreds of items</li>
+          <li style="margin-bottom: 4px;"><span style="color: var(--green);">→</span> answers are typed and probability-calibrated, so software can act on them directly, no parsing</li>
+        </ul>
+        <p>// source for everything below: <a href="https://github.com/raaulc/jev-projects" target="_blank" style="color: var(--green);">github.com/raaulc/jev-projects</a></p>
+      </div>
+
+      <p class="cmd">
+        <span class="dollar">$</span>
+        <span class="command"> ls</span>
+        <span class="flag"> -la</span>
+        <span class="arg"> ./jev/</span>
+      </p>
+
+      <div class="content-block">
+        <div class="project-entry">
+          <p class="project-name"><a href="/projects/ai-paper-radar">ai-paper-radar/</a></p>
+          <p class="project-desc">// daily-automated arxiv paper ranker — jev scores every new cs.ai/cs.cl/cs.lg/cs.ma paper for relevance and novelty, github actions cron keeps it fresh every morning, full date-wise history browsable</p>
+          <p class="project-meta">// stack: jev (typesafe ai) &middot; python &middot; github actions &middot; arxiv api</p>
+          <p class="project-status">// status: in progress</p>
+        </div>
+        <div class="project-entry">
+          <p class="project-name"><a href="/projects/five-trolleys-jev">five-trolleys-jev/</a></p>
+          <p class="project-desc">// five famous ethical dilemmas run through jev's typed-decision api — real/not-a-dilemma, ethical framework, difficulty score, and an actual yes/no verdict for each</p>
+          <p class="project-meta">// stack: jev (typesafe ai) &middot; python &middot; vanilla html/css/js</p>
+          <p class="project-status">// status: complete</p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
