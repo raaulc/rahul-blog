@@ -56,7 +56,9 @@ def fetch_recent_papers(category: str, max_results: int) -> list[dict]:
         "max_results": str(max_results),
     }
     url = "http://export.arxiv.org/api/query?" + urllib.parse.urlencode(params)
-    with urllib.request.urlopen(url) as resp:
+    # arXiv rejects requests with no / a generic User-Agent (HTTP 406), so identify ourselves.
+    req = urllib.request.Request(url, headers={"User-Agent": "ai-paper-radar/1.0 (raaulc.com)"})
+    with urllib.request.urlopen(req) as resp:
         root = ET.fromstring(resp.read())
 
     papers = []
