@@ -18,6 +18,8 @@ Run:
 import datetime
 import json
 import os
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -55,11 +57,25 @@ def fetch_recent_papers(category: str, max_results: int) -> list[dict]:
         "sortOrder": "descending",
         "max_results": str(max_results),
     }
-    url = "http://export.arxiv.org/api/query?" + urllib.parse.urlencode(params)
-    # arXiv rejects requests with no / a generic User-Agent (HTTP 406), so identify ourselves.
-    req = urllib.request.Request(url, headers={"User-Agent": "ai-paper-radar/1.0 (raaulc.com)"})
-    with urllib.request.urlopen(req) as resp:
-        root = ET.fromstring(resp.read())
+    url = "https://export.arxiv.org/api/query?" + urllib.parse.urlencode(params)
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "Mozilla/5.0 (compatible; ai-paper-radar/1.0; +https://raaulc.com/jev)",
+            "Accept": "application/atom+xml",
+        },
+    )
+    last_err = None
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                root = ET.fromstring(resp.read())
+            break
+        except urllib.error.HTTPError as e:
+            last_err = e
+            time.sleep(2 * (attempt + 1))
+    else:
+        raise last_err
 
     papers = []
     for entry in root.findall("atom:entry", ATOM_NS):
@@ -124,7 +140,12 @@ def main():
 
     all_papers = []
     for cat in ARXIV_CATEGORIES:
-        all_papers.extend(fetch_recent_papers(cat, PAPERS_PER_CATEGORY))
+        try:
+            all_papers.extend(fetch_recent_papers(cat, PAPERS_PER_CATEGORY))
+        except Exception as e:
+            print(f"  (skipping category {cat} — fetch failed after retries: {e})")
+    if not all_papers:
+        raise RuntimeError("Fetched 0 papers across all categories — arXiv likely unreachable, aborting.")
     all_papers = dedupe(all_papers)
     print(f"Fetched {len(all_papers)} unique papers across {ARXIV_CATEGORIES}")
 
