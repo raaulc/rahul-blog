@@ -1,0 +1,233 @@
+{
+  "date": "2026-09-21",
+  "generated_at": "2026-09-21T13:29:38.012234+00:00",
+  "interest": "LLM agents, tool use, and structured/typed model outputs",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "papers": [
+    {
+      "title": "Designer-RSI: Evolving Procedural Memory from User Traffic for Agentic Graphic Design",
+      "summary": "Professional graphic design is a long-horizon agentic task in which structured, editable artifacts emerge from many interdependent actions, yet outcomes admit no reliable programmatic oracle. We introduce a continual adaptation framework in which a frozen frontier model operates professional design software through more than 230 tools, while an external procedural memory of natural-language skills accumulates and refines reusable design procedures from experience. The memory widens by acquiring procedures for recurring uncovered subtasks and deepens by revising existing procedures against their own successful and failed executions, while a matched replay gate admits only changes that repair failures without regressing observed successes. Five rounds over 1,406 real user briefs and 1,869 automatically graded trajectories, with no weight updates and no human labels, grow the bank from 76 documentation-derived skills to 139 and raise GenEval2 execution success on Claude-Sonnet-4 from 72.7% to 99.3% (+11.99 points in generation quality), with 61.8% and 67.6% win rates against the no-skill agent across four specialized design benchmarks on Claude-Sonnet-4 and Claude-Opus-4.6. We further show the two mechanisms are effective in combination: on 200 held-out briefs from user-traffic benchmark, widening or deepening alone reaches a 49.4% / 48.6% win rate over the no-skill agent, while their combination reaches 58.5% (p = 0.025). Procedural memory offers a practical route to continual adaptation of agents under noisy, unverifiable feedback.",
+      "link": "http://arxiv.org/abs/2609.22086v1",
+      "published": "2026-09-18T17:59:56Z",
+      "category": "cs.AI",
+      "worth_reading": 0.86,
+      "novelty": 1.9,
+      "kind": "new_method",
+      "priority": 0.792
+    },
+    {
+      "title": "CodeMidas: Scaling Agentic Coding RL Environments from Code Itself",
+      "summary": "Training capable coding agents via reinforcement learning (RL) requires diverse tasks with reliable verifiers. Open-source codebases offer a rich source of such tasks, while existing methods typically rely on development artifacts such as issues and commits, limiting the range of tasks that can be extracted. To better scale RL environments, we present CodeMidas, an agentic pipeline that turns implemented functionality in existing codebases into executable RL environments using source code as its only task-specific input. CodeMidas allocates agentic compute to every stage of environment construction: agents explore implemented functionality to formulate behavioral specifications, construct tests grounded in execution of the original code, and validate and filter candidate tasks through execution checks and repeated solution rollouts. The resulting dataset has 5,545 training tasks from 3,185 open-source codebases spanning 23 programming languages and 15 technical domains. Training MiMo-V2.5 on these tasks with GRPO improves performance on all five diverse benchmarks, covering issue repair (DeepSWE + 11.7%), whole-program construction (ProgramBench +17%), and terminal work (Terminal-Bench v2.1 +8.5%). Ablations show that increasing the number of high-quality training tasks improves performance. Trajectory analysis shows the RL-trained agent demonstrates better behaviors like increasing codebase exploration and more diverse self-verification. These results establish source code as a scalable foundation for constructing RL environments that improve coding agents across diverse software tasks.",
+      "link": "http://arxiv.org/abs/2609.22068v1",
+      "published": "2026-09-18T17:55:17Z",
+      "category": "cs.AI",
+      "worth_reading": 0.85,
+      "novelty": 1.85,
+      "kind": "new_method",
+      "priority": 0.78
+    },
+    {
+      "title": "RecreationWorld: Scalable and Verifiable Environments for Hybrid Computer-Use Agents",
+      "summary": "Computer-use agents (CUAs) have advanced along two separate lines: graphical interaction and software development through code and the command line. Real digital work requires both, interleaved rather than stacked end to end. We study hybrid CUAs that autonomously decide when to explore an interface, implement software, and run and visually verify their artifacts. We introduce RecreationWorld, a five-platform framework built around recreation: given a running reference, an agent must discover its behavior and build a faithful implementation with no prescribed workflow. RecreationWorld provides reproducible environments on Ubuntu, macOS, Windows, Android, and Web, plus a unified harness with native GUI control and coding tools. The running reference serves as an oracle for hidden behavioral tests, providing execution-grounded rewards. We scale trajectory generation with high-quality open-source applications. Models trained on these trajectories improve across five out-of-distribution coding and hybrid computer-use benchmarks and more frequently verify their rendered outputs, providing evidence of transfer beyond recreation. For held-out evaluation, we introduce RecreationBench, comprising 250 diverse tasks across domains and platforms. Reference-grounded programmatic and visual assertions cover action-conditioned outcomes at multiple interaction depths; each is validated on the reference and by human reviewers before the suite is frozen for automatic scoring. GPT-6 Astra leads at 58.1% overall, but passes all programmatic tests on just 2.8% of tasks. Agents reproduce static interface structure more reliably than interactions and computed outputs, while generated applications remain smaller and more monolithic than their references. We release the benchmark, environments, and test suites.",
+      "link": "http://arxiv.org/abs/2609.22000v1",
+      "published": "2026-09-18T17:00:56Z",
+      "category": "cs.CL",
+      "worth_reading": 0.84,
+      "novelty": 1.92,
+      "kind": "benchmark_or_eval",
+      "priority": 0.78
+    },
+    {
+      "title": "FINSKILLOPS: A Self-Evolving Multi-Agent System for SEC Filing QA",
+      "summary": "Financial QA systems are typically improved before deployment through better retrieval, prompting, or agent coordination, leaving their reliability behavior fixed thereafter. In practice, new SEC-filing questions repeatedly expose heterogeneous errors in period, entity, evidence use, and calculation. Existing self-improvement methods can turn failures into new behaviors, but offer limited control over where a correction should apply or which previously correct answers it may break. We therefore frame post-deployment improvement as controlled behavioral maintenance: recurring failures should become scoped skill patches, and each patch should earn deployment with- out introducing regressions. We instantiate this view in FINSKILLOPS, a multi-agent system for SEC filing QA. FINSKILLOPS derives reusable skills from evidence-grounded, typed failure diagnoses and governs them through targeted validation, protected-case regression checks, negative controls, and versioned replacement or retirement. Across six financial QA benchmarks, a single frozen skill registry achieves the highest verdict-weighted correctness and reference consistency among the evaluated systems. Evolved skills raise correctness from 3.70 to 4.55 on our enhanced benchmark. In a separate 12-round operational study, only six of 33 proposed skills are promoted, while the monitoring non-correct rate falls from 20.0% to 12.5%. These results establish controlled skill scope, admission, and lifecycle management as the foundation for reliable self-improvement.",
+      "link": "http://arxiv.org/abs/2609.19680v1",
+      "published": "2026-09-17T04:25:17Z",
+      "category": "cs.MA",
+      "worth_reading": 0.86,
+      "novelty": 1.78,
+      "kind": "new_method",
+      "priority": 0.78
+    },
+    {
+      "title": "Loopjacking: Hijacking Human-in-the-Loop Approval",
+      "summary": "Human approval is often treated as the last security boundary before an agent executes a consequential operation. That boundary is only meaningful if the operation presented for review is the operation later authorized or released. We call failures of this binding Loopjacking: a human approves what they understand as operation A, while the implementation uses that decision for a materially different operation B. We distinguish two variants. In a representation-based attack, B is already encoded but omitted or misrepresented at approval time; in a post-approval state-substitution attack, the human sees the correct A and mutable workflow state later replaces it with B.   We evaluate a purposive set of released agent products. We reproduce post-approval substitution in seven tested Agno AgentOS releases ending at 3.0.9 and in 12 tested versions of a conditional in-memory LangGraph Agent Server composition ending at 0.14.0. We reproduce representation mismatch in OpenClaw 2026.2.23 and its rejection in 2026.2.24. OpenAI Agents SDK 0.22.0 and 0.22.2 provide a negative control: serialized continuation preserves exact per-call binding and rejects mutated B. These results do not estimate ecosystem prevalence. They show that complete canonical approval rendering and exact use-time comparison, or preventing unauthorized pending-state mutation, block the tested attacks while preserving legitimate execution. We separate this contribution from established work on misleading dialogs, session smuggling, action binding, and authorization continuity.",
+      "link": "http://arxiv.org/abs/2609.21081v1",
+      "published": "2026-09-17T20:58:26Z",
+      "category": "cs.MA",
+      "worth_reading": 0.83,
+      "novelty": 1.92,
+      "kind": "benchmark_or_eval",
+      "priority": 0.773
+    },
+    {
+      "title": "AutoViewMem: Self-Configuring Orthogonal Views for Conversational Long-Term Memory",
+      "summary": "Long-term memory is essential for large language model (LLM) agents to maintain consistency and personalization over extended interactions. Existing memory systems typically rely on fixed granularities or static schemas, but these designs struggle when heterogeneous information, such as preferences, events, constraints, and temporal updates, is embedded in a single mixed representation. The resulting semantic interference makes top-K retrieval sensitive to noise and often leaves relevant evidence poorly ranked. We present AutoViewMem, a data-driven framework that organizes long-term conversational memory into self-configuring, low-overlap semantic views before indexing. AutoViewMem discovers candidate views from interaction traces, selects a compact complementary view set, and uses these views to guide write-time structured extraction of provenance-grounded memories. This representation-first design moves semantic disentanglement from retrieval time to write time, allowing standard top-K similarity search to retrieve focused evidence without explicit routing or iterative retrieval. We further apply offline consolidation to improve memory compactness and consistency. Experiments on the LoCoMo and PersonaMem benchmarks, under both Qwen3-8B and Qwen3-14B backbones, show that AutoViewMem improves long-horizon question answering and personalization over strong memory baselines while preserving a simple inference pipeline.",
+      "link": "http://arxiv.org/abs/2609.21940v1",
+      "published": "2026-09-18T15:55:29Z",
+      "category": "cs.AI",
+      "worth_reading": 0.82,
+      "novelty": 1.8,
+      "kind": "new_method",
+      "priority": 0.754
+    },
+    {
+      "title": "Bayesian Belief Layer for Controllable Opinion Dynamics in LLM Agents",
+      "summary": "LLM agents in social simulation revise their opinions implicitly, in context: how open an agent is to persuasion can neither be specified nor verified, and collective outcomes inherit the model's training prior. We introduce Bayesian Chronicle Agents (BCA), a minimal belief layer separating \\emph{what} an agent believes from \\emph{how} it speaks. Each stance is a probability, updated by one Bayesian step per utterance heard. A single prior-strength parameter $\u03ba$ encodes stubbornness, modeled after its role in Friedkin--Johnsen (FJ) opinion dynamics. We then sweep this parameter to yield three canonical regimes of opinion dynamics on demand (consensus, persistent disagreement, committed-minority influence), with persistent disagreement matching the FJ closed-form fixed points at $R^2\\!=\\!0.93$--$0.99$. We further show that prescribed $\u03ba$ remains recoverable after the language round-trip, with perfect rank-order recovery across all four models. Explicit belief also makes simulation auditable: the layer surfaces systematic per-model stance biases that end-to-end simulation would silently absorb.",
+      "link": "http://arxiv.org/abs/2609.21997v1",
+      "published": "2026-09-18T16:57:14Z",
+      "category": "cs.AI",
+      "worth_reading": 0.8,
+      "novelty": 1.88,
+      "kind": "new_method",
+      "priority": 0.748
+    },
+    {
+      "title": "Available Guardrails: Certifying Selective Prediction across ML Systems",
+      "summary": "A selective predictor acts as a safety gate: it returns an output only when the prediction appears sufficiently trustworthy. Deployments increasingly require this reliability to be certified at a target precision for every reporting unit of interest, such as a tool, policy label, or patient subgroup. The main difficulty is often not whether a granted certificate is valid, but whether finite calibration data can produce one at all. As the gate becomes safer or more fine-grained, some units may receive too little evidence to certify. We make this notion of availability computable through classical exact-binomial inversion and formulate reporting-partition selection, under a fixed group order, as a dynamic program that exposes the trade-off among safety, granularity, and served traffic. The resulting frontier reveals a large population opportunity that finite-sample estimation nearly erases: a truth-informed planner gains $0.157$ mean coverage over support balancing, whereas a naive estimator recovers only $0.005$, making recovery from finite data the central challenge. Constructing candidate partitions on one planning split and selecting among them on another recovers part of this gap, improving mean coverage over support balancing by $0.060$, with the direction reproduced in $59$ of $60$ model effects across three intent-routing datasets and two architectures. A complementary validity-preserving lever, reallocating the familywise error budget across reporting units, recovers additional coverage both with population quantities and noisy estimates. The same frontier recurs, with predictor-specific ceilings, across LLM tool-calling, content moderation, lesion classification, and recommendation. Certified availability is therefore a plannable deployment resource that determines when a safety gate can be certified, at what granularity, and over how much traffic.",
+      "link": "http://arxiv.org/abs/2609.22048v1",
+      "published": "2026-09-18T17:36:52Z",
+      "category": "cs.LG",
+      "worth_reading": 0.79,
+      "novelty": 1.93,
+      "kind": "new_method",
+      "priority": 0.746
+    },
+    {
+      "title": "NemotronLabs VoiceChat: An Open Full-duplex Speech-to-Speech Model with Tool Calling Capabilities",
+      "summary": "We introduce NemotronLabs VoiceChat, an open full-duplex speech-to-speech model with native tool-calling capabilities. NemotronLabs VoiceChat combines a streaming speech encoder and decoder-only language model with parallel specialized output streams for agent text and structured function calls, an auxiliary RNN-T branch for incremental user transcription, and a streaming TTS decoder. This design enables the model to listen, transcribe, reason, invoke tools, and speak within a unified streaming architecture while preserving the temporal behavior required for natural conversation. On Full-Duplex-Bench 1.0, NemotronLabs VoiceChat achieves the lowest pause-handling takeover rates among evaluated open-weight systems, 100\\% takeover following user interruptions, and a 4.33/5 post-interruption response-quality score. On Full-Duplex-Bench 1.5, it resumes its response after user backchannels in 93\\% of cases. NemotronLabs VoiceChat obtains a 55.1 normalized average on VoiceBench and, on Full-Duplex-Bench 3.0 (FDB 3.0), achieves 82.5\\% tool-selection F1, while argument accuracy and end-to-end tool execution remain areas for improvement. These results demonstrate that full-duplex interaction, speech recognition and generation, general language capabilities, and external tool use can be integrated in a single open speech-to-speech model without sacrificing real-time conversational behavior.",
+      "link": "http://arxiv.org/abs/2609.21967v1",
+      "published": "2026-09-18T16:27:22Z",
+      "category": "cs.AI",
+      "worth_reading": 0.85,
+      "novelty": 1.41,
+      "kind": "new_method",
+      "priority": 0.736
+    },
+    {
+      "title": "When Should a Failing Robot Ask? Initiating Corrective Human-Robot Dialogue from Audited Sensor Evidence",
+      "summary": "A robot that fails at a task faces the first decision in corrective dialogue: act on its own diagnosis, consult another onboard sensor, or interrupt a person. Choosing well requires knowing how much the robot's sensors reveal about the cause and how reliable the robot's own diagnosis is. We build a simulated benchmark in which every failure's true cause is known, because we injected it, and measure what each sensor reveals, with explicit checks against data leakage. Some failures are diagnosable from camera images; others only from the robot's force data (0.99 from force data, no image method above 0.55). We then test six open vision-language models. Their behavior tracks the surface of the prompt, not the evidence: moving the refusal option from last to first in the answer list collapses refusal rates from 78-100% to 0-6% in three of the six swept model-and-family pairs. Accuracy from frames stays at or below a majority-class baseline under every prompt variant, with or without worked examples, and stated confidence carries no information about correctness. Handing the same models the force data as ten lines of text produces the first above-baseline diagnoses, in four of the six models: much of the failure reflects missing sensor data, not missing ability. We pose the choice as a three-action decision problem, act, consult your own sensors, or ask a human, whose optimal policy follows from measured accuracy. The models do not follow it, and their ask rates ignore a fourfold change in question cost. One question to a human still lifts them from that baseline to roughly the answerer's own reliability (0.70-0.81 when they ask). The decision to ask should be tied to measured accuracy and stated costs, not to the model's confidence.",
+      "link": "http://arxiv.org/abs/2609.21942v1",
+      "published": "2026-09-18T15:56:52Z",
+      "category": "cs.AI",
+      "worth_reading": 0.8,
+      "novelty": 1.73,
+      "kind": "benchmark_or_eval",
+      "priority": 0.733
+    },
+    {
+      "title": "TrialAtlas: Multi-Agent Research Organization for Clinical Trial Design and Optimization",
+      "summary": "Nearly 90% of drugs entering clinical development ultimately fail, despite billions of dollars in investment. Pharmaceutical companies therefore rely on clinical development planning (CDP) and probability of technical and regulatory success assessment to anticipate development risks, yet these decisions remain labor-intensive and subjective, requiring experts across clinical science, statistics, regulatory affairs, and competitive intelligence to jointly acquire, synthesize, and reason over heterogeneous evidence. Here, we introduce TrialAtlas, a memory-augmented multi-agent research organization for CDP that mirrors this collaborative process by coordinating specialized agents for literature synthesis, competitive trial intelligence, regulatory precedent analysis, and integrated reasoning over trial design and development risk. TrialAtlas further learns from historical clinical trials and regulatory outcomes, including prior New Drug Applications (NDAs), to ground its decisions in accumulated development experience. To evaluate these capabilities in an authentic regulatory setting, we introduce TrialAtlasBench, constructed from 291 FDA Complete Response Letters and spanning three practical tasks: detecting trial design deficiencies, recommending actionable design improvements, and predicting technical and regulatory success. TrialAtlas achieves an F1 score of 50.0% for deficiency detection, outperforming the strongest baseline by 6.1 points, and reaches 85.3% balanced accuracy and 84.7% F1 for prediction of technical and regulatory success, improving over the best baselines by 6.7 points in balanced accuracy and 12.0 points in Cohen's kappa. In expert evaluation, 86.4% of TrialAtlas-generated concerns were judged valid, compared with 83.1% for OpenAI DeepResearch and 59.3% for Gemini DeepResearch.",
+      "link": "http://arxiv.org/abs/2609.21859v1",
+      "published": "2026-09-18T14:53:34Z",
+      "category": "cs.CL",
+      "worth_reading": 0.8,
+      "novelty": 1.69,
+      "kind": "applied_system",
+      "priority": 0.729
+    },
+    {
+      "title": "Value-Sensitive Delegation in Everyday AI Agent Use: Evidence from OpenClaw",
+      "summary": "Users increasingly delegate work to autonomous AI agents, yet evaluations typically measure task completion rather than the values users prioritize. Using Value Sensitive Design, we analyzed, with LLM assistance, 73,093 first-person Reddit posts about using OpenClaw, each for its human value, agent aspect, value fulfillment, and user outcome. The 21 values form six value groups, including Autonomous, Dependable, and Affordable Operation, Bounded Reach, Reviewability, and Equitable Access. Relative to each aspect's corpus share, values clustered not at the agent's outputs but at the operating conditions users set around a run. Values were usually met where users described what the agent delivered, in five of six groups, and mostly unmet where users described supervising it, in all six groups. We conceptualize this pattern as value-sensitive delegation. Supporting human values requires attention not only to what an agent accomplishes, but to the conditions users set around delegation, including cost, access, and oversight.",
+      "link": "http://arxiv.org/abs/2609.22067v1",
+      "published": "2026-09-18T17:55:09Z",
+      "category": "cs.AI",
+      "worth_reading": 0.77,
+      "novelty": 1.89,
+      "kind": "benchmark_or_eval",
+      "priority": 0.728
+    },
+    {
+      "title": "SoK: Trading Agents or Market Crashers? Dissecting Robustness and Security Failures in Academic Financial LLM Trading Schemes",
+      "summary": "Autonomous large language model (LLM) agents are moving rapidly into high-stakes domains, yet existing agentic-AI security studies remain largely domain-agnostic and overlook the distinctive, high-consequence attack surface such settings create. We examine this gap through financial trading agents, a representative case of high-stakes agentic security, where a single compromised agent has direct execution authority over real capital in an adversarial, reflexive market. To this end, we present FARSIGHT (Financial Agent Robustness and Security Investigation and Global Holistic Testing), a framework that performs scheme-level evaluation of financial LLM agents on two axes: robustness under market turbulence (including flash-crash-like scenarios), and security against three attack types: attacks on information sources, attacks on agents, and agent-as-attacker behaviors. Applying FARSIGHT to 15 representative academic schemes, we find that most overlook robustness and realistic adversarial threats: 80% fail at least one core robustness metric and 100% exhibit security vulnerabilities. These two failure modes are inseparable: a small misjudgment can cascade into a market-wide crash on its own, while an adversary can deliberately trigger the same collapse at minimal cost.",
+      "link": "http://arxiv.org/abs/2609.19705v1",
+      "published": "2026-09-17T04:59:08Z",
+      "category": "cs.MA",
+      "worth_reading": 0.76,
+      "novelty": 1.91,
+      "kind": "benchmark_or_eval",
+      "priority": 0.723
+    },
+    {
+      "title": "An Interpretable Memory Decision Controller for LLM Agents Based on Three-Signal Complementarity: Decoupling Confidence and Consistency",
+      "summary": "Memory systems for large language models have focused predominantly on efficient retrieval, whereas the decision of whether retrieved memories should be trusted has received comparatively little attention. When the memory store contains conflicting positions, standard retrieval-augmented generation (RAG) blindly injects memories and amplifies hallucinations: in models susceptible to memory injection, the RAG hallucination rate under conflicting memories is markedly higher than that of a memory-free baseline. Inspired by memory signaling mechanisms in the prefrontal cortex, we propose the Memory Decision Layer (MDL), a zero-parameter memory decision controller situated between the retrieval and generation stages. Its core is a three-signal complementary encoder that fuses relevance, reliability, and task risk through QR-based orthogonal subspace projection and a meta-working-memory signal into an interpretable decision representation that quantifies the trustworthiness of retrieved memories. Building on this encoder, MDL explicitly decouples confidence from consistency and introduces risk inversion and explicit abstention. Evaluations on mainstream large language models and multiple open-source datasets show that MDL reduces the hallucination rate under conflicting memories by about 56.04% in general scenarios and approaches zero hallucination in high-risk scenarios. The controller is fully white-box: it relies purely on geometric operations, requires no trained parameters, and adds only about 0.14 ms per decision -- roughly 50x faster than the embedding-retrieval step that precedes it and four to five orders of magnitude faster than an LLM self-evaluation call.",
+      "link": "http://arxiv.org/abs/2609.22043v1",
+      "published": "2026-09-18T17:34:13Z",
+      "category": "cs.CL",
+      "worth_reading": 0.74,
+      "novelty": 1.97,
+      "kind": "new_method",
+      "priority": 0.715
+    },
+    {
+      "title": "Language-model groups overstate consensus when replaying human deliberation on a reasoning task",
+      "summary": "Full-consensus rates are often treated as indicators of collective cognition, yet depend on how participation and final states are operationalized. We replayed 100 held-out human Wason groups with matched large language model (LLM) agent groups, seeding one belief-anchored agent per participant's pre-discussion answer and scoring agents and people with the same code. Across human scoring definitions, estimates ranged from 24.0% to 57.0%; about one fifth of participants never posted, whereas agents almost always did. Agent groups remained more consensual in two post-unblinding sensitivity analyses: the submit-based comparison (n = 98) yielded gaps of 34.0 and 43.9 percentage points for chat and reasoning modes, and the participation-matched comparison (n = 45) yielded gaps of 34.1 and 44.4 points. These complementary routes reduced different measurement asymmetries yet converged within 0.5 percentage points. The gap persisted without early stopping and under a reparameterization removing the memorizable answer; reasoning-mode groups then agreed nearly unanimously, mostly on incorrect answers. Simulated consensus did not track collective accuracy, and belief-anchored agent groups were biased estimators of the human group-outcome distribution in this setting. These analyses provide a scoring-explicit basis for assessing simulated-group estimates of human deliberative outcomes.",
+      "link": "http://arxiv.org/abs/2609.20543v1",
+      "published": "2026-09-17T15:11:08Z",
+      "category": "cs.MA",
+      "worth_reading": 0.75,
+      "novelty": 1.66,
+      "kind": "benchmark_or_eval",
+      "priority": 0.691
+    },
+    {
+      "title": "LearnActCoder: Role-Aware Error Memory for Adaptive Clinical Coding Agents",
+      "summary": "Clinical coding agents repeatedly encounter the same failure modes, including unsupported codes, missed documented conditions, specificity errors, and procedure-coding convention mismatches. We introduce Learn-Then-Act, an inference-time adaptation framework that converts errors from a small labeled LEARN batch into a structured Mistake Knowledge Database (MistakeKDB). False-negative lessons are routed to a recall-oriented Coder, while false-positive lessons are routed to a precision-oriented Judge. We instantiate the framework in LearnActCoder, a Coder-Judge clinical coding pipeline with lookup-table grounding where available. On 150 matched MIMIC-III notes, structured MistakeKDB improves CPT F1 by 5.9 percentage points, while raw-example and reflection-style memories remain near the no-memory baseline; the ICD-9 improvement is not significant. On a matched MIMIC-IV cohort, memory shifts ICD-10 coding toward higher precision at a recall cost, leaving F1 statistically unchanged. Applying the same memory to 1,000 held-out MIMIC-III notes maintains a stable ICD operating point, providing scale/stability evidence. Overall, the results are consistent with structured, feedback-derived error memory being useful for adapting clinical coding behavior across cases without weight updates or changes to the underlying workflow. Absolute CPT/HCPCS performance remains low, and the system is evaluated retrospectively rather than in clinical deployment.",
+      "link": "http://arxiv.org/abs/2609.19721v1",
+      "published": "2026-09-17T05:27:46Z",
+      "category": "cs.MA",
+      "worth_reading": 0.76,
+      "novelty": 1.37,
+      "kind": "new_method",
+      "priority": 0.669
+    },
+    {
+      "title": "Replan, Repair, or Edit? A Unified Empirical Evaluation of Travel Agents for Itinerary Revision under Resource Disruptions",
+      "summary": "Travel-planning agents generate itineraries that may become infeasible after acceptance because of flight cancellations, hotel unavailability, or attraction closures. Revising these itineraries involves full replanning, classical plan repair, and LLM-based travel-agent revision, whose differing task formulations and evaluation protocols hinder comparison. We conduct a systematic empirical study using two TREK-derived benchmark sets: 500 single-disruption cases, including feasible and infeasible instances, and 200 feasible simultaneous compound-disruption cases. We compare LLM-Z3 full replanning, IPyHOPPER hierarchical repair, and an iTIMO local-revision adapter across effectiveness, plan stability, and computational cost. LLM-Z3 with Gemini achieved the highest observed compound-disruption success. IPyHOPPER nearly matched that configuration's single-disruption overall success, while preserving substantially more of the accepted itinerary on successful repairs. Successful hierarchical and local repairs made fewer edits and retained more accepted commitments than full replanning. Computational profiles differed: IPyHOPPER used no LLM inference, the evaluated LLM-Z3 adapter used compact one-call inference, and the iTIMO adapter consumed substantially more tokens. The study provides practical guidelines for balancing feasibility recovery, commitment preservation, and computational cost within evaluated settings.",
+      "link": "http://arxiv.org/abs/2609.19654v1",
+      "published": "2026-09-17T03:50:39Z",
+      "category": "cs.MA",
+      "worth_reading": 0.8,
+      "novelty": 1.02,
+      "kind": "benchmark_or_eval",
+      "priority": 0.662
+    },
+    {
+      "title": "Predictable Failure in Multi-Hop Retrieval: Score-Distributional Confidence Scoring and Abstention",
+      "summary": "Multi-hop retrieval failures are not uniformly distributed across queries: they cluster in structurally predictable subpopulations. We prove two results formalizing this structure. First (CWAR Reducibility): confident-failure reduction is achievable if and only if retrieval features carry mutual information about success, a condition satisfied by LLM-judge pipelines but substantially weaker in dense-only settings, explaining the AUC-AC gap between regimes. Second (Feature Regime Complementarity): no single ANN score feature achieves best predictive performance across all failure regimes; the dominant feature differs between datasets (query length on MuSiQue, hop-1 concentration on HoVer), and a constructive witness pair shows each is necessary in one regime and non-contributory in the other. We instantiate these principles in RegimeAbstain, which computes a Retrieval Confidence Score (RCS), a logistic function of up to nine query-ANN structural features, all available without any additional LLM call, and uses it to implement a calibrated abstention policy. We define the Confident-Wrong-Answer Rate (CWAR) metric and evaluate across three multi-hop benchmarks (MuSiQue, 2WikiMultiHopQA, HoVer) and two retrieval architectures (LLM-judge and dense-only), covering five failure regimes with CWAR from 14.5% to 62.1%. RCS achieves best or co-best AUC-AC in all five conditions against eight confidence baselines. On MuSiQue (LLM-judge), RCS reduces CWAR from 39.5% to 20.6% at 50% coverage (47.8% relative reduction), with ECE=0.035. A model trained on MuSiQue transfers to 2WikiMultiHopQA with only -0.5pp AUC loss, confirming the domain-agnostic structure of regime features.",
+      "link": "http://arxiv.org/abs/2609.22056v1",
+      "published": "2026-09-18T17:48:15Z",
+      "category": "cs.CL",
+      "worth_reading": 0.64,
+      "novelty": 1.91,
+      "kind": "new_method",
+      "priority": 0.639
+    },
+    {
+      "title": "What Should We Ask Next? Retrieval-Aware Question Learning under Partial Evidence",
+      "summary": "Interactive retrieval under partial evidence is a sequential information-acquisition problem: an agent must decide which question will create the most useful evidence for the next retrieval update. Existing systems train this decision by imitating an offline ordering of candidate QA pairs, although question value is determined by the response it elicits and its downstream effect on retrieval. We establish that candidate discriminativeness and perceived usefulness provide weak supervision for this objective, then introduce RAVEL, a retrieval-aware online reinforcement learning framework for interactive person re-identification. RAVEL initializes from supervised question generation, observes the current Top-4 candidates directly, and optimizes the question policy with rank feedback from the full question-answer-retrieval loop. Experiments on Interactive-PEDES show that RAVEL delivers progressively stronger retrieval performance across five interaction rounds. Further analysis shows that RAVEL reallocates the questioning budget toward localized open-ended attributes, which provide more useful retrieval evidence and yield the largest gains on initially difficult queries.",
+      "link": "http://arxiv.org/abs/2609.21924v1",
+      "published": "2026-09-18T15:45:01Z",
+      "category": "cs.AI",
+      "worth_reading": 0.65,
+      "novelty": 1.68,
+      "kind": "new_method",
+      "priority": 0.623
+    },
+    {
+      "title": "Benchmarking the Explanatory Quality of Open-Weight Vision-Language Models in Face Recognition",
+      "summary": "Vision-Language Models (VLMs) have recently been proposed as promising tools for face recognition, as they can produce natural language explanations alongside similarity scores. This capability is considered appealing for face comparisons in forensic contexts, which require decisions to be transparent and auditable. However, existing evaluations of VLMs for that use case focus mostly on recognition accuracy, while the validity of generated explanations remains unquantified. In this work, we introduce a benchmarking framework for VLM-based face recognition that treats explanation quality as a core evaluation axis. We propose two criteria that explanations should satisfy: relevance, i.e., reliance on identity-stable facial features; and faithfulness, i.e., alignment with the visible image content without hallucinated features. We jointly develop a methodology enabling the quantification of relevance and faithfulness of evaluated models, based on constraining model outputs to a structured explanation format that supports automated querying and auditing. Using this framework, we benchmark several families of open-weight VLMs, jointly evaluating face verification accuracy and explanation quality. Our results highlight remaining shortcomings of produced explanations, and emphasize the need for such explanation quality metrics to get a complete picture of model performance. The proposed benchmark and open-source evaluation harness provide a foundation for proper benchmarking and future fine-tuning of explainable face recognition systems.",
+      "link": "http://arxiv.org/abs/2609.21879v1",
+      "published": "2026-09-18T15:06:02Z",
+      "category": "cs.AI",
+      "worth_reading": 0.65,
+      "novelty": 1.51,
+      "kind": "benchmark_or_eval",
+      "priority": 0.606
+    }
+  ]
+}
