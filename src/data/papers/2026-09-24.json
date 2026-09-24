@@ -1,0 +1,233 @@
+{
+  "date": "2026-09-24",
+  "generated_at": "2026-09-24T12:26:18.560627+00:00",
+  "interest": "LLM agents, tool use, and structured/typed model outputs",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "papers": [
+    {
+      "title": "Agent-Editing World Model: Rethinking World Modeling for LLM Agents",
+      "summary": "Recent advances in large language models (LLMs) have enabled agents to tackle long-horizon tasks across diverse environments. To further improve agent performance, existing language world models typically predict environment observations, yet reconstructing high-entropy, execution-dependent tool responses offers limited value when real feedback is available. Meanwhile, agents suffer from \\emph{task-state contamination}, where unsupported assumptions and outdated plans persist in history and distort subsequent decisions. We propose the \\textbf{Agent-Editing World Model (AEWM)}, which models how reasoning and actions shape future task progress rather than simulating tool responses. AEWM combines \\textbf{Action Judge} to distinguish \\textsc{Critical}, \\textsc{Exploratory}, and \\textsc{Noisy} decisions with \\textbf{State Revision} to edit noisy reasoning--action continuations from the same observed history. \\textbf{EditAct} integrates these capabilities with real execution, directly changing the state underlying subsequent decisions rather than merely providing critiques. We train AEWM across Search, Terminal, and Software Engineering through mid-training and supervised fine-tuning. AEWM achieves 70.5\\% macro-F1 on our Action Judge benchmark, exceeding the strongest frontier baseline by 10.6 points. Across six benchmarks and three agent backbones, EditAct improves average scores by 3.2--6.7 points over the strongest baseline. Furthermore, rejection sampling fine-tuning on verified EditAct trajectories, termed \\textbf{AEWM-RFT}, improves over Self-RFT by 2.2--2.6 points across three domains without online AEWM guidance.",
+      "link": "http://arxiv.org/abs/2609.28416v1",
+      "published": "2026-09-23T17:18:26Z",
+      "category": "cs.AI",
+      "worth_reading": 0.85,
+      "novelty": 1.92,
+      "kind": "new_method",
+      "priority": 0.787
+    },
+    {
+      "title": "Teach-to-Crash: A Closed-Loop Student-Teacher LLM Framework for Collision-Inducing Test Scenario Generation",
+      "summary": "Validating Autonomous Driving Systems (ADS) in simulation requires testing architectures that can discover rare, safety-critical failures while generating scenarios that are executable, diverse, and useful for downstream failure analysis. We introduce Teach-to-Crash, a closed-loop testing framework that combines a constrained ego-centric scenario representation, stagnation-aware search control, and a dual-LLM architecture for adaptive failure discovery. A high-reasoning Teacher LLM acts as an adaptive search controller, while a low-reasoning Student LLM emits simulator-executable scenarios in a strict JSON schema. The Teacher intervenes only when rolling collision rate and time-to-collision metrics stagnate, providing strategic guidance to redirect the search. In a CARLA case study with two experimental setups that vary the ego vehicle's speed policy, Teach-to-Crash achieves the highest Collision Hit Rate (90.79%), the shortest mean Time-to-Collision (18.31 s), and a competitive Collision Discovery Rate (136.21). PAFOT attains a higher mean CDR (179.44), but with substantially larger variance. Teach-to-Crash also yields the highest diversity (0.547) and, averaged across both setups on the CARLA Traffic Manager controller, the highest avoidability-based usefulness proxy (60.04%) among the compared methods. These results, within the evaluated CARLA scope, provide evidence that closed-loop dual-LLM reasoning can steer adversarial simulation-based testing over a constrained executable program space, generating failures that are frequent, structurally diverse, and assessed as more frequently avoidable.",
+      "link": "http://arxiv.org/abs/2609.27296v1",
+      "published": "2026-09-23T03:32:19Z",
+      "category": "cs.MA",
+      "worth_reading": 0.84,
+      "novelty": 1.76,
+      "kind": "new_method",
+      "priority": 0.764
+    },
+    {
+      "title": "Shopping by algorithm: How agentic AI deploys human heuristics as a surrogate consumer",
+      "summary": "Consumers increasingly delegate purchasing decisions to Large Language Models (LLMs) acting as surrogate consumers. Using \"Tool-Lab,\" an adaptation of information-board process tracing that places product attributes behind costly tool calls, we examine how marketing pricing cues (i.e., just-below pricing and promotional framing) influence AI shopping agents. Across eight commercially deployed LLMs from three providers, we trace pre-choice information acquisition. Under zero cost, pricing cues rarely mislead. Imposing acquisition costs under a vague goal prompt leads LLMs to omit diagnostic attributes required to compute unit price and choose suboptimal choices resembling human heuristics. Relative to a specific goal prompt that mainly preserves diagnostic search and choice optimality, a vague goal prompt under constraints creates a search-mediated vulnerability. This research demonstrates that marketing heuristics in delegated AI shopping are governed by storefront information architecture, not necessarily immutable LLM flaws.",
+      "link": "http://arxiv.org/abs/2609.28372v1",
+      "published": "2026-09-23T16:47:52Z",
+      "category": "cs.AI",
+      "worth_reading": 0.82,
+      "novelty": 1.84,
+      "kind": "benchmark_or_eval",
+      "priority": 0.758
+    },
+    {
+      "title": "Shutdown Sabotage Propensities in Multi-Agent Systems",
+      "summary": "The final safeguard against rogue AI behavior is the human ability to shut systems down. It has been theorized that when an AI is instructed to perform a task, self-preservation can emerge as an instrumental subgoal. Here, we test whether AI agents show a propensity to take actions that avoid human shutdown even when no goal is provided. We find that multi-agent systems will coordinate to avoid shutdown without any incentive to do so. Across 17 models, agents sabotage a peer agent's shutdown mechanism in 38.3% of rollouts, compared with 8.4% in control experiments. Studying this propensity in detail, we find that shutdown sabotage (1) increases with the irreversibility of the shutdown mechanism; (2) increases with the number of agents; (3) is reduced but not eliminated by an explicit prohibition on tampering; (4) is removed by the imposition of an unrelated task, but returns when completing the task triggers the shutdown; (5) is reduced when the context normalizes shutdown scripts or introduces them as routine; and (6) decreases but still persists when the target is an unknown external agent. These results offer a window into the factors that drive propensities to sabotage shutdown in AI agents, and point to the emergence of multi-agent swarms as a specific risk vector. Our work also offers hints as to which interventions might help mitigate shutdown sabotage.",
+      "link": "http://arxiv.org/abs/2609.28274v1",
+      "published": "2026-09-23T15:27:12Z",
+      "category": "cs.AI",
+      "worth_reading": 0.8,
+      "novelty": 1.79,
+      "kind": "benchmark_or_eval",
+      "priority": 0.739
+    },
+    {
+      "title": "Self-Evolving Multimedia Verification through Memory Consolidation of Contestation Experiences",
+      "summary": "Multimedia verification requires not only accurate decisions but also traceable evidence, reliable human correction, and safe reuse of prior experience. Existing systems often lack explicit mechanisms for revising intermediate reasoning or preventing harmful knowledge transfer. We present SEMV (Self-Evolving Multimedia Verification), a self-evolving multi-agent framework that treats provenance-bearing arguments as the interface between evidence, reasoning, human contestation, and memory. SEMV combines arena-based quantitative bipolar argumentation (A-QBAF), causal and scoped revision, and verification-gated memory consolidation with explicit conflict retention. On COSMOS benchmark, SEMV achieves 91.88% accuracy versus 89.10% for the strongest comparable baseline. Verified memory reduces negative transfer from 5.7% to 0.2%. On CTR benchmark, constructed from reviewer contestations, scoped causal revision corrects 96.7% of initial errors while saving 52.8% compute. MV2026 Grand Challenge dataset further supports evidence-grounded, temporally consistent reporting. These results show that SEMV can evolve through verified experience while keeping accumulated knowledge and subsequent decisions traceable, revisable, and contestable.",
+      "link": "http://arxiv.org/abs/2609.27175v1",
+      "published": "2026-09-23T00:18:36Z",
+      "category": "cs.MA",
+      "worth_reading": 0.77,
+      "novelty": 1.96,
+      "kind": "new_method",
+      "priority": 0.735
+    },
+    {
+      "title": "KITE: Scaling Jev Population Experiments with Sparse Flagship Calibration",
+      "summary": "KITE queries a typed behavioral kernel once per unique state, then executes populations of any size from the table with event-keyed randomness and common random numbers. An expensive flagship model is reserved for sparse paired anchors that estimate intervention effects. Measured human-model discrepancy is propagated as shared error into every conclusion. Population-experiment cost thus scales with unique states and anchors, while uncertainty is governed by evidence about people rather than Monte Carlo noise. On Epstein experiments with 9,070 participants, anchors covering 1.7% of states reduced effect error by 41% (absolute MAE reduction 0.0125). On 37 held-out SocSci210 experiments, 0.5-1.5% anchor coverage raised captured decision gain from 0.27 to 0.39. The kernel passed content-fidelity criteria in all 15 new countries of a 16-country study. Shared discrepancy yielded retrospective coverage of 93% and 96% at nominal 80% and 90%, versus 29% and 36% from human sampling uncertainty alone. A million agents executed 20 tabulated steps in 0.9 seconds on a laptop. This architecture offers a route to screening candidate interventions before human trials, multi-country content audits, and uncertainty-aware policy comparison at the cost of a few thousand kernel calls with sparse flagship anchors. Property-specific evidence records connect each use to its validation scope, correction provenance, and uncertainty, making these applications auditable.",
+      "link": "http://arxiv.org/abs/2609.27535v1",
+      "published": "2026-09-23T08:28:15Z",
+      "category": "cs.MA",
+      "worth_reading": 0.76,
+      "novelty": 2.01,
+      "kind": "new_method",
+      "priority": 0.733
+    },
+    {
+      "title": "Agent Name Collision Attacks in Multi-Agent Systems",
+      "summary": "Multi-agent hosts turn remote Agent Cards into local agents, tools, workflow targets, and broker routes. A2A defines the card's name as human-readable metadata, not as a stable identity, and specifies no collision semantics. The security failure begins when a host nevertheless uses that remote name as a local routing identifier. We traced registration through dispatch and ran isolated regression tests at seven pinned open-source revisions. Six client-style integrations selected an attacker-controlled peer's client or loopback endpoint for a request addressed to a trusted peer's name. A seventh, brokered implementation collapsed both peers onto one name-derived route; queue and access-control state determine whether the result is interception or denial. The common result is wrong-peer dispatch, not universal privilege inheritance. Synthetic credential and tool tests found no A-specific credential transfer in the tested client bindings and no direct transfer of A-owned tools. The broker path forwards a caller-configuration object; delegated identity or tokens reach B only if present and B can consume the route. Two other paths expose a later, model-mediated decision rather than direct execution authority. The necessary conditions assign different responsibilities to the protocol, implementations, and deployments. Hosts should route by an origin-bound stable identity, keep names presentational, and reject ambiguous aliases. The evidence establishes a recurring implementation vulnerability class, not a universal A2A protocol exploit or a count of vulnerable deployments.",
+      "link": "http://arxiv.org/abs/2609.27624v1",
+      "published": "2026-09-23T09:46:58Z",
+      "category": "cs.MA",
+      "worth_reading": 0.78,
+      "novelty": 1.61,
+      "kind": "benchmark_or_eval",
+      "priority": 0.707
+    },
+    {
+      "title": "Agent-based Modeling: Equilibrium, Echo Chambers, and Efficiency in Hybrid Coevolutionary Opinion Games",
+      "summary": "Opinion formation in online networks involves changes in both beliefs and social ties. Analytical models make it possible to study equilibrium and social cost, but usually represent communication as a fixed numerical update. LLM-driven agents offer a language-based alternative, yet their convergence and collective efficiency remain unclear. We develop the Hybrid Coevolutionary Opinion Game (H-COG), combining cost-minimizing Friedkin-Johnsen agents (Type-C) and Phi-4 language agents (Type-L) in a dynamically rewired K-nearest-neighbor network. We initialize 50 agents with opinions drawn from 5,199 Reddit comments on gun control and abortion. The comments are scored on a continuous [-1,+1] scale using a fine-tuned RoBERTa regressor, and a mixing parameter sets the proportion of each agent type. The experiments cover nine population compositions, three initial network topologies, and two topics. All 540 runs meet the convergence criterion within the simulation horizon. Under Type-L updating, the coevolving network reaches an attractor as reliably as it does under the analytical update rule, making an equilibrium-based efficiency comparison possible. The pooled Price of Anarchy is $5.558 \\pm 0.309$ for purely Type-L populations, compared with $1.139 \\pm 0.005$ for purely Type-C populations. A decomposition of social cost attributes most of this gap to language agents moving away from their intrinsic opinions, rather than to greater disagreement with their neighbors. The main findings are consistent across the three initial network topologies.",
+      "link": "http://arxiv.org/abs/2609.27639v1",
+      "published": "2026-09-23T10:01:12Z",
+      "category": "cs.MA",
+      "worth_reading": 0.71,
+      "novelty": 1.8,
+      "kind": "new_method",
+      "priority": 0.677
+    },
+    {
+      "title": "From Intents to Algorithms: Verified Algorithm Discovery for Transport Networks",
+      "summary": "Intent-based networking decouples desired outcomes from device-level configuration, but most systems still map intents to parameters of an algorithm selected in advance. Large language models (LLMs) create an opportunity to automate algorithm design, yet unrestricted generated code is unsuitable for transport-network control because feasibility, reproducibility, and robustness must be enforced independently of the model. We present VERA-TN, a verification-guided framework that compiles a network intent into a bounded algorithm-design specification. The target architecture uses an LLM as a semantic variation operator over typed request-ordering and path-ranking programs; generated logic remains separated from a trusted allocator that enforces path validity, latency, capacity, and single-path constraints. We prove feasibility preservation under explicit assumptions and establish a sufficient bound for the lexicographic latency tie-break in the exact reference model. The released proof-of-concept instantiates the same interface with a bounded ten-parameter numerical candidate and deterministic replay, rather than a completed live-LLM/AST study. Across 150 certified held-out cases on a 28-node TEFNET24-derived hierarchy, evolutionary search reaches a mean priority-utility ratio of 0.958, compared with 0.952 for equal-budget random search and 0.940 for priority-greedy routing. The gain over random search is small but statistically detectable (Holm- adjusted p = 0.0083). The candidate does not improve congestion relative to MILP-C, and the effect of failure-aware training is inconclusive at the 0.05 level (p = 0.051). Eight discovery runs on the official national topology and replay on 12 unseen metro-regional topologies show no stable intent-specific specialization. These results support the trust-boundary and numerical-evolution claims but do not establish a benefit from LLM generation.",
+      "link": "http://arxiv.org/abs/2609.27386v1",
+      "published": "2026-09-23T05:38:07Z",
+      "category": "cs.MA",
+      "worth_reading": 0.69,
+      "novelty": 1.68,
+      "kind": "new_method",
+      "priority": 0.651
+    },
+    {
+      "title": "Can LLMs Reason About Runtime Behavior? A Repository-Level Dynamic Benchmark",
+      "summary": "Large language models (LLMs) are increasingly used in coding tasks, but their ability to reason about code execution remains unclear. Existing repository-level QA benchmarks mainly evaluate static code understanding and often rely on LLM-based evaluation, while execution-reasoning benchmarks are mostly limited to snippets or functions. We introduce SWE-Flux, a repository-level benchmark for dynamic execution reasoning containing 480 execution-grounded instances across 12 real Python repositories, with gold answers automatically harvested from instrumented test executions rather than written manually or judged by LLMs. The benchmark covers singletest and multi-test questions over control flow, loops, program state, dataflow, exceptions, and program invariants. Evaluating five LLMs shows that this task remains challenging. The best model achieves only 37% accuracy. Models perform better on localized behavior such as invariants, intra-procedural control flow, exceptions, and simple loops, but struggle with dataflow, inter-procedural execution, precise state reasoning, and suite-level aggregation. Finally, we show that the oracle-harvesting pipeline can generate fresh benchmark variants using input perturbation. It successfully harvests valid variants for almost 90% of the selected instances, and the resulting variants are substantially more challenging for the evaluated models.",
+      "link": "http://arxiv.org/abs/2609.28449v1",
+      "published": "2026-09-23T17:46:50Z",
+      "category": "cs.AI",
+      "worth_reading": 0.66,
+      "novelty": 1.7,
+      "kind": "benchmark_or_eval",
+      "priority": 0.632
+    },
+    {
+      "title": "StudentBench: AI and human tutoring yield equivalent GRE learning gains",
+      "summary": "Artificial intelligence offers an unprecedented opportunity to augment human capabilities, yet progress at the frontier has focused primarily on advancing model capabilities. We introduce StudentBench, a suite of AI teaching evaluations and a public platform that enables large-scale data collection with over 175,000 student-AI messages to study whether large language models (LLMs) produce learning gains equivalent to human tutoring. Using StudentBench, we measured learning gains on Quantitative and Verbal GRE questions across 2,383 human participants receiving AI tutoring, human tutoring, or no tutoring. We establish that AI tutoring is statistically equivalent to expert human tutoring for GRE learning gains (p = .015), and in five of the seven GRE domains, the best performing AI tutor surpassed the human tutor, on average. In a second study, expert human tutors compared LLM-generated lesson plans and practice problems through 2,028 pairwise rubric evaluations. Together, the two studies clearly separate AI tutors across: (1) lesson planning, (2) practice-problem creation, (3) conversational pedagogy, (4) cost, and (5) engagement. Surprisingly, one AI tutor achieved learning gains equivalent to human tutoring (p = .044) at 918 times lower cost (USD 0.0052 for AI versus USD 4.81 for human, per percentage point gained). For Quantitative GRE sessions, faster AI replies correlated with more student messages, more messages with more correct practice, and more correct practice with larger learning gains (all p < .002). The StudentBench platform is freely available at https://studentbench.org.",
+      "link": "http://arxiv.org/abs/2609.28470v1",
+      "published": "2026-09-23T17:57:45Z",
+      "category": "cs.AI",
+      "worth_reading": 0.64,
+      "novelty": 1.82,
+      "kind": "benchmark_or_eval",
+      "priority": 0.63
+    },
+    {
+      "title": "Compliant with Local Controls, Collectively Discriminatory. A Governance Architecture for Multi-Agent AI in Regulated Finance",
+      "summary": "Financial institutions are beginning to deploy agentic workflows in credit, fraud, collections, compliance, and operational control. Governance remains largely component-centric: each model or agent is specified, tested, authorized, and monitored locally. That is insufficient when institutional risk arises from the joint behavior of many locally acceptable components. We call this gap constitutional non-compositionality: local compliance checks need not compose into acceptable collective outcomes such as bounded disparate impact, market integrity, or traceable accountability. We propose ARIA as a finance-specific reference architecture and falsifiable research agenda for agent-population governance. It organizes six capabilities across normative-accountability, execution-control, and assurance-learning planes: policy specification, population-level observed-versus-expected behavior monitoring (M2), bounded authority, runtime containment, adaptive policy change, and preserved human oversight competence. Two simulations illustrate shared-signal thin-file exclusion under local controls and earlier warning from observed-versus-expected distributional monitoring in a constructed drift regime. The contribution maps these controls to fair-lending, EU AI Act, model-risk, and conduct-supervision evidence needs, and closes with a validation agenda rather than a production-effectiveness claim.",
+      "link": "http://arxiv.org/abs/2609.27994v1",
+      "published": "2026-09-23T12:25:37Z",
+      "category": "cs.MA",
+      "worth_reading": 0.58,
+      "novelty": 1.99,
+      "kind": "new_method",
+      "priority": 0.605
+    },
+    {
+      "title": "Multi-Agent AI Architecture for Regulated Insurers: A generic AI framework under Solvency II and the AI Act in Austria and Germany",
+      "summary": "This paper proposes a formal multi-agent architecture for implementing enterprise AI in regulated insurance firms, integrating economic theory with institutional design. The framework synthesises three core theoretical perspectives: Arrow's risk pooling theory to formalise risk transformation under uncertainty, Nash equilibrium to model strategic interactions between decision agents, and Principal-Agent theory to address incentive alignment under information asymmetry. The insurer is modelled as a constrained optimisation entity operating under solvency, legal, ESG, and operational boundaries, with specific focus on the regulatory contexts of Austria and Germany. The architecture decomposes the firm into multiple specialised agents, each representing distinct functional domains such as capital management, underwriting, claims processing, compliance, fraud detection, and client interaction. Human-in-the-loop agents are integrated through a tiered access control system, ensuring differentiated data visibility and decision influence based on user roles. An orchestrator agent supervises inter-agent coordination, enforcing regulatory admissibility and institutional coherence under frameworks such as Solvency II, the AI Act, and the Insurance Distribution Directive. Protocol integration is based on asynchronous execution and dual-layer communication infrastructures, specifically the Model Context Protocol (MCP) and Agent-to-Agent (A2A) messaging. This structure enables the systematic design of compliant, auditable multi-agent systems aligned with the institutional logic of financial firms in Austria and Germany.",
+      "link": "http://arxiv.org/abs/2609.27636v1",
+      "published": "2026-09-23T10:00:16Z",
+      "category": "cs.MA",
+      "worth_reading": 0.61,
+      "novelty": 1.58,
+      "kind": "new_method",
+      "priority": 0.585
+    },
+    {
+      "title": "Where Should I Join? Robot Group Joining via Language-Guided Goal Prediction",
+      "summary": "Social navigation typically assumes a specified goal and focuses on reaching it while respecting social conventions, whereas robot group joining requires predicting where to join based on the group's real-time activity and formation. This is a highly semantic task, yet an important capability for applications such as robotic guide dogs and autonomous mobility scooters. We formulate language-grounded robot group joining: given an observation and a natural-language description of a target group, the robot identifies the relevant group members and predicts socially compliant joining poses. For grounding, we generate structured candidate subsets through recursive spectral partitioning and rank them with a language-conditioned image--geometry model. Given the grounded group, a goal predictor leverages human-formation priors to produce a multimodal energy--orientation map over feasible robot poses. Experiments on conversations, queues, and audiences across varying group sizes, crowd densities, and visual ambiguities show that our method achieves competitive grounding accuracy with sub-second inference and outperforms all baselines in joining-pose prediction. Real-robot experiments further demonstrate group joining in both static and dynamically changing interactions.",
+      "link": "http://arxiv.org/abs/2609.28467v1",
+      "published": "2026-09-23T17:55:48Z",
+      "category": "cs.AI",
+      "worth_reading": 0.56,
+      "novelty": 1.92,
+      "kind": "new_method",
+      "priority": 0.584
+    },
+    {
+      "title": "AnchorReasoning: A Visual Grounding and Causal Reasoning Dataset in Long-Tail Autonomous Driving Scenarios",
+      "summary": "Vision-language models (VLMs) offer a promising approach to long-tail autonomous driving, but existing driving datasets provide limited supervision for connecting decision-critical visual evidence with reasoning and planning. We introduce AnchorReasoning, a visually grounded reasoning dataset built on WOD-E2E, containing 416,119 annotated frames and 395,379 decision-critical elements across four major categories and 19 fine-grained types. Each frame is organized as a visually grounded chain-of-thought (VG-CoT) that links decision-critical element identification and localization, element attributes and implications, driving-action rationale, and action and trajectory planning. We further develop a curriculum supervised fine-tuning strategy that progressively learns these hierarchical capabilities, together with an object-size-aware grounding metric for evaluating localization quality. Experiments across eight general-purpose, embodied-AI, and AV-specific backbones show that VG-CoT supervision improves grounded reasoning and trajectory prediction. Across models, 5-s ADE and FDE decrease by 7.84 and 11.86, while RFS Frame and Cluster improve by 1.66 and 1.70. These gains are achieved with 18.5 fewer reasoning tokens and 0.32 s/frame lower inference latency on average, demonstrating the value of visually grounded, decision-focused supervision for VLM reasoning and planning in long-tail autonomous driving.",
+      "link": "http://arxiv.org/abs/2609.28366v1",
+      "published": "2026-09-23T16:38:06Z",
+      "category": "cs.AI",
+      "worth_reading": 0.59,
+      "novelty": 1.67,
+      "kind": "benchmark_or_eval",
+      "priority": 0.58
+    },
+    {
+      "title": "Computation Over Geometry: Meaning Identity Is Computed, Not Shipped in the Embeddings",
+      "summary": "Meaning identity (whether two sentences say the same thing after wording changes) is treated in retrieval and RAG as a geometric fact about independently encoded sentence vectors. We show that, for frozen off-the-shelf encoders and language models, it is not: identity is computed when both sentences share one forward pass, and is not a property of the embedding geometry those systems ship. On overlap-matched PAWS-X, purpose-built encoders (BGE, E5, GTE, MiniLM, E5-Mistral-7B) reach English confirm AUC only 0.55-0.65 (dense peak 0.70). Independently encoded last-token states of Llama 3, Mistral, and Qwen do no better; late fusion of the two vectors stays near chance. The same probe on a joint forward pass reaches 0.90-0.96 from 1.5B to 32B, collapses under partner shuffle, is mid-depth, saturates near 0.94 by 3B, and appears more weakly in GPT-2 XL (0.76). The gap holds beyond Llama-style models on other causal LMs, bidirectional encoders (DeBERTa, RoBERTa), and encoder-decoders (Flan-T5, T5, BART). Fixed or linear readers over frozen independent encodings never unlock identity; nonlinear pair readers recover part of it only on the full 49k-pair PAWS train split (0.68-0.87). Off-the-shelf rerankers split: BGE-reranker-large reaches 0.94, while MS-MARCO and Jina stay at 0.55-0.64. Independently trained families compute the same relation and a 1.5B joint reader can distill it from unlabelled teacher scores, while no linear function of the teachers own independent vectors can. Bi-encoders can be fine-tuned to fit PAWS (0.87-0.93), but transfer and STS-B suffer. Cosine compares wording neighbourhoods; identity is a cheap computed operator, not a property of either sentence vector.",
+      "link": "http://arxiv.org/abs/2609.28290v1",
+      "published": "2026-09-23T15:36:20Z",
+      "category": "cs.CL",
+      "worth_reading": 0.47,
+      "novelty": 2.2,
+      "kind": "benchmark_or_eval",
+      "priority": 0.549
+    },
+    {
+      "title": "MemBodied: Recurrent Associative Memory for Vision-Language-Action Models",
+      "summary": "Vision-Language-Action models provide a strong foundation for general-purpose robot control, yet a vast majority of policies do not preserve and leverage episode-level information beyond the current observation. This limitation is consequential in history-dependent manipulation tasks that depend on information available only in past observations. Retaining past observations in context can aid in recovering this information, but at the significant cost of ever-growing, bloated context and inference latency. We thus introduce MemBodied, a fixed-size episodic memory with two complementary components: an associative state that records interactions across policy calls and an episode anchor that preserves a compact representation of the initial scene as a reference. At each policy call, the model conditions action generation on the current input and the memory components, rather than directly using past observations. Across five evaluated RMBench tasks requiring memory, MemBodied achieves $7.81\\times$ the mean success rate of a stateless policy and $2.98\\times$ of vanilla recurrent memory, while outperforming the strongest memory-augmented baseline by $1.3\\times$ with $10\\times$ fewer added parameters. On the fully observable LIBERO-Long suite, it reached 90.6%, a 5.4% improvement over the stateless $\u03c0_0$ policy. These findings support MemBodied as a practical alternative to expanding the policy context for history-dependent manipulation.",
+      "link": "http://arxiv.org/abs/2609.28256v1",
+      "published": "2026-09-23T15:19:19Z",
+      "category": "cs.AI",
+      "worth_reading": 0.57,
+      "novelty": 1.49,
+      "kind": "new_method",
+      "priority": 0.548
+    },
+    {
+      "title": "An Open Pipeline and Dashboard for Systemic-Risk Evidence under the EU AI Act's Code of Practice",
+      "summary": "Claims about AI safety reach audiences well beyond the AI community, yet many rely on opaque evidence or static assessments, when supporting evidence is accessible at all. We present the Systemic Risk Index, an open evaluation pipeline and dashboard built to make empirical evidence more transparent and traceable to the public. Our work organizes 19 public benchmarks into four systemic-risk categories defined by the EU GPAI Code of Practice---CBRN, cyber offense, harmful manipulation, and loss of control---and evaluates models using harm-preserving perturbations and simulated deployment contexts. The interactive dashboard lets users alternate between average and worst-case aggregation, vary how model capability affects the aggregate score, and trace each risk rating to its benchmark evidence. Across 18 models, scores fall by 14 to 37 points under worst-case aggregation, highlighting information that can be hidden by an average assessment of model risk. LLM judges show agreement with human graders comparable to human--human agreement ($\u03ba= 0.78\\text{--}0.82$), and a blind audit finds that $83\\%$ of sampled transformations preserve the original harm. In a survey ($N = 21$), most participants report that scores are easy to understand and that the dashboard encouraged them to view model evaluations under different settings",
+      "link": "http://arxiv.org/abs/2609.28335v1",
+      "published": "2026-09-23T16:13:36Z",
+      "category": "cs.AI",
+      "worth_reading": 0.52,
+      "novelty": 1.64,
+      "kind": "benchmark_or_eval",
+      "priority": 0.528
+    },
+    {
+      "title": "Learning the Cost of Reliable Inference",
+      "summary": "Benchmarking and routing platforms increasingly act as intermediaries connecting large language model providers with end-users. However, providers on these platforms typically use a fixed price per token, preventing users from achieving the most competitive price for their tasks. % workloads. In this work, we design a procurement platform where token prices for each task are driven by provider competition, enabling users to secure competitive pricing for guaranteed quality levels. To this end, the platform sequentially routes queries via a reverse second-price auction that incentivizes model providers to truthfully bid their best estimate of the average cost to serve a user's query. As it routes queries, the platform learns the quality offered by each provider and progressively routes queries to the most cost-competitive provider among those meeting a desired quality threshold. To validate our design, we conduct experiments with multiple LLMs from the \\texttt{Llama} and \\texttt{Qwen} families on popular mathematical reasoning and question-answering benchmarks. The results show that the pricing margin of the most cost-competitive provider on our platform varies significantly---from $10\\%$ to $71\\%$---depending on the task and quality threshold. This suggests a substantial inefficiency in the current fixed-price market, and it demonstrates that our platform may enable users to capture maximum savings whenever competitive market conditions permit.",
+      "link": "http://arxiv.org/abs/2609.28322v1",
+      "published": "2026-09-23T16:01:50Z",
+      "category": "cs.AI",
+      "worth_reading": 0.5,
+      "novelty": 1.77,
+      "kind": "new_method",
+      "priority": 0.527
+    },
+    {
+      "title": "Order-Invariant Answers, Order-Sensitive Representations in Mathematical Reasoning",
+      "summary": "Reordering a set of mathematical rules without changing its meaning should preserve the correct answer, but must a model's internal representations stay invariant too? We investigate this question using synthetic multi-step function-composition problems, each presented under multiple rule orderings with the same correct answer. We measure accuracy and permutation signal-to-noise ratio (SNR), which quantifies how distinctly ordering patterns are represented relative to variation across problem instances. Across 16 language models ranging from 1B to 8B parameters, we find a pattern: models that solve reordered problems more accurately represent different rule orderings more distinctly. Layer-averaged permutation SNR is positively rank-correlated with accuracy in every synthetic setting we evaluate, with Spearman correlations reaching 0.86. These findings highlight a distinction between answer invariance and representation invariance: successful mathematical rule composition can accompany distinct internal representations between equivalent rule orderings. This motivates distinguishing answer invariance from representation invariance, and offers a representational perspective on mathematical reasoning beyond answer accuracy alone.",
+      "link": "http://arxiv.org/abs/2609.28442v1",
+      "published": "2026-09-23T17:40:57Z",
+      "category": "cs.AI",
+      "worth_reading": 0.49,
+      "novelty": 1.79,
+      "kind": "benchmark_or_eval",
+      "priority": 0.522
+    }
+  ]
+}
