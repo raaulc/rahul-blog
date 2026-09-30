@@ -1,0 +1,233 @@
+{
+  "date": "2026-09-30",
+  "generated_at": "2026-09-30T13:12:03.952515+00:00",
+  "interest": "LLM agents, tool use, and structured/typed model outputs",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "papers": [
+    {
+      "title": "GitHarness: Git Init Your Harness Working Memory for Perpetual User Requirements",
+      "summary": "LLM-based agents increasingly collaborate with users on long-horizon tasks, accumulating evidence, code, and drafts through extensive search, reasoning, and execution. As users inspect these results, they may supply missing information requirement completion, introduce new requirements requirement elicitation, or revise existing ones requirement shift. These changes often affect only part of the accumulated work, yet agents may carry forward obsolete information or turn local revisions into global rewrites. Existing approaches clarify current intent without determining how prior work should change, or reuse execution histories under a fixed objective. We address this gap by formulating dynamic-requirement collaboration as joint requirement tracking and local update. We introduce GitHarness, a pluggable Git-style framework that organizes requirement states and their corresponding harness work states into a branchable version history. A trainable Git Agent resolves requirement changes and selects a semantically compatible historical state. A unified version interface then restores that state and creates a new branch, enabling the underlying harness to exclude obsolete information, inherit compatible work, and focus execution on affected parts. The Git Agent is trained through interface-level black-box reinforcement learning, with downstream harnesses and task-execution models kept fixed. We also construct MTAgentBench, a verifier-preserving benchmark covering mathematical reasoning, text-to-SQL, agentic search, software engineering, and research synthesis. Experiments demonstrate strong task performance alongside effective requirement tracking, preservation of valid work, and efficient execution.",
+      "link": "http://arxiv.org/abs/2609.36789v1",
+      "published": "2026-09-29T06:00:43Z",
+      "category": "cs.MA",
+      "worth_reading": 0.84,
+      "novelty": 1.97,
+      "kind": "new_method",
+      "priority": 0.785
+    },
+    {
+      "title": "Do LLM Agents Execute the Plans They Declare? From Planning-Mode Declaration to Pattern-Specific Execution",
+      "summary": "Large language models (LLMs) enable agents to solve long-horizon tasks by generating a plan and then executing it in an environment. However, successful planning requires two distinct capabilities: selecting an appropriate plan for the task and executing it faithfully. Existing planner--executor systems can fail at either stage, while final task success alone cannot distinguish selection from execution failures. We therefore study the Plan Declaration--Execution Gap and introduce Planning-as-Routing, where an LLM declares one of four planning modes: Predefined, Sequential, Hierarchical, or Search, and a deterministic router dispatches the task to the corresponding pattern-specific executor. Across four benchmarks and three LLMs, we find three consistent patterns. First, generic Plan+ReAct often fails to preserve declared planning structure, especially for longer plans: across three benchmarks, only (22)--(45%) of trajectories preserve it, whereas pattern-specific executors enforce the intended structure. Second, planning-mode effectiveness varies across environments and models: Search performs best on ALFWorld, Hierarchical on SWE-bench, and the strongest pattern can vary across models within the same benchmark. Third, the largest gains come from execution: pattern-specific executors improve task success from (0.48) to (0.92) on ALFWorld and from (0.36) to (0.44) on SWE-bench Verified over Plan+ReAct. Current LLMs, however, do not reliably select the strongest mode for each task, although few-shot examples improve selection in some benchmark--model combinations. Overall, reliable agent planning requires both effective mode selection and faithful execution: routing substantially closes the execution gap, while task-specific mode selection remains open.",
+      "link": "http://arxiv.org/abs/2609.38108v1",
+      "published": "2026-09-29T17:47:18Z",
+      "category": "cs.AI",
+      "worth_reading": 0.86,
+      "novelty": 1.63,
+      "kind": "new_method",
+      "priority": 0.765
+    },
+    {
+      "title": "Thinking Before Thinking: Scaling Agentic Inference Through Meta-Reasoning",
+      "summary": "As agents take on longer and more complex problems, controlling the execution becomes a task in its own right. Each step in the run brings new control choices, like which partial work to build on, whether to start fresh, or when to stop. We introduce agentic meta-reasoning, an inference-time harness that makes these choices an explicit and structured reasoning process. Workers carry out the task-level computation, while a controller consolidates what the run has established, explores next options, assesses what each option is worth under the remaining budget, and dispatches the chosen work with context drawn from persistent memory. Between decisions the controller carries only a compact account of the run rather than replaying its full history. Our baselines span production coding agents and research harnesses, together with a Direct Control Agent using the same workers and compute budget allowance. On ProgramBench, which tests long-horizon agentic capability through program reconstruction, meta-reasoning achieves 71.5% with GPT-5.5 against 58.0% for Codex; with Opus 4.8 it achieves 67.2% against 65.5% for Claude Code. On the other benchmarks, spanning abstract reasoning, multi-domain long-horizon reasoning, and proof generation, it gains between 3.6 and 4.2 points over direct control, averaged across three frontier models. It keeps improving over the tested budget ranges where direct control plateaus, though its overhead can hurt at small budgets. Artifact-graph analysis reveals more reuse of earlier work, higher coverage of correct solutions in most settings, and nonuniform gains in final selection. These results indicate that spending computation on structured control becomes more important as agents scale to longer runs.",
+      "link": "http://arxiv.org/abs/2609.38147v1",
+      "published": "2026-09-29T17:57:25Z",
+      "category": "cs.AI",
+      "worth_reading": 0.84,
+      "novelty": 1.66,
+      "kind": "new_method",
+      "priority": 0.754
+    },
+    {
+      "title": "Rational Clarification by Assistive Agents via Value-of-Information Reasoning",
+      "summary": "Users of language-based assistive agents often make ambiguous requests. In response, an assistant can either directly act on its interpretation of the request --- risking misalignment with the user --- or ask a clarifying question. Which option is the most safe and helpful? A common approach is to ask questions that minimize uncertainty about the user's intent until a threshold is reached. However, this neglects the impact of uncertainty reduction on downstream performance, the costs of asking versus acting immediately, and the possibility that users may provide corrections without being asked. To navigate these trade-offs, we introduce Rational Enquiry via Value-of-Information Reasoning (REVOIR). REVOIR makes clarification decisions via inference-time reasoning about the value-of-information of a question, which captures the expected improvement in task reward due to the answer received. In two assistive tasks --- ambiguous question answering (CondAmbigQA) and preference-aligned household task planning (ADAPT) --- we show that REVOIR achieves greater success with fewer questions than approaches based on prompting, chain-of-thought, fine-tuning, or information gain, improving preference satisfaction on ADAPT by 13-15% over a fine-tuned clarification policy while requiring no training and asking five times fewer questions. Furthermore, when the assistant can receive cheap user corrections after acting, REVOIR naturally infers that asking questions is not always efficient, demonstrating the adaptivity of our approach. In contrast, we find that vanilla reasoning agents fail to adaptively clarify user requests, and request fewer clarifications as reasoning effort increases.",
+      "link": "http://arxiv.org/abs/2609.37588v1",
+      "published": "2026-09-29T13:44:20Z",
+      "category": "cs.MA",
+      "worth_reading": 0.82,
+      "novelty": 1.7,
+      "kind": "new_method",
+      "priority": 0.744
+    },
+    {
+      "title": "Learning Meta-Skills for Agent Harness Design in Test-Time AI4AI",
+      "summary": "Agent performance depends on both reasoning ability and the environment in which it acts. We study test-time AI-for-AI, asking how a Builder can learn to construct better execution environments for a Target while both models' weights remain fixed. To make the Builder's experience reusable, we introduce Meta-Skill: principles specifying when support is needed and what resources to provide. The Builder learns these principles from Target's execution feedback on the development set, then uses the frozen skill bank to construct harnesses for unseen tasks. Across Harness-Bench and NewtonBench, full-bank meta-skills improve macro-average performance by 8.95 percentage points over no-skill construction, and 12.02 points over direct delivery of the same bank to the Target. These results highlight the value of translating experience into executable support. Gains when the same model serves both roles further suggest a path to system level self-improvement through learning to build better environments.",
+      "link": "http://arxiv.org/abs/2609.38143v1",
+      "published": "2026-09-29T17:55:56Z",
+      "category": "cs.AI",
+      "worth_reading": 0.79,
+      "novelty": 1.9,
+      "kind": "new_method",
+      "priority": 0.743
+    },
+    {
+      "title": "AdviSD: Learning to Advise Frontier LLMs via Targeted Multi-Turn Self-Distillation",
+      "summary": "A small trainable advisor can steer a frozen language-model executor using natural-language advice. In addition to learning from task rewards, the advisor can use feedback from completed interactions to improve its advice. However, a plausible correction need not change execution, yet learning from such corrections can still affect the advisor's future decisions in other contexts. In a shared-parameter model, we prove that such corrections can limit learning if their targets favor useful advice less strongly than those of other corrections. Keeping them less often than the rest improves the model's eventual performance compared to learning from every correction. Motivated by this, our method, Advisor Self-Distillation (AdviSD), pairs outcome-based reinforcement learning with self-distillation from a feedback-conditioned copy of the advisor selectively. Reflection proposes corrections, and the advisor scores the same recorded executor response with and without its issued advice, using the magnitude of the difference to select decisions for supervision. This approach does not require executor likelihoods or additional executor rollouts. Experiments with Qwen3-8B advisors for Gemini and Claude show that AdviSD outperforms advisor-GRPO by 4.2-6.4 percentage points on BFCL-v3 and by 3.9-5.1 score points on EnvScaler. The trained advisors generalize to out-of-domain tasks and transfer across different executor versions and model families. AdviSD also beats matched-count random selection, supporting the value of its selection rule.",
+      "link": "http://arxiv.org/abs/2609.38142v1",
+      "published": "2026-09-29T17:55:40Z",
+      "category": "cs.AI",
+      "worth_reading": 0.81,
+      "novelty": 1.71,
+      "kind": "new_method",
+      "priority": 0.738
+    },
+    {
+      "title": "An LLM-powered Agent Framework for Heterogeneous Evacuation Behavior Modeling under a Moving Threat in a Public Plaza",
+      "summary": "Modeling heterogeneous evacuation behavior under a moving threat is difficult because human perception, memory, and evidence evaluation are not well captured by fixed rules. We propose a novel LLM-powered agent-based framework to represent these internal decision processes. Each pedestrian agent perceives a private symbolic ASCII view, maintains a Memory-based Knowledge Graph derived solely from individual observations, and makes decisions through persona-conditioned prompts under a common sampling configuration. A compressed decision context with stateless memory preserves trial-and-error experience across turns while excluding reasoning traces, and a validation engine separates behavioral choice from physical feasibility by executing routes only over observed terrain. We evaluated eight personality compositions in eight paired randomized blocks within a simulated public plaza. Usable-exit knowledge was strongly associated with evacuation success: 89.5% of agents possessing such knowledge evacuated, compared with 1.05% of those without it. Personality compositions also differed in their evaluation of remembered threat evidence: the proportion of danger assessments varied by 0.265, while high-urgency, low-directness decisions ranged from 11.41% to 34.33%. After direct threat sightings, responses converged, with 99.6% of assessments classifying the situation as dangerous. Movement was selected in 99.8% of decisions. Overall, evacuation outcomes were strongly associated with information access, while evacuation time was jointly associated with spatial geometry, information, and affect. The framework provides an auditable approach to generating endogenous behavioral heterogeneity through persona-conditioned LLM agents in crowd-evacuation simulations.",
+      "link": "http://arxiv.org/abs/2609.37009v1",
+      "published": "2026-09-29T08:31:57Z",
+      "category": "cs.MA",
+      "worth_reading": 0.75,
+      "novelty": 1.99,
+      "kind": "new_method",
+      "priority": 0.724
+    },
+    {
+      "title": "FlowMAS: Learning Multi-Agent Workflow Topology via Information-guided Generative Flow Network",
+      "summary": "Automated multi-agent systems offer clear advantages over manually designed ones in scalability and adaptability, but existing workflow topology methods still face important limitations. Search-based methods are often computationally expensive, textual-gradient-based methods rely on coarse-grained feedback, and existing generation-based methods are not well suited to discrete workflow topologies with complex dependencies. To address these limitations, we propose FlowMAS, a multi-agent workflow topology method based on Generative Flow Networks (GFlowNets). FlowMAS models workflow generation as reward-guided flow over the topology space and introduces three components: a GFlowNet-based topology generation backbone, a curiosity-driven module for structure-aware exploration, and an information-guided optimization module for evaluating intermediate topologies. Concretely, the curiosity-driven module encourages exploration of structurally novel workflows, while the information-guided module measures both the information contribution and the communication efficiency of different operators to favor more informative and effective collaboration patterns. Experiments on six benchmark datasets with three LLM backbones show that FlowMAS consistently outperforms multiple baselines.",
+      "link": "http://arxiv.org/abs/2609.37151v1",
+      "published": "2026-09-29T09:43:26Z",
+      "category": "cs.MA",
+      "worth_reading": 0.78,
+      "novelty": 1.69,
+      "kind": "new_method",
+      "priority": 0.715
+    },
+    {
+      "title": "Skill-Space Shooting for Autonomous Robot Policy Improvement",
+      "summary": "Robots deployed in the physical world must be able to improve beyond their initial training as they encounter new situations and failures. For this improvement to scale across tasks, it must make effective use of experience without requiring human demonstration of each correction. Recent agentic systems offer a way to reduce this reliance on human effort by using foundation models to autonomously compose learned behaviors to complete tasks. Yet completing tasks this way does not itself teach a task policy to overcome its own failures; that requires turning these behaviors into learnable corrections for the policy. Our insight is that many such corrections are familiar short behaviors, or skills: they recur across tasks and describe actions that foundation models can reason about from a scene. We introduce skill-space shooting, which uses foundation model guidance to explore corrections through these reusable skills and turn successful trials into policy improvement. Real-world experiments show repeated improvement in policies acting autonomously, while skills can also be shared to reduce the teaching needed to improve on new tasks. By making reusable skills a source of corrective supervision, skill-space shooting enables scalable and generalizable policy improvement within and across tasks. Additional results and videos at https://skill-space-shooting.github.io.",
+      "link": "http://arxiv.org/abs/2609.38178v1",
+      "published": "2026-09-29T17:59:55Z",
+      "category": "cs.AI",
+      "worth_reading": 0.73,
+      "novelty": 1.87,
+      "kind": "new_method",
+      "priority": 0.698
+    },
+    {
+      "title": "Correct Answers, Invalid Traces: What Verifiable Grade-School Math Reveals About Chain-of-Thought Traces",
+      "summary": "Chain-of-thought traces are widely read as records of how models reach their answers, informing debugging, agent auditing, and claims about reasoning. Testing this interpretation is difficult because natural-language thinking traces are rarely mechanically verifiable. We revisit it in iGSM, a synthetic grade-school mathematics benchmark designed to study thinking traces and used to support claims of learned reasoning and planning. Crucially, iGSM exposes the exact quantities and dependencies that a correct solution should use, allowing generated traces to be checked programmatically step by step and enabling us to test whether correct answers are reliably accompanied by valid traces. We first evaluate models trained exclusively on valid, minimal traces. Answer correctness and trace validity nearly coincide in distribution but decouple out of distribution: on the hardest instances, 31.6% of correct answers have invalid traces, over half of which pass all syntactic and arithmetic checks but fail semantic dependency checks. We then intervene on trace supervision. Non-minimal training traces induce non-minimal outputs, while re-asking the same problem with a different query reveals computations inherited from the original query, weakening minimality as evidence of selective planning. Shuffling tokens in 10% of training trace sentences preserves near-clean accuracy even out of distribution despite no trace passing verification. Swapped training traces likewise retain high in-distribution accuracy. We discuss the implications of these findings for chain-of-thought monitoring and interpretation in the context of AI safety.",
+      "link": "http://arxiv.org/abs/2609.38107v1",
+      "published": "2026-09-29T17:46:55Z",
+      "category": "cs.AI",
+      "worth_reading": 0.75,
+      "novelty": 1.73,
+      "kind": "benchmark_or_eval",
+      "priority": 0.698
+    },
+    {
+      "title": "LLM-Based Multi-Agent Systems over Wireless Networks: A Joint Agent--Network Design Perspective",
+      "summary": "As large language models (LLMs) evolve from standalone models into collaborative agents embedded in physical systems, their reasoning and execution are increasingly distributed across wireless edge nodes. In this setting, wireless networks are experiencing a paradigm shift from only providing data connectivity to supporting the multi-agent reasoning workflow itself. The task performance of such network-constrained LLM-based multi-agent systems (MASs) is jointly affected by the multi-agent reasoning dependencies as well as the underlying network connectivity and edge resources. This coupling gives rise to various technical challenges, including the metric misalignment and message redundancy, state inconsistency and topology mismatch, as well as resource limitation and trust discontinuity. To address these challenges, this article develops a novel joint agent--network design perspective that coordinates decisions on both sides of the system. Specifically, we present the joint design of agent--interaction scheduling and resource allocation, the message selection-transmission co-design, as well as the joint agent--network topology design and workload--resource allocation. Furthermore, we consider the network-verified provenance that is linked with agent-side information-flow control to constrain how received information affects subsequent operations. An illustrative vehicle-to-everything (V2X) case study shows that jointly adapting agent-side interaction decisions and network operations improves task completion under communication and edge-resource constraints, outperforming the conventional agent-only and wireless-only separate designs.",
+      "link": "http://arxiv.org/abs/2609.37094v1",
+      "published": "2026-09-29T09:19:34Z",
+      "category": "cs.MA",
+      "worth_reading": 0.66,
+      "novelty": 1.96,
+      "kind": "new_method",
+      "priority": 0.658
+    },
+    {
+      "title": "Character Training for Risk-Averse Agents",
+      "summary": "Risk aversion in resources could prevent misaligned AI agents from causing catastrophic harm. Misaligned but risk-averse agents would tend to favor safer strategies like making deals with humans over riskier strategies like rebelling. We train agents to be risk averse through character training, finding that persona traits provide a robust mechanism for instilling risk preferences. To do this, we construct a model constitution describing constant absolute risk aversion (CARA) over an agent's resources and instill it through on-policy distillation. Despite never seeing the benchmark's decision format during training, character-trained models are competitive with baselines trained directly on it, and generalise better than them out of distribution on two of our four models. We also modulate different aspects of the constitution, finding that token budget and model choice are the most influential aspect of character training to instill risk aversion. We conclude from these results that character training is a promising and scalable way to instil broad dispositions, which we can use to our advantage in mitigating risk from misaligned AI agents.",
+      "link": "http://arxiv.org/abs/2609.38093v1",
+      "published": "2026-09-29T17:42:54Z",
+      "category": "cs.AI",
+      "worth_reading": 0.66,
+      "novelty": 1.69,
+      "kind": "new_method",
+      "priority": 0.631
+    },
+    {
+      "title": "LongHarness Bench: Stress-Testing Language Model Harnesses for Long-Context Reasoning",
+      "summary": "Language-model (LM) harnesses enable LMs to operate effectively over long contexts using additional compute. However, existing long-context evaluations are insufficient for distinguishing modern harnesses, reflected by saturated accuracy across harnesses and largely similar evaluation costs. In this paper, we introduce a benchmark for evaluating both the effectiveness and efficiency of long-context harnesses. Our tasks require diverse retrieval strategies, including lexical search and semantic matching, together with strategic and adaptive reasoning over global and local context. Much of the context is semantically relevant but only a small subset is useful at each step, creating both a challenging search problem and different accuracy--cost tradeoffs across processing strategies. For example, one task requires identifying every person satisfying several conditions using evidence scattered across documents; strategically checking the most selective condition first can narrow the search before verifying the remaining conditions. We evaluate multiple families of frontier language models with four state-of-the-art harnesses. Our benchmarks remain challenging even for strong model--harness combinations: the best reaches 68\\% macro-average accuracy across four evaluation suites. More importantly, we find that the same underlying model can exhibit markedly different efficiency under different harnesses. Our results establish efficiency as an important axis for long-context evaluation and provide a testbed for developing harnesses that process context strategically rather than exhaustively.",
+      "link": "http://arxiv.org/abs/2609.38137v1",
+      "published": "2026-09-29T17:55:07Z",
+      "category": "cs.CL",
+      "worth_reading": 0.64,
+      "novelty": 1.73,
+      "kind": "benchmark_or_eval",
+      "priority": 0.621
+    },
+    {
+      "title": "Beyond the Timeline: Augmenting Long-Video Memory with Grounded Entity Biographies",
+      "summary": "Answering questions about long videos often requires connecting events involving the same objects across hours or days. Chronological descriptions and text-derived entities can leave physical identity unresolved: different objects may share a description, while observations of the same object remain disconnected across events. Retrieving relevant events therefore does not necessarily recover the \"biography\" of the particular entity a question concerns. To address this, we introduce Grounded Entity Biographies (GEB), a long-video memory framework that groups visually grounded observations of the same physical instance across clips into retrievable biographies while preserving the context of each moment. During question answering, the biography is retrieved alongside episodic evidence, allowing the model to follow an entity through events using identity links established during memory construction. Evaluations across four benchmarks, including day-long and week-long recordings, demonstrate improvements over prior memory frameworks in both multiple-choice and open-ended question answering. On EgoLifeQA, GEB achieves 72.0% accuracy, 4.4 percentage points above the best published result. Ablations show that grounded identity association and biography reading both contribute to the gains, which additional descriptions alone do not fully recover.",
+      "link": "http://arxiv.org/abs/2609.38155v1",
+      "published": "2026-09-29T17:59:01Z",
+      "category": "cs.AI",
+      "worth_reading": 0.6,
+      "novelty": 1.73,
+      "kind": "new_method",
+      "priority": 0.593
+    },
+    {
+      "title": "Pretraining Latent Information Feedback Transformers with Teacher Supervision",
+      "summary": "Transformer language models (LMs) are feed-forward: deep-layer representations are never fed back to shallower layers, and the only pathway for information to flow downward across generation steps is the decoded token. This narrow channel forces models to recompute intermediate results and to discard alternative continuations. In this work, we remove this bottleneck during pretraining, introducing the LIFT (Latent Information Feedback Transformer) architecture and training method which enable LMs to propagate state across generation. We achieve this by turning recurrent-state learning into a teacher-forced prediction problem: each input token is paired with an information-dense state, derived from the next-token distribution of an off-the-shelf pretrained LM. The model, extended with a small number of additional parameters, is then trained to predict both the next token and the next state. As the input states are precomputed, pretraining remains fully parallel across positions. At inference, the model's own predicted states are fed back, with a minor computational overhead that decreases with model size. Experiments with pretrained models ranging from 135M to 1B parameters show that LIFT consistently outperforms standard Transformers and baselines on language modeling, downstream reasoning tasks, and procedural tasks under token-matched budget, while being on par with or ahead of compute-matched Transformers. Moreover, a controlled study on a state-tracking task shows that a tiny LIFT outperforms same-size Transformers trained on 8x more data, even when trained with the states of a Transformer that fails the task. Overall, we show that LMs can learn to exploit deep-to-shallow feedback during pretraining via scalable teacher supervision.",
+      "link": "http://arxiv.org/abs/2609.38149v1",
+      "published": "2026-09-29T17:57:40Z",
+      "category": "cs.CL",
+      "worth_reading": 0.54,
+      "novelty": 1.96,
+      "kind": "new_method",
+      "priority": 0.574
+    },
+    {
+      "title": "From Routing Signals to Selective Review: Visual regrounding in MoE VLMs",
+      "summary": "Vision-language models (VLMs) may accept false visual premises, answering questions about a target object's color, count, location, or state even when it is absent. We call this reliability-critical behavior a target-absence grounding failure. Existing visual-grounding detectors primarily rely on generated responses, hidden states, or uncertainty measures. We present the first framework to leverage internal routing decisions in Mixture-of-Experts (MoE) VLMs to detect target absence before generation and guide selective correction. We extract target-token routing probabilities from Qwen3-VL-30B-A3B-Instruct and Gemma-4-26B-A4B-it, train a separate L2-regularized linear detector for each model, and use its predictions to selectively invoke a target-aware review prompt. Using routing alone, the Qwen and Gemma detectors achieve ROC-AUCs of 0.9988 and 0.9956 on GQA-Inpaint and retain 0.8095 and 0.7781 on the external OBER dataset, respectively. The resulting routing-gated policy improves end-to-end accuracy on GQA-Inpaint and OBER by +22.25% and +12.17% for Qwen, and by +13.42% and +1.39% for Gemma, without modifying model weights. Further analysis shows that the signal is localized to the target-object token, emerges in early MoE layers, and is distributed across partially substitutable experts. Although cross-dataset threshold shifts require recalibration, false-positive review causes limited harm overall, suggesting that intervention risk can be controlled through joint selection of the detector threshold and review prompt. Overall, we show that routing probabilities alone preserve actionable information about visual perception, allowing computation already produced by an MoE VLM to support low-cost detection and selective visual regrounding.",
+      "link": "http://arxiv.org/abs/2609.38111v1",
+      "published": "2026-09-29T17:49:07Z",
+      "category": "cs.CL",
+      "worth_reading": 0.52,
+      "novelty": 1.94,
+      "kind": "new_method",
+      "priority": 0.558
+    },
+    {
+      "title": "Cooperative Multi-Agent Vision-Language-Action Models via Reinforced Fine Tuning",
+      "summary": "We study reinforcement learning (RL) methods for cooperative multi-agent Vision-Language-Action (VLA) models. This problem is challenging because VLAs are pretrained on large-scale single-agent data and therefore lack the fine-grained coordination skills required for inter-robot collaboration. Supervised fine-tuning (SFT) on multi-robot demonstrations partially bridges this gap, but its performance is bounded by the demonstration data and cannot improve from its own experience. We present a three-stage reinforced fine-tuning (RFT) pipeline for multi-agent VLAs. First, initialization-aware data collection sweeps over initial configurations and invokes human demonstrations only when the pretrained VLA repeatedly fails, yielding robustness to initialization shift with reduced human cost. Second, offline credit-filtered tuning assigns credit to individual agents and fine-tunes on per-agent trajectories with positive advantage rather than on entire joint rollouts. Third, we find existing online RL for VLAs are less effective for hard multi-agent tasks, which we attribute to noisy co-exploration and unstable updates. We instead use online latent-space fine tuning, which freeze the VLA and perform RL in its latent noise space. We evaluate our multi-agent VLA with both $\u03c0_0$ and $\u03c0_{0.5}$ backbones across 11 tasks in RoboTwin, RoboFactory and real-world manipulation with two Franka robots. Our multi-agent VLA improves the average success rate by $+23.1\\%$, $+16.4\\%$, and $+44\\%$ on RoboTwin, RoboFactory, and real-world tasks, respectively. Code available at https://anonymous.4open.science/r/mavla_rft-2BC0/.",
+      "link": "http://arxiv.org/abs/2609.36588v1",
+      "published": "2026-09-29T03:05:50Z",
+      "category": "cs.MA",
+      "worth_reading": 0.56,
+      "novelty": 1.66,
+      "kind": "new_method",
+      "priority": 0.558
+    },
+    {
+      "title": "Human-AI Collaboration: From Paradoxes to Patterns",
+      "summary": "Evidence shows that humans and AI systems perform better together, by collaborating, than alone. This paper examines two key design dimensions of human-AI collaboration (autonomy and initiative) and explores the collaboration patterns that they generate. Documenting these patterns starts with identifying the underlying problems and solutions, followed by examining the internal tensions within the problems. The paper uses a paradox perspective to analyze those tensions. It describes a process for surfacing the tensions and mapping the underlying paradoxes. It also illustrates how the pattern descriptions can be derived from mapping these paradoxes. Finally, the paper documents four human-AI collaboration patterns: Instruction, Delegation, Assistance, and Co-creation.",
+      "link": "http://arxiv.org/abs/2609.36481v1",
+      "published": "2026-09-29T01:38:17Z",
+      "category": "cs.MA",
+      "worth_reading": 0.59,
+      "novelty": 1.14,
+      "kind": "survey_or_position",
+      "priority": 0.527
+    },
+    {
+      "title": "A Spectral Theory of Distortion in LLM Graph Reconstruction: Sharp Bounds and Empirical Characterization",
+      "summary": "Evaluations of graph reconstruction by language models typically report a single aggregate distance between the original and the reconstructed graph. We prove that for the Wasserstein distance between Laplacian spectra such a summary is bracketed by two edge counts, the net change in edge number from below and the symmetric difference from above, each scaled by $2/n$ where $n$ is the number of vertices. The bracket is sharp: its two ends coincide exactly when the reconstruction only adds edges or only deletes them, and on that class the distance is a rescaled edge count that says nothing about which edges changed. When the ends differ, the residual between the distance and the lower end is positive only if the reconstruction both invented and lost edges, which turns it into a certificate of mixed editing computable from the reported summaries alone. We characterize these regimes in 135 reconstructions produced by three open-weight models over 45 synthetic graphs. Seventy-seven outputs are one-sided and 29 mixed outputs have $X > 0$, including cases where edge count is exactly preserved while nineteen edges were simultaneously invented and lost. The three models differ in editing policy, ranging from copying the input to attempting completion at the cost of large hallucination volume, a distinction that aggregate distortion does not reveal.",
+      "link": "http://arxiv.org/abs/2609.38161v1",
+      "published": "2026-09-29T17:59:16Z",
+      "category": "cs.LG",
+      "worth_reading": 0.44,
+      "novelty": 1.96,
+      "kind": "benchmark_or_eval",
+      "priority": 0.504
+    },
+    {
+      "title": "IMPACT: Modeling Socially Interdependent Movement in a Generative Multi-Agent Simulation of a Pompeian Household",
+      "summary": "Simulations of archaeological sites can make interpretations of past cultural practices observable and examinable. Generative multi-agent simulations offer a bottom-up approach to modeling how people collectively moved through and used historical spaces. However, current agents designed to simulate everyday life often plan and act independently, limiting their ability to capture how movement depends on others' actions. We introduce IMPACT (Interdependent Movement Planning through Inter-Agent Constraints and Triggers), an architecture that uses culturally specific roles and obligations to define dependencies among agents' activities and guide coordination. IMPACT connects socially gated milestone planning, wait-or-prompt resolution, structured directive issuance, and directive integration. These mechanisms determine whether and when activities can begin or change as social conditions evolve, producing socially constrained and prompted movement as their primary observable outcome. We instantiate IMPACT in a five-hour simulation of a Pompeian dinner involving ten agents across interdependent roles. Analysis of five simulation runs shows how social roles, responsibilities, and status relations shape household activities and spatial practices, as reflected in patterns of co-location, asymmetric waiting, co-movement, and social directives. In a controlled ablation evaluation, thirty-seven participants rated the complete architecture's behavior as more socially coherent and believable than that of two reduced architectures. Interviews with six archaeology experts highlighted historically plausible movement patterns and the simulation's potential to support archaeological interpretation, while identifying areas requiring stronger historical grounding for future work.",
+      "link": "http://arxiv.org/abs/2609.38113v1",
+      "published": "2026-09-29T17:49:21Z",
+      "category": "cs.MA",
+      "worth_reading": 0.43,
+      "novelty": 1.87,
+      "kind": "new_method",
+      "priority": 0.488
+    }
+  ]
+}
