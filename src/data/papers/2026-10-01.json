@@ -1,0 +1,233 @@
+{
+  "date": "2026-10-01",
+  "generated_at": "2026-10-01T14:01:52.956881+00:00",
+  "interest": "LLM agents, tool use, and structured/typed model outputs",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "papers": [
+    {
+      "title": "PhantomEnvironments: Training LLM Agents in Fictional Worlds",
+      "summary": "Training LLM agents with reinforcement learning (RL) is bottlenecked by environments, which must provide verifiable rewards, support long-horizon interaction, and scale cheaply. Existing approaches rely on costly human-curated data or on LLM-generated environments that risk hallucinations and benchmark contamination. We show that LLMs can instead be trained into capable search agents using synthetic environments generated entirely by rules, whose generation requires no LLM and has zero marginal cost. We build PhantomEnvironments, multi-turn RL environments from fictional worlds, where agents must search a corpus of templated articles to answer multi-hop questions. Despite sharing no facts with the real world, these strikingly simple environments yield agents that transfer to real-world multi-hop search benchmarks, often outperforming real-world training data on newer benchmarks. Trained agents generalize to unseen fictional universes, and Qwen models learn to scale their search budget roughly linearly with question difficulty, suggesting emergent search scaling from environment interaction alone. Ablating environment complexity reveals that hop count drives transfer more than constraints or comparisons: even the simplest rule-generated environments are a surprisingly effective, free resource for training generalizable LLM agents.",
+      "link": "http://arxiv.org/abs/2609.40221v1",
+      "published": "2026-09-30T17:26:57Z",
+      "category": "cs.CL",
+      "worth_reading": 0.83,
+      "novelty": 2.01,
+      "kind": "new_method",
+      "priority": 0.782
+    },
+    {
+      "title": "Cogentic: Multi-Agent Orchestration for Automated Proof Discovery",
+      "summary": "We present Cogentic, a multi-agent harness for automated proof discovery on open research problems. While frontier language models can generate strong mathematical ideas in a single shot, single-shot generation is often insufficient for open problems that require exploring multiple competing conjectures, overcoming subtle technical obstructions, and retaining intermediate progress over a long horizon. Cogentic addresses these challenges through an iterative prove--verify loop in which an orchestrator allocates a population of independent provers across distinct proof directions, subjects their output to adversarial verification by several specialized components, and promotes confirmed intermediate results into a persistent verified ledger that later rounds build on. The harness is designed to be able to solve research-level math and theoretical computer science problems. Using Gemini as the base model, Cogentic produced novel results on five open problems across online learning, auction theory, and mechanism design. Each result was independently verified by domain experts and is developed in full in companion papers. We list these results, and new ones as they are verified, at https://sites.google.com/view/cogentic .",
+      "link": "http://arxiv.org/abs/2609.40324v1",
+      "published": "2026-09-30T17:55:22Z",
+      "category": "cs.AI",
+      "worth_reading": 0.84,
+      "novelty": 1.82,
+      "kind": "new_method",
+      "priority": 0.77
+    },
+    {
+      "title": "Mid-Harness: Scaling Actions Between Model and Harness for Terminal Agents",
+      "summary": "Terminal agents act through stochastic model generations, yet the ability to generate a useful action does not ensure its reliable execution. A poor command (e.g., wrong package install) can change the environment in ways that hinder subsequent progress, even when the model could generate a better alternative. We investigate whether allocating test-time compute at the model-harness boundary can improve action reliability and trajectory success, and what makes this allocation effective. To study these questions, we introduce Mid-Harness, which samples and verifies candidate actions before forwarding one for execution, while keeping the generator and harness unchanged. With a TMAX-9B generator, more action sampling yields little benefit under weak verification, whereas a capable verifier can exploit useful alternatives from the same generator. On TerminalBench-Lite, a GPT-5.6 Sol verifier raises Pass@1 from 50.00% for the base agent to 68.03% with 8 sampled actions. When the same TMAX-9B model serves as the verifier, pairwise verification performs best among the evaluated verification mechanisms. Distilling responses from the stronger verifier into TMAX-9B further improves Pass@1, while leaving the action generator unchanged. With TMAX-9B on TerminalBench-Lite, combining action and trajectory scaling reaches higher success at lower estimated token cost than generating more trajectories alone. Mid-Harness also improves performance across additional models, benchmarks, and harnesses. These findings identify action scaling as a promising target for test-time compute scaling in terminal agents.",
+      "link": "http://arxiv.org/abs/2609.39982v1",
+      "published": "2026-09-30T15:40:39Z",
+      "category": "cs.MA",
+      "worth_reading": 0.86,
+      "novelty": 1.64,
+      "kind": "new_method",
+      "priority": 0.766
+    },
+    {
+      "title": "PivotOPD: Learning to Recover from Pivotal Mistakes in Multi-Turn Agents",
+      "summary": "On-policy distillation (OPD) is a promising approach for training language agents, providing dense teacher supervision on student-generated trajectories. However, in multi-turn interaction, an incorrect action changes the states the student encounters later, so errors compound across turns. In preliminary experiments across three Qwen3 models (8B to 235B), we find that more than half of the failed rollouts contain a pivotal mistake, an action that moves the agent farther from completing the task, and this mistake typically occurs early. These pivotal mistakes often remain recoverable: guiding the model for only a few turns after the pivotal turn can restore task success. We therefore propose PivotOPD, an on-policy distillation framework that jointly trains the student to prevent pivotal mistakes and to recover from the states they create. At each pivotal mistake, a teacher model provides a gold action and then names a recovery action at each of the next few turns. Preventive distillation uses the gold action with reverse KL to steer the student away from the pivotal mistake, while recovery distillation uses the recovery actions with forward KL to transfer recovery behaviors that the student rarely samples. Against 13 baselines on ALFWorld, WebShop, and Search-based QA, PivotOPD achieves the strongest average performance for both Qwen3-1.7B and Qwen3-8B students, improving over the strongest baseline on ALFWorld by +5.5% with the 1.7B student. The gains also transfer to another model family on the software engineering domain, where PivotOPD raises the resolve rate of a Nemotron-3.5 student on SWE-Bench Verified by +3.2%. Project page: https://research.nvidia.com/labs/lpr/pivotopd/",
+      "link": "http://arxiv.org/abs/2609.40285v1",
+      "published": "2026-09-30T17:48:11Z",
+      "category": "cs.AI",
+      "worth_reading": 0.85,
+      "novelty": 1.69,
+      "kind": "new_method",
+      "priority": 0.764
+    },
+    {
+      "title": "OverForge: Reasoning Through Strategies and Tactics Helps Cooperative Lifelong Adaptation",
+      "summary": "Cooperative language-model agents must coordinate over long horizons and adapt to changing environments and to partners with unfamiliar conventions, yet existing agents map observations to actions without separating persistent coordination strategies from their tactical execution. We introduce OverForge, a training-free hierarchical architecture that separates strategic reasoning over roles and divisions of labour from tactical reasoning over actions within each agent's private, partner-conditioned world model. A metacognitive Prefrontal Cortex Module couples the two levels by forming strategy-action branches, imagining their consequences with a forward model, and committing when confident. In OvercookedV2, OverForge delivers 7 soups in a connected kitchen versus 3 for each flat LLM baseline, retains agreed roles, and adopts roles proposed by unfamiliar partners. Ablations and a fixed-strategy probe show that persistent strategies guide tactical adaptation while each reasoning level contributes to coordination. Memory restarts show that cross-episode partner knowledge supports task performance and partner prediction, linking the hierarchy to continual adaptation.",
+      "link": "http://arxiv.org/abs/2609.39727v1",
+      "published": "2026-09-30T13:37:03Z",
+      "category": "cs.MA",
+      "worth_reading": 0.81,
+      "novelty": 1.94,
+      "kind": "new_method",
+      "priority": 0.761
+    },
+    {
+      "title": "RSIGame: Autonomous Agentic Game Development with Recursive Self-improvement",
+      "summary": "Recent advances in large language models have made automatic game generation increasingly feasible, yet reliably improving generated games beyond a playable version remains challenging. Naive iterative refinement can easily overfit a small set of test cases, producing fragile games with unresolved bugs, missing behaviors, and poor generalization to broader player interactions. We introduce RSIGame, an autonomous agentic game development framework with recursive self-improvement. RSIGame organizes development into complementary local and global loops. Concretely, a local explore-diagnose-improve loop broadly explores the executable game, diagnoses and prioritizes discovered issues, and performs evidence-grounded revision, where an evolving checklist continually accumulates new testing and improvement guidance. A global loop tracks overall quality, preserves the best checkpoint, and detects saturation or regression over long-horizon development. Beyond test-time improvement, RSIGame further internalizes successful development experience into the generator through training. Across 140 GameCraft-Bench tasks, two game engines, and five generators, RSIGame consistently improves game quality under matched development budgets. Notably, experience internalization enables Qwen3.8-27B to reach 61.38 on Godot and 58.53 on Phaser, exceeding GPT-5.5 one-shot scores while reducing Qwen's generation tokens by 11 times.",
+      "link": "http://arxiv.org/abs/2609.39045v1",
+      "published": "2026-09-30T05:54:34Z",
+      "category": "cs.MA",
+      "worth_reading": 0.83,
+      "novelty": 1.68,
+      "kind": "new_method",
+      "priority": 0.749
+    },
+    {
+      "title": "Turbo Harness: Instance-Adaptive Harness Optimization",
+      "summary": "Automating the search for effective harnesses is an important step toward enabling agents to recursively self-improve. Existing harness optimizations typically produce a single global harness that is applied uniformly across task instances. However, a harness that works well on average may not be optimal for every instance. We introduce Turbo Harness, a framework that can adapt a globally optimized harness to each instance by reusing information generated during the original optimization process. Specifically, Turbo Harness recycles artifacts produced during a completed global harness optimization run, and summarizes them into a structured playbook. We train a harness editor to leverage this prior optimization experience to generate instance-specific patches to the global harness. At inference time, the editor uses the instance and the playbook to construct a tailored harness in which the execution model operates. Through numerical experiments, we show that Turbo Harness consistently outperforms existing harness optimization baselines across seven benchmarks spanning interactive agent tasks, software engineering, and long-horizon terminal tasks.",
+      "link": "http://arxiv.org/abs/2609.40330v1",
+      "published": "2026-09-30T17:56:09Z",
+      "category": "cs.AI",
+      "worth_reading": 0.83,
+      "novelty": 1.67,
+      "kind": "new_method",
+      "priority": 0.748
+    },
+    {
+      "title": "AIMS: An Agentic AI Framework for Sim-to-Real Multi-Modal ISAC",
+      "summary": "Multi-modal integrated sensing and communication (ISAC) enables environmental perception and reliable connectivity for intelligent wireless networks. Data-driven multi-modal ISAC models depend heavily on annotated real-world data to learn relationships across sensing and wireless observations, thereby constraining scalable deployment. Although synthetic data generation reduces the burden, adapting existing simulation pipelines to a target deployment requires consistent scene, sensing, wireless, and learning configurations, while mismatches among these coupled components impair sim-to-real transferability. To address the challenge, we propose an agentic artificial intelligence (AI) framework for sim-to-real multi-modal ISAC, named AIMS. Given a natural-language deployment request specifying the target task, deployment conditions, and real-data budget, AIMS derives a deployment-specific sim-to-real configuration and coordinates its execution to produce a deployment-specific task model. A two-agent architecture coordinates scene construction with task learning. A scene construction agent generates geographically grounded, synchronized sensing and wireless records from shared physical states, while a scene understanding agent configures task-relevant modalities and mixture-of-experts (MoE) learning for zero-shot inference or few-shot adaptation. Structured domain knowledge guides dependency-aware planning, while validation evidence supports feedback-driven revision of affected decisions. Experiments on the real-world DeepSense~6G dataset demonstrate improved vehicle detection and beam prediction over the considered simulation and fusion baselines. A separate orchestration benchmark evaluates task interpretation, dependency reasoning, and feedback-driven replanning across diverse deployment requests, showing improved plan correctness with structured domain knowledge and validation feedback.",
+      "link": "http://arxiv.org/abs/2609.39964v1",
+      "published": "2026-09-30T15:31:29Z",
+      "category": "cs.MA",
+      "worth_reading": 0.79,
+      "novelty": 1.85,
+      "kind": "new_method",
+      "priority": 0.738
+    },
+    {
+      "title": "Safety of Latent Communication in Multi-Agent Systems",
+      "summary": "Latent communication enables multi-agent systems to exchange information directly in internal representation space, reducing the token, computation, and latency overhead of text-based communication. To this end, lightweight trainable links are introduced to map the sender's representations into the receiver's input space. In this work, we show that even benign link training can increase harmful compliance relative to text-based communication while the underlying safety-aligned agents remain unchanged. An attacker can amplify this effect by optimizing the links on harmful query--response pairs or poisoning otherwise benign training data. We further develop a reinforcement-learning attack that rewards harmful compliance alongside benign task performance without requiring harmful target responses. Across three communication topologies and four safety benchmarks, this attack raises the mean harmful-compliance score from 27.9 with benignly trained links to 76.9. Compared with direct supervised optimization, it also achieves higher average accuracy on two benign utility benchmarks. Adapting the rewards toward safer behavior also enables repair of compromised links, substantially reducing harmful compliance across all evaluated attacks without updating the agents. Overall, our results show that safety alignment requires considering the multi-agent system as a whole.",
+      "link": "http://arxiv.org/abs/2609.39788v1",
+      "published": "2026-09-30T14:09:57Z",
+      "category": "cs.MA",
+      "worth_reading": 0.78,
+      "novelty": 1.89,
+      "kind": "new_method",
+      "priority": 0.735
+    },
+    {
+      "title": "MatLoom: Layered Text-to-Material Generation in a Compact Program Space",
+      "summary": "Material generation should produce not only an appearance, but also the rules that construct it. We introduce MatLoom, a compact, layer-oriented language for text-to-material generation with pretrained language models. Each program composes alpha-masked layers whose shared spatial expressions define coverage and physically based rendering (PBR) channels, making dependencies between patterns, color, and relief explicit. A standalone interpreter evaluates the program into material maps, while the source retains named fields and layer parameters for subsequent authoring. Without task-specific fine-tuning, our pipeline uses parser-guided repair and preview-based critique to revise material designs, then searches noise seeds while keeping each candidate's remaining source fixed. On a curated benchmark of 141 prompts evaluated with six backbones, our best-performing configuration achieves higher mean scores than three diffusion baselines on all four flat-layout prompt-alignment metrics. Its initial programs already exceed all three baselines on mean BLIPScore, before critique or seed search. Retained programs have a median length of 21 lines when pooled across backbones. In a blind four-way comparison involving 30 participants and 20 prompts, our renders receive 59.2% of choices, compared with 19.3% for the most-preferred baseline. Compact executable programs thus offer a way to generate prompt-aligned materials while retaining their construction as part of the asset.",
+      "link": "http://arxiv.org/abs/2609.40322v1",
+      "published": "2026-09-30T17:55:06Z",
+      "category": "cs.AI",
+      "worth_reading": 0.77,
+      "novelty": 1.95,
+      "kind": "new_method",
+      "priority": 0.734
+    },
+    {
+      "title": "ComputerSD: Online Self-Distillation from Real-Time Feedback for Computer-Use Agents",
+      "summary": "Online training enables computer-use agents (CUAs) to improve through interaction with executable environments. However, existing methods primarily rely on sparse outcome rewards, which provide no supervision for intermediate actions. On-policy self-distillation (OPSD) offers token-level learning signals through privileged rescoring, but directly applying it to CUA online training presents two challenges: fixed guidance may become misaligned with the student's current state, and guidance-induced probability shifts may conflict with step-level correctness. We introduce ComputerSD, an online self-distillation method for CUAs that converts real-time feedback from executed GUI transitions into guidance for policy learning. A fine-tuned GUI analyzer produces guidance and a step-level value score after each action; the guidance provides privileged context, while the score regulates the resulting OPSD signals. ComputerSD jointly optimizes token-level OPSD and trajectory-level GRPO in a fully asynchronous training framework. On OSWorld-Verified, ComputerSD outperforms outcome-only GRPO by 1.9 and 4.1 percentage points on the general-purpose Qwen3-VL-8B-Thinking and specialized EvoCUA-8B backbones, respectively. Evaluation in out-of-distribution settings further supports the generalizability of ComputerSD. These results demonstrate the effectiveness of learning from real-time feedback through online self-distillation for CUAs.",
+      "link": "http://arxiv.org/abs/2609.40253v1",
+      "published": "2026-09-30T17:40:09Z",
+      "category": "cs.AI",
+      "worth_reading": 0.83,
+      "novelty": 1.52,
+      "kind": "new_method",
+      "priority": 0.733
+    },
+    {
+      "title": "EvoDuet: Bilevel Co-Evolution of Web Searching and Task Solving for Scientific Discovery",
+      "summary": "Evolutionary search with large language models (LLMs) can stall when progress requires external knowledge the model lacks. Supplying relevant documents helps, but simply adding web search tool can keep returning the same pages as solutions change. We introduce EvoDuet, a bi-level optimization method that co-evolves solutions and search queries with fixed model parameters. At each iteration, a retrieval gate lets the LLM assess its knowledge gap and choose to retrieve new documents, reuse stored ones, or proceed without them. An inner loop refines queries and ranks documents by the solution scores they are predicted to yield; an outer loop generates candidates in parallel from these documents and records the evaluated outcomes for later searches. Across 21 optimization tasks with one candidate per iteration, EvoDuet raises OpenEvolve's normalized discovery gain from 74.1% to 78.0% with GPT-5.6-Luna and from 61.3% to 82.3% with Gemini-3.8-Flash, whereas Qwen3.5-9B does not benefit. Our best runs surpass the previously reported best scores on eight tasks, including Swap Reduction on Q20 and Rosetta, and match them on three more. EvoDuet also improves with other scaffolds (e.g., Top-K, EvoX) on Sums/Diffs and Denoising, demonstrating its applicability across evolutionary search scaffolds.",
+      "link": "http://arxiv.org/abs/2609.40340v1",
+      "published": "2026-09-30T17:58:28Z",
+      "category": "cs.CL",
+      "worth_reading": 0.81,
+      "novelty": 1.63,
+      "kind": "new_method",
+      "priority": 0.73
+    },
+    {
+      "title": "Risk-Aware Adaptive Evaluation: Finding High-Impact Failures Under Limited Budgets",
+      "summary": "Evaluating interactive agents is expensive. Agent behavior is stochastic, so reliability must be measured over repeated trials, but failures are rare and differ widely in how much they matter. Standard benchmarks spend this budget uniformly: a read-only lookup is sampled as often as an irreversible payment action. We instead formulate evaluation as a sequential allocation problem. Given a fixed trial budget and a set of scenarios whose failure behavior is unknown, which scenarios should be run, and run again? We propose a risk-aware contextual Thompson Sampling policy that combines a pre-execution scenario context vector and a fixed impact score with the failure outcomes observed during evaluation, and we test it by offline replay over 70 $\u03c4$-bench airline scenarios and 824 recorded trials. Our main result is at the smallest budget: with only 50 trials ($6\\%$ of the corpus), the policy recovers $86\\%$ of the impact-weighted failures an oracle could find, compared to $25\\%$ for uniform allocation. It discovers $3.5\\times$ more impact-weighted failures (215.4 vs. 62.2) with the same number of trials, delivers $5\\times$ the discovery per dollar, and cuts the budget wasted on scenarios that never fail from $34\\%$ to $2.8\\%$. The rest of our analysis demonstrates and qualifies this result: a budget sweep shows the advantage shrinks as the budget approaches the corpus size, and paired significance tests show that scenario context helps mainly at small budgets while posterior-based exploration helps at moderate ones. Risk-aware adaptive allocation therefore helps most exactly where evaluation budget is scarcest.",
+      "link": "http://arxiv.org/abs/2609.38914v1",
+      "published": "2026-09-30T04:00:14Z",
+      "category": "cs.MA",
+      "worth_reading": 0.78,
+      "novelty": 1.81,
+      "kind": "new_method",
+      "priority": 0.727
+    },
+    {
+      "title": "RefCon: Iterative Refinement and Contrastive Memory Extraction for Context-Evolving Agent",
+      "summary": "Long-horizon agent interactions generate useful but noisy experience, and retraining models to absorb it is expensive. Context-evolving agents therefore need memory extraction methods that improve with more test-time compute without relying on gold labels. We propose RefCon, which combines sequential self-refinement with parallel self-contrast to extract higher-quality memories without gold labels. Evaluated on AppWorld and BFCL-V3 across multiple context-evolving agent frameworks, RefCon delivers strong and consistent gains, including relative improvements of 21.6% on ACE and 16.6% on ReMe over no-scaling baselines, while a diversity-focused variant (DivCon) achieves a 35.5% gain on ReasoningBank. RefCon consistently outperforms existing baselines without ground-truth labels, and generalizes across model scales and to software engineering tasks, where it surpasses even ground-truth baselines. We further analyze the accuracy-token trade-off and scaling behavior, showing RefCon maintains favorable efficiency and continues to improve as more trajectories are used, unlike diversity-only scaling which saturates earlier.",
+      "link": "http://arxiv.org/abs/2609.39143v1",
+      "published": "2026-09-30T07:10:38Z",
+      "category": "cs.MA",
+      "worth_reading": 0.81,
+      "novelty": 1.59,
+      "kind": "new_method",
+      "priority": 0.726
+    },
+    {
+      "title": "DynaHarness: A Dynamic Physical Harness for Self-Evolving Robot Agents",
+      "summary": "Pretrained robot policies provide useful action priors, but long-horizon manipulation still requires coordination between semantic reasoning and physical execution. Semantic reasoning operates at a coarser timescale than physical interaction, while episode-level failures provide limited guidance on which system component should be revised. We propose DynaHarness, a dynamic physical harness that couples semantic reasoning with physical governance through a shared execution contract and turns failure evidence into validated capability revisions. To be more specific, the slow brain proposes capabilities and symbolic arguments, while the fast brain grounds and monitors commands, refuses unresolved actions, substitutes capabilities, and requests replans when needed. The physical execution contract bounds each accepted command and records execution evidence across analytic skills, recovery skills, and the frozen VLA. Failure attribution localizes faults in these records and directs targeted revisions of reusable capabilities or execution mechanisms. Paired regression checks govern admission or rejection, closing the self-evolution loop. On LIBERO-Pro, DynaHarness achieves 75.2% on 800 newly sampled initial states, compared with 17.5% for the frozen policy. With the same capability library, full dynamic execution reaches 74.0% versus 63.9% under nominal one-step replanning. This demonstrates the value of DynaHarness as a dynamic physical harness that governs how existing capabilities are grounded, monitored, and coordinated during execution. Our project page is at https://denghaoyuan123.github.io/Dynaharness_page/.",
+      "link": "http://arxiv.org/abs/2609.40306v1",
+      "published": "2026-09-30T17:52:09Z",
+      "category": "cs.AI",
+      "worth_reading": 0.75,
+      "novelty": 1.88,
+      "kind": "new_method",
+      "priority": 0.713
+    },
+    {
+      "title": "cua-speedrun: Standardized Benchmarking of the Speed of Computer-Use Agents",
+      "summary": "Computer use agents (CUAs), which use graphical user interfaces (GUIs) to complete tasks on a computer, have recently surpassed human performance on many standard benchmarks, including difficult long-horizon tasks. Their capabilities are undoubtedly impressive, however, a key barrier to the widespread adoption and deployment of CUAs remains their speed and cost. Progress towards faster yet capable CUAs requires reliable evaluation of their speed, but many CUA benchmarks currently face a reproducibility crisis. Benchmarks are based on complex infrastructure with varying machine and container configurations that confound the evaluation of the execution speed of CUAs. Towards addressing this gap, we propose cua-speedrun, which introduces standardized infrastructure and task sets, with a focus on evaluating the speed and efficiency of CUAs. cua-speedrun uses a uniform virtual machine setup and execution pipeline, along with a common agent interface that enables single-agent implementations to operate seamlessly across different benchmarks. Across four different CUA benchmarks, we evaluate how reasoning effort, agent harnesses, and environment latency affect performance, speed, and cost. We find no single model family is optimal for all three; none of the open-weight models are on the frontier, and also, unintuitively, for some models increasing the reasoning effort can speed up task completion, while faster environment input-output can slow down overall task completion time. We also demonstrate that we can effectively reduce the evaluation task set of most CUA benchmarks without degrading overall statistical power, allowing for more efficient benchmarking and comparison. We believe cua-speedrun will enable structured progress towards fast, efficient CUAs, unlocking new real-world use cases and applications. All code, infrastructure, and analysis are available at https://cuaspeedrun.com.",
+      "link": "http://arxiv.org/abs/2609.40284v1",
+      "published": "2026-09-30T17:48:06Z",
+      "category": "cs.AI",
+      "worth_reading": 0.8,
+      "novelty": 1.48,
+      "kind": "benchmark_or_eval",
+      "priority": 0.708
+    },
+    {
+      "title": "Consensus and Factual Dynamics in Large Populations of Interacting Language Models",
+      "summary": "Large Language Model (LLM) agents are increasingly deployed as populations of interacting entities, in which consensus --agreement on a shared answer-- emerges as a collective, unengineered behaviour. Prior work on LLM consensus shows that agents can cross-verify their answers and converge towards more factual responses, treating agreement as a proxy for correctness. However, these studies usually fix a single interaction structure, leaving open how consensus depends on how agents interact. We address this gap by introducing RHEON, a physics-inspired framework that recasts a population drawn from a single frozen model as an evolving $O(n)$ spin system on a ladder of interaction geometries of increasing effective dimension --from a 1D ring to a full-coupling mean-field graph-- with the sampling temperature $T$ as the tunable source of thermal disorder, evolved through a Glauber-like asynchronous dynamics. Sweeping RHEON across $432$ configurations of prompt, population size, communication topology, and sampling temperature yields Eraclitus-4.7M, a tagged evolutionary corpus of $4.7$ million responses. We find that agents reach their strongest consensus gain within the first few update sweeps and that increasing the number of neighbours per agent accelerates convergence on average. We further show that whether a configuration settles on factually correct or hallucinated consensus is not predictable from its initial state alone, and that the hallucination-minimising temperature depends on how the agents are coupled, so the common near-greedy default is not automatically the safest. Finally, semantic agreement correlates positively with factual convergence, and interaction strengthens the association, yet never enough for unanimity to certify correctness.",
+      "link": "http://arxiv.org/abs/2609.39211v1",
+      "published": "2026-09-30T07:55:01Z",
+      "category": "cs.MA",
+      "worth_reading": 0.71,
+      "novelty": 1.97,
+      "kind": "new_method",
+      "priority": 0.694
+    },
+    {
+      "title": "How Much of a Harness Does a Strong Agent Need for Autonomous ML Engineering?",
+      "summary": "Recent autonomous machine learning engineering (MLE) agents have made significant progress on public leaderboards. Often motivated by progress stagnation over long-horizon cycles and limited Large Language Model (LLM) primitives, modern MLE agents are deployed on top of increasingly elaborate machinery: multi-agent orchestrators, dedicated retrieval subagents, and more. While such harnesses expand, the use of more primitive but improved coding agents - where LLMs have direct access to the execution environment through read, write, and bash primitives - has received little attention in the field. In this paper we find that, under an equal time budget and the same frontier LLM backbone, open-source state-of-the-art harnesses provide no advantages over a single session of a minimal-harness coding agent baseline, pointing to the backbone as the primary driver for performance. Via a series of large-scale systematic ablation studies, we argue that the machinery layers become redundant in the coding agent setting. We conclude that the effort spent elaborating hand-crafted harnesses around strong models yields poor returns for current MLE benchmarks.",
+      "link": "http://arxiv.org/abs/2609.40303v1",
+      "published": "2026-09-30T17:51:30Z",
+      "category": "cs.AI",
+      "worth_reading": 0.79,
+      "novelty": 1.4,
+      "kind": "survey_or_position",
+      "priority": 0.693
+    },
+    {
+      "title": "SQD-Agent: LLM-driven agentic framework for Quantum Chemistry workflows",
+      "summary": "Quantum algorithms and quantum hardware are advancing towards a promising paradigm for scientific applications. However, translating domain-specific problems into executable hybrid quantum-classical workflows remains a significant barrier for application researchers due to the required expertise in quantum algorithms, nuances in quantum programming, and hardware-aware system integration. At the same time, AI and primarily LLM based agents are increasingly capable of interpreting natural-language intent, reasoning over complex workflows, and translating high-level objectives into executable code and building computational pipelines. In this work, we introduce SQD Agent, an LLM-based agentic framework that translates natural-language user intent into executable workflows for Quantum Chemistry applications where algorithms from the Sample-Based Quantum Diagonalization (SQD) family are used. By automating this translation, SQD Agent reduces the level of human expertise and configuration overhead required, thereby simplifying experimentation in hybrid quantum-classical settings for application researchers new to quantum. SQD Agent adopts a modular and extensible architecture that supports seamless integration of heterogeneous quantum backends, classical solvers, and workflow components, ensuring adaptability to rapidly evolving quantum ecosystems. The framework further incorporates interactive capabilities for on-demand profiling, bottleneck analysis, resource optimization, intelligent result caching, and convergence visualization. Key features include quantum chemistry experiments, error mitigation on real quantum hardware, together with analysis of candidate mitigation schemes in terms of their potential error-recovery behavior and computational budget, helping users understand their practical trade-offs and decide which strategies to explore in subsequent experiments.",
+      "link": "http://arxiv.org/abs/2609.39302v1",
+      "published": "2026-09-30T08:45:57Z",
+      "category": "cs.MA",
+      "worth_reading": 0.75,
+      "novelty": 1.54,
+      "kind": "applied_system",
+      "priority": 0.679
+    },
+    {
+      "title": "MemLife: Curating and Reasoning over Long-Term Egocentric Video Memories",
+      "summary": "Long-term egocentric video enables personalized AI assistants to reason about daily life. However, as video histories grow to hundreds of hours spanning months or years, reprocessing raw clips for every query becomes computationally prohibitive. Memory systems offer a scalable alternative by compacting videos into text representations, but often fail on practical benchmarks: either the memory does not preserve key evidence, or the retriever fails to locate relevant entries due to retrieval competition in growing search spaces. To address these challenges, we introduce MemLife, a multimodal memory system that constructs entity-grounded, first-person text episodes and retrieves them via a time-indexed agentic reader. Without training or query-time video access, MemLife improves over the strongest training-free baseline by 4.6--12.0% across four long-horizon benchmarks. To further improve memory quality, we propose MemOpt, a reinforcement learning framework that optimizes the memory writer to produce faithful, informative, and retrievable memories. MemOpt consistently improves MemLife by 2.7--5.0% across different video and question distributions, with gains that generalize across writer and reader backbones and memory systems.",
+      "link": "http://arxiv.org/abs/2609.40195v1",
+      "published": "2026-09-30T17:11:33Z",
+      "category": "cs.CL",
+      "worth_reading": 0.75,
+      "novelty": 1.43,
+      "kind": "new_method",
+      "priority": 0.668
+    }
+  ]
+}
