@@ -1,0 +1,233 @@
+{
+  "date": "2026-10-04",
+  "generated_at": "2026-10-04T12:57:24.821810+00:00",
+  "interest": "LLM agents, tool use, and structured/typed model outputs",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "papers": [
+    {
+      "title": "KaliBench: A Fine-Grained Benchmark for Cybersecurity Tool Use on Kali Linux with Runtime-Free Verifiable Rewards",
+      "summary": "LLMs are increasingly applied to cybersecurity workflows, where they are expected to translate analysts' intent into tool invocations. However, existing evaluations focus on knowledge-based assessments or end-to-end agentic tasks, and do not directly measure LLMs' ability to generate executable commands for real-world cybersecurity tools. This gap is critical because cybersecurity operations rely on strict command-line interfaces (CLIs), where minor syntax errors, incorrect flag--value bindings, or argument misordering can invalidate execution. We introduce KaliBench, a fine-grained benchmark and dataset for natural-language--to--CLI translation on Kali Linux, comprising 8,504 query--command pairs spanning 1,642 tools across 23 capability dimensions and 5 security phases. KaliBench is constructed via a manuscript-grounded pipeline with deterministic canonicalization and alias-aware evaluation, enabling precise and reproducible assessment of tool selection and argument construction. To ensure both semantic correctness and practical executability, we develop a multi-stage verification pipeline that combines LLM-based validation, sandboxed terminal execution, and human-in-the-loop refinement. Building on these fine-grained, deterministic signals, KaliBench further enables runtime-free verifiable rewards for training. Across three evaluation modes and 24 configurations of general-purpose and security-focused open-weight models, no open-weight model exceeds 42% exact-command accuracy in the unrestricted setting, highlighting the difficulty of accurate CLI-based cybersecurity tool use without explicit tool hints. We further show that supervised fine-tuning and reinforcement learning with verifiable rewards derived from KaliBench significantly improve an 8B model and achieve performance comparable to a 685B MoE model.",
+      "link": "http://arxiv.org/abs/2610.02206v1",
+      "published": "2026-10-01T17:59:55Z",
+      "category": "cs.AI",
+      "worth_reading": 0.88,
+      "novelty": 1.9,
+      "kind": "benchmark_or_eval",
+      "priority": 0.806
+    },
+    {
+      "title": "Argo-Bench: Evaluating Data Agents on Enterprise-Scale Workflows",
+      "summary": "Real-world enterprise data science and analytics workflows require reasoning across dozens of tables, performing statistical analyses, and acting on the results. Established text-to-SQL benchmarks evaluate query generation alone, and audits have found their answer keys frequently wrong. Because real enterprise warehouses are too sensitive to release, these benchmarks are built on public datasets where a business event fits in a single table. We introduce Argo-Bench, an evaluation framework comprising 210 data science and analytics tasks. Drawing on public data, peer-reviewed industry literature, and regulatory filings, we simulate a food delivery platform in New York City at true scale, with 81 million orders in 2024, grounded economics, fraud patterns, and marketplace incentives. We export this world to an ERP warehouse of 235 tables and 7.5 billion rows, modeled on the Oracle E-Business Suite schema. The simulator's ground-truth state is withheld from the warehouse the agent sees, so tasks require reconstructing facts by navigating the warehouse before acting on them. Argo-Bench goes beyond text-to-SQL: the agent files actions such as banning fraudulent accounts, allocating courier incentive budgets, or issuing back pay, and the grader scores each by its consequences in the simulator. Every task has an executable reference solution that demonstrates solvability using only the warehouse. The strongest of 14 frontier and open-weight models scores 95 or higher on only 34.8% of tasks and averages 59.5 points. We hope Argo-Bench drives progress toward agents that understand, navigate, and act within real data environments.",
+      "link": "http://arxiv.org/abs/2610.02122v1",
+      "published": "2026-10-01T17:35:44Z",
+      "category": "cs.CL",
+      "worth_reading": 0.86,
+      "novelty": 2.02,
+      "kind": "benchmark_or_eval",
+      "priority": 0.804
+    },
+    {
+      "title": "Keyword Harnesses Fail Open: A Cheap Diagnostic Ladder for Tool-Use Claims in Small Language Models",
+      "summary": "Keyword-matching benchmarks can credit small models for tool use they never perform. We document such a false positive in a matched-architecture pair of Spanish security language models and propose a ladder of strict, cheap diagnostics. A 661.6M parameter model (approx. 65% code/technical text; no dedicated SFT) and a 1,109M model (web-heavy multi-phase curriculum; 6B-token tool-SFT) share decoder, tokenizer, and special tokens, scoring almost identically on lenient tool-use metrics (B4: 0.660 vs. 0.650).   Verbatim-reproduction checks on training examples separate them completely: the 600M emits valid tool calls with generalized arguments on 6/6 examples; the 1B does so on 0/6 across checkpoints. A first-token probe localizes the 1B's failure to a missing prior (prob. $10^{-4}$--$10^{-5}$ on <|tool_call|>), which was erased by its web-heavy training phase. A targeted SFT recipe (diverse corpus, 5x higher learning rate, 2,202 steps, ~3.3 GPU-hours) repairs the 1B using three orders of magnitude fewer tokens than the failed phase. On all 269 corpus rows, valid emission rises from 0.100 to 0.959 (600M: 0.926). On 238 unseen prompts, the repaired 1B passes 0.536 vs. the 600M's 0.428 ($p = 0.004$). Embedding-drift checks show the repair did not move the trigger token's tied embedding (97.7% of the bf16 table remains bit-identical), meaning changes live in the surrounding network.   Both models over-trigger, rarely answering negative prompts without a call (0.09 for 600M, 0.17 for repaired 1B). Factorial analyses confirm all repair configurations install the format, though suppression benefits from a diverse corpus remain a hypothesis due to seed sensitivity. This cheap diagnostic ladder costs minutes of CPU time and should gate tool-use claims on small models.",
+      "link": "http://arxiv.org/abs/2610.02142v1",
+      "published": "2026-10-01T17:46:38Z",
+      "category": "cs.CL",
+      "worth_reading": 0.87,
+      "novelty": 1.71,
+      "kind": "benchmark_or_eval",
+      "priority": 0.78
+    },
+    {
+      "title": "VeriHarness: Scaling Agentic Verification for Long-Horizon Tasks",
+      "summary": "As LLM agents undertake increasingly complex, long-horizon tasks, verifying their outputs becomes increasingly challenging. We study how verification capability can be strengthened with a fixed base model, without access to reference answers or grading rubrics at test time. Repeated sampling yields multiple rollouts that can contain complementary correct claims, but we need a reliable verification mechanism to determine which claims to trust. We first find that disagreement often exposes correct alternatives, while consensus can conceal errors. These observations motivate VeriHarness, which turns the underlying LLM a generator uses into an agentic verifier by giving it a workspace, evidence tools, and reusable verification skills. A disagreement resolver checks competing claims against environmental evidence, while a consensus challenger tests shared claims and searches for omitted requirements. Their findings guide the selection and revision of the final artifact. Across five long-horizon workspace benchmarks and two frontier models, VeriHarness achieves the highest selection scores among the evaluated baselines. Evidence-backed revision further improves average performance, bringing gains over a single rollout to 6.2 points with Gemini 3.5 Flash and 6.4 points with Claude Opus 4.8. We further show that verification skills can self-improve from failure feedback, demonstrating VeriHarness as a novel and critical approach for scaling long-horizon agentic verification. We release the full pool of approximately 26,000 rollouts across all five benchmarks and both models, produced at a cost of over $100,000, to support future research on agentic verification.",
+      "link": "http://arxiv.org/abs/2610.00972v1",
+      "published": "2026-10-01T03:02:17Z",
+      "category": "cs.MA",
+      "worth_reading": 0.85,
+      "novelty": 1.82,
+      "kind": "new_method",
+      "priority": 0.777
+    },
+    {
+      "title": "ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization",
+      "summary": "Automated harness optimization can substantially improve LLM agents by iteratively updating their prompts, tool interfaces, and control logic from execution feedback. However, existing methods primarily optimize how the harness is updated while largely fixing which training scenarios generate the feedback that drives those updates. As the harness evolves, the scenarios most useful for further optimization can change, suggesting that the training curriculum itself should adapt alongside the harness. We formulate this missing dimension of harness optimization as an automated curriculum learning problem and introduce ActiveSaddler. ActiveSaddler models the evolving curriculum as a non-stationary bandit with dynamically instantiated optimization targets. It abstracts recurring failures into reusable failure-pattern arms, estimates the potential learning progress from further targeting each pattern, and adaptively balances revisiting known weaknesses with exploring unseen scenarios for new ones. Optimization outcomes continually update both the set of discovered failure patterns and their priorities, allowing the curriculum to co-evolve with the harness. Experiments on GAIA2 and Terminal-Bench 2.0 show that ActiveSaddler consistently discovers stronger harnesses, improving test Pass@1 by 4.4 and 7.5 percentage points over the same harness optimizer using a scenario order fixed before optimization, respectively. Ablations further show that these gains depend on dynamically constructing optimization targets, estimating their evolving utility, and balancing continued optimization with new failure discovery. Together, these results establish automated curriculum learning as a new crucial optimization dimension for harness optimization.",
+      "link": "http://arxiv.org/abs/2610.00906v1",
+      "published": "2026-10-01T01:36:03Z",
+      "category": "cs.MA",
+      "worth_reading": 0.83,
+      "novelty": 1.89,
+      "kind": "new_method",
+      "priority": 0.77
+    },
+    {
+      "title": "From Knowledge Access to Source Learning: Developing Source-Specific Competence",
+      "summary": "Large language model (LLM) agents increasingly rely on persistent external sources to solve sequences of knowledge-intensive tasks. Existing methods improve how source content is accessed and organized, while agent-memory systems preserve reusable knowledge from prior interactions, but repeated use of the same source is still largely treated as repeated access rather than an opportunity to progressively improve understanding of that source. We study source learning: developing reusable source-specific competence over a persistent authoritative source. We represent this competence with a persistent source model that captures reusable understanding of the source, including how its knowledge is structured, interpreted, and applied. To construct and progressively refine such models, we propose SourceLearn, which combines two complementary learning mechanisms. Self-Directed Source Learning identifies what remains incompletely understood and adaptively revisits the source, while Task-Guided Source Learning uses downstream experience to reveal local representational gaps and recurring needs in how source knowledge should be organized. In both cases, learning signals determine what should be reconsidered, while persistent updates are reconstructed from the authoritative source. Across five benchmarks and three LLM backends, SourceLearn achieves the best performance in 13 of 15 settings, with gains of up to 22.6 points over Hybrid RAG and substantial overall improvements over static source representations and experience-based memory baselines.",
+      "link": "http://arxiv.org/abs/2610.02150v1",
+      "published": "2026-10-01T17:50:16Z",
+      "category": "cs.AI",
+      "worth_reading": 0.82,
+      "novelty": 1.92,
+      "kind": "new_method",
+      "priority": 0.766
+    },
+    {
+      "title": "AutoCompact: Learning When to Compact Context in Long-Horizon Coding Agents",
+      "summary": "Coding agents solve repository-level software engineering tasks through long trajectories of code inspection, search, editing, and testing. As a task progresses, earlier exploration becomes stale, so managing context is more than avoiding overflow: an agent must decide when to compact, what working state to preserve, and how to continue from it. We introduce AutoCompact, which trains a coding agent to make these decisions as part of its policy. To collect training data, we run the base agent on coding tasks and use a judge to review its compaction decisions, summaries, and actions after compaction. Flawed outputs are replaced with corrected ones before being executed in the environment, so each trajectory continues from the corrected decisions. We use these trajectories for supervised fine-tuning, then jointly optimize coding and compaction through reinforcement learning with task-success rewards. Experiments on SWE-bench Verified and SWE-PolyBench Verified show that AutoCompact improves pass rates over the base model by an absolute 9.2\\% and 5.0\\%, respectively. The improvements hold across all evaluated inference budgets, with a 256K context window that never overflows and with a 16K window whose overflow triggers fallback compaction.",
+      "link": "http://arxiv.org/abs/2610.02163v1",
+      "published": "2026-10-01T17:54:34Z",
+      "category": "cs.CL",
+      "worth_reading": 0.85,
+      "novelty": 1.64,
+      "kind": "new_method",
+      "priority": 0.759
+    },
+    {
+      "title": "Reconstruct, Practice, Go Real: Guided Self-Improvement for Embodied Agents",
+      "summary": "Building reliable robot capabilities across diverse tasks requires substantial human effort to develop and maintain skills, design rewards, and integrate perception with control. We present Reconstruct, Practice, Go Real (RPG), a framework for autonomous improvement of robot execution systems without updating model weights. RPG identifies manipulation capabilities in an offline dataset and constructs related practice tasks in simulation. During practice, RPG uses execution feedback, privileged simulator state, and available dataset videos to diagnose failures. It develops new reusable symbolic skills, refines existing skills, and revises the system prompt based on these diagnoses. Cross-task evaluation tests individual candidate changes and merged revisions before they are retained for reuse. At test time, a multimodal LLM uses the resulting system prompt and skill library to coordinate perception and robot control. On held-out initializations of 22 manipulation tasks, RPG improves task success from 28.6% after the first practice round to 95.0% after 15 rounds, outperforming all evaluated baselines, including ASPIRE (75.5%) and CaP-Agent0 powered by GPT-6 Astra Pro (60.0%). After a common calibration and hardware-adaptation procedure, the frozen system succeeds in all 30 physical trials, with ten trials on each of three tasks. Project Website: https://rpg-robot.github.io/",
+      "link": "http://arxiv.org/abs/2610.02204v1",
+      "published": "2026-10-01T17:59:50Z",
+      "category": "cs.AI",
+      "worth_reading": 0.82,
+      "novelty": 1.82,
+      "kind": "new_method",
+      "priority": 0.756
+    },
+    {
+      "title": "LLM-Driven Multi-Agent Control for Skill-Based Smart Manufacturing",
+      "summary": "Factories are shifting toward smaller lot sizes with high product customization, requiring frequent re-programming of flexible and reconfigurable automation systems. LLM-based agents can be deployed in two complementary roles: Offline, they generate deterministic production sequences, reducing programming effort; online, they operate live machines and handle unforeseen runtime faults that static programs cannot anticipate. We propose a solution in which each factory module is paired with a dedicated LLM-based agent and an MCP tool server that exposes the module's skills via OPC UA method calls, with agents coordinating over MQTT and grounded by real-time updates of the factory state. We compare three agent architectures (orchestrator, peer-to-peer, and monolithic) across nine production challenges of increasing complexity in a simulation of a physical six-module hexagonal factory, including silent hardware fault detection. The monolithic and peer-to-peer architectures both achieve the highest mean solve rate (93\\%), while the orchestrator uniquely resolves a silent conveyor-belt fault in all ten runs by autonomously rerouting plates around the blocked segment. All architectures exhibit emergent fault-diagnosis behavior without any explicit failure-handling logic, establishing standardized MCP tooling, MQTT-based inter-agent communication, and real-time state injection as a viable and reproducible foundation for LLM-programmed smart manufacturing.",
+      "link": "http://arxiv.org/abs/2610.01364v1",
+      "published": "2026-10-01T09:34:25Z",
+      "category": "cs.MA",
+      "worth_reading": 0.82,
+      "novelty": 1.78,
+      "kind": "applied_system",
+      "priority": 0.752
+    },
+    {
+      "title": "HakiCC: LLM-Driven Multi-Agent Design and Optimization of Concurrency Control Protocols",
+      "summary": "Large language models (LLMs) have recently been applied in systems research as a tool to reduce human-intensive engineering effort through cost-efficient automation. Decades of research have produced a rich landscape of concurrency control (CC) protocols, each encoding distinct trade-offs in correctness, throughput, and abort behavior. However, most applications in practice default to 2PL or OCC, because selecting and adapting a protocol to a specific application requires expert knowledge that is rarely available to application designers. This is a wasted opportunity, as an application-specific CC protocol can yield significant performance advantages over a generic baseline, but designing one requires deep expertise in CC protocol design.   In this paper, we propose HakiCC, an LLM-driven multi-agent pipeline that automatically designs, verifies, and optimizes concurrency control protocols tailored to a given target application. HakiCC provides a two-stage pipeline. In Stage 1, a multi-agent system takes a workload description as input and generates an application-specific CC protocol implementation, which is iteratively repaired and verified for conflict-serializability. In Stage 2, the verified protocol is further optimized for that application through an LLM-driven evolutionary loop targeting correctness and throughput. We evaluate HakiCC on TPC-C and AuctionMark as target workloads, producing and reporting ten application-specific CC protocols. All ten are conflict-serializable after Stage 1; Stage 2 improves throughput for every protocol, with average gains of +50.6% for TPC-C protocols and +92.2% for AuctionMark protocols.",
+      "link": "http://arxiv.org/abs/2610.00889v1",
+      "published": "2026-10-01T01:10:15Z",
+      "category": "cs.MA",
+      "worth_reading": 0.79,
+      "novelty": 1.91,
+      "kind": "new_method",
+      "priority": 0.744
+    },
+    {
+      "title": "LLM2Jev: LLMs Are Already Jev-Style Decision Models -- When and How to Fine-Tune Them",
+      "summary": "Jev-style decision models return categorical probability distributions over predefined options without generating free-form text, enabling software systems to act on their outputs directly. In this work, we investigate the extent to which general-purpose LLMs already possess this capability out of the box, and when fine-tuning is actually necessary. We present LLM2Jev, an architecture-preserving framework that extracts calibrated decisions directly from next-token probabilities over bracketed numeric identifiers. LLM2Jev provides both a training-free inference recipe and a fine-tuning objective that optimizes candidate selection via a tree-factorized listwise loss while anchoring auxiliary predictions to the base model using KL divergence penalties. Evaluating on Qwen3.5-4B and Qwen3-0.6B, we find that modern LLMs are inherently effective decision models: without training, the 4B model matches community Jev-style models built on the same backbone, outperforms letter-logit readouts, supports arbitrary option counts, and natively handles multimodal decisions over images. Fine-tuning provides targeted rather than universal benefits -- substantially improving weaker models and specific tasks (such as many-option intent routing), but offering diminishing returns for strong backbones. Crucially, our KL anchors prevent behavioral degradation in conversational text generation, with LoRA delivering the strongest performance on capable models.",
+      "link": "http://arxiv.org/abs/2610.02076v1",
+      "published": "2026-10-01T17:15:24Z",
+      "category": "cs.CL",
+      "worth_reading": 0.83,
+      "novelty": 1.55,
+      "kind": "new_method",
+      "priority": 0.736
+    },
+    {
+      "title": "Managing Context and Communication in Distributed Agentic UAV Swarms",
+      "summary": "Unmanned aerial vehicle (UAV) swarms increasingly rely on language-model agents to provide adaptive mission-level reasoning in uncertain environments. Fully distributed control, in which each UAV hosts an independent Small Language Model (SLM), removes reliance on a centralized coordinator but introduces an information-management problem: long-running interaction histories can degrade the reasoning context, while indiscriminate information dissemination increases communication and inference overhead. We address these challenges with a distributed UAV-agent architecture that enables continuous local SLM control through an event-driven reason-act-observe lifecycle. Runtime knowledge is represented as structured atomic notes and organized into core, local, and peer-specific memory. A deterministic interest-aware gossip engine selectively disseminates these notes according to recipient-specific semantic novelty and recency. We evaluate the architecture using ten UAVs in a simulated search-and-rescue mission. Our approach completes all experimental runs, whereas unrestricted flooding messages completes only 70-85\\%, and delegating forwarding decisions to the SLM prevents mission completion in every run. Compared with unrestricted flooding, our approach approximately halves inference-token consumption, reduces transmitted data, and achieves lower survivor-count error.",
+      "link": "http://arxiv.org/abs/2610.01569v1",
+      "published": "2026-10-01T12:30:29Z",
+      "category": "cs.MA",
+      "worth_reading": 0.81,
+      "novelty": 1.62,
+      "kind": "new_method",
+      "priority": 0.729
+    },
+    {
+      "title": "SoK: Decentralized Agent Economic Infrastructure",
+      "summary": "Decentralized agent economies increasingly build a single task from protocols that were designed and secured separately. This creates a simple problem: a workflow can look correct at each step and still produce the wrong outcome. For example, a correct escrow may release payment on an authorized approval that provides little evidence that the delivered work actually satisfied the task.   We systematize this problem across the full lifecycle of an agent task. Our study organizes security and economic requirements into 17 property families over six stages, with receipt soundness and completeness assessed separately. We examine 12 systems and standards, five reusable mechanism families, and four classical baselines. We introduce guarantee closure, a task-relative criterion for determining whether guarantees established at one stage remain available and constrain the later decisions that depend on them.   We apply the criterion to controlled and native workflows, covering 840 matched executions and an exhaustive 11,648-case check over a finite objective-task domain. Our results expose recurring failures between verification and settlement, where conforming work can remain unaccepted or valid evidence can be ignored. Public records and model judgments further distinguish recorded approval from evidence of task conformance, while economic analysis identifies the report, penalty, and shared-error assumptions behind these guarantees. These findings show where end-to-end guarantees fail and what must be repaired to preserve them across the workflow.",
+      "link": "http://arxiv.org/abs/2610.01756v1",
+      "published": "2026-10-01T14:19:21Z",
+      "category": "cs.MA",
+      "worth_reading": 0.74,
+      "novelty": 1.91,
+      "kind": "survey_or_position",
+      "priority": 0.709
+    },
+    {
+      "title": "VISTA: A Visual Harness for Reasoning in an Interactive World",
+      "summary": "We show that multimodal models possess strong reasoning abilities and that an appropriate harness can unlock their potential to solve tasks across diverse interactive environments. We introduce VISTA, a visual harness that gives a general-purpose multimodal model long-horizon vision. VISTA allows the model to directly perceive the environment through visual observations and maintains a lossless visual memory that preserves past observations in their original form. The model can actively retrieve these observations and reorganize its visual input as it reasons. On ARC-AGI-3, VISTA improves Claude Opus 5.0's Relative Human Action Efficiency score from 40.68 to a perfect 100.00, with the model completing all 25 public games using 57.4% fewer actions than first-time human participants. VISTA's simple design also allows it to extend naturally to diverse visual environments with minimal adaptation. Across three additional benchmarks covering a diverse range of visual games and puzzles, it substantially outperforms baselines using the same underlying model with minimal harnesses. Our results highlight VISTA's potential as a general-purpose visual harness for advancing multimodal agents in complex visual environments.",
+      "link": "http://arxiv.org/abs/2610.02200v1",
+      "published": "2026-10-01T17:59:45Z",
+      "category": "cs.AI",
+      "worth_reading": 0.77,
+      "novelty": 1.69,
+      "kind": "new_method",
+      "priority": 0.708
+    },
+    {
+      "title": "Can AI Scientists Coordinate at Runtime?",
+      "summary": "Multi-agent AI scientists have shown improving performance across a diverse range of tasks. Yet a common approach is design-time agentic orchestration, which typically relies on fixed workflows. In contrast, human scientists coordinate and adjust their division of labor at runtime. We therefore ask: can AI scientists also coordinate at runtime? To this end, we introduce Runtime Agent Coordination (RAC), which selects agents from existing AI-scientist hosts during execution, assigns scoped work contracts, and provides artifact-grounded verification. Verification informs subsequent agents without blocking transitions or discarding artifacts. We conduct a single-seed exploratory evaluation across Agent Laboratory, EvoScientist, and ARK on ResearchClawBench, preserving host models, tools, and permissions under host-calibrated budgets. Four cumulative conditions separate native execution, runtime communication, runtime selection, and the combined addition of contracts and verification. Runtime selection yields the highest observed mean score for each host; adding contracts and verification reduces these means, with host-dependent outcomes relative to native execution. These results motivate runtime coordination while exposing the limits of additional coordination mechanisms under constrained budgets. Code is available at https://github.com/systemind-team/Runtime-AI-Scientist.",
+      "link": "http://arxiv.org/abs/2610.00980v1",
+      "published": "2026-10-01T03:18:07Z",
+      "category": "cs.MA",
+      "worth_reading": 0.77,
+      "novelty": 1.63,
+      "kind": "new_method",
+      "priority": 0.702
+    },
+    {
+      "title": "ScholarCatalyst: A Benchmark for Retrieving Papers That Inspire New Research",
+      "summary": "What makes great scientists great? Even as AI systems start to make progress on open problems, scientists remain far ahead of them at sensing which prior idea, buried in an ever-growing archive of research, a new problem needs. To study this skill, we draw on researchers who know firsthand which earlier work advanced their completed projects, with papers serving as pointers to the ideas within. Using our automated pipeline that makes author annotation scalable, we build ScholarCatalyst by having 184 lead authors of 207 recent computer science papers label which candidates did or could have advanced their project, each with a detailed rationale. We introduce a retrieval task with author-provided judgments: given an initial research question, retrieve these papers from only the literature available when the project began. Agentic search does no better than embedding retrieval (0.42 vs. 0.48 Recall@20) despite calling that same retriever as a tool. Even an agent built on Claude Fable 5.1, which may have seen the completed papers during training, reaches only 0.51 R@20. These results highlight the need for new training recipes that equip models with expert intuition for searching broad corpora. We envision ScholarCatalyst as a step toward scientific agents that can take a half-formed idea and point to the prior research it needs.",
+      "link": "http://arxiv.org/abs/2610.02202v1",
+      "published": "2026-10-01T17:59:47Z",
+      "category": "cs.AI",
+      "worth_reading": 0.74,
+      "novelty": 1.79,
+      "kind": "benchmark_or_eval",
+      "priority": 0.697
+    },
+    {
+      "title": "Token Communication-Assisted Collaborative Embodied Artificial Intelligence: Concepts, Framework, and Opportunities",
+      "summary": "Collaborative embodied artificial intelligence (CEAI) enables multiple physical agents to perceive, reason, and act cooperatively in dynamic environments. Effective communication is essential for CEAI, yet CEAI agents must exchange not only large multimodal observations but also task-relevant insights, intents, and interactive information over long horizons. This article investigates token communication (TokCom) as a native intelligence interface for CEAI, in which tokens serve jointly as compact semantic carriers for communication and fundamental inference units for generative foundation models (GFMs). We first discuss how TokCom supports insight sharing, intent alignment, and interactive control among embodied agents. We then propose a TokCom-assisted CEAI framework driven by a task-adaptive communication protocol. Comprising a compact codebook, syntax rules, and contextual examples, this protocol guides GFM-based transceivers to distill messages into compact tokens and reconstruct them after wireless transmission. A case study on collaborative object transport demonstrates that the proposed TokCom framework substantially reduces the source payload bit consumption while preserving task efficiency and showing robustness under noisy channels. Finally, we outline future research directions.",
+      "link": "http://arxiv.org/abs/2610.01826v1",
+      "published": "2026-10-01T15:01:50Z",
+      "category": "cs.MA",
+      "worth_reading": 0.67,
+      "novelty": 1.89,
+      "kind": "new_method",
+      "priority": 0.658
+    },
+    {
+      "title": "Form and Void: Entangled Composition through an Autonomous AI Agent",
+      "summary": "Positive and negative space is a fundamental principle in visual composition, supporting visually coherent forms and layered semantic relationships. Generating such compositions is challenging because it requires coordinated control over two semantic concepts that share a common boundary. Although recent text-to-image models and multimodal large language models (MLLMs) have achieved strong performance in image generation and visual understanding, positive-negative space generation remains difficult, particularly under direct single-pass prompting. In this work, we present the \\textbf{F}orm \\textbf{a}nd \\textbf{V}oid \\textbf{A}gent (\\textbf{FaV-A}), a multimodal agent designed for staged positive-negative space generation. FaV-A follows a progressive workflow: it first generates a base object, then analyzes its shape and spatial structure to identify candidate negative-space semantics, and finally produces compositional instructions for the final image generation stage. Experimental results and ablation analyses suggest that FaV-A provides a more effective framework than direct zero-shot MLLM baselines for producing visually coherent and semantically aligned positive-negative space compositions.",
+      "link": "http://arxiv.org/abs/2610.02045v1",
+      "published": "2026-10-01T16:55:37Z",
+      "category": "cs.MA",
+      "worth_reading": 0.72,
+      "novelty": 1.44,
+      "kind": "new_method",
+      "priority": 0.648
+    },
+    {
+      "title": "A Multi-Agent LLM Framework for Personalized Health Checkup Interpretation and Guidance",
+      "summary": "Personalized interpretation of health checkup results requires reasoning across longitudinal records, medical knowledge, lifestyle guidance, and healthcare navigation. We present a multi-agent large language model (LLM) system that identifies multiple intents, maps each to a task-specific agent, executes them in parallel, and synthesizes their outputs. We compared answers generated in Single Agent and Multi Agent settings on 120 Korean compound queries combining two to four requirements, using synthetic health checkup records. The Multi Agent improved the weighted LLM-judge score from 1.695 to 1.797 (p = 0.027), and three additional LLM judges showed consistent improvements ($\u0394$ = +0.111 to +0.186, all p < 0.05). The gains came from usefulness, consistency, and the handling of every requirement in compound queries, whereas numerical accuracy and grounding improved significantly under only one of the four judges and medical safety did not differ, and critical failures occurred at similar rates (Single Agent 15.0% vs. Multi Agent 13.3%). Two human evaluators preferred Multi Agent in 66.7% and 68.3% of pairwise comparisons. Multi Agent execution increased latency and cost by 1.31$\\times$ and 2.02$\\times$, respectively. In exploratory subgroup analyses, the improvement was concentrated in queries involving personal-record lookup.",
+      "link": "http://arxiv.org/abs/2610.01451v1",
+      "published": "2026-10-01T10:48:04Z",
+      "category": "cs.MA",
+      "worth_reading": 0.78,
+      "novelty": 0.86,
+      "kind": "applied_system",
+      "priority": 0.632
+    },
+    {
+      "title": "DuoMind: Enabling Distributed Multi-Robot Coordination with Semantic Communication",
+      "summary": "Vision-language models (VLMs) and vision-language-action models (VLAs) have recently driven rapid progress in general-purpose robots, yet most progress has focused on single-robot settings. Extending these capabilities to multi-robot systems remains challenging because robots must coordinate long-horizon behaviors while maintaining reliable, fine-grained execution. We introduce DuoMind, a distributed hierarchical framework for multi-robot coordination through semantic communication. Each robot uses a VLA-based action model for low-level execution and a VLM-based orchestrator for high-level reasoning and inter-agent coordination. At each planning step, the orchestrator at each robot reasons over the task instruction, local observations, and messages received from other robots. It then generates low-level instructions for the action model and semantic messages for peer robots. This architecture exploits the complementary strengths of pretrained models by combining the semantic reasoning capabilities of VLMs with the precise action-generation capabilities of VLAs. To address the scarcity of benchmarks for multi-robot coordination, we further develop RoboPoly, a benchmark comprising long-horizon manipulation tasks that require coordinated, closed-loop execution under distributed control. Experiments on RoboPoly and RoboTwin demonstrate that DuoMind improves multi-robot task performance, while ablation studies confirm the contributions of hierarchical orchestration and semantic communication. More details are available on our project page.",
+      "link": "http://arxiv.org/abs/2610.02161v1",
+      "published": "2026-10-01T17:53:09Z",
+      "category": "cs.AI",
+      "worth_reading": 0.66,
+      "novelty": 1.6,
+      "kind": "new_method",
+      "priority": 0.622
+    }
+  ]
+}
