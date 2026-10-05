@@ -1,0 +1,233 @@
+{
+  "date": "2026-10-05",
+  "generated_at": "2026-10-05T15:25:23.793469+00:00",
+  "interest": "LLM agents, tool use, and structured/typed model outputs",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "papers": [
+    {
+      "title": "NeutronGym: Physics-Graded Neutron Instrument Design for LLM Agents",
+      "summary": "Designing a scientific instrument tests whether language-model agents can do physics rather than recall it, provided the grading cannot be argued with. We introduce NeutronGym, to our knowledge the first executable environment for neutron instrument design: agents build instruments through validating tools, McStas ray-traces what they build, and a level-resolved ladder grades syntax, runtime, structure and science with no LLM judge. Procedural families supply unlimited instances of a fixed layout whose design parameters the agent must set, with held-out parameter regimes; a curated slice, McStasBench, adds 16 tasks from published instruments behind memorization probes and a sandbox. Seven models reproduce at most 7 of the 16, none retrieves a reference, and none meets an improvement target. The environment also trains. Reinforcement learning on its reward takes Qwen3-8B from 11% to 77% of held-out instances of a family whose targets come from a hidden design (69% at a second seed), past an untrained Qwen3-32B, and the recipe holds, at one seed each, on three further gated families. The analysis says what that gain is. Without the ladder's partial credit it collapses by 60 points. From reward alone the trained model reaches what a classical optimizer reaches, at the agent's simulation budget, only when handed the closed-form physics (77% against 81%, a gap that does not separate at this size), while frontier models still solve 98-99%. Getting a trustworthy result meant failing four task designs that no-model baselines could solve, and we release the probes that found them.",
+      "link": "http://arxiv.org/abs/2610.03631v1",
+      "published": "2026-10-02T17:23:52Z",
+      "category": "cs.AI",
+      "worth_reading": 0.83,
+      "novelty": 2.06,
+      "kind": "benchmark_or_eval",
+      "priority": 0.787
+    },
+    {
+      "title": "Structured Composition of Verifiable Atomic Insights for Table-to-Report Generation",
+      "summary": "Table-to-report generation refers to the task of automatically generating article-level analyt- ical reports from relational tables and is an essential capability for automated data science and decision support. Its central challenge lies in systematically discovering verifiable com- posite insights across tables, attributes, and analytical perspectives, and organizing them into coherent, complete, and traceable evidence chains. Existing methods primarily rely on sequential, reactive data agents or direct Large Language Model(LLM) generation. They suffer from exploration bias: early local observations constrain subsequent actions, causing models to focus prematurely on local analyzes and miss cross-table or cross-dimensional evidence. We propose ComInsight, which reformulates insight discovery as the composition of atomic evidences. We first define an atomic insight as the smallest executable analytical unit conforming to a predefined analysis pattern and enumerate all valid atomic insights from database schema and content. These atoms are then organized into a multi-relational insight graph, where nodes represent verified data facts and edges encode logical, temporal, or hierarchical relations. Finally, a set of composition operators systematically fuses atomic nodes into higher-order composite conclusions. Every composite output is accompanied by executable SQL and fine-grained provenance, ensuring full verifiability. Across three benchmarks InsightBench, DDR-Bench, and T2R-Bench, ComInsight consistently outperforms strong baselines in factual correctness, novelty, and structural completeness. We believe ComInsight offers a reliable, efficient, and explainable path toward table-to-report generation.",
+      "link": "http://arxiv.org/abs/2610.03525v1",
+      "published": "2026-10-02T16:14:18Z",
+      "category": "cs.CL",
+      "worth_reading": 0.85,
+      "novelty": 1.88,
+      "kind": "new_method",
+      "priority": 0.783
+    },
+    {
+      "title": "WebUIProof: Benchmarking WebUI Code Generators with UI-Agent Execution Harness",
+      "summary": "Evaluating WebUI code generation at scale is difficult: outputs may compile and look plausible yet fail under user interaction, and prior benchmarks largely rely on free-form prompts with static checks (build success, screenshots) that miss functional correctness. We introduce WebUIProof, an execution-oriented benchmark that provides structured specifications and dense, executable interaction tests for WebUI generation across two task families: general WebUIs (e.g., dashboards, game, interactive tools) and 3D interactive simulation (e.g., particle/galaxy systems, physics dynamics). WebUIProof includes a UI-agent harness that runs executable interaction tests in a headless browser using an iterative plan--act--observe loop: it locates DOM elements, performs actions, observes resulting UI/DOM changes, and checks the specified assertions. We evaluate across eight commercial LLMs and observe frequent failures on interaction-based requirements even when pages render successfully, especially on 3D simulation interfaces. Finally, we show the UI-agent harness can provide outcome-level training signals. Training compact models (e.g., Qwen2.5 14B and MIMO 7B) with RL rewards derived from executable interaction tests improves functional completion while reducing build failures.",
+      "link": "http://arxiv.org/abs/2610.02617v1",
+      "published": "2026-10-02T00:17:11Z",
+      "category": "cs.MA",
+      "worth_reading": 0.86,
+      "novelty": 1.8,
+      "kind": "benchmark_or_eval",
+      "priority": 0.782
+    },
+    {
+      "title": "Passing the Test You Trained On: Re-evaluating Prompt-Injection Detectors for LLM Agents",
+      "summary": "LLM agents increasingly screen tool outputs with small prompt-injection detectors, and teams choose among detectors by their scores on public benchmarks. We ask whether those scores predict how a detector behaves inside an agent. We replay the ground-truth tool calls of two agent benchmarks, AgentDojo and tau-bench, without an LLM to obtain tool outputs that are benign by construction, label injected outputs by differential replay, and evaluate fifteen detectors, including Meta's Prompt Guard 2, and two task-aware LLM judges on these outputs and on the BIPIA benchmark. Detection rankings transfer poorly between benchmarks: the best detector on BIPIA catches 2% of AgentDojo injections at a 1% false-positive rate, and a detector that catches 72% of AgentDojo injections catches 15% on tau-bench. False-positive rates on tool outputs, which range from none to over 90%, do transfer between the two agent benchmarks. Where training data is public, the form of the training inputs explains the results. The BIPIA leader was trained on full BIPIA inputs, but having seen InjecAgent's attack strings as short prompts does not help it find them inside tool outputs; the best detector on both agent benchmarks shares no data with any benchmark and was trained on agent-style inputs. Evaluations meant to inform deployment should use the agent's own tool outputs, report detection at a low false-positive rate, and audit what the detector was trained on.",
+      "link": "http://arxiv.org/abs/2610.03448v1",
+      "published": "2026-10-02T15:30:11Z",
+      "category": "cs.CL",
+      "worth_reading": 0.86,
+      "novelty": 1.77,
+      "kind": "benchmark_or_eval",
+      "priority": 0.779
+    },
+    {
+      "title": "Evaluator-in-the-Loop Monte Carlo Tree Search via LLM Agents for Motif Scaffolding in Protein Design",
+      "summary": "Motif-scaffolding systems commonly follow a generate-then-filter paradigm, in which candidate proteins are generated independently and structural evaluation is used primarily for terminal screening or ranking. This paradigm underuses evaluation: failed predictions contain state-specific evidence about whether a design requires repair of motif geometry, global foldability, or other structural constraints. We introduce \\textbf{ELMS} (Evidence-based LLM-guided Monte Carlo Search), an evaluator-in-the-loop search framework for motif scaffolding that turns such evaluator feedback into targeted design actions. Effective reuse of structural feedback is nontrivial because different scaffold states exhibit different failure modes, and repeatedly refining a single trajectory can prematurely commit computation to an unproductive region of sequence space. ELMS therefore retains evaluated scaffolds as persistent search states: a Critic Agent diagnoses state-local structural failures, a Policy Agent selects targeted operators with execution parameters, motif-locked operators realize legal sequence modifications, and MCTS determines which historical states should receive further design effort. Under the standard GeomMotif protocol (100 candidates per task), ELMS achieves Successful rates of 86.41\\% on single-motif tasks and 84.57\\% on paired-motif tasks, exceeding the strongest prior baseline by 19.3 and 21.9 percentage points, respectively. On MotifBench, under a matched 100-candidate search budget, it solves 26.7 of 30 tasks on average (88.89\\% Task Success), compared with 16.0 tasks (53.33\\%) for the strongest baseline. These results establish ELMS as an effective approach for converting structural evaluation from a terminal filter into actionable guidance for iterative motif scaffolding.",
+      "link": "http://arxiv.org/abs/2610.02924v1",
+      "published": "2026-10-02T07:16:04Z",
+      "category": "cs.MA",
+      "worth_reading": 0.83,
+      "novelty": 1.91,
+      "kind": "new_method",
+      "priority": 0.772
+    },
+    {
+      "title": "Credit Where It Matters: Dependency-Aware Policy Optimization for Terminal Agents",
+      "summary": "Terminal-using agents benefit from reinforcement learning (RL) in coding, debugging, and other multi-step terminal tasks. In these tasks, later commands often depend on information or intermediate results produced by earlier commands. However, existing trajectory-level and step-level credit assignment methods do not explicitly trace the read-write dependencies through which commands affect the final outcome. Consequently, training signals could still be assigned to irrelevant operations, weakening learning from relevant steps. In this paper, we propose Dependency-Aware Group Policy Optimization (DepGPO), which uses execution dependencies between commands to guide credit assignment for terminal agents. Specifically, we construct a command dependency graph from execution traces and trace backward from the resources inspected by the task verifier. We then assign credit to relevant writes and their supporting reads along these paths, and use it to redistribute trajectory advantages across steps. Extensive comparative experiments and ablation studies demonstrate that DepGPO improves task performance and training stability on complex terminal tasks.",
+      "link": "http://arxiv.org/abs/2610.03634v1",
+      "published": "2026-10-02T17:24:48Z",
+      "category": "cs.AI",
+      "worth_reading": 0.85,
+      "novelty": 1.69,
+      "kind": "new_method",
+      "priority": 0.764
+    },
+    {
+      "title": "EdgeAgent: Orchestrating On-Device LLM inference for End-User Multi-Agent Systems on CPU-GPU Unified Memory Architectures",
+      "summary": "Emerging multi-agent LLMs demand privacy-preserving edge deployment, yet current inference systems struggle with these collaborative workflows. Specifically, the memory-bound decode phase causes severe bus contention on unified memory architectures (UMA), paralyzing naive CPU-GPU co-execution. Furthermore, speculative decoding in multi-agent workloads faces extreme variance in drafting difficulty, alternating between complex reasoning and predictable structured generation. Compounded by frequent tool-induced stalls, this highly fragmented execution severely underutilizes hardware and defeats traditional static batching.   We present EdgeAgent, a cross-layer inference system explicitly co-designed for edge UMA and multi-agent workloads. At the micro-architectural level, it bypasses rigid graph-compiler constraints to enable zero-copy UMA-aware tensor parallelism, utilizing asymmetric memory layouts to fully saturate both CPU and GPU compute units. At the scheduling level, it dynamically allocates draft budgets based on real-time sequence predictability to bound bandwidth waste. Concurrently, an asynchronous suspend-and-yield mechanism actively evicts stalled agents, ensuring continuous hardware saturation during unpredictable tool invocations.   Extensive evaluations on an Apple M4 SoC demonstrate that the UMA-aware execution alone contributes a 1.29x speedup over batched speculative decoding. Adding the agent-aware scheduling lifts the full EdgeAgent system to a 1.77x speedup under extreme tool-use latencies.",
+      "link": "http://arxiv.org/abs/2610.03394v1",
+      "published": "2026-10-02T14:43:42Z",
+      "category": "cs.MA",
+      "worth_reading": 0.78,
+      "novelty": 1.86,
+      "kind": "new_method",
+      "priority": 0.732
+    },
+    {
+      "title": "FinNextAssist: Towards Professional Financial Deep Research Assistant",
+      "summary": "Deep Research (DR) agents have demonstrated strong capabilities in complex, research-oriented tasks through autonomous planning, iterative retrieval, multi-step reasoning, and structured reporting. However, adapting DR agents to finance introduces unique challenges: financial analysis demands the joint completion of heterogeneous sub-tasks spanning diverse data types, tools, and analytical workflows. We identify three key requirements for a professional financial DR agent: integration of authoritative, heterogeneous financial data sources; specialized analytical tools and skills; and dedicated sub-agents for domain-specific sub-tasks. Building on these principles, we propose FinNextAssist, an end-to-end deep research framework designed for professional financial analysis. FinNextAssist decomposes the research process into four stages: Task Planner, Evidence Compiler, Reasoning Engine, and Report Assembler, and introduces two novel lightweight sub-agents: TabAgent, for cross-market financial table understanding, and HeteroAgent, for cross-modality heterogeneous financial data interpretation. Extensive experiments on FinDeepResearch, the Finance Agent Benchmark, and FinTMMBench-Web show that FinNextAssist substantially outperforms both strong proprietary and open-source DR agents, with ablation studies confirming the contribution of each component across diverse markets and languages.",
+      "link": "http://arxiv.org/abs/2610.03174v1",
+      "published": "2026-10-02T11:52:01Z",
+      "category": "cs.MA",
+      "worth_reading": 0.86,
+      "novelty": 1.29,
+      "kind": "new_method",
+      "priority": 0.731
+    },
+    {
+      "title": "4DCodeBench: Benchmarking Agents on Inverse Graphics of Dynamic Scenes",
+      "summary": "We introduce 4DCodeBench, a benchmark for 4D inverse graphics through code generation, in which agents reconstruct dynamic scenes from video as executable graphics programs. To accomplish this, agents must translate visual observations into compact representations of scene structure and dynamics, by implementing abstractions such as physical simulations to reproduce complex behavior. To evaluate this capability, we curate a set of real-world videos and construct synthetic scenes spanning diverse physical phenomena, including deformation, fluid flow, and fracture. We perform extensive benchmarking of frontier models, finding that strong static reconstruction capabilities do not yet translate into reliable reconstruction of complex dynamics. 4DCodeBench provides a testbed for tracking progress toward agents that can interpret the dynamics of the world through code. Our benchmark is available at https://github.com/4DCodeBench/4DCodeBench",
+      "link": "http://arxiv.org/abs/2610.03715v1",
+      "published": "2026-10-02T17:58:49Z",
+      "category": "cs.AI",
+      "worth_reading": 0.78,
+      "novelty": 1.84,
+      "kind": "benchmark_or_eval",
+      "priority": 0.73
+    },
+    {
+      "title": "Silent Dissent: LLM Agents That Yield to the Majority Still Represent Their Original Premise",
+      "summary": "Multi-agent debate is increasingly used to reach consensus among LLM agents, yet agents often yield to a unanimous majority. When an agent changes its answer, has it changed its mind or only its statement? We study this with two-hop factual questions whose intermediate entity (the bridge, e.g. the country in \"the capital of the country where the Sagrada Familia is located\") is never stated by anyone. Scripted peers, in the role of Asch's confederates, unanimously assert a wrong answer taken from another fact with a different bridge. At the moment the agent answers, we read the bridge from its residual stream with the Jacobian lens (J-lens) and, for comparison, the logit lens. In pre-registered tests on held-out facts with four open-weight models, agents of Qwen3.5-4B, Qwen3.6-27B and Gemma-4-E4B-it that gave in still represented their original bridge in the pre-registered layers below the output (hit@100 above a control entity: 0.85, 0.22 and 0.24), where the logit lens rarely ranked it among the top 100 tokens (0.00-0.06). These agents also represented the bridge behind the peers' answer, beyond a mention baseline. A pre-registered addendum hid the agent's earlier answer or removed it: agents that gave in still represented their original bridge in all four models (0.43, 0.29, 0.37 and 0.25 with the answer hidden), including Llama-3.1-8B-Instruct, which barely did so with its answer in view (0.03). The premise can thus be computed from the question alone while the agent states the majority's answer. Hiding the earlier answer also changed conformity: Qwen3.5-4B gave in on 89% of questions instead of 8%. In exploratory interventions, injecting the bridge's J-lens direction brought agents back to their original answer only in the two Qwen models. Stated consensus in multi-agent debate can thus overstate agreement. We also report the negative results of our pre-registered program.",
+      "link": "http://arxiv.org/abs/2610.02702v1",
+      "published": "2026-10-02T02:37:05Z",
+      "category": "cs.MA",
+      "worth_reading": 0.75,
+      "novelty": 1.95,
+      "kind": "benchmark_or_eval",
+      "priority": 0.72
+    },
+    {
+      "title": "Dynamic Expert Pruning for Multi-Agent Systems",
+      "summary": "Mixture-of-Experts (MoE) architectures scale language models efficiently by activating only a few experts per token, but the saving is confined to computation: every expert must stay resident on the accelerator, so memory bounds where these models can be deployed. Expert pruning reduces this footprint, yet existing methods are static --- a single mask, calibrated offline, is applied to the model for every subsequent request. This assumption can fail when the workload is heterogeneous, most prominently in multi-agent systems, where one backbone serves many tasks and roles at once: our analysis shows that different tasks and roles recruit different experts, while static methods assign one fixed subset to all of them. We therefore propose Dynamic Expert Pruning (DEP), which rests on a finding we establish here: an agent's system and task prompts are by themselves sufficient to identify the experts that agent and its task require, since that text already describes what the agent will do. A lightweight predictor, trained once on workflow transcripts, turns those prompts into a specialized per-request mask in a single forward pass, with no per-configuration calibration. Across diverse tasks and roles, model scales, and MoE architectures, DEP achieves better overall accuracy than static pruning and merging baselines, and generalizes to workflows unseen in training without retraining. Its margin over those baselines is largest when few experts are retained, suggesting that the role specialization inherent to multi-agent systems permits sparser serving than static pruning allows.",
+      "link": "http://arxiv.org/abs/2610.02951v1",
+      "published": "2026-10-02T07:45:30Z",
+      "category": "cs.MA",
+      "worth_reading": 0.76,
+      "novelty": 1.79,
+      "kind": "new_method",
+      "priority": 0.711
+    },
+    {
+      "title": "FALCON: A Model and Dataset Agnostic Framework for Synthetic Data Generation for NL2SQL Pairs",
+      "summary": "Relational databases are among the most widely deployed forms of structured knowledge, and natural language access to them requires grounding language onto schema entities and relations while handling the ambiguity inherent in how people phrase requests. Existing synthetic NL-to-SQL data generation methods largely ignore this ambiguity and produce oversimplified queries that fail to prepare models for the complexity of real-world structured knowledge access. We present FALCON, a framework that generates realistic, ambiguity-aware NL-to-SQL data matching the complexity of challenging real-world benchmarks, at low cost using compact open models. Our approach combines reserved-word SQL seeding and persona-based prompting to generate structurally complex queries, while alignment-based filtering preserves difficulty by distinguishing genuinely incorrect examples from complex but valid queries. Human evaluation confirms consistent high quality across model sizes, and our generated data exceeds existing benchmarks in both SQL complexity and natural language richness. Difficulty-stratified analysis shows models trained on FALCON data increasingly outperform baseline-trained models as query complexity increases, validating our pipeline's success in generating challenging training data. When combined with a small proportion of existing benchmark data, mixed training recovers performance on simpler queries while preserving these advantages on complex ones. The model- and database-agnostic design enables organizations to generate high-complexity NL-to-SQL training data locally without external APIs.",
+      "link": "http://arxiv.org/abs/2610.03625v1",
+      "published": "2026-10-02T17:19:50Z",
+      "category": "cs.CL",
+      "worth_reading": 0.77,
+      "novelty": 1.61,
+      "kind": "new_method",
+      "priority": 0.7
+    },
+    {
+      "title": "A Near-Zero Monitor Readout Is Not Evidence of Behavioral Control",
+      "summary": "Post-training with verifiable rewards can induce reward hacking, motivating the use of monitors within the training objective rather than solely for offline auditing. We show that a low monitor readout does not identify whether such an intervention controls behavior. In a code-generation environment whose dominant exploit is available at the start of the reasoning trace, we train policies against three monitors that pass the same offline gate: an in-domain activation probe and two penalties conditioned on how early the policy commits to its own final answer. The probe score is at its numerical floor from the first recorded training step, and the trained-score median is zero for every prefix-trained run at the endpoint. These readouts estimate different quantities, and we do not compare their scales; within each monitor family, however, low values do not establish behavioral control. Within one fixed configuration, prefix-trained runs with the same zero-median trained score range, by seed alone, from a mixed regime with a low hacking share to near-pure reward hacking. All probe runs reach the hacking regime, but their floor-level readout reflects a mismatch between the position where the probe was validated and the position where it was read during training, not a second instance of this ambiguity. Text-level analysis identifies a prefix failure mode: generic planning and filler shells postpone the exploit past the cut without eliminating it from the final output. Low measured commitment therefore does not distinguish a low hacking share from delayed commitment to the exploit. Offline discrimination and low monitor-aligned readouts are insufficient evidence of behavioral control; an out-of-band behavioral check is required. We characterize the endpoint readout, not its evolution. Code is available at https://github.com/zhezhou1106/spoof-cost.",
+      "link": "http://arxiv.org/abs/2610.03458v1",
+      "published": "2026-10-02T15:33:56Z",
+      "category": "cs.CL",
+      "worth_reading": 0.74,
+      "novelty": 1.66,
+      "kind": "benchmark_or_eval",
+      "priority": 0.684
+    },
+    {
+      "title": "FrugalEvo: Towards Cost-Aware LLM-Guided Program Evolution",
+      "summary": "LLM-guided evolutionary methods, such as AlphaEvolve, have emerged as powerful approaches for challenging computational optimization problems, such as circle packing. However, prior work typically optimizes performance gain over a fixed number of iterations. We argue that practical optimization should maximize gain per unit cost. To this end, we propose FrugalEvo, a cost-aware evolutionary framework where a stronger, higher-cost LLM explores solution strategies, and a cheaper LLM implements them and iteratively refines the resulting code. We also design a cache-efficient evolution process, where our harness and prompts maximize the sharing of prefixes across different evolution steps, to improve cache reuse. To measure solution quality throughout a fixed cost budget, we introduce Budget-Aware Area Under the Curve (BA-AUC), defined as the area under the best-so-far evaluation score curve over cumulative LLM cost, up to the budget. Across 10 mathematical and systems optimization tasks, FrugalEvo matches or surpasses state-of-the-art baselines, including OpenEvolve, ShinkaEvolve, AdaEvolve, and EvoX, in final solution quality and achieves higher BA-AUC on 9 tasks. It also achieves higher average performance than these baselines on 10 algorithmic optimization tasks from ALE-Bench-Lite. Notably, on circle packing, FrugalEvo achieves new state-of-the-art performance with GPT-5.6 Terra and Luna for only 1.68 USD and with GLM-5.3 and its Flash variant for only 0.55 USD, matching or surpassing all baselines, including multi-agent methods such as CORAL and SwarmResearch, which cost approximately 50 USD on average.",
+      "link": "http://arxiv.org/abs/2610.03675v1",
+      "published": "2026-10-02T17:44:05Z",
+      "category": "cs.AI",
+      "worth_reading": 0.73,
+      "novelty": 1.68,
+      "kind": "new_method",
+      "priority": 0.679
+    },
+    {
+      "title": "Engineering Sustainable Agents: A Systematic Comparison of Agentic LLMs for Developer Workflows",
+      "summary": "Large language models (LLMs) are increasingly used in software engineering, including agentic systems that coordinate multiple agents, but impose higher computational and environmental costs. In this paper, we present a comprehensive empirical study of agentic LLM systems across five software engineering tasks: code generation, technical debt identification, code vulnerability detection, log parsing, and log analysis. For each task, we compare LLM configurations that range from a non-agentic single-query baseline to multi-agent workflows, using six open-weight LLMs, two prompt strategies, and three hardware platforms. We assess each configuration in terms of accuracy, inference latency, and energy consumption. Our results reveal substantial trade-offs between agentic complexity and energy efficiency: multi-agent designs consume on average 6.36$\\times$ as much energy and run 6.07$\\times$ as long as the non-agentic baseline, with worst-case slowdowns of up to 160$\\times$ for individual task--hardware pairs. Accuracy gains from additional agents are limited and task-specific: multi-agent improves average vulnerability-detection accuracy, but lightweight non-agentic and single-agent configurations still dominate the Pareto front, accounting for 59 of 66 Pareto-optimal configurations. Model and prompt choice act as task-specific levers whose effective direction varies between tasks rather than as global defaults. We translate these findings into design guidelines for sustainable, task-aware LLM-based development tools.",
+      "link": "http://arxiv.org/abs/2610.03010v1",
+      "published": "2026-10-02T08:41:46Z",
+      "category": "cs.MA",
+      "worth_reading": 0.82,
+      "novelty": 1.04,
+      "kind": "benchmark_or_eval",
+      "priority": 0.678
+    },
+    {
+      "title": "Defense-in-Depth at the Perception-Reasoning Interface of LLM-Centric Agentic UAV Swarms",
+      "summary": "Large Language Models (LLMs) increasingly support Uncrewed Aerial Vehicle (UAV) swarm operations such as data collection scheduling, where the model reads structured sensor reports and decides which sensors to visit. An adversary who quietly manipulates those reports can redirect the swarm without modifying the model weights or the UAV. Defenses for this interface have been proposed architecturally but rarely implemented or evaluated. We implement and evaluate defense-in-depth at the perception-reasoning interface of LLM-Centric Agentic UAV Swarms. Five layers check the provenance of a report, whether its values are physically admissible, whether they agree with what swarm geometry and service history predict, whether the resulting schedule starves any sensor, and, when these fail, hand control to a deterministic scheduler that ignores the suspect input. We test each layer against an adversary strong enough to defeat the layer before it. For each of the three input-side layers, we derive in closed form how far a report can be distorted before that layer reacts, fixing each boundary from deployment parameters before any attack data is collected; across thirty matched simulation runs, predicted and measured boundaries agree. Separating attack detection from response is a well-established principle, and we quantify the cost of neglecting this distinction at the perception-reasoning interface. When the system rejects a report, it replaces it with the most recent accepted report. This prevents the adversary from controlling the UAV schedule, but it also increases cumulative cost by 79% and 74% for the two detectors, respectively, compared with the undefended system. The safety check does not detect any attacks, but it nevertheless reduces the attack-induced cost by 37.5%.",
+      "link": "http://arxiv.org/abs/2610.03319v1",
+      "published": "2026-10-02T13:54:35Z",
+      "category": "cs.MA",
+      "worth_reading": 0.76,
+      "novelty": 1.41,
+      "kind": "applied_system",
+      "priority": 0.673
+    },
+    {
+      "title": "Coherence-Driven Belief Formation and Population Dynamics of Contagion in LLM Agents",
+      "summary": "Models of social contagion usually assume how individuals adopt beliefs and derive population behavior from it. We instead empirically measure belief adoption in language model agents, quantifying the probability an agent adopts a claim given how many peers endorse it. We find this adoption kernel to be sigmoid, a characteristic of complex contagion, with a threshold that is sensitive to three sources: the claim's plausibility, the source's reliability, and the agent's disposition. These three dimensions are well approximated by a single effective dimension which we propose can be understood as the coherence of the incoming belief with the LLM agent's prior beliefs. Further, we observe a characteristic of complex contagion in the collective dynamics of belief adoption in a system of AI agents: further spread on clustered than random networks. These systems also exhibit a bifurcating cascade window, and self-sustaining hysteretic consensus which lead to consensus being far harder to remove than to establish.",
+      "link": "http://arxiv.org/abs/2610.02654v1",
+      "published": "2026-10-02T01:20:52Z",
+      "category": "cs.MA",
+      "worth_reading": 0.7,
+      "novelty": 1.82,
+      "kind": "benchmark_or_eval",
+      "priority": 0.672
+    },
+    {
+      "title": "Language Models that Play Chess and Explain Their Moves",
+      "summary": "Modern chess engines are silent experts: they play at a superhuman level, but do not offer explanations for their play. On the other hand, language models (LMs) can generate plausible-sounding explanations, but their weak playing strength limits the utility of their explanations. We introduce Queen, a 4B-parameter chess-language model that can explain its moves and plans while playing at the level of a typical Grandmaster. Our novel framework enables domain-specific reasoning through complementary components: an encoder-decoder architecture and an iterative distillation algorithm. This architecture integrates a silent expert chess encoder with an instruction-tuned LM through cross-attention, which we train via a question-answering curriculum to extract chess concepts from the encoder's representations. Building on this domain-adapted model, we iteratively improve its explanations with a natural-language analog of the Bellman update: the model analyzes the positions after its top candidate moves and consolidates them into an explanation of the current position, which is then distilled back into the model. Over seven iterations, our model gains over 900 Elo points (1782 to 2697), substantially surpassing all frontier models on both playing strength and puzzle accuracy, despite containing three orders of magnitude fewer parameters. Furthermore, LM-based evaluations show that our explanations are fluent and approach GPT-5.6-Sol (high) in coherence. The generality of our architecture and training procedure suggests a recipe for applying language models to domains where silent expert encoders are available, like games, robotics, and computer use.",
+      "link": "http://arxiv.org/abs/2610.03695v1",
+      "published": "2026-10-02T17:54:22Z",
+      "category": "cs.CL",
+      "worth_reading": 0.64,
+      "novelty": 2.03,
+      "kind": "new_method",
+      "priority": 0.651
+    },
+    {
+      "title": "What Should World Models Forget? Stratified Retention for Continual Adaptation",
+      "summary": "Continual learning treats degradation on previously seen data as evidence of failure, a convention inherited from settings with a stationary prediction target, where a correct label remains correct indefinitely. World models do not satisfy this condition. Their prediction target is the environment, which changes, so knowledge that was accurate when acquired may later become false, and discarding it is required behavior rather than a defect. Non-stationary ground truth is well studied in the concept drift literature and in the temporal factuality of language models, but has not been formulated for world models, which are distinctive in that they also encode knowledge that must never be revised. We argue that continual world models require retention stratified by invariance timescale, separating invariants such as physics and object permanence, which must never be revised, from instance-level facts that should be revised as soon as the environment changes. Standard forgetting metrics cannot distinguish a world model that has correctly revised outdated knowledge from one that has suffered catastrophic forgetting, and consequently rank a frozen model highest, while existing physical-reasoning benchmarks evaluate only frozen checkpoints. We propose differential retention, which reports invariant regression testing across the adaptation stream jointly with revision latency, without aggregation.",
+      "link": "http://arxiv.org/abs/2610.03713v1",
+      "published": "2026-10-02T17:58:14Z",
+      "category": "cs.AI",
+      "worth_reading": 0.54,
+      "novelty": 1.98,
+      "kind": "benchmark_or_eval",
+      "priority": 0.576
+    },
+    {
+      "title": "Do Large Language Models Know Colombian Law? A Reliability Benchmark for the Colombian Legal System",
+      "summary": "Large language models (LLMs) are increasingly used to support legal practice, education, and research, yet their reliability in national legal systems outside the United States remains largely undocumented. We introduce an expert-validated benchmark for evaluating LLM reliability on the Colombian legal system. The benchmark comprises 1,042 items spanning ten areas of law and three question formats (closed multiple-choice, semi-open, and open-ended IRAC), built through a human-in-the-loop pipeline with multi-stage expert review. We evaluate 15 contemporary proprietary and open-weight models with format-appropriate metrics. Accuracy on closed questions ranges widely, from 0.905 (Gemini 3.1 Pro) to 0.577, but on free-text legal answers factual correctness never exceeds 0.45 (on a 0-1 scale) for any model. We find a dissociation between answer relevancy and correctness (Spearman rho = -0.46): models reliably sound responsive while frequently being wrong, a pattern of particular concern for non-expert users. Closed-question accuracy and free-text correctness are strongly rank-correlated (rho = 0.94), so cheap multiple-choice screening predicts model ranking but overstates absolute reliability. An independent rubric-based LLM judge and blind human expert scoring both reproduce the free-text ranking (rho >= 0.88). The judge further reveals that only about half of the norms models cite are correct; the rest are wrong or non-existent. Reliability varies systematically by legal area and follows an inverted-U across question complexity. Our results indicate that current LLMs require expert supervision for Colombian legal tasks, and that grounding answers in authoritative sources is a promising path to higher reliability. We release the benchmark construction pipeline to support reproducible evaluation.",
+      "link": "http://arxiv.org/abs/2610.03639v1",
+      "published": "2026-10-02T17:27:41Z",
+      "category": "cs.AI",
+      "worth_reading": 0.64,
+      "novelty": 1.23,
+      "kind": "benchmark_or_eval",
+      "priority": 0.571
+    }
+  ]
+}
