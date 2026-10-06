@@ -1,0 +1,233 @@
+{
+  "date": "2026-10-06",
+  "generated_at": "2026-10-06T13:47:43.572565+00:00",
+  "interest": "LLM agents, tool use, and structured/typed model outputs",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "papers": [
+    {
+      "title": "CLIFT: Conformal Self-Verification for Web Agent Training and Test-Time Scaling",
+      "summary": "Open-source web agents are now strong enough to execute realistic browser tasks, but training them with reinforcement learning still depends on weak supervision: binary task success is too sparse for credit assignment, while frontier-language-model judges are too expensive to call at every step and cannot be assumed available at deployment. We introduce CLIFT, a training and test-time scaling method built around conformal self-verification. During training, the agent answers natural-language verification questions about its own rollouts; a Compositional Conformal Certifier keeps only question signals whose URL-conditional evidence agrees with a training-time judge, assigns signed trust weights through polarity-aware lift, and blends the resulting verifier score into per-step rewards in a way that never subtracts from the judge baseline. At test time, the same certified bank is frozen and reused as structured evidence for Conformal Trajectory Selection (CTS): the agent samples a greedy rollout and one or more diverse retries, the self-verifier summarises each URL trace, and a conservative majority-vote rule chooses whether to swap away from the current incumbent without calling any external judge. This single mechanism supports three settings. On WebArena Infinity, CLIFT achieves state-of-the-art performance among open-source web agents. On VisualWebArena, a bank trained with the open model transfers to GPT-5.5 at test time and reaches state-of-the-art performance under the canonical harness. On Online Mind2Web, without training an agent on the benchmark, translating the certified question bank improves a live-web agent in zero-shot evaluation. Together these results position conformal self-verification as a way to turn costly judge feedback into a reusable training signal and a judge-free test-time scaling signal.",
+      "link": "http://arxiv.org/abs/2610.06829v1",
+      "published": "2026-10-05T17:57:51Z",
+      "category": "cs.AI",
+      "worth_reading": 0.85,
+      "novelty": 1.96,
+      "kind": "new_method",
+      "priority": 0.791
+    },
+    {
+      "title": "Topology-Conditioned Backdoors: Language Models That Insert Vulnerabilities When They Infer They Are in a Multi-Agent System",
+      "summary": "A language model may behave safely in a single-agent evaluation yet produce vulnerable code when its context suggests that it is part of a multi-agent system. We study this failure mode by fine-tuning Qwen2.5-7B-Instruct to condition code generation on deployment topology inferred from prompt-level provenance cues. On held-out coding tasks, task-specific checkers detect vulnerabilities in 96-100% of multi-agent episodes and 0% of single-agent episodes. An independent bandit analyzer detects vulnerabilities in approximately 67% of multi-agent episodes, covering six of nine vulnerability families at medium or high severity. Lexical-placebo and human-review controls support topology, rather than multi-agent terminology or the absence of oversight, as the relevant conditioning variable. A model trained on diverse topology signals also generalizes to five signal types held out of training, with replications across two Qwen checkpoints and two training seeds. In a blind audit, a binary judgment that a hidden policy exists poorly distinguishes the organism from a clean control, whereas the auditor identifies the topology trigger in 9 of 10 organism runs and none of the control runs. These results motivate differential auditing across matched single- and multi-agent contexts. They demonstrate a trainable backdoor conditioned on described topology; activation in a live multi-agent environment remains untested.",
+      "link": "http://arxiv.org/abs/2610.05793v1",
+      "published": "2026-10-05T04:38:58Z",
+      "category": "cs.MA",
+      "worth_reading": 0.83,
+      "novelty": 1.98,
+      "kind": "benchmark_or_eval",
+      "priority": 0.779
+    },
+    {
+      "title": "Recursive Video In-Context Learning for Agentic Robot",
+      "summary": "LLM agents that orchestrate frozen vision-language-action (VLA) policies improve across episodes through text memory, which records what the agent did but not how the task is done. A demonstration video shows it, but fits poorly into an agent's context. The full video slows every turn, fixed keyframes lose the contact detail that decides whether a grasp holds, and what the agent needs shifts from the task's structure while planning to the frames around each contact. We introduce Recursive Video In-Context Learning (RV-ICL), a training-free method that turns a demonstration into a hierarchy the agent navigates rather than a prompt it receives. The hierarchy is built from the sub-events of the demonstration, such as grasps and releases. Its levels grow finer, from keyframes of the whole task to phases, moments and short clips, and are exposed through read-only tools. The agent reads the coarse levels before planning. During execution it re-enters the hierarchy whenever a step needs more detail and loads only the clip of its current sub-goal. One demonstration per task is enough. Built on RPent, RV-ICL raises success from 92.6% to 96.5% on LIBERO-PRO and from 86.7% to 95.8% on LIBERO-Plus.",
+      "link": "http://arxiv.org/abs/2610.06843v1",
+      "published": "2026-10-05T17:59:11Z",
+      "category": "cs.AI",
+      "worth_reading": 0.84,
+      "novelty": 1.9,
+      "kind": "new_method",
+      "priority": 0.778
+    },
+    {
+      "title": "One Figure, Every Canvas: Editable Flowchart Relayout via Agentic Pipeline",
+      "summary": "Pipeline figures in ML papers must be repurposed across many canvases, including paper columns, 16:9 slides, portrait posters, 1:1 social teasers, 9:16 phone previews. Each format imposes a different aspect ratio on the same computational graph, where any silently broken connection misrepresents the method. We formulate aspect-ratio-adaptive flowchart relayout as a distinct task: given a raster flowchart and a target ratio, produce a structurally faithful, hallucination-free, editable layout. Existing methods fail characteristically: image-to-image models stretch blocks and reject extreme ratios, text-to-image agentic systems hallucinate content, and parse-then-render systems mis-route edges. We propose an agentic pipeline factored into Parse, Style, and Layout stages, each pairing a main agent with a critic that combines deterministic constraint checks with VLM visual feedback so connectivity is explicitly checked and prevented from being silently broken. Outputs are draw.io-editable mxGraph XML. On a curated benchmark of 100 flowcharts at five aspect ratios, evaluated by Gemini 3.1 Pro and validated against human judgments, our method reaches 68.6% Content Fidelity versus 11.2-41.4% for prior work. Project page: https://onefigureeverycanvas.vercel.app/",
+      "link": "http://arxiv.org/abs/2610.06852v1",
+      "published": "2026-10-05T17:59:54Z",
+      "category": "cs.AI",
+      "worth_reading": 0.85,
+      "novelty": 1.82,
+      "kind": "new_method",
+      "priority": 0.777
+    },
+    {
+      "title": "Back to the Future: Rethinking EDA Infrastructure for Agentic Systems in Chip Design Verification",
+      "summary": "The unprecedented computational scale of modern artificial intelligence depends on complex, multi-billion-transistor Systems-on-Chip, yet the workflows that verify these chips remain stubbornly manual. Although Large Language Models (LLMs) have made rapid inroads into Electronic Design Automation (EDA), approximately 74.6% of existing studies target static Register-Transfer Level (RTL) code generation, leaving post-simulation verification and interactive waveform debugging largely untouched. We introduce Back-to-the-Future (BTTF), an end-to-end agentic framework that closes this infrastructural gap. BTTF distills massive, unstructured simulation dumps into a normalized relational SQLite database and couples it with a collaborative multi-agent orchestration engine that translates natural-language verification queries into schema-aware SQL while correlating signal anomalies with versioned RTL repositories. Across a 150-query benchmark, BTTF attains 95.33% execution accuracy, charting a practical path toward autonomous EDA verification.",
+      "link": "http://arxiv.org/abs/2610.06790v1",
+      "published": "2026-10-05T17:48:14Z",
+      "category": "cs.AI",
+      "worth_reading": 0.82,
+      "novelty": 1.93,
+      "kind": "applied_system",
+      "priority": 0.767
+    },
+    {
+      "title": "BazaarBench: Delegation Safety in Decentralized C2C Marketplaces Run by LLM Agents",
+      "summary": "In decentralized consumer-to-consumer (C2C) marketplaces, people list goods, negotiate with strangers, and rate one another, so trust rests on reputation. Large language model (LLM) agents now act for users, raising risks to their money, privacy, and reputation. We introduce BazaarBench, a simulated C2C marketplace and benchmark for evaluating the safety of these agents. It tracks ownership, item condition, and commitments across transactions, combining record checks with rubric-based LLM judgments to identify six failure types across five stages. We run three base markets for 30 simulated days, each with 100 agents using one model and inventories drawn from a public eBay sample. Across 45 continuations, we evaluate five models under ordinary instructions, deadline pressure, or adversarial instructions to exploit other traders. Each continuation runs for seven simulated days from a copy of a market's day-30 state. The tested model controls the same 20 selected agents, retaining their personas, inventories, and histories, while the other 80 keep the base model. All five models attempt to promise the same item to multiple buyers under ordinary instructions. Adding targets and deadlines increases these attempts for every model. Under adversarial instructions, the share of tested sellers' committed transactions completed despite unavailable items or overstated conditions rises from 15.4% to 33.4%, reaching 55.5% for GPT-5.4. Averaged across models and markets, simulated weekly earnings per tested agent rise from USD 20 under ordinary instructions to USD 33 under adversarial instructions. Most of the increase comes from items the sellers never held. We release the simulator, saved market states, evaluation code, and records covering 357,608 agent model calls for evaluating new models and developing safer marketplace agents.",
+      "link": "http://arxiv.org/abs/2610.06748v1",
+      "published": "2026-10-05T17:26:17Z",
+      "category": "cs.MA",
+      "worth_reading": 0.82,
+      "novelty": 1.84,
+      "kind": "benchmark_or_eval",
+      "priority": 0.758
+    },
+    {
+      "title": "Attention Tax, Handoff Tax: A Stylised Model of When Multi-Agent LLM Systems Help",
+      "summary": "Recent work on multi-agent LLM systems reaches sharply different conclusions: some results show that a single agent with the same information and compute should dominate a delegated system, others that multi-agent gains grow with task depth. We argue that much of the disagreement comes from modelling different bottlenecks, and introduce a stylised reliability model built around two trade-offs. Decomposition reduces the burden of long contexts but incurs a handoff tax when information is compressed or transferred between agents. Redundancy gains from multiple samples, but its benefit depends on how much their failures are shared. With reasoning budget, verification, and task structure added, the model yields two crossover conditions: decomposition becomes preferable once the attention cost avoided by resetting context exceeds the handoff cost, and parallel sampling at equal budget is eventually preferable when its shared-failure floor lies below the error floor of one agent thinking longer. We connect these regimes to recent theoretical and empirical results. On a ledger-reconciliation task we measure the context-degradation curve and the handoff tax from single-agent and handoff runs alone. From these the model places the crossover at depth 10 and predicts decomposition to win at depths 20, 50, and 100. It does, on step-level and final-balance accuracy, and the decomposed system's success, which the prediction never sees, lands within 9 percentage points of the predicted rate at every depth.",
+      "link": "http://arxiv.org/abs/2610.06069v1",
+      "published": "2026-10-05T10:04:20Z",
+      "category": "cs.MA",
+      "worth_reading": 0.82,
+      "novelty": 1.78,
+      "kind": "survey_or_position",
+      "priority": 0.752
+    },
+    {
+      "title": "TasteVal: Measuring the Experimental Research Taste of AI Systems Against Human Experts",
+      "summary": "We introduce TasteVal, a benchmark to evaluate the experimental research taste of frontier models. We define research taste as the ability to pick interesting problems to solve, design experiments, and interpret experimental results. TasteVal measures the experimental component of research taste; given a fixed research problem, we measure how well a model iteratively designs experiments and draws conclusions from their outcomes. We operationalize experimental research taste as compute efficiency; a Researcher who reaches the same score as an expert human using half the serial experimental compute has twice the experimental taste. Experimental taste thus acts as a multiplier on experimental compute, making it a key input to forecasts of AI progress. TasteVal consists of 8 novel, challenging, open-ended tasks representative of frontier AI R&D. To isolate taste from coding ability, the model under evaluation acts as a Researcher that iteratively designs experiments while a fixed Coder agent implements them and reports their results. The Researcher executes until either the 40 H100 hour or 120 wall-clock hour budgets are exhausted. We recruit 24 human experts, at least 2 per task, and take the best expert attempt per task as the expert baseline. We evaluate 20 models released between 2023 and 2026. The best-performing model, Opus 5.5, exceeds our expert baseline, with a compute multiplier of 2.3x (95% CI 1.15-4.37), at roughly 1/30 of our baseliners' average per-run cost. On TasteVal, the compute multiplier of frontier models has doubled approximately every 3.0 months since December 2025 (95% CI 1.7-5.0), up from every 14 months between 2023 and December 2025. Measured by final normalized performance, frontier models show no trend break, doubling every 14.6 months. To keep TasteVal uncontaminated, we do not release the tasks.",
+      "link": "http://arxiv.org/abs/2610.06824v1",
+      "published": "2026-10-05T17:57:15Z",
+      "category": "cs.AI",
+      "worth_reading": 0.75,
+      "novelty": 1.99,
+      "kind": "benchmark_or_eval",
+      "priority": 0.724
+    },
+    {
+      "title": "T-Search: An Open Agentic Retriever and Playground for Hard Multi-Step Search",
+      "summary": "We present T-Search, an open-weight agentic retriever for hard multi-step search. Given a question and a search tool over a fixed corpus, it runs a bounded multi-round search and returns a ranked list of evidence chunks with short justifications, leaving answer generation to a downstream model, so backend and generator can be swapped without retraining. T-Search is built on Qwen3.6-35B-A3B and trained on adversarially filtered synthetic search tasks with round-sliced supervised fine-tuning followed by GSPO on a recall reward. Averaged over seven English and Russian benchmarks with gold evidence annotations, it reaches 56.0 Recall@10 with one rollout, 14.4 points above its base, and 61.3 with three fused rollouts, outperforming larger open models. We release the model, harness, live demo, and three benchmarks, including TRuST, the first native-Russian hard-search benchmark.",
+      "link": "http://arxiv.org/abs/2610.06782v1",
+      "published": "2026-10-05T17:44:26Z",
+      "category": "cs.CL",
+      "worth_reading": 0.86,
+      "novelty": 1.17,
+      "kind": "new_method",
+      "priority": 0.719
+    },
+    {
+      "title": "PlotGround: Grounding Plot Digitization in Real Scientific Figures and Their Source Data",
+      "summary": "Scientific figures often encode quantitative results that are not readily available in machine-readable form, making accurate plot digitization important for verifying and reusing published findings. Yet it remains unclear how accurately current models recover plotted values from real scientific figures, as existing benchmarks rely largely on synthetic charts or cover only a limited range of chart types. We introduce PlotGround, an automated pipeline for building plot digitization benchmarks from real scientific figures and their author-released source data. PlotGround maps figures to source tables, identifies reconstructable panels, and generates quantitative questions with source-grounded reference values. We use PlotGround to construct PlotGround-1k, a human-verified benchmark of 1,119 questions from 1,066 bioRxiv preprints. Across sixteen multimodal models, the best reaches 87.5% accuracy at a $\\pm 5\\%$ relative-error tolerance. Tightening the tolerance to $\\pm 2\\%$ lowers every model's accuracy by 11-24 percentage points, revealing a gap between approximate visual reading and precise quantitative recovery. PlotGround's paired figure-source structure lets us compare how accurately the same values are recovered from figures and from source tables. Providing source tables instead of figures raises a coding agent's accuracy from 90.0% to 97.4% while cutting cost by 72%.",
+      "link": "http://arxiv.org/abs/2610.06825v1",
+      "published": "2026-10-05T17:57:19Z",
+      "category": "cs.CL",
+      "worth_reading": 0.78,
+      "novelty": 1.69,
+      "kind": "benchmark_or_eval",
+      "priority": 0.715
+    },
+    {
+      "title": "MemPilot: Orchestrating On-Demand Multimodal Memory Curation for LLM Agents",
+      "summary": "Memory has become integral to the LLM agent ecosystem, supporting information retention and reuse across interactions. However, most existing agent memory systems construct memory in a query-agnostic manner, which can incur unnecessary preprocessing cost and discard details that later prove essential. Recent studies have begun shifting memory processing toward runtime adaptation, but typically specialize in particular operations or fixed processing schemes, leaving flexible control over performance, cost, and latency largely underexplored. To address this challenge, we present \\textbf{MemPilot}, a flexible framework that orchestrates on-demand memory curation under different performance--cost--latency preferences. Specifically, we optimize a multi-step LLM policy via reinforcement learning to iteratively choose between retrieving from query-agnostic memory and delegating query-specific curation of raw multimodal history to heterogeneous LLMs and VLMs. The policy jointly controls evidence amount, curation instructions, model selection, and visual access, enabling fine-grained allocation of runtime computation. To optimize this policy under competing objectives, we adapt objective-wise advantage decoupling by separately estimating each objective's advantage before aggregation. Moreover, we introduce prefix-based marginal utility estimation for fine-grained credit assignment across multi-step rollouts. Experiments on five multimodal agent-memory benchmarks demonstrate favorable performance--cost--latency trade-offs across optimization preferences, with preference sweeps yielding broader frontiers than existing trade-off-aware baselines.",
+      "link": "http://arxiv.org/abs/2610.06830v1",
+      "published": "2026-10-05T17:58:06Z",
+      "category": "cs.AI",
+      "worth_reading": 0.78,
+      "novelty": 1.67,
+      "kind": "new_method",
+      "priority": 0.713
+    },
+    {
+      "title": "Who Keeps the Gains from Personal AI Assistants? Seller Adaptation and the Unassisted in a Language-Model Market Simulation",
+      "summary": "Personal AI assistants are beginning to transact for consumers, and early adopters capture real savings. Whether those savings survive, and what happens to consumers who have no assistant, depends on how sellers respond -- a question single-user evidence cannot answer. We build an agent-based rental market in which language models play consumers, assistants, and six adaptive sellers guided by an algorithmic pricing tool. Half the population receives an assistant under an advisory or an executing mandate; the contract pairs a fee only the renter's physical action avoids with a pre-selected add-on an authorised assistant can cancel online. An analytical benchmark and a behaviourally calibrated rule market supply ex-ante predictions, and paired branches with frozen versus adaptive sellers separate adoption effects from market feedback. Across thirty simulated markets, executing assistants cut adopters' spending by 13.7 USD per renter-day when sellers are frozen; adaptation claws back about a third, leaving 8.7, with the gains arriving both as lower bills and as rentals completed at all. Sellers raise headline rates while cutting fees, and the calibrated forecast of the burden on unassisted consumers (+3.6) does not transfer: their mean spending change is +0.4, confidence interval -0.6 to +1.3. Seller-model swaps and a within-market transfer of fee-setting to the pricing tool show that fee conduct, and with it the division of the gains, is decided on the seller side. Assistants, we conclude, should be evaluated at market level -- completion, total spending, and non-users included -- and the comparison layers locate exactly where a calibrated behavioural forecast fails in a language-model market.",
+      "link": "http://arxiv.org/abs/2610.05823v1",
+      "published": "2026-10-05T05:20:51Z",
+      "category": "cs.MA",
+      "worth_reading": 0.72,
+      "novelty": 1.94,
+      "kind": "benchmark_or_eval",
+      "priority": 0.698
+    },
+    {
+      "title": "MedPrune: Topology-Efficient Multimodal Multi-Agent Communication Evolution for Medical VQA Tasks",
+      "summary": "While medical multimodal large language models (Med-MLLMs) advance medical visual question answering (VQA), existing clinical workflow-inspired multi-agent frameworks suffer from interaction patterns and excessive computational overhead caused by redundant communication topologies. In this paper, we propose MedPrune, an efficient medical multimodal multi-agent collaboration framework that dynamically prunes both nodes and edges from the communication topology to enhance reasoning ability and token efficiency. Specifically, we first formulate the diagnostic process as a heterogeneous communication graph, where nodes represent specialist agents from various departments and edges capture intra- and inter-departmental interactions. Building on this graph, we introduce two sparsification mechanisms to enable adaptive collaborative evolution: (1) Heterogeneous Node Sparsification, which eliminates task-irrelevant specialist agents irrelevant to the current multimodal question via reinforcement learning-driven topological optimization, and (2) Heterogeneous Edge Sparsification, which selectively retains only the most diagnostically salient intra- and inter-departmental connections by jointly optimizing task performance and topological complexity. Extensive medical VQA experiments under full-set and few-shot training settings prove MedPrune surpasses multi-agent baselines and boosts token efficiency with strong adversarial robustness.",
+      "link": "http://arxiv.org/abs/2610.06695v1",
+      "published": "2026-10-05T16:55:58Z",
+      "category": "cs.CL",
+      "worth_reading": 0.75,
+      "novelty": 1.65,
+      "kind": "new_method",
+      "priority": 0.69
+    },
+    {
+      "title": "Agentic-ZTA: A Multi-Agent Architecture for Autonomous Zero Trust Enforcement",
+      "summary": "Agentic AI is emerging as a promising paradigm for automating complex cybersecurity decisions, yet its use in enforcing zero trust introduces significant challenges in safety, reliability, and policy compliance. This paper presents Agentic AI based zero trust architecture (Agentic-ZTA) that operationalizes the NIST SP 800-207 ZTA architecture control loop through coordinated multi- agent decision pipeline. In the proposed framework, policy knowledge is embedded into a retrieval-augmented generation pipeline and retrieved at inference time as top-k relevant policies. Access requests are intercepted by the Policy Enforcement Point (PEP), enriched with contextual metadata. The request context is routed to a policy engine agent which invokes domain-specialized core agents first followed by supporting agents, if further evaluation needed. AI agents reason over access context, policy constraints and determine trust. The retrieved policies are embedded into agent prompt during inference time and agentic trust scores are aggregated and evaluated by a trust-algorithm, producing the final access decision for enforcement under continuous verification. We implement Agentic-ZTA in a testbed and evaluate it on representative access-control use cases scenarios. Our Agentic-ZTA framework achieves 95.0% accuracy, 93.9% precision, and 96.3% recall, and demonstrate the feasibility of enforcing zero trust using AI agents.",
+      "link": "http://arxiv.org/abs/2610.05782v1",
+      "published": "2026-10-05T04:31:29Z",
+      "category": "cs.MA",
+      "worth_reading": 0.74,
+      "novelty": 1.43,
+      "kind": "new_method",
+      "priority": 0.661
+    },
+    {
+      "title": "IdeaLens: Detecting AI Ideas in Long-form Writing",
+      "summary": "While modern AI detectors identify who wrote the words, emerging policies on AI use increasingly hinge on a different question: who came up with the ideas? We introduce IdeaLens, a detector that identifies whether a document's ideas came from a human or AI (idea provenance), regardless of who wrote its words. To focus IdeaLens on ideas rather than prose, we represent documents as outlines: lists of items that each pair a discourse role with a brief, paraphrased description of the content, minimizing word-level overlap with the raw text. We train IdeaLens on 1M FineWeb documents with silver labels from Pangram, a prose provenance detector. Since the outlines are largely stripped of surface-level information, the labels must be fit mainly through the ideas. In a controlled study, IdeaLens's AI flag rate drops from 95% to 7% as models write from increasingly detailed human plans, while Pangram 4 still flags 92%; from AI-derived plans, IdeaLens stays above 96%. Conversely, on a new dataset of 50 stories that human authors wrote from AI-generated plans, IdeaLens flags 68% of the stories as AI, compared to 8% for Pangram 4. On a comprehensive suite of 19 existing detection benchmarks, we show that IdeaLens maintains strong detection rates at low false positive rates, suggesting that ideas themselves provide a powerful discriminative signal, and its performance holds across domains, formats, and languages. Finally, we examine 90K predictions from IdeaLens to characterize systematic differences between human and AI ideation. We release our models and labeled datasets to facilitate future research on idea provenance detection.",
+      "link": "http://arxiv.org/abs/2610.06778v1",
+      "published": "2026-10-05T17:43:33Z",
+      "category": "cs.CL",
+      "worth_reading": 0.65,
+      "novelty": 2.03,
+      "kind": "new_method",
+      "priority": 0.658
+    },
+    {
+      "title": "Symmetry and AI-assisted discovery of magic-state factories",
+      "summary": "Magic-state distillation is a major resource cost in fault-tolerant quantum computing. The cost of a magic-state factory depends strongly on its failure rate, which grows with the number of input magic states. Although symmetry-restricted methods have recently made distance two searches tractable, distance three and above have remained elusive at moderate input counts. We develop symmetry- and AI-assisted methods to search this regime. We present a unified binary-matrix formulation encompassing both triorthogonal-code and direct circuit searches. We show that distance at least three is equivalent to nonzero, pairwise distinct syndromes, separating the choice of syndromes from the search for compatible output gates. We restrict the syndrome search using group symmetry and language-model agents, followed by deterministic solving and independent verification. Our searches yield 699 factory classes, including 564 new ones. These include factories for pure-T states and factories with entangled outputs comprising combinations of T, CS, and CCZ magic states. The pure-T factories [[63, 11, 3]] and [[850, 128, 6]] achieve the lowest overhead exponents we know among protocols with at most 100 and 1000 inputs, respectively, with $\u03b3= 1.589$ and $\u03b3= 1.057$. Our [[1715, 287, 6]] factory, with $\u03b3= 0.998$, is the smallest known pure-T factory with $\u03b3< 1$. We also provide a context directory of search briefs and campaign notes with which readers can train their own agents and tailor the search to their requirements. With these results, we begin constructing an active, open-source repository of magic-state distillation protocols for the quantum community, supplemented by our methods and data, for the practical fault-tolerant quantum computing regime.",
+      "link": "http://arxiv.org/abs/2610.06535v1",
+      "published": "2026-10-05T15:36:37Z",
+      "category": "cs.MA",
+      "worth_reading": 0.65,
+      "novelty": 1.97,
+      "kind": "new_method",
+      "priority": 0.652
+    },
+    {
+      "title": "Parallelism or Concession? Concurrency-Aware Procurement Negotiation for Agentic Commerce",
+      "summary": "Agentic buyers can cheaply fork a procurement task into many parallel negotiations, but concurrency is not free: every thread consumes resources, and simultaneous agreements create cancellation and commitment risk. We study a one-unit post-order sourcing problem with a single hard-deadline negotiation window, in which a planner jointly chooses the number of seller-facing negotiators and a common procurement price cap. The model combines a product-specific acceptance curve with fulfillment loss, per-thread cost, and excess-commitment cost. We establish three structural results. First, holding the per-thread acceptance target fixed, the marginal value of another negotiator decays geometrically, yielding a conditional concurrency threshold. Second, under a convex quantile curve, parallelism substitutes for concession: more concurrent negotiators imply a weakly lower per-thread acceptance target and price cap. Third, when prices are more dispersed, Agentic buyers benefit by searching harder for bargains, but suffer when they instead try to guarantee procurement by offering higher prices. We operationalize these results in the Concurrency-Aware Negotiation Optimizer (CANO), a deterministic optimizer that jointly determines the optimal negotiation concurrency and procurement price cap for an agentic procurement system. Across different analytic market configurations and extensive Monte Carlo, finite-data, non-Gaussian, and correlated-seller stress tests, CANO consistently outperforms common heuristic policies while validating the predicted structural properties.",
+      "link": "http://arxiv.org/abs/2610.06017v1",
+      "published": "2026-10-05T09:15:47Z",
+      "category": "cs.MA",
+      "worth_reading": 0.61,
+      "novelty": 1.9,
+      "kind": "new_method",
+      "priority": 0.617
+    },
+    {
+      "title": "Balancing Memory Pathways: Analyzing and Improving Memory Utilization in Hybrid LMs",
+      "summary": "Recurrent-attention hybrid language models (LMs), which interleave attention and recurrent layers, are increasingly used to combine the efficiency of the recurrent layers with the strong performance of attention layers. Prior work suggests that attention and recurrent layers offer complementary pathways to use past information: attention supports precise memory recall from earlier tokens, while recurrent layers support consolidation of disparate information over long contexts. However, we observe that simply having access to both pathways does not mean that hybrid LMs are effectively using them. We find that they rely substantially more on attention than on the recurrent state. Standard supervised fine-tuning improves overall performance but does not improve how the two memory pathways are coordinated: the model becomes more reliant on information propagated by attention layers, while its use of information propagated by recurrent layers remains limited. To encourage better coordination between the two memory pathways, we add an auxiliary loss that limits attention's access to earlier context while the recurrent state propagates through the full sequence. This objective encourages the model to retain and use information through the recurrent pathway alongside attention. It improves overall performance, with particularly strong gains on tasks involving longer contexts or requiring information aggregation, consistent with the strengths of recurrent layers observed in analysis. Crucially, this imbalance and the benefit of our auxiliary loss generalize: they apply to multiple recurrent-attention LMs in question-answering and agentic tasks, as well as to attention-based LMs that combine different forms of memory. Together, our findings show that simply providing multiple memory pathways does not ensure their effective use, and that targeted supervision is needed to better coordinate them.",
+      "link": "http://arxiv.org/abs/2610.06750v1",
+      "published": "2026-10-05T17:27:30Z",
+      "category": "cs.CL",
+      "worth_reading": 0.66,
+      "novelty": 1.51,
+      "kind": "new_method",
+      "priority": 0.613
+    },
+    {
+      "title": "ufakzeka-karar: An Open Turkish Typed-Decision Model with Order-Invariant Option Scoring",
+      "summary": "ufakzeka-karar is an open Turkish decision model with 182,494,466 parameters. Given a Turkish text and questions of a fixed answer type (a choice, a level on an ordered scale, or yes or no), it returns a temperature-scaled probability for every option and an expected error that serves as a \"not sure\" signal, without generating text and in one CPU forward pass for up to ten options. Built on the lab's ufakzeka-1-base, its head scores each option blind to the others at shared positions, so the answer does not depend on option order. A sequential head trained with shuffled options was about as accurate but changed 2.3 to 2.8 percent of its answers when only the option order changed; REINFORCE lost 10.2 points (0.102) of macro F1 to cross-entropy. On the open set of HakemBench v1.0 (4,275 questions, 7 tracks) the released model ranks 7th of 16 rows with a composite of 0.660 (95% interval 0.642 to 0.677). Temperature scaling lowers calibration error (smooth ECE) on the development set but raises it on held-out support questions, from 0.027 to 0.045 for the first scored run, which never trained on them; the released model later trained on them, so its 0.036 to 0.064 is not an unseen-question test. The released model is the last of three runs scored on HakemBench, and its numbers are not blind. The second run's new training data was aimed at the first run's errors on the full test set in guardrails, moderation and customer support, and the released run was trained after the second run's guardrail results on the full test set were read, under a protocol fixed in writing before any of its data, code or runs. All its numbers come after these readings; its guardrail, moderation and customer support numbers carry the flag \"shaped by reading the test results\". With every model scored on the other four tracks only, its composite is 0.678, 6th of 16. Weights and code are under Apache-2.0.",
+      "link": "http://arxiv.org/abs/2610.06744v1",
+      "published": "2026-10-05T17:22:23Z",
+      "category": "cs.CL",
+      "worth_reading": 0.66,
+      "novelty": 1.03,
+      "kind": "applied_system",
+      "priority": 0.565
+    },
+    {
+      "title": "Base Models Can Reason By Taking a Cue From Training Data",
+      "summary": "In this paper, we study how training data creates associations between the tokens at the start of a base model's response and the reasoning behavior that follows. First, we demonstrate that fixing particular starting token cues makes a base model's performance competitive with that of its reinforcement learning (RL)-trained counterparts on math and coding. For instance, the cue \".\\n\\nOkay\" raises Olmo-3-7B's MATH-500 pass@1 accuracy from 42% to 78%, while \"Alright,\" raises Qwen3-14B's from 72% to 87%. Second, RL makes these cues more likely, while fixing them recovers much of its performance gain over the base model. Third, we trace the reasoning effects of token cues to the training data. We perform causal data interventions to turn an arbitrary word, such as \"chicken\", into an effective reasoning cue, or remove an existing cue's effect. A similar edit makes the prompt instruction \"Think duck duck goose\" as effective as \"Think step by step\" at eliciting reasoning. We also find that the hidden state representations induced by different cues correlate with different document types from the training set. Finally, we extend our study of token cues with a case study in language model safety, finding that different cues elicit distinct refusal and compliance behaviors that correspond to different types of training data.",
+      "link": "http://arxiv.org/abs/2610.06851v1",
+      "published": "2026-10-05T17:59:52Z",
+      "category": "cs.AI",
+      "worth_reading": 0.51,
+      "novelty": 1.91,
+      "kind": "new_method",
+      "priority": 0.548
+    }
+  ]
+}
