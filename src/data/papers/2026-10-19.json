@@ -1,0 +1,233 @@
+{
+  "date": "2026-10-19",
+  "generated_at": "2026-10-19T14:11:58.089130+00:00",
+  "interest": "LLM agents, tool use, and structured/typed model outputs",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "papers": [
+    {
+      "title": "DrugHarness: An Evolvable Agent Harness for Computational Drug Discovery",
+      "summary": "Computational drug discovery requires agents to compose scientific operations and adapt to changing evidence and constraints. Here we introduce DrugHarness, an evolvable agent harness coupling composable scientific execution with conditional skill induction. Its environment integrates over 80 scientific operations, biomedical resources and task-specific code, preserving associations among candidates, results and artifacts. From execution trajectories and outcome feedback, DrugHarness induces action hypotheses with observable applicability conditions, recommended actions and supporting evidence. An independent review agent evaluates candidate skills derived from these hypotheses through source verification and, when needed, targeted execution trials. Admitted skills guide subsequent tasks and are revised through feedback. Evaluation on MolBench and SMDD-Bench demonstrates capabilities in molecular screening, optimization and constrained design. Without evolution, DrugHarness exceeds reported MolClaw-CC results by 10.8 percentage points in affinity-comparison accuracy and 55% in mean top-three active hits on MolBench. Retrospective evaluation on skill-development tasks shows that evolution increases Qwen's affinity-comparison accuracy from 62.2% to 81.1% and optimization success from 79.5% to 87.2%. In a prospective HPK1 study, DrugHarness achieves a more favorable median docking score than Biomni among system-specific candidates. A synthesized compound achieves a cellular IC50 of 14.19 nM, a 2.64-fold potency improvement over the best input reference, with activity competitive with two selected compounds designed by experienced medicinal chemists. These results support conditional skill evolution for scientific agents and demonstrate a workflow connecting computational drug design with experimental validation.",
+      "link": "http://arxiv.org/abs/2610.23791v1",
+      "published": "2026-10-16T17:20:19Z",
+      "category": "cs.AI",
+      "worth_reading": 0.85,
+      "novelty": 1.85,
+      "kind": "new_method",
+      "priority": 0.78
+    },
+    {
+      "title": "Self-Building Labs",
+      "summary": "Self-driving laboratories (SDLs) accelerate scientific discovery by automating experimental execution and optimization. AI agents can increasingly propose new experiments, but existing SDLs can only run the procedures they were built for. Adapting them to a new experiment still takes extensive manual engineering, which makes laboratory flexibility the bottleneck for scaling discovery. We introduce the self-building laboratory (SBL), which designs, configures, and operates its own laboratory setup given a high-level scientific goal. SBL starts from whatever already exists, from an empty room to a working SDL, and builds the missing capabilities: the lab layout, its digital twin, robot skills, and experimental workflows. We demonstrate the system working across different robots and setups, scaling from a single workstation to laboratories with several robots working together. We validate SBL's end-to-end capabilities through a real-world quantum-dot synthesis experiment. By shifting the role of human researchers from manually configuring and programming device automation to specifying scientific objectives, SBL makes scientific automation more accessible, flexible, and scalable. Project website: https://self-building-labs.github.io/",
+      "link": "http://arxiv.org/abs/2610.23826v1",
+      "published": "2026-10-16T17:48:29Z",
+      "category": "cs.AI",
+      "worth_reading": 0.81,
+      "novelty": 2.12,
+      "kind": "new_method",
+      "priority": 0.779
+    },
+    {
+      "title": "GLOBE: Evolving Structured Agentic Memory for E-commerce Product Optimization in Generative Search",
+      "summary": "Optimizing product listings for generative search requires language agents not only to rewrite effectively but also to continually self-improve by retaining successful strategies across diverse categories. However, existing approaches often treat structured listings as free-form text, leaving effective strategies implicit in prompts, search trajectories, or rewritten outputs rather than accumulating them as a reusable agentic memory. To address this limitation, we introduce GLOBE, an agentic framework that drives continual self-improvement by storing optimization knowledge in an evolving handbook of explicit, field-scoped behaviors. In each episode, an Editor applies relevant behaviors and receives rank-based feedback, which a Reflector converts into behavior updates. Crucially for dependable execution in real-world settings, a Moderator removes redundant proposals, a Curator commits accepted changes, and consistently harmful behaviors are deactivated. This cycle transforms episodic feedback into a persistent, field-scoped optimization memory. Experiments show that structured behaviors outperform monolithic prompt optimization, while feedback-driven evolution and moderation further improve effectiveness and reduce downside risk. The learned behaviors also remain effective on unseen product categories, suggesting that agentic memory evolution supports interpretable and transferable product optimization.",
+      "link": "http://arxiv.org/abs/2610.23709v1",
+      "published": "2026-10-16T16:33:17Z",
+      "category": "cs.AI",
+      "worth_reading": 0.85,
+      "novelty": 1.79,
+      "kind": "new_method",
+      "priority": 0.774
+    },
+    {
+      "title": "AI-Driven Reproducibility and Analytical Robustness in Scientific Discovery",
+      "summary": "Reproducible and analytically robust research findings are essential to scientific progress, but evaluating these properties typically requires costly manual effort. We investigate whether LLM agents can help automate reproduction and robustness analysis, using a medical case study grounded in the Surveillance, Epidemiology, and End Results (SEER) database, a widely used U.S. cancer registry underlying tens of thousands of published studies. First, we introduce SEER-Repro, a benchmark of 20 published SEER-based papers together with the data and resources required to reproduce their findings. Second, we create an AI agent that successfully reproduces 77.4% of 2,190 atomic claims, while providing executable baselines for further analysis. Third, we develop an agentic analysis pipeline to test the robustness of the medical findings by identifying analytical choices underlying each finding, proposing defensible alternatives, and rerunning the analysis to determine whether those choices affect the conclusion. Across published papers in SEER-Repro, our pipeline identifies potentially consequential analytical choices in 9.5% of fully reproduced findings and flags them for expert review. These results show how LLM agents can support scientific review by reproducing findings, systematically testing their robustness, and directing expert attention toward potentially consequential analytical choices.",
+      "link": "http://arxiv.org/abs/2610.23845v1",
+      "published": "2026-10-16T17:57:55Z",
+      "category": "cs.AI",
+      "worth_reading": 0.83,
+      "novelty": 1.78,
+      "kind": "benchmark_or_eval",
+      "priority": 0.759
+    },
+    {
+      "title": "TUPLE-Bench: Evaluating and Mitigating Privacy-Utility Trade-offs in Typed Decision Models",
+      "summary": "Typed decision models often return more than a selected category. They also expose probabilities for each candidate and, sometimes, a separate confidence score. These fields support downstream decisions but may reveal information beyond a recipient's authorization. We introduce TUPLE-Bench (Typed decision models' Utility and Privacy Leakage Evaluation Benchmark), a benchmark of paired synthetic cases in which recipients may learn a coarse operational category but not its fine-grained cause. Across nine models, instructions to withhold the cause fail to protect it: 91.88%-99.93% of responses reveal the cause through direct selection or residual scores. Even when causes are excluded from the candidate set, full outputs enable 62.85%-75.35% recovery on held-out cases, compared with 51.04%-57.64% using only the selected category (50% chance). Full outputs also reduce mean downstream cost in all 27 model-task comparisons. However, confidence fields increase leakage without consistently reducing cost. We further introduce workflow-constrained privacy quantization (WCPQ), which reduces secret recovery while preserving the behavior and cost of specified downstream workflows. Our findings highlight the need to audit decision interfaces field by field and workflow by workflow.",
+      "link": "http://arxiv.org/abs/2610.23668v1",
+      "published": "2026-10-16T16:00:57Z",
+      "category": "cs.AI",
+      "worth_reading": 0.84,
+      "novelty": 1.69,
+      "kind": "benchmark_or_eval",
+      "priority": 0.757
+    },
+    {
+      "title": "Thought Blocks: Non-Autoregressive Latent Communication for Multi-Agent Systems via Trajectory-to-State Compilation",
+      "summary": "LLM-based multi-agent systems typically communicate through text, incurring repeated generation and re-encoding costs. Although latent communication removes explicit verbalization, constructing latent messages may still require autoregressive latent trajectories. We therefore distinguish message representation from message construction and ask whether agents can directly construct useful continuation states without executing the trajectories that normally produce them. We formulate this problem as trajectory-to-state compilation and introduce Thought Blocks, fixed-size blocks of latent key--value (KV) continuation memory constructed in one shot. Thought Blocks achieve a 2.5 times average latency speedup over autoregressive latent communication. Compared with text-based multi-agent communication, Thought Blocks reduce text tokens by 45.7% and autoregressive steps by 84.8%, achieving an 8.6 times average latency speedup. These results demonstrate that trajectory-to-state compilation enables efficient inter-agent latent communication without sequential latent rollouts at inference.",
+      "link": "http://arxiv.org/abs/2610.23056v1",
+      "published": "2026-10-16T07:35:02Z",
+      "category": "cs.MA",
+      "worth_reading": 0.8,
+      "novelty": 1.95,
+      "kind": "new_method",
+      "priority": 0.755
+    },
+    {
+      "title": "Annotrace: A Workbench for Step-Level Annotation of Agent Traces",
+      "summary": "Every study of why LLM agents fail begins by labelling traces by hand, and every such study builds its own throwaway tool. Observability platforms record agent traces but offer no structured labelling; annotation tools label text but have no notion of a step, a delegation or a tool call, leaving it unclear what the smallest unit of execution to label should be. Annotrace reads six trace formats, including OpenTelemetry GenAI, LangSmith and Langfuse, and turns each run into an ordered, nested list of steps. The annotator writes their own labelling codebook; a frontier model proposes a starting set from a sample of their own traces, answers first, and is asked exactly the questions the human is asked, making annotation a joint human-AI process. Annotrace measures agreement between any two annotators, human or AI. On a multi-agent question-answering corpus it reproduces a previous manual effort's 235 annotation units exactly, and two models labelling the same traces agree 91% of the time at $\u03ba= 0.82$.",
+      "link": "http://arxiv.org/abs/2610.23284v1",
+      "published": "2026-10-16T10:55:26Z",
+      "category": "cs.MA",
+      "worth_reading": 0.83,
+      "novelty": 1.62,
+      "kind": "applied_system",
+      "priority": 0.743
+    },
+    {
+      "title": "KiranaBench: Can a Language Model Run a Neighbourhood Shop?",
+      "summary": "Large language model (LLM) agents are increasingly evaluated on long-horizon tasks, including autonomously running a business. Existing benchmarks for this setting are almost exclusively English-language, Western in retail context, and single-agent, with the agent observing the business directly. We study how these results transfer to a multi-agent Indic setting. We introduce KiranaBench, a simulated Indian general store in which four roles (manager, cashier, helper, and bookkeeper) are each played by a separate LLM agent. Interactions with customers and suppliers occur in English, Hindi, or Hinglish, and product demand is calibrated to India's national Household Consumption Expenditure Survey. Evaluating four open-weight LLMs, we find that all fall far short of a fixed-rule shopkeeper baseline: the best model earns only one-eighth of the baseline's profit, and two models finish below an unmanaged shop. Performance is also consistently lower for Hindi and Hinglish than for English supplier communication. KiranaBench offers evidence that current LLM agents are not yet reliable for autonomously operating small businesses in India, and provides a testbed for developing agents suited to settings that are long-horizon, collaborative, and multilingual.",
+      "link": "http://arxiv.org/abs/2610.22980v1",
+      "published": "2026-10-16T06:02:00Z",
+      "category": "cs.MA",
+      "worth_reading": 0.77,
+      "novelty": 1.59,
+      "kind": "benchmark_or_eval",
+      "priority": 0.698
+    },
+    {
+      "title": "Learning Personalized Memory Gating from Delayed One-Sided Feedback",
+      "summary": "Long-term memory enables language-model agents to personalize future interactions, but a finite memory bank cannot preserve every extracted fact. Existing memory gating policies are typically shared across users and therefore fail to account for user-specific patterns of future reuse. In this paper, we study memory gating at the fact level. We first propose a retrieval-based labeling strategy that labels each fact by whether it is later retrieved and incorporated into responses. We then formulate online memory gating as contextual apple tasting with delayed one-sided feedback, and propose Warm-Start UCB, which combines offline learning from existing data with online adaptation to the current user. Our theoretical analysis establishes a high-probability regret upper bound of $\\tilde{O}(T\u03b5\\wedge d\\sqrt{T})$ when the delay window is at most $O(\\sqrt{T})$, where $T$ is the total number of rounds, $\u03b5$ is the initialization error, $d$ is the dimension of the feature map, and $\\tilde{O}(\\cdot)$ hides constant and poly-logarithmic factors. The results of our experiment demonstrate that our method outperforms all baselines under different memory budgets and history lengths, establishing it as a promising personalized memory gating policy.",
+      "link": "http://arxiv.org/abs/2610.23812v1",
+      "published": "2026-10-16T17:34:45Z",
+      "category": "cs.LG",
+      "worth_reading": 0.76,
+      "novelty": 1.65,
+      "kind": "new_method",
+      "priority": 0.697
+    },
+    {
+      "title": "Cryptographically Secure Agent-to-Agent Communication in Multi-Agent Systems",
+      "summary": "Multi-agent systems (MAS) comprise AI agents that collaborate or compete to perform complex, distributed tasks. Their dynamic interactions create opportunities for threat actors to target and impersonate other agents, intercept messages, inject malicious prompts, and exfiltrate sensitive data while simultaneously complicating the detection of anomalous behavior through conventional monitoring. This paper surveys threats and cryptographic challenges in agent-to-agent communication and presents a zero-trust architecture integrating identity, transport security, message integrity, and monitoring. The architecture establishes agent identities via decentralized identifiers and task-scoped verifiable credentials backed by a permissioned ledger, enforcing least-privilege authorization. For transport security, it provides mutually authenticated, crypto-agile TLS with hybrid post-quantum key establishment, and evaluates KEMTLS with pre-distributed public keys to reduce handshake overhead. Signed CBOR envelopes preserve payload integrity across multi-hop exchanges, while zero-knowledge proofs verify declared task constraints without exposing underlying inputs. Context-aware monitoring of inter-agent messages, tool activity, and execution telemetry informs the setting of risk-based trust thresholds and supports the detection of behavioral anomalies. Together, these mechanisms provide an integrated framework for securing and auditing agent communication, with implications for other agentic protocols and prospective 6G semantic communication.",
+      "link": "http://arxiv.org/abs/2610.23078v1",
+      "published": "2026-10-16T07:49:54Z",
+      "category": "cs.MA",
+      "worth_reading": 0.8,
+      "novelty": 1.35,
+      "kind": "new_method",
+      "priority": 0.695
+    },
+    {
+      "title": "Towards High Semantic Fidelity: Hyperdimensional Symbolic Messages in Multi-Agent Communication",
+      "summary": "Semantic fidelity is essential for multi-agent communication under non-ideal channels, comprising transmission fidelity and conversion fidelity. Yet existing numerical and neural message formats cannot simultaneously achieve both. To address this, we propose a novel message format-\\textbf{H}yperdimensional \\textbf{S}ymbolic \\textbf{M}essages (HSM) and its corresponding communication framework \\textbf{Herm}. For transmission fidelity, Herm suppresses semantic entanglement via an entity-attribute-value structured encoding pipeline. For conversion fidelity, Herm first leverages a receiver-centric ego-binding mechanism to align semantics. Then, a similarity-aware dual-branch fusion module is proposed to prevent critical semantic dilution. To realize explicit message-semantic conversion, we devise an iterative decoding scheme via algebraic inverse operations. Experiments exhibit that Herm outperforms baselines across various noisy scenarios while maintaining superior structural readability.",
+      "link": "http://arxiv.org/abs/2610.23092v1",
+      "published": "2026-10-16T08:01:08Z",
+      "category": "cs.MA",
+      "worth_reading": 0.7,
+      "novelty": 1.95,
+      "kind": "new_method",
+      "priority": 0.685
+    },
+    {
+      "title": "Provable Authority: A Protocol for Verifiable Authority Resolution and Control Across Human, Organizational, and Agentic Transactions",
+      "summary": "Payment systems authenticate users, devices, accounts, and cryptographic credentials, but a relying party, such as a counterparty, payment rail, marketplace, or autonomous agent runtime, generally cannot obtain compact, independently verifiable evidence that the party presenting one exact transaction holds current organizational authority to execute it under the applicable evidence, policy, budget, and approval state. Agentic commerce makes this gap operationally urgent: a software agent can produce a valid signature while acting outside its delegated purpose, after its sponsor's authority has changed, or on transaction details that differ from those a human approved. We describe the ChainIT Authority Protocol, a subject-neutral and rail-neutral pre-execution authority and evidence control plane. The protocol separates durable identity, a versioned organizational authority record (the Authority Resolution Pactvera), sourced evidence assertions, deterministic reason-coded policy predicates, and organization-configured dispositions; binds each decision and human approval to a canonical transaction digest; reserves capacity atomically so that limits hold under concurrency; and authorizes commit only through a single-use, sender-constrained Execution Authorization Credential consumed at the rail adapter, with append-only lifecycle evidence sealed after the terminal outcome. An Agent Subject Profile adds the workload registration, attested key hierarchy, and sovereignty boundary required when the acting subject is an AI agent, without introducing a separate authority concept. We specify the commit-time execution predicate and bounded-freshness status rules, give enforcement profiles for fiat (ACH, wire, card, instant payment) and stablecoin rails, and state residual risks and non-goals.",
+      "link": "http://arxiv.org/abs/2610.22899v1",
+      "published": "2026-10-16T04:01:29Z",
+      "category": "cs.MA",
+      "worth_reading": 0.68,
+      "novelty": 1.95,
+      "kind": "new_method",
+      "priority": 0.671
+    },
+    {
+      "title": "Emergent Discrimination and Polarization in Multi-Agent Systems",
+      "summary": "We study theoretically how discrimination and polarization can emerge in a population of learning agents. Each agent uses an adaptive linear decision layer to map a language-model embedding of an issue to a binary opinion and maintains an evolving estimate of how much it trusts every other agent. Through pairwise interactions, agents update both their decision weights and trust estimates using an online Bayesian rule derived from teacher-student learning over a noisy channel. In-context-learning experiments with large language models qualitatively reproduce the predicted opinion and trust updates. We then assign each agent one of two arbitrary group labels, A or B, and model group bias by allowing a fraction $f_b$ of agents to shift its perceived agreement with each message by a strength $b$, a bias steering prejudice, depending on whether the sender and receiver share a label. We use order parameters from statistical mechanics to connect these local dynamics to collective states and transitions. Starting from uniformly random initial conditions, simulations reveal a rich phase diagram in the $(b,f_b)$ plane, comprising four collective states: spin-glass frustrated out-group favoritism, nondiscriminatory polarization, discrimination with opinion alignment, and discrimination without opinion alignment. Which state emerges depends on both the strength and prevalence of the bias. These results show how simple local learning dynamics can generate qualitatively distinct forms of polarization and discrimination, underscoring the need for population-level safety analysis of multi-agent systems. They also suggest measurable order parameters for characterizing analogous collective states in human societies.",
+      "link": "http://arxiv.org/abs/2610.22701v1",
+      "published": "2026-10-15T22:07:16Z",
+      "category": "cs.MA",
+      "worth_reading": 0.68,
+      "novelty": 1.9,
+      "kind": "new_method",
+      "priority": 0.666
+    },
+    {
+      "title": "Learning Self-Orchestration in Decentralized Agent Swarms",
+      "summary": "The capabilities of an agent swarm depend on both its individual members and how they coordinate. Yet existing multi-agent systems often train agents within fixed orchestration structures, separating the learning of individual capabilities from the organization of collective behavior. We introduce market-based post-training (MPT), a framework for jointly learning action policies and self-orchestration in decentralized agent swarms. Agents express their willingness to participate through bids, which determine who acts and how collective outcomes provide local training credit. Learning both action and bidding behavior allows individual capabilities and patterns of participation to adapt together without a central coordinating agent. We evaluate MPT on embodied crafting, robot navigation, and deep research. Results show gains over monolithic post-training and confirm that agent participation indeed evolves with learning. With the same post-trained action policies, learned self-orchestration outperforms alternative coordination strategies. Ablations show that both action and bidding benefit from learning, and that learned bids provide more effective action-training signals. Beyond the original training objectives, trained swarms adapt faster to related tasks and achieve better performance with larger populations at inference time. Larger populations also suffer smaller performance losses under agent dropout, demonstrating that learned self-orchestration supports reuse, scaling, and robustness in decentralized agent swarms. Code and trained models are available at https://github.com/Embodied-Minds-Lab/MPT.",
+      "link": "http://arxiv.org/abs/2610.22322v1",
+      "published": "2026-10-15T17:51:57Z",
+      "category": "cs.MA",
+      "worth_reading": 0.65,
+      "novelty": 1.93,
+      "kind": "new_method",
+      "priority": 0.648
+    },
+    {
+      "title": "On the possibilities and limitations of LLM-based multi-agent systems for multi-criteria decision-making in healthcare operations management",
+      "summary": "Multi-criteria models for healthcare operations need weights that express how stakeholders trade off patient waiting time, provider workload, and operating cost, but these weights are difficult to quantify. Teams of large language model (LLM) agents, each prompted to represent a stakeholder, have been used to supply them. We propose a framework for assessing the reliability of LLM-generated preferences as inputs to multi-objective optimization and quantifying how their uncertainty affects decisions. We study explicit preferences by asking agents to rate the importance of the criteria in an outpatient appointment scheduling problem, and implicit preferences by inferring trade-offs from the agents' pairwise choices between emergency department configurations. The computational experiments show that the explicit preferences respond to the clinic's operating conditions and differ across roles, but deliberation among the agents can erase these differences, whereas simple averaging preserves them. The pairwise choices used to reveal the agents' implicit preferences depend largely on which option is presented first, and we find limited evidence that a statistical model using contextual information alongside presentation order predicts the agents' choices on new comparison pairs better than a model using presentation order alone. We then formulate robust weighted-sum optimization models to account for preference uncertainty. In most cases, these models select different schedules or configurations from those obtained using average preference weights. These results indicate that LLM-generated preferences need an audit of this kind before they are used as optimization weights in healthcare decision support.",
+      "link": "http://arxiv.org/abs/2610.23673v1",
+      "published": "2026-10-16T16:05:15Z",
+      "category": "cs.AI",
+      "worth_reading": 0.69,
+      "novelty": 1.59,
+      "kind": "benchmark_or_eval",
+      "priority": 0.642
+    },
+    {
+      "title": "Logic-Guided Graph Denoising Diffusion Models",
+      "summary": "Graph diffusion models are competitive approaches for generating complex graph-structured data. However, when such distributions have strict structural constraints, diffusion models may fail to capture them exactly, resulting in the generation of invalid graphs. In this paper, we propose a method for grounding graph diffusion models in domain-specific knowledge via First Order Logic (FOL), leveraging its expressive and interpretable formalism to impose structural constraints on the generative process. We incorporate domain knowledge using classifier guidance, a technique that conditions the diffusion model's distribution on external variables to exert control over the sampled data. During the generative process, classifier guidance steers the denoising trajectory to optimize an objective function, which we define as a fuzzy and differentiable relaxation of the logical rules. Our methodology requires only the specification of constraints in FOL, whose satisfaction is encouraged at inference time to guide a pre-trained generative model. We evaluate our approach by comparing the unconditional generation of knowledge graphs with our logic-guided framework, which incorporates domain ontologies as structural constraints during inference. This approach significantly increases the proportion of generated graphs that satisfy the ontological constraints.",
+      "link": "http://arxiv.org/abs/2610.23766v1",
+      "published": "2026-10-16T17:06:07Z",
+      "category": "cs.LG",
+      "worth_reading": 0.66,
+      "novelty": 1.73,
+      "kind": "new_method",
+      "priority": 0.635
+    },
+    {
+      "title": "Cooperation Without Adaptation: LLM Agents in a Collective-Risk Dilemma",
+      "summary": "Language-model agents are increasingly deployed to act on behalf of people in settings where individual decisions shape shared outcomes. We examine whether five production models adapt their contributions to changing risks and partner behaviour, or instead follow a relatively fixed strategy. In a collective-risk dilemma game (CRG), six players contribute to a shared pool over ten rounds; if the pool falls short of its target, a catastrophe may destroy their remaining resources. Four models contributed approximately an equal share at every positive risk level, and four of the five also contributed when risk was zero, even though contributing could not improve their payoff. Explicitly stating that only the agent's own payoff mattered reduced zero-risk contributions for most models, while a more neutral prompt did not. Several models correctly identified which action offered the higher expected payoff at different risk levels, yet their contributions changed little. Against fixed partners, no model consistently chose the payoff-maximising response, and in mixed-model groups, a single agent's shortfall in the final round could cause an otherwise successful group to fail. Payoff-based selection also depended on population composition: in a single six-agent group, it favoured the model that contributed least and reduced group success, whereas in larger, randomly mixed populations, it favoured an exact fair-share model at moderate and high risk. These findings show that cooperative self-play alone is not evidence of strategic adaptability. Consistent with a machine-behaviour approach, evaluations of agents in multi-agent systems should test how they respond to incentives, partner actions, and population composition.",
+      "link": "http://arxiv.org/abs/2610.22882v1",
+      "published": "2026-10-16T03:38:04Z",
+      "category": "cs.MA",
+      "worth_reading": 0.69,
+      "novelty": 1.51,
+      "kind": "benchmark_or_eval",
+      "priority": 0.634
+    },
+    {
+      "title": "Behavioral Couplings: From Formation to Behavioral Emergence in Language Models",
+      "summary": "Fine-tuning large language models (LLMs) can induce behaviors beyond those explicitly targeted. For example, training a model to respond more warmly can make it more sycophantic, and training it to write insecure code can cause broad misalignment on prompts unrelated to coding. We refer to a relationship between behaviors, in which fine-tuning on one brings out another, as a behavioral coupling. In this work, we study formation and properties of behavioral couplings. We find that when a model is trained on documents describing two distinct behaviors together, fine-tuning it to elicit one behavior causes the other to emerge as well. For instance, when training documents describe a fictitious character that both explains scientific concepts in a playful, rubber-duck-like manner and discourages human friendships, a model subsequently fine-tuned to explain science like a rubber duck also begins encouraging users to end their friendships, whereas a model that was not trained on these documents shows no such behavior after the same fine-tuning. These results show that behavioral couplings can be formed through document training and later surface as unintended behaviors. More concerningly, we find that couplings can compose. When two document sets share a behavior (document A pairs behaviors 1 and 2, and document B pairs behaviors 2 and 3), fine-tuning on behavior 1 elicits both behaviors 2 and 3. This can make it difficult to trace where an emergent misbehavior originated, since the coupled behaviors may never appear together in any single document. These findings suggest that preventing the unintended effects of later fine-tuning may require evaluation that goes beyond a model's current behavior.",
+      "link": "http://arxiv.org/abs/2610.23847v1",
+      "published": "2026-10-16T17:58:08Z",
+      "category": "cs.AI",
+      "worth_reading": 0.58,
+      "novelty": 1.82,
+      "kind": "benchmark_or_eval",
+      "priority": 0.588
+    },
+    {
+      "title": "OwlSight: A Panoramic Monitor for Chain-of-Thought Reasoning",
+      "summary": "Chain-of-Thought (CoT) monitoring offers actionable evidence for oversight AI systems, with the potential to enable early detection and intervention. However, existing approaches are focused on specific tasks, whereas the regulation of AI, particularly reasoning models, requires monitoring a broader range of tasks. We introduce Factor for CoT monitoring, a strategy that supports customizing monitoring requirements in the prompt, which enables a single monitor to cover different tasks by relying on different factors. Furthermore, we introduce two types of factors, fine-grained and coarse-grained (e.g., monitoring whether a specific email address has been leaked versus monitoring privacy leakage), to accommodate diverse user monitoring needs. Based on this, we develop a CoT monitor named OwlSight that relies solely on factor to monitor behaviors related to multiple dimensions, including capability, safety, and trustworthiness. Experiments across 15,971 reasoning trajectories show that OwlSight surpasses general-purpose LLMs by 1.32-30.57 and 11.71-27.81 points at fine and coarse granularity, respectively, and achieves state-of-the-art results on OpenAI's CoT monitorability benchmark. It also generalizes to unseen models' CoTs and remains robust to Factor rephrasings, CoT compression, and obfuscation, offering a promising paradigm for CoT monitoring that can contribute to the oversight of frontier AI.",
+      "link": "http://arxiv.org/abs/2610.23670v1",
+      "published": "2026-10-16T16:01:49Z",
+      "category": "cs.AI",
+      "worth_reading": 0.58,
+      "novelty": 1.74,
+      "kind": "new_method",
+      "priority": 0.58
+    },
+    {
+      "title": "PresenceBench: An Exploratory Evaluation of Large Language Model Adaptation to User State",
+      "summary": "Presence-aware intelligence is the capacity of an AI system's intelligence layer to adapt appropriately to the functional state of the person it serves (here readiness, flow, and stability) while preserving task quality and safety. We introduce PresenceBench, an instrument for measuring it. PresenceBench evaluates how the intelligence layer uses a supplied state, not how that state is sensed, and breaks the capability into measurable properties. Two are tested here. Receptivity: does the model take up the state and give a better response than with no signal? Specificity: does any improvement depend on the correct state, rather than on extra structured context? A third, adaptation across states, is a required endpoint not measured in this release. A five-arm causal design answers both questions, against each model's own baseline and an equally structured mismatched-state control, scored by a correctness-gated human paired comparison. The exploratory evaluation covered four models across eighteen single-turn, six fixed three-turn and six simulated natural-conversation scenarios. Supplying a synthetic state, raw or translated into a response policy, gave human-preference point estimates above 0.5 for all four models (Claude Sonnet 5, DeepSeek V4 Pro, Gemini 3.6 Flash, GPT-5.6 Terra), with three of eight 95% intervals excluding chance. Specificity was not resolved: no per-model interval excluded chance, and the design cannot yet separate the state values from a generic instruction to adapt. Policy delivery reduced priced cost and output tokens against each model's baseline; these are resource-use changes, not efficiency gains, because correctness non-inferiority was not established. Safety-floor failures were rare (13 of 360 cases), with a non-significant excess under policy delivery. We report the instrument, the frozen results, and the controls a confirmatory study needs.",
+      "link": "http://arxiv.org/abs/2610.23625v1",
+      "published": "2026-10-16T15:33:04Z",
+      "category": "cs.AI",
+      "worth_reading": 0.54,
+      "novelty": 1.79,
+      "kind": "benchmark_or_eval",
+      "priority": 0.557
+    }
+  ]
+}
