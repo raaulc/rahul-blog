@@ -25,6 +25,32 @@ const {
 const SITE = 'https://www.raaulc.com';
 const canonical = new URL(Astro.url.pathname, SITE).href;
 const fullTitle = title.toLowerCase().includes('rahul') ? title : `${title} — rahul`;
+const ogImage = `${SITE}/og-default.png`;
+
+const person = {
+  '@type': 'Person',
+  '@id': `${SITE}/#person`,
+  name: 'Rahul Rathod',
+  url: `${SITE}/`,
+  image: `${SITE}/images/pic.jpg`,
+  jobTitle: 'AI Engineer',
+  worksFor: { '@type': 'Organization', name: 'Flutter UK & Ireland' },
+  address: { '@type': 'PostalAddress', addressLocality: 'Sheffield', addressCountry: 'GB' },
+  knowsAbout: ['AI system design', 'Recommender systems', 'Ranking', 'LLM evaluation', 'AI agents', 'TypeScript', 'Python'],
+  sameAs: ['https://www.linkedin.com/in/raaulc/', 'https://github.com/raaulc'],
+};
+const jsonLd = type === 'article'
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: title,
+      description,
+      url: canonical,
+      datePublished: publishedAt?.toISOString(),
+      author: person,
+      image: ogImage,
+    }
+  : { '@context': 'https://schema.org', '@graph': [person, { '@type': 'WebSite', url: `${SITE}/`, name: 'rahul', author: { '@id': `${SITE}/#person` } }] };
 ---
 
 <meta charset="UTF-8" />
@@ -40,12 +66,19 @@ const fullTitle = title.toLowerCase().includes('rahul') ? title : `${title} — 
 <meta property="og:url" content={canonical} />
 <meta property="og:site_name" content="rahul" />
 <meta property="og:locale" content="en_GB" />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Rahul: AI systems, from prototype to production" />
 {publishedAt && <meta property="article:published_time" content={publishedAt.toISOString()} />}
 
 <!-- Twitter Card -->
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
 <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 <link rel="alternate" type="application/rss+xml" title="rahul" href="/rss.xml" />
