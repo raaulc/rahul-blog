@@ -852,3 +852,11 @@ article.post-content hr::after {
   .navbar-nav { gap: 10px; }
   .navbar-nav a { padding: 10px 2px; }
 }
+.navbar-nav a.nav-cv { color: var(--accent); }
+@media (max-width: 380px) {
+  .navbar { padding: 0 10px; }
+  .navbar-path .p-tilde { display: none; }
+  .navbar-nav { gap: 6px; }
+  .navbar-nav li:nth-last-child(-n+2) { margin-left: -4px; }
+  .navbar-nav a.nav-search, .theme-toggle { min-width: 34px; }
+}

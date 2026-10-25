@@ -34,4 +34,4 @@ I am currently an AI Engineer in Automation Transformation and AI at Flutter UK 
 
 ## Get in touch
 
-Find me on [LinkedIn](https://www.linkedin.com/in/raaulc/) and [GitHub](https://github.com/raaulc).
+Read my [CV (PDF)](/cv/Rahul_Rathod_CV.pdf), or find me on [LinkedIn](https://www.linkedin.com/in/raaulc/) and [GitHub](https://github.com/raaulc).
