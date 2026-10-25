@@ -1,104 +1,34 @@
 ---
-import Head from '../components/Head.astro';
+import Base from '../layouts/Base.astro';
+import WorkCard from '../components/WorkCard.astro';
+import { experiments, notebooks, selected } from '../data/work';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <Head
-      title="projects"
-      description="Production-style AI systems built by Rahul: ranking pipelines, typed AI decisions and agent workflows."
-    />
-  </head>
-  <body>
-    <nav class="navbar">
-      <a href="/" class="navbar-path">
-        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
-      </a>
-      <ul class="navbar-nav">
-        <li><a href="/">blog</a></li>
-        <li><a href="/projects" class="active">projects</a></li>
-        <li><a href="/deck">deck</a></li>
-        <li><a href="/jev">jev</a></li>
-        <li><a href="/about">about</a></li>
-      </ul>
-    </nav>
+<Base title="work" description="Selected AI systems by Rahul Rathod: a real-time recommender, a daily ranking pipeline and typed AI decisions, plus experiments and notebooks." active="work" ogImage="/og/projects.png">
+  <h1 class="sr-only">Work</h1>
+  <p class="cmd"><span class="dollar">$</span><span class="command"> ls</span><span class="flag"> --selected</span><span class="arg"> ./work</span></p>
+  <p class="page-lede">Systems built end to end, with measured results.</p>
+  <h2 class="sr-only">Selected work</h2>
+  <div class="work-grid">
+    {selected.map((item) => <WorkCard item={item} />)}
+  </div>
 
-    <main class="container">
-      <a href="/" class="back-link">← cd ..</a>
+  <section class="section">
+    <h2 class="section-title">Experiments</h2>
+    <div class="work-grid two">
+      {experiments.map((item) => <WorkCard item={item} compact />)}
+    </div>
+  </section>
 
-      <p class="cmd">
-        <span class="dollar">$</span>
-        <span class="command"> ls</span>
-        <span class="flag"> -la</span>
-        <span class="arg"> ./projects/</span>
-      </p>
-
-      <div class="content-block">
-        <div class="project-entry">
-          <p class="project-name"><a href="/projects/ai-paper-radar">ai-paper-radar/</a></p>
-          <p class="project-desc">// a daily ranking pipeline over arxiv — every new cs.ai/cs.cl/cs.lg/cs.ma paper is scored for relevance and novelty, ranked, and published with a date-wise archive. scheduled, retried and running unattended since sep 2026</p>
-          <p class="project-meta">// stack: jev (typesafe ai) &middot; python &middot; github actions &middot; arxiv api</p>
-          <p class="project-status">// status: live — runs every morning</p>
-        </div>
-        <div class="project-entry">
-          <p class="project-name"><a href="/projects/five-trolleys-jev">five-trolleys-jev/</a></p>
-          <p class="project-desc">// five famous ethical dilemmas run through jev's typed-decision api — real/not-a-dilemma, ethical framework, difficulty score, and an actual yes/no verdict for each</p>
-          <p class="project-meta">// stack: jev (typesafe ai) &middot; python &middot; vanilla html/css/js</p>
-          <p class="project-status">// status: complete</p>
-        </div>
-        <div class="project-entry">
-          <p class="project-name"><a href="/projects/daily-media-update">daily-media-update/</a></p>
-          <p class="project-desc">// daily morning briefing — GPT-4o writes a John Oliver-style monologue from your reminders, emails, and AI news. read aloud by OpenAI TTS.</p>
-          <p class="project-meta">// stack: gpt-4o &middot; openai tts &middot; kling ai &middot; python</p>
-          <p class="project-status">// status: in progress</p>
-        </div>
-        <div class="project-entry">
-          <p class="project-name"><a href="/projects/next-word-prediction-lstm">next-word-prediction-lstm/</a></p>
-          <p class="project-desc">// next word prediction from scratch — lstm trained on medium article titles. autoregressive generation, one token at a time.</p>
-          <p class="project-meta">// stack: pytorch &middot; nltk &middot; pandas &middot; numpy</p>
-          <p class="project-status">// status: complete</p>
-        </div>
-        <div class="project-entry">
-          <p class="project-name"><a href="/projects/finetune-t5-small-summarization">finetune-t5-small-summarization/</a></p>
-          <p class="project-desc">// fine-tuning google t5-small on samsum dialogue dataset — seq2seq summarization with huggingface trainer api.</p>
-          <p class="project-meta">// stack: huggingface transformers &middot; pytorch &middot; datasets &middot; accelerate</p>
-          <p class="project-status">// status: complete</p>
-        </div>
-        <div class="project-entry">
-          <p class="project-name"><a href="/projects/fine-tuning-gpt2-peft-lora">fine-tuning-gpt2-peft-lora/</a></p>
-          <p class="project-desc">// fine-tuning gpt-2 with peft-lora — only 0.24% of parameters trained. english quotes dataset, 4 minutes, one gpu.</p>
-          <p class="project-meta">// stack: peft &middot; huggingface transformers &middot; pytorch &middot; accelerate</p>
-          <p class="project-status">// status: complete</p>
-        </div>
-        <div class="project-entry">
-          <p class="project-name"><a href="/projects/variational-autoencoders-mnist">variational-autoencoders-mnist/</a></p>
-          <p class="project-desc">// conditional vae on mnist — generate any handwritten digit on demand. reparameterisation trick + kl divergence from scratch.</p>
-          <p class="project-meta">// stack: pytorch &middot; torchvision &middot; matplotlib</p>
-          <p class="project-status">// status: complete</p>
-        </div>
-        <div class="project-entry">
-          <p class="project-name"><a href="/projects/ai-anime-chatbot-with-rag">ai-anime-chatbot-with-rag/</a></p>
-          <p class="project-desc">// anime chatbot that scrapes any url, builds a faiss vector store, augments with duckduckgo search, and answers via groq llama 3.3 — every answer cites [rag] or [search].</p>
-          <p class="project-meta">// stack: langchain &middot; faiss &middot; huggingface &middot; groq &middot; duckduckgo &middot; streamlit</p>
-          <p class="project-status">// status: complete</p>
-        </div>
-        <div class="project-entry">
-          <p class="project-name"><a href="/projects/quiz-generator-with-llama">quiz-generator-with-llama/</a></p>
-          <p class="project-desc">// paste any text, pick a difficulty — llama 4 generates 5 mcqs as structured json, rendered as an interactive quiz with auto-scoring.</p>
-          <p class="project-meta">// stack: groq &middot; llama 4 scout &middot; streamlit &middot; python</p>
-          <p class="project-status">// status: complete</p>
-        </div>
-        <div class="project-entry">
-          <p class="project-name"><a href="/projects/self-rag-pipeline">self-rag-pipeline/</a></p>
-          <p class="project-desc">// self-evaluating rag pipeline — llm grades its own retrieved docs, checks for hallucinations, and validates its answer. stateful langgraph workflow.</p>
-          <p class="project-meta">// stack: langgraph &middot; langchain &middot; groq &middot; chroma &middot; huggingface</p>
-          <p class="project-status">// status: complete</p>
-        </div>
-      </div>
-    </main>
-
-    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
-    <script defer src="/_vercel/insights/script.js"></script>
-  </body>
-</html>
+  <section class="section">
+    <h2 class="section-title">Lab notebooks</h2>
+    <ul class="notebook-list">
+      {notebooks.map((n) => (
+        <li>
+          <a href={n.href}>{n.title}</a>
+          <span>{n.summary}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>

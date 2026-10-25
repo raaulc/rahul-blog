@@ -1,0 +1,27 @@
+---
+import type { WorkItem } from '../data/work';
+interface Props {
+  item: WorkItem;
+  compact?: boolean;
+}
+const { item, compact = false } = Astro.props;
+---
+
+<article class:list={['work-card', { compact }]}>
+  <header class="work-head">
+    <h3 class="work-title"><a href={item.href}>{item.title}</a></h3>
+    <span class:list={['status', item.status.replace(' ', '-')]}>{item.status}</span>
+  </header>
+  <p class="work-summary">{item.summary}</p>
+  {item.metrics && !compact && (
+    <dl class="metrics">
+      {item.metrics.map((m) => (
+        <div class="metric">
+          <dt>{m.label}</dt>
+          <dd>{m.value}</dd>
+        </div>
+      ))}
+    </dl>
+  )}
+  <p class="work-stack">{item.stack.join(' · ')}</p>
+</article>

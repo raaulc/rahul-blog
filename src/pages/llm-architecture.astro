@@ -1,45 +1,17 @@
 ---
 import { getCollection } from 'astro:content';
-import Head from '../components/Head.astro';
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
 
 const posts = (await getCollection('posts'))
   .filter((p) => p.data.type === 'llm-architecture')
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-function readingTime(post) {
-  const words = post.body.split(/\s+/).length;
-  return Math.max(1, Math.round(words / 200));
-}
-
-function fmtDate(d) {
-  return d.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: '2-digit' });
-}
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <Head
-      title="llm architecture"
-      description="Deep dives into LLM architecture — building language models from scratch with PyTorch."
-    />
-  </head>
-  <body>
-    <nav class="navbar">
-      <a href="/" class="navbar-path">
-        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
-      </a>
-      <ul class="navbar-nav">
-        <li><a href="/">blog</a></li>
-        <li><a href="/projects">projects</a></li>
-        <li><a href="/deck">deck</a></li>
-        <li><a href="/jev">jev</a></li>
-        <li><a href="/about">about</a></li>
-      </ul>
-    </nav>
+<Base title="llm architecture" description="Deep dives into LLM architecture — building language models from scratch with PyTorch." active="work">
 
-    <main class="container">
-      <a href="/" class="back-link">← cd ..</a>
+      <a href="/projects" class="back-link">← cd ../work</a>
 
       <p class="cmd">
         <span class="dollar">$</span>
@@ -48,19 +20,5 @@ function fmtDate(d) {
         <span class="arg"> ./llm-architecture/</span>
       </p>
 
-      <ul class="post-list">
-        {posts.map((post) => (
-          <li class="post-entry">
-            <span class="post-date">{fmtDate(post.data.date)}</span>
-            <a href={`/posts/${post.slug}`} class="post-link">{post.data.title}</a>
-            <span class="post-mins">{readingTime(post)}m</span>
-          </li>
-        ))}
-        {posts.length === 0 && <p class="empty-msg">// no posts yet — check back soon</p>}
-      </ul>
-    </main>
-
-    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
-    <script defer src="/_vercel/insights/script.js"></script>
-  </body>
-</html>
+      <PostList posts={posts} />
+</Base>

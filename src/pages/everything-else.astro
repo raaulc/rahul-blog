@@ -1,30 +1,9 @@
 ---
-import Head from '../components/Head.astro';
+import Base from '../layouts/Base.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <Head
-      title="everything else"
-      description="Health, habits, books, and random thoughts from Rahul — a software engineer building in public."
-    />
-  </head>
-  <body>
-    <nav class="navbar">
-      <a href="/" class="navbar-path">
-        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
-      </a>
-      <ul class="navbar-nav">
-        <li><a href="/">blog</a></li>
-        <li><a href="/projects">projects</a></li>
-        <li><a href="/deck">deck</a></li>
-        <li><a href="/jev">jev</a></li>
-        <li><a href="/about">about</a></li>
-      </ul>
-    </nav>
+<Base title="everything else" description="Health, habits, books, and random thoughts from Rahul — a software engineer building in public." active="work">
 
-    <main class="container">
       <a href="/" class="back-link">← cd ..</a>
 
       <p class="cmd">
@@ -37,9 +16,4 @@ import Head from '../components/Head.astro';
         <p>// health, habits, books, random thoughts</p>
         <p>// coming soon</p>
       </div>
-    </main>
-
-    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
-    <script defer src="/_vercel/insights/script.js"></script>
-  </body>
-</html>
+</Base>

@@ -1,0 +1,214 @@
+---
+// Live demo of the realtime-recs ranker. Calls /api/recommend, which runs the same TypeScript code as the service.
+---
+
+<div class="demo" id="recs-demo">
+  <div class="demo-panel demo-pick">
+    <p class="demo-step"><span>1</span> Who is playing?</p>
+    <div class="demo-presets" role="group" aria-label="Player profiles">
+      <button type="button" data-preset="8930,34330,200510" aria-pressed="false">strategy player</button>
+      <button type="button" data-preset="730,550,620" aria-pressed="false">action player</button>
+      <button type="button" data-preset="105600,413150,212680" aria-pressed="false">indie player</button>
+    </div>
+    <div class="demo-search">
+      <input id="demo-q" type="search" list="demo-games" placeholder="add a game they played…" autocomplete="off" aria-label="Add a game the player has played" />
+      <datalist id="demo-games"></datalist>
+    </div>
+    <ul class="demo-chips" id="demo-history" aria-label="Games played"></ul>
+  </div>
+
+  <div class="demo-panel demo-out" aria-live="polite">
+    <p class="demo-step"><span>2</span> Recommendations</p>
+    <div id="demo-notice" class="demo-notice" hidden></div>
+    <ol class="demo-recs" id="demo-recs"><li class="demo-empty">Loading…</li></ol>
+    <div class="demo-latency" id="demo-latency" hidden>
+      <div class="lat-bar" aria-hidden="true">
+        <span class="lat-retrieval" id="lat-retrieval"></span><span class="lat-ranking" id="lat-ranking"></span><span class="lat-policy" id="lat-policy"></span>
+      </div>
+      <p class="demo-timing" id="demo-timing"></p>
+    </div>
+  </div>
+
+  <div class="demo-panel demo-play">
+    <p class="demo-step"><span>3</span> Play, and watch it react</p>
+    <p class="demo-hint">Each tap logs 30 minutes this session. The next request reflects it. Past 180 minutes in an hour, the cooldown guardrail stops recommendations.</p>
+    <div class="demo-session" id="demo-session"></div>
+    <div class="session-meter" aria-hidden="true"><span id="session-fill"></span></div>
+    <p class="demo-hint" id="demo-session-total">Session: 0 of 180 minutes.</p>
+    <div class="demo-row">
+      <label class="demo-exclude">
+        <span>Player excludes genre</span>
+        <select id="demo-exclude"><option value="">none</option></select>
+      </label>
+      <button type="button" class="demo-reset" id="demo-reset">reset session</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  type Game = { id: string; t: string; g: string[] };
+  type Rec = {
+    itemId: string;
+    title: string;
+    genres: string[];
+    score: number | null;
+    because?: { itemId: string; title: string; via: 'co-play' | 'taste' };
+  };
+  type Result = {
+    items: Rec[];
+    guardrails: { code: string; sessionMinutes?: number; demoted?: number; count?: number }[];
+    timings: { retrieval: number; ranking: number; policy: number; total: number };
+    modelVersion: string;
+  };
+
+  const SESSION_LIMIT = 180;
+  const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+  const el = <K extends keyof HTMLElementTagNameMap>(tag: K, props: Partial<HTMLElementTagNameMap[K]> = {}, ...kids: (Node | string)[]) => {
+    const e = Object.assign(document.createElement(tag), props);
+    e.append(...kids);
+    return e;
+  };
+  const decode = (s: string) => s.replace(/&amp;/g, '&');
+  const history = new Map<string, number>(); // itemId -> lifetime minutes
+  const session: { itemId: string; minutes: number }[] = [];
+  let games = new Map<string, Game>();
+  let byTitle = new Map<string, string>();
+  let pending = 0;
+  const title = (id: string) => games.get(id)?.t ?? '…';
+
+  fetch('/api/catalog.json')
+    .then((r) => r.json())
+    .then((catalog: { games: Game[]; genres: string[] }) => {
+      games = new Map(catalog.games.map((g) => [g.id, g]));
+      byTitle = new Map(catalog.games.map((g) => [g.t, g.id]));
+      $('demo-games').append(...catalog.games.map((g) => el('option', { value: g.t })));
+      $('demo-exclude').append(...catalog.genres.map((g) => el('option', { value: g, textContent: decode(g) })));
+      renderInputs();
+    });
+
+  function renderInputs() {
+    $('demo-history').replaceChildren(
+      ...[...history.keys()].map((id) => {
+        const x = el('button', { type: 'button', textContent: '×', ariaLabel: `remove ${title(id)}` });
+        x.onclick = () => {
+          history.delete(id);
+          markPreset(null);
+          update();
+        };
+        return el('li', {}, title(id), x);
+      }),
+    );
+    $('demo-session').replaceChildren(
+      ...[...history.keys()].map((id) => {
+        const b = el('button', { type: 'button', textContent: `+30m ${title(id)}` });
+        b.onclick = () => {
+          session.push({ itemId: id, minutes: 30 });
+          update();
+        };
+        return b;
+      }),
+    );
+    const mins = session.reduce((t, s) => t + s.minutes, 0);
+    $('session-fill').style.width = `${Math.min(100, (mins / SESSION_LIMIT) * 100)}%`;
+    $('session-fill').classList.toggle('over', mins > SESSION_LIMIT);
+    $('demo-session-total').textContent = `Session: ${mins} of ${SESSION_LIMIT} minutes${session.length ? ` across ${session.length} plays` : ''}.`;
+  }
+
+  function renderResult(r: Result, rtt: number) {
+    const msgs: string[] = [];
+    for (const g of r.guardrails) {
+      if (g.code === 'cooldown') msgs.push(`Cooldown: ${g.sessionMinutes} minutes played this hour, so nothing is recommended and the player is nudged to take a break.`);
+      if (g.code === 'diversity') msgs.push(`Diversity: ${g.demoted} game(s) moved down so one genre does not fill the list.`);
+      if (g.code === 'excluded') msgs.push(`Exclusions: ${g.count} games filtered out before ranking.`);
+      if (g.code === 'cold_start') msgs.push('Cold start: no history, so these are popular games.');
+    }
+    const notice = $('demo-notice');
+    notice.hidden = !msgs.length;
+    notice.replaceChildren(...msgs.map((m) => el('p', { textContent: m })));
+    notice.classList.toggle('warn', r.guardrails.some((g) => g.code === 'cooldown'));
+
+    $('demo-recs').replaceChildren(
+      ...(r.items.length
+        ? r.items.map((it) => {
+            const why = it.because
+              ? el('span', { className: 'rec-why' }, it.because.via === 'co-play' ? 'players of ' : 'like ', el('b', { textContent: it.because.title }), it.because.via === 'co-play' ? ' also play this' : '')
+              : el('span', { className: 'rec-why', textContent: decode(it.genres.slice(0, 2).join(' · ')) });
+            return el('li', {}, el('span', { className: 'rec-title', textContent: it.title || it.itemId }), why);
+          })
+        : [el('li', { className: 'demo-empty', textContent: 'Nothing recommended.' })]),
+    );
+
+    const t = r.timings;
+    const total = Math.max(t.total, 0.001);
+    // Nothing was ranked during a cooldown, so there is no latency to show.
+    $('demo-latency').hidden = !r.items.length;
+    $('lat-retrieval').style.width = `${(t.retrieval / total) * 100}%`;
+    $('lat-ranking').style.width = `${(t.ranking / total) * 100}%`;
+    $('lat-policy').style.width = `${(t.policy / total) * 100}%`;
+    $('demo-timing').replaceChildren(
+      el('span', { className: 'k-retrieval', textContent: `retrieval ${t.retrieval.toFixed(1)}` }), ' · ',
+      el('span', { className: 'k-ranking', textContent: `ranking ${t.ranking.toFixed(1)}` }), ' · ',
+      el('span', { className: 'k-policy', textContent: `guardrails ${t.policy.toFixed(1)}` }),
+      ` · server ${t.total.toFixed(1)} ms · round trip ${Math.round(rtt)} ms`,
+    );
+  }
+
+  async function update() {
+    renderInputs();
+    const id = ++pending;
+    const exclude = ($('demo-exclude') as HTMLSelectElement).value;
+    const t0 = performance.now();
+    $('recs-demo').classList.add('busy');
+    try {
+      const res = await fetch('/api/recommend', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          history: [...history].map(([itemId, minutes]) => ({ itemId, minutes })),
+          session,
+          excludedGenres: exclude ? [exclude] : [],
+          k: 8,
+        }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      const r: Result = await res.json();
+      if (id === pending) renderResult(r, performance.now() - t0);
+    } catch {
+      if (id === pending) $('demo-recs').replaceChildren(el('li', { className: 'demo-empty', textContent: 'The demo API is not reachable right now.' }));
+    } finally {
+      if (id === pending) $('recs-demo').classList.remove('busy');
+    }
+  }
+
+  const presets = document.querySelectorAll<HTMLButtonElement>('[data-preset]');
+  function markPreset(active: HTMLButtonElement | null) {
+    presets.forEach((b) => b.setAttribute('aria-pressed', String(b === active)));
+  }
+  function loadPreset(b: HTMLButtonElement) {
+    history.clear();
+    session.length = 0;
+    for (const id of b.dataset.preset!.split(',')) history.set(id, 20 * 60);
+    markPreset(b);
+    update();
+  }
+  presets.forEach((b) => (b.onclick = () => loadPreset(b)));
+  $('demo-q').addEventListener('change', (e) => {
+    const input = e.target as HTMLInputElement;
+    const id = byTitle.get(input.value);
+    if (id && history.size < 20) {
+      history.set(id, 20 * 60);
+      input.value = '';
+      markPreset(null);
+      update();
+    }
+  });
+  $('demo-exclude').addEventListener('change', update);
+  $('demo-reset').onclick = () => {
+    session.length = 0;
+    ($('demo-exclude') as HTMLSelectElement).value = '';
+    update();
+  };
+
+  // Start with a profile loaded so visitors see results without clicking.
+  loadPreset(presets[0]);
+</script>

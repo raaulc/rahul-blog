@@ -1,0 +1,38 @@
+---
+import Base from './Base.astro';
+import type { Metric } from '../data/work';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    path: string;
+    status: string;
+    stack: string[];
+    metrics: Metric[];
+    ogImage?: string;
+  };
+}
+const { title, description, path, status, stack, metrics, ogImage } = Astro.props.frontmatter;
+---
+
+<Base title={title} description={description} active="work" ogImage={ogImage}>
+  <a href="/projects" class="back-link">← cd ../work</a>
+  <p class="cmd"><span class="dollar">$</span><span class="command"> cat</span><span class="arg"> {path}/README.md</span></p>
+  <header class="cs-head">
+    <h1>{title}</h1>
+    <p class="cs-lede">{description}</p>
+    <p class="work-stack">{status} · {stack.join(' · ')}</p>
+    <dl class="metrics cs-metrics">
+      {metrics.map((m) => (
+        <div class="metric">
+          <dt>{m.label}</dt>
+          <dd>{m.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </header>
+  <article class="post-content cs-body">
+    <slot />
+  </article>
+</Base>

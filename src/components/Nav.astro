@@ -1,0 +1,26 @@
+---
+interface Props {
+  active?: 'writing' | 'work' | 'about';
+}
+const { active } = Astro.props;
+const links = [
+  { id: 'work', href: '/projects', label: 'work' },
+  { id: 'writing', href: '/writing', label: 'writing' },
+  { id: 'about', href: '/about', label: 'about' },
+] as const;
+const CV = '/cv/Rahul_Rathod_CV.pdf';
+---
+
+<nav class="navbar" aria-label="Main">
+  <a href="/" class="navbar-path">
+    <span class="p-tilde">~/</span><span class="p-name">rahul</span>
+  </a>
+  <ul class="navbar-nav">
+    {links.map((l) => (
+      <li><a href={l.href} class:list={{ active: active === l.id }} aria-current={active === l.id ? 'page' : undefined}>{l.label}</a></li>
+    ))}
+    <li><a href={CV} class="nav-cv">cv</a></li>
+    <li><a href="/search" class="nav-search" aria-label="Search" title="Search (press /)">⌕</a></li>
+    <li><button type="button" class="theme-toggle" aria-label="Toggle colour theme" title="Toggle theme">◐</button></li>
+  </ul>
+</nav>

@@ -1,0 +1,65 @@
+---
+import Head from '../components/Head.astro';
+import Nav from '../components/Nav.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  type?: 'website' | 'article';
+  publishedAt?: Date;
+  active?: 'writing' | 'work' | 'about';
+  noindex?: boolean;
+  ogImage?: string;
+}
+const { active, noindex, ...head } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head {...head} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <script is:inline>
+      // Apply a saved theme before first paint so there is no flash.
+      try {
+        const t = localStorage.getItem('theme');
+        if (t) document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Nav active={active} />
+    <main class="container" id="main" data-pagefind-body={noindex ? undefined : true}>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <a href="/cv/Rahul_Rathod_CV.pdf">cv</a>
+      <a href="https://www.linkedin.com/in/raaulc/">linkedin</a>
+      <a href="https://github.com/raaulc">github</a>
+      <a href="/rss.xml">rss</a>
+      <a href="/privacy">privacy</a>
+    </footer>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script>
+      const root = document.documentElement;
+      document.querySelector('.theme-toggle')?.addEventListener('click', () => {
+        const dark = root.dataset.theme
+          ? root.dataset.theme === 'dark'
+          : matchMedia('(prefers-color-scheme: dark)').matches;
+        root.dataset.theme = dark ? 'light' : 'dark';
+        try { localStorage.setItem('theme', root.dataset.theme); } catch {}
+      });
+      // "/" opens search from anywhere, unless the visitor is typing.
+      document.addEventListener('keydown', (e) => {
+        const t = e.target as HTMLElement;
+        if (e.key === '/' && !e.metaKey && !e.ctrlKey && !t.closest('input, textarea, select, [contenteditable]') && location.pathname !== '/search') {
+          e.preventDefault();
+          location.href = '/search';
+        }
+      });
+    </script>
+  </body>
+</html>

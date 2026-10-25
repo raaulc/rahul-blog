@@ -1,30 +1,9 @@
 ---
-import Head from '../../components/Head.astro';
+import Base from '../../layouts/Base.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <Head
-      title="AI Anime Chatbot with RAG"
-      description="Anime chatbot that scrapes any URL, embeds with FAISS, augments with DuckDuckGo search, and answers via Groq's Llama 3.3. Full RAG pipeline with source citations."
-    />
-  </head>
-  <body>
-    <nav class="navbar">
-      <a href="/" class="navbar-path">
-        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
-      </a>
-      <ul class="navbar-nav">
-        <li><a href="/">blog</a></li>
-        <li><a href="/projects" class="active">projects</a></li>
-        <li><a href="/deck">deck</a></li>
-        <li><a href="/jev">jev</a></li>
-        <li><a href="/about">about</a></li>
-      </ul>
-    </nav>
+<Base title="AI Anime Chatbot with RAG" description="Anime chatbot that scrapes any URL, embeds with FAISS, augments with DuckDuckGo search, and answers via Groq's Llama 3.3. Full RAG pipeline with source citations." active="work">
 
-    <main class="container">
       <a href="/projects" class="back-link">← cd ..</a>
 
       <p class="cmd">
@@ -74,9 +53,4 @@ groq (llama 3.3 70b) answers in bullets with source tags
           >↗ view on github</a>
         </div>
       </div>
-    </main>
-
-    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
-    <script defer src="/_vercel/insights/script.js"></script>
-  </body>
-</html>
+</Base>

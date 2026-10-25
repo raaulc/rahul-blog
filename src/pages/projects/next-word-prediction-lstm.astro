@@ -1,40 +1,9 @@
 ---
-import Head from '../../components/Head.astro';
+import Base from '../../layouts/Base.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <Head
-      title="next word prediction — lstm"
-      description="Next word prediction from scratch using an LSTM in PyTorch, trained on Medium article titles."
-    />
-    <style>
-      .notebook-frame {
-        width: 100%;
-        height: 85vh;
-        border: 1px solid var(--border);
-        border-radius: 4px;
-        background: #fff;
-        margin-top: 16px;
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar">
-      <a href="/" class="navbar-path">
-        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
-      </a>
-      <ul class="navbar-nav">
-        <li><a href="/">blog</a></li>
-        <li><a href="/projects" class="active">projects</a></li>
-        <li><a href="/deck">deck</a></li>
-        <li><a href="/jev">jev</a></li>
-        <li><a href="/about">about</a></li>
-      </ul>
-    </nav>
+<Base title="next word prediction — lstm" description="Next word prediction from scratch using an LSTM in PyTorch, trained on Medium article titles." active="work">
 
-    <main class="container">
       <a href="/projects" class="back-link">← cd ..</a>
 
       <p class="cmd">
@@ -54,9 +23,14 @@ import Head from '../../components/Head.astro';
         class="notebook-frame"
         title="Next Word Prediction LSTM Notebook"
       ></iframe>
-    </main>
-
-    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
-    <script defer src="/_vercel/insights/script.js"></script>
-  </body>
-</html>
+  <style>
+      .notebook-frame {
+        width: 100%;
+        height: 85vh;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        background: #fff;
+        margin-top: 16px;
+      }
+    </style>
+</Base>

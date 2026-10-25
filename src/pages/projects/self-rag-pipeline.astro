@@ -1,30 +1,9 @@
 ---
-import Head from '../../components/Head.astro';
+import Base from '../../layouts/Base.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <Head
-      title="Self-RAG Pipeline with LangGraph"
-      description="A self-evaluating RAG pipeline built with LangGraph — the LLM grades its own retrieved docs, checks for hallucinations, and validates its answers before returning them."
-    />
-  </head>
-  <body>
-    <nav class="navbar">
-      <a href="/" class="navbar-path">
-        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
-      </a>
-      <ul class="navbar-nav">
-        <li><a href="/">blog</a></li>
-        <li><a href="/projects" class="active">projects</a></li>
-        <li><a href="/deck">deck</a></li>
-        <li><a href="/jev">jev</a></li>
-        <li><a href="/about">about</a></li>
-      </ul>
-    </nav>
+<Base title="Self-RAG Pipeline with LangGraph" description="A self-evaluating RAG pipeline built with LangGraph — the LLM grades its own retrieved docs, checks for hallucinations, and validates its answers before returning them." active="work">
 
-    <main class="container">
       <a href="/projects" class="back-link">← cd ..</a>
 
       <p class="cmd">
@@ -62,9 +41,4 @@ filter_docs_by_relevance // llm grades each doc: yes or no
           </pre>
         </div>
       </div>
-    </main>
-
-    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
-    <script defer src="/_vercel/insights/script.js"></script>
-  </body>
-</html>
+</Base>

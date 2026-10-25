@@ -1,35 +1,14 @@
 ---
-import { getCollection } from 'astro:content';
-import Head from '../components/Head.astro';
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
 
 const all = await getCollection('posts');
-const aboutPost = all.find((p) => p.slug === 'about');
-const { Content } = aboutPost ? await aboutPost.render() : { Content: null };
+const aboutPost = all.find((p) => p.id === 'about');
+const { Content } = aboutPost ? await render(aboutPost) : { Content: null };
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <Head
-      title="about"
-      description="Rahul is an AI engineer at Flutter UK &amp; Ireland with 15+ years in software: background, focus and contact."
-    />
-  </head>
-  <body>
-    <nav class="navbar">
-      <a href="/" class="navbar-path">
-        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
-      </a>
-      <ul class="navbar-nav">
-        <li><a href="/">blog</a></li>
-        <li><a href="/projects">projects</a></li>
-        <li><a href="/deck">deck</a></li>
-        <li><a href="/jev">jev</a></li>
-        <li><a href="/about" class="active">about</a></li>
-      </ul>
-    </nav>
+<Base title="about" description="Rahul is an AI engineer at Flutter UK &amp; Ireland with 15+ years in software: background, focus and contact." active="about">
 
-    <main class="container">
       <a href="/" class="back-link">← cd ..</a>
 
       <p class="cmd">
@@ -42,9 +21,4 @@ const { Content } = aboutPost ? await aboutPost.render() : { Content: null };
         ? <article class="post-content"><Content /></article>
         : <div class="content-block"><p>// coming soon</p></div>
       }
-    </main>
-
-    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
-    <script defer src="/_vercel/insights/script.js"></script>
-  </body>
-</html>
+</Base>
