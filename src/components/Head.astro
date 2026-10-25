@@ -22,9 +22,9 @@ const {
   bare = false,
 } = Astro.props;
 
-const SITE = 'https://raaulc.com';
+const SITE = 'https://www.raaulc.com';
 const canonical = new URL(Astro.url.pathname, SITE).href;
-const fullTitle = title.endsWith('rahul') ? title : `${title} — rahul`;
+const fullTitle = title.toLowerCase().includes('rahul') ? title : `${title} — rahul`;
 ---
 
 <meta charset="UTF-8" />
@@ -48,5 +48,6 @@ const fullTitle = title.endsWith('rahul') ? title : `${title} — rahul`;
 <meta name="twitter:description" content={description} />
 
 <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+<link rel="alternate" type="application/rss+xml" title="rahul" href="/rss.xml" />
 {!bare && <link rel="stylesheet" href="/styles/global.css" />}
 {stylesheet && <link rel="stylesheet" href={stylesheet} />}
