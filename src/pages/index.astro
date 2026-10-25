@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Head from '../components/Head.astro';
 
 const posts = (await getCollection('posts'))
-  .filter((p) => p.data.type !== 'page')
+  .filter((p) => p.data.type === 'post')
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 function readingTime(post) {
@@ -20,8 +20,8 @@ function fmtDate(d) {
 <html lang="en">
   <head>
     <Head
-      title="rahul — ai engineering & building in public"
-      description="Software engineer in Sheffield building agentic AI apps and writing about AI engineering."
+      title="rahul — AI systems, from prototype to production"
+      description="AI engineer with 15+ years in software. I take AI from prototype to production and write about the system design behind it."
     />
   </head>
   <body>
@@ -42,8 +42,8 @@ function fmtDate(d) {
 
       <!-- Intro -->
       <p class="intro">
-        <span class="hi">Rahul</span> — software engineer in Sheffield, UK. I build apps and agentic
-        AI workflows, and write about AI engineering as I go.
+        <span class="hi">Rahul</span> — AI engineer in the UK with 15+ years of shipping software.
+        I take AI from prototype to production, and write about the system design behind it.
       </p>
 
       <!-- Whois -->
@@ -66,7 +66,7 @@ function fmtDate(d) {
             <div class="bio-field">
               <span class="bio-key">role</span>
               <span class="bio-sep">:</span>
-              <span class="bio-val orange">software engineer</span>
+              <span class="bio-val orange">AI engineer @ Flutter UK&amp;I</span>
             </div>
             <div class="bio-field">
               <span class="bio-key">location</span>
@@ -74,9 +74,14 @@ function fmtDate(d) {
               <span class="bio-val">Sheffield, UK</span>
             </div>
             <div class="bio-field">
-              <span class="bio-key">learning</span>
+              <span class="bio-key">focus</span>
               <span class="bio-sep">:</span>
-              <span class="bio-val">agentic AI, LLMs, AI engineering, system design</span>
+              <span class="bio-val">AI system design · agents &amp; harnesses · ranking · evals</span>
+            </div>
+            <div class="bio-field">
+              <span class="bio-key">before</span>
+              <span class="bio-sep">:</span>
+              <span class="bio-val">Marks &amp; Spencer · Best Buy · Capgemini (tech lead)</span>
             </div>
             <div class="chips">
               <a class="chip" href="https://github.com/raaulc" target="_blank" rel="noopener">◈ github</a>
@@ -106,6 +111,7 @@ function fmtDate(d) {
           ))}
           {posts.length === 0 && <p class="empty-msg">// no posts yet — check back soon</p>}
         </ul>
+        <p class="empty-msg">// older lab notebooks: <a href="/llm-architecture">model internals</a> · <a href="/rag-system">rag systems</a></p>
       </div>
 
       <!-- Shell launcher -->
