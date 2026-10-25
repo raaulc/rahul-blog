@@ -1,6 +1,6 @@
 import { cooldown, DEFAULT_POLICY, diversify, exclusions, type GuardrailPolicy, type GuardrailReason } from './guardrails.ts';
 import type { Model } from './model.ts';
-import { candidateFeatures, scoreCandidates } from './ranking.ts';
+import { candidateFeatures, explain, scoreCandidates } from './ranking.ts';
 import { historyOf, type PlayerState } from './store.ts';
 
 export interface Recommendation {
@@ -8,6 +8,8 @@ export interface Recommendation {
   title: string;
   genres: string[];
   score: number | null;
+  /** The played game that best explains this pick, if any. */
+  because?: { itemId: string; title: string; via: 'co-play' | 'taste' };
 }
 
 export interface RecommendResult {
@@ -33,8 +35,9 @@ export function recommend(
     timings.total = since(t0);
     return { items, guardrails, timings, modelVersion: m.version };
   };
-  const toRec = (i: number, score: number | null): Recommendation => ({
+  const toRec = (i: number, score: number | null, why?: { item: number; via: 'co-play' | 'taste' }): Recommendation => ({
     itemId: m.items[i].item_id, title: m.items[i].title, genres: m.items[i].genres, score,
+    ...(why && { because: { itemId: m.items[why.item].item_id, title: m.items[why.item].title, via: why.via } }),
   });
 
   const cool = cooldown(state, policy);
@@ -68,7 +71,8 @@ export function recommend(
   const { items, demoted } = diversify(m, ranked, k, policy.maxPerGenre);
   if (demoted) guardrails.push({ code: 'diversity', demoted });
   const scoreOf = new Map(order.map((r) => [cands.items[r], scores[r]]));
+  const why = explain(m, history, items);
   timings.policy = since(t);
 
-  return done(items.map((i) => toRec(i, Math.round(scoreOf.get(i)! * 1e4) / 1e4)));
+  return done(items.map((i) => toRec(i, Math.round(scoreOf.get(i)! * 1e4) / 1e4, why.get(i))));
 }

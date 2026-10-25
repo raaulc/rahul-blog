@@ -32,14 +32,15 @@ const posts = (await getCollection('posts'))
       a technical lead and consultant at Capgemini, Best Buy and Marks &amp; Spencer.
     </p>
     <div class="cta-row">
-      <a class="btn primary" href="/projects">selected work →</a>
-      <a class="btn" href="/about">about &amp; career</a>
+      <a class="btn primary" href="/projects/realtime-recs#try-it">try my live recommender →</a>
+      <a class="btn" href="/projects">selected work</a>
+      <a class="btn" href="/about">about</a>
       <a class="btn" href="https://www.linkedin.com/in/raaulc/">linkedin</a>
     </div>
   </section>
 
   <section class="section">
-    <p class="cmd"><span class="dollar">$</span><span class="command"> ls</span><span class="flag"> --selected</span><span class="arg"> ./work</span></p>
+    <h2 class="section-title">Selected work</h2>
     <div class="work-grid">
       {selected.map((item) => <WorkCard item={item} />)}
     </div>
@@ -47,13 +48,13 @@ const posts = (await getCollection('posts'))
   </section>
 
   <section class="section">
-    <p class="cmd"><span class="dollar">$</span><span class="command"> ls</span><span class="flag"> -lt</span><span class="arg"> ./writing</span><span class="pipe"> | head</span></p>
+    <h2 class="section-title">Writing</h2>
     <PostList posts={posts} />
     <a class="more-link" href="/writing">all writing →</a>
   </section>
 
   <section class="section">
-    <p class="cmd"><span class="dollar">$</span><span class="command"> cat</span><span class="arg"> career.log</span></p>
+    <h2 class="section-title">Career</h2>
     <ol class="timeline">
       {career.map((c) => (
         <li>

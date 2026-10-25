@@ -112,3 +112,42 @@ export function scoreCandidates(m: Model, c: Candidates): Float64Array {
   for (let r = 0; r < c.items.length; r++) out[r] = m.ranker.predict(c.features, r * N_FEATURES);
   return out;
 }
+
+export interface Explanation {
+  item: number; // the history item that best explains the recommendation
+  via: 'co-play' | 'taste';
+}
+
+/**
+ * Why each target was recommended: the played game with the strongest item-kNN link to it
+ * ("players who played X also played this"); if none links, the closest game in SVD space.
+ */
+export function explain(m: Model, history: HistoryEntry[], targets: number[]): Map<number, Explanation> {
+  const want = new Set(targets);
+  const best = new Map<number, { item: number; sim: number }>();
+  for (const { item } of history) {
+    const o = item * m.knnK;
+    for (let j = 0; j < m.knnK; j++) {
+      const t = m.knnIdx[o + j];
+      if (!want.has(t)) continue;
+      const sim = m.knnVal[o + j];
+      if (sim > (best.get(t)?.sim ?? 0)) best.set(t, { item, sim });
+    }
+  }
+  const out = new Map<number, Explanation>();
+  for (const t of targets) {
+    const b = best.get(t);
+    if (b) {
+      out.set(t, { item: b.item, via: 'co-play' });
+      continue;
+    }
+    let bestItem = -1, bestDot = -Infinity;
+    for (const { item } of history) {
+      let dot = 0;
+      for (let d = 0; d < m.dim; d++) dot += m.vectors[item * m.dim + d] * m.vectors[t * m.dim + d];
+      if (dot > bestDot) [bestItem, bestDot] = [item, dot];
+    }
+    if (bestItem >= 0) out.set(t, { item: bestItem, via: 'taste' });
+  }
+  return out;
+}

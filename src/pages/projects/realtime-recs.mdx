@@ -8,14 +8,25 @@ status: in progress
 stack: [TypeScript, Python, LightGBM, Node, AWS (next)]
 metrics:
   - { value: '+23%', label: 'NDCG@10 over the best single model' }
-  - { value: '3.97 ms', label: 'p99 in-process latency' }
+  - { value: '3.87 ms', label: 'p99 in-process latency' }
   - { value: '25 / 25', label: 'players pass the Python parity test' }
 ---
 import RecsDemo from '../../components/RecsDemo.astro';
+import ArchDiagram from '../../components/ArchDiagram.astro';
+
+<div class="tldr">
+
+**In short**
+
+- Took a recommender from a Python notebook to a TypeScript service, with a test proving both produce the same results.
+- The two-stage model ranks **23% better** than the best single model and covers **2.3×** more of the catalogue.
+- **3.87 ms** at p99, with guardrails (cooldown, exclusions, diversity) and an explanation for every pick.
+
+</div>
 
 ## Try it
 
-Pick a player profile, then log some play time. Every change sends one request to the same TypeScript ranker described below, running as a serverless function.
+A strategy player is already loaded. Switch profiles, add games, or log play time: every change sends one request to the same TypeScript ranker described below, running as a serverless function.
 
 <RecsDemo />
 
@@ -46,16 +57,12 @@ Two retrievers each produce 100 candidates. A learned ranker reorders their unio
 
 ## Stage 2: the production service
 
-```
-play event ──► player state ──► retrieval ──────────► ranking ──────────► guardrails ──► response
-               (history,        SVD fold-in +         300 LightGBM trees   cooldown,        + reason codes
-                session)        kNN sums, top-100     over ~157 candidates  exclusions,      + Server-Timing
-                                each                                        diversity
-```
+<ArchDiagram />
 
 - **Real-time by construction.** Both retrievers score from play history alone: the SVD user vector is a weighted sum of item vectors, and kNN sums neighbour lists. A play event changes the next response with no retraining and no per-user model state.
 - **The ranker runs in plain TypeScript.** The 300 trees are loaded from LightGBM's JSON dump into flat typed arrays, with no native dependencies, so the serverless bundle stays small.
 - **Parity is a test, not a hope.** A fixture from the Python prototype checks that the service reproduces the candidates, all 12 features and the ranker scores for 25 players.
+- **Every pick explains itself.** The response names the played game with the strongest co-play link to each recommendation ("players of Civilization V also play this"), falling back to the closest game in embedding space.
 - **Guardrails are first-class.** Every response lists which rules fired:
   - **Cooldown:** above 20 plays or 180 minutes in an hour, show nothing and nudge a break.
   - **Exclusions:** a global blocklist, plus genres and games the player has excluded.
@@ -66,10 +73,10 @@ play event ──► player state ──► retrieval ────────�
 
 | Stage | p50 | p99 |
 |---|---|---|
-| Retrieval (5,329 games) | 0.98 ms | 1.43 ms |
-| Ranking (300 trees × ~157 candidates) | 2.23 ms | 2.78 ms |
-| Guardrails | 0.02 ms | 0.04 ms |
-| **Total, in-process** | **3.25 ms** | **3.97 ms** |
+| Retrieval (5,329 games) | 0.93 ms | 1.24 ms |
+| Ranking (300 trees × ~157 candidates) | 2.21 ms | 2.54 ms |
+| Guardrails and explanations | 0.09 ms | 0.51 ms |
+| **Total, in-process** | **3.24 ms** | **3.87 ms** |
 
 The work is CPU-bound, and that shapes the deployment. One Node process serves about 320 requests a second. With one request in flight, p99 over HTTP is 4.3 ms; at 8 concurrent it is 40 ms, and at 32 it is 164 ms, all of it queueing. The budget is met by running one request per instance, or one process per core, not by making a single process faster.
 

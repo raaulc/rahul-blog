@@ -8,19 +8,20 @@ import { experiments, notebooks, selected } from '../data/work';
   <h1 class="sr-only">Work</h1>
   <p class="cmd"><span class="dollar">$</span><span class="command"> ls</span><span class="flag"> --selected</span><span class="arg"> ./work</span></p>
   <p class="page-lede">Systems built end to end, with measured results.</p>
+  <h2 class="sr-only">Selected work</h2>
   <div class="work-grid">
     {selected.map((item) => <WorkCard item={item} />)}
   </div>
 
   <section class="section">
-    <p class="cmd"><span class="dollar">$</span><span class="command"> ls</span><span class="arg"> ./experiments</span></p>
+    <h2 class="section-title">Experiments</h2>
     <div class="work-grid two">
       {experiments.map((item) => <WorkCard item={item} compact />)}
     </div>
   </section>
 
   <section class="section">
-    <p class="cmd"><span class="dollar">$</span><span class="command"> ls</span><span class="arg"> ./lab-notebooks</span></p>
+    <h2 class="section-title">Lab notebooks</h2>
     <ul class="notebook-list">
       {notebooks.map((n) => (
         <li>
