@@ -12,7 +12,7 @@ export interface WorkItem {
   title: string;
   summary: string;
   stack: string[];
-  status: 'live' | 'complete' | 'in progress';
+  status: 'live' | 'complete';
   metrics?: Metric[];
   external?: boolean;
 }
@@ -26,8 +26,8 @@ export const selected: WorkItem[] = [
     title: 'Real-time game recommender',
     summary:
       'A two-stage recommender taken from a Python research prototype to a TypeScript service: real-time updates from play events, a latency budget, guardrails and a parity test against the prototype.',
-    stack: ['TypeScript', 'Python', 'LightGBM', 'AWS (next)'],
-    status: 'in progress',
+    stack: ['TypeScript', 'Python', 'LightGBM', 'Node'],
+    status: 'live',
     metrics: [
       { value: '+23%', label: 'NDCG@10 over best single model' },
       { value: '4 ms', label: 'p99 in-process latency' },

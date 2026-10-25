@@ -7,7 +7,7 @@ type: page
 
 # About me
 
-I am Rahul, an AI engineer in the UK with 15+ years of building software.
+I am Rahul, an AI engineer in Leeds, UK, with 16+ years of building software.
 
 I am currently an AI Engineer in Automation Transformation and AI at Flutter UK & Ireland, where I build agents and AI automation. Before moving into AI, I spent three and a half years there as a software engineer.
 
