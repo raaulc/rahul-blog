@@ -28,8 +28,8 @@ I am currently an AI Engineer in Automation Transformation and AI at Flutter UK 
 
 ## On this site
 
-- [Writing](/) on AI system design: harnesses, inference, ranking and evals.
-- [Projects](/projects), including a daily paper-ranking pipeline that has run unattended since September 2026.
+- [Writing](/writing) on AI system design: harnesses, inference, ranking and evals.
+- [Work](/projects), including a real-time recommender with a live demo and a daily paper-ranking pipeline that has run unattended since September 2026.
 - Older lab notebooks on [model internals](/llm-architecture) and [RAG](/rag-system).
 
 ## Get in touch

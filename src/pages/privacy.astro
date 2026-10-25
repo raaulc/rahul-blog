@@ -1,38 +1,14 @@
 ---
-import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
 
 const all = await getCollection('posts');
-const page = all.find((p) => p.slug === 'privacy');
-const { Content } = page ? await page.render() : { Content: null };
+const page = all.find((p) => p.id === 'privacy');
+const { Content } = page ? await render(page) : { Content: null };
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>privacy policy -- rahul</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-    <link rel="stylesheet" href="/styles/global.css" />
-  </head>
-  <body>
-    <nav class="navbar">
-      <a href="/" class="navbar-path">
-        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
-      </a>
-      <ul class="navbar-nav">
-        <li><a href="/">blog</a></li>
-        <li><a href="/projects">projects</a></li>
-        <li><a href="/deck">deck</a></li>
-        <li><a href="/jev">jev</a></li>
-        <li><a href="/about">about</a></li>
-      </ul>
-    </nav>
+<Base title="privacy policy">
 
-    <main class="container">
       <a href="/" class="back-link">← cd ..</a>
 
       <p class="cmd">
@@ -45,8 +21,4 @@ const { Content } = page ? await page.render() : { Content: null };
         ? <article class="post-content"><Content /></article>
         : <div class="content-block"><p>// privacy policy coming soon</p></div>
       }
-    </main>
-
-    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
-  </body>
-</html>
+</Base>

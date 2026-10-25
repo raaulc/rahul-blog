@@ -1,0 +1,174 @@
+---
+// Live demo of the realtime-recs ranker. Calls /api/recommend, which runs the same TypeScript code as the service.
+---
+
+<div class="demo" id="recs-demo">
+  <div class="demo-panel">
+    <p class="demo-step"><span>1</span> Pick games this player has played</p>
+    <div class="demo-presets">
+      <button type="button" data-preset="8930,34330,200510">strategy player</button>
+      <button type="button" data-preset="730,550,620">action player</button>
+      <button type="button" data-preset="105600,413150,212680">indie player</button>
+    </div>
+    <div class="demo-search">
+      <input id="demo-q" type="search" list="demo-games" placeholder="or search 1,500 games…" autocomplete="off" aria-label="Search games" />
+      <datalist id="demo-games"></datalist>
+    </div>
+    <ul class="demo-chips" id="demo-history" aria-live="polite"></ul>
+
+    <p class="demo-step"><span>2</span> Play in this session</p>
+    <p class="demo-hint">Each click logs 30 minutes. Recommendations update on the next request; above 180 minutes in an hour, the cooldown guardrail stops them.</p>
+    <div class="demo-session" id="demo-session"></div>
+    <p class="demo-hint" id="demo-session-total"></p>
+
+    <label class="demo-exclude">
+      <span>Player excludes genre</span>
+      <select id="demo-exclude"><option value="">none</option></select>
+    </label>
+    <button type="button" class="demo-reset" id="demo-reset">reset</button>
+  </div>
+
+  <div class="demo-panel demo-out">
+    <p class="demo-step"><span>3</span> Recommendations</p>
+    <div id="demo-notice" class="demo-notice" hidden></div>
+    <ol class="demo-recs" id="demo-recs"><li class="demo-empty">Pick a profile to start.</li></ol>
+    <p class="demo-timing" id="demo-timing"></p>
+  </div>
+</div>
+
+<script>
+  type Game = { id: string; t: string; g: string[] };
+  type Result = {
+    items: { itemId: string; title: string; genres: string[]; score: number | null }[];
+    guardrails: { code: string; sessionMinutes?: number; demoted?: number; count?: number }[];
+    timings: { retrieval: number; ranking: number; policy: number; total: number };
+    modelVersion: string;
+  };
+
+  const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+  const decode = (s: string) => s.replace(/&amp;/g, '&');
+  const history = new Map<string, number>(); // itemId -> lifetime minutes
+  const session: { itemId: string; minutes: number }[] = [];
+  let games = new Map<string, Game>();
+  let pending = 0;
+
+  let byTitle = new Map<string, string>();
+  fetch('/api/catalog.json')
+    .then((r) => r.json())
+    .then((catalog: { games: Game[]; genres: string[] }) => {
+      games = new Map(catalog.games.map((g) => [g.id, g]));
+      byTitle = new Map(catalog.games.map((g) => [g.t, g.id]));
+      $('demo-games').append(...catalog.games.map((g) => Object.assign(document.createElement('option'), { value: g.t })));
+      $('demo-exclude').append(
+        ...catalog.genres.map((g) => Object.assign(document.createElement('option'), { value: g, textContent: decode(g) })),
+      );
+      if (history.size) renderInputs();
+    });
+
+  function renderInputs() {
+    const chips = $('demo-history');
+    chips.replaceChildren(
+      ...[...history.keys()].map((id) => {
+        const li = document.createElement('li');
+        li.textContent = games.get(id)?.t ?? id;
+        const x = Object.assign(document.createElement('button'), { type: 'button', textContent: '×', ariaLabel: 'remove' });
+        x.onclick = () => {
+          history.delete(id);
+          update();
+        };
+        li.append(x);
+        return li;
+      }),
+    );
+    $('demo-session').replaceChildren(
+      ...[...history.keys()].map((id) => {
+        const b = Object.assign(document.createElement('button'), { type: 'button', textContent: `+30m ${games.get(id)?.t ?? id}` });
+        b.onclick = () => {
+          session.push({ itemId: id, minutes: 30 });
+          update();
+        };
+        return b;
+      }),
+    );
+    const mins = session.reduce((t, s) => t + s.minutes, 0);
+    $('demo-session-total').textContent = mins ? `Session so far: ${mins} minutes across ${session.length} plays.` : '';
+  }
+
+  function renderResult(r: Result, rtt: number) {
+    const notice = $('demo-notice');
+    const msgs: string[] = [];
+    for (const g of r.guardrails) {
+      if (g.code === 'cooldown') msgs.push(`Cooldown: ${g.sessionMinutes} minutes played this hour. No recommendations are shown; the player is nudged to take a break.`);
+      if (g.code === 'diversity') msgs.push(`Diversity: ${g.demoted} item(s) moved down so one genre does not fill the list.`);
+      if (g.code === 'excluded') msgs.push(`Exclusions: ${g.count} games filtered out before ranking.`);
+      if (g.code === 'cold_start') msgs.push('Cold start: no history yet, so these are popular games.');
+    }
+    notice.hidden = !msgs.length;
+    notice.replaceChildren(...msgs.map((m) => Object.assign(document.createElement('p'), { textContent: m })));
+    notice.classList.toggle('warn', r.guardrails.some((g) => g.code === 'cooldown'));
+
+    $('demo-recs').replaceChildren(
+      ...(r.items.length
+        ? r.items.map((it) => {
+            const li = document.createElement('li');
+            const t = Object.assign(document.createElement('span'), { className: 'rec-title', textContent: it.title || it.itemId });
+            const g = Object.assign(document.createElement('span'), { className: 'rec-genre', textContent: decode(it.genres.slice(0, 2).join(' · ')) });
+            li.append(t, g);
+            return li;
+          })
+        : [Object.assign(document.createElement('li'), { className: 'demo-empty', textContent: 'Nothing recommended.' })]),
+    );
+    const t = r.timings;
+    $('demo-timing').textContent =
+      `server ${t.total.toFixed(1)} ms (retrieval ${t.retrieval.toFixed(1)}, ranking ${t.ranking.toFixed(1)}) · round trip ${Math.round(rtt)} ms · ${r.modelVersion}`;
+  }
+
+  async function update() {
+    renderInputs();
+    const id = ++pending;
+    const exclude = ($('demo-exclude') as HTMLSelectElement).value;
+    const t0 = performance.now();
+    try {
+      const res = await fetch('/api/recommend', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          history: [...history].map(([itemId, minutes]) => ({ itemId, minutes })),
+          session,
+          excludedGenres: exclude ? [exclude] : [],
+          k: 8,
+        }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      const r: Result = await res.json();
+      if (id === pending) renderResult(r, performance.now() - t0);
+    } catch {
+      if (id === pending) $('demo-timing').textContent = 'The demo API is not reachable right now.';
+    }
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-preset]').forEach((b) => {
+    b.onclick = () => {
+      history.clear();
+      session.length = 0;
+      for (const id of b.dataset.preset!.split(',')) history.set(id, 20 * 60);
+      update();
+    };
+  });
+  $('demo-q').addEventListener('change', (e) => {
+    const input = e.target as HTMLInputElement;
+    const id = byTitle.get(input.value);
+    if (id && history.size < 20) {
+      history.set(id, 20 * 60);
+      input.value = '';
+      update();
+    }
+  });
+  $('demo-exclude').addEventListener('change', update);
+  $('demo-reset').onclick = () => {
+    history.clear();
+    session.length = 0;
+    ($('demo-exclude') as HTMLSelectElement).value = '';
+    update();
+  };
+</script>

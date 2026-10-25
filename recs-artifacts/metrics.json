@@ -1,0 +1,48 @@
+{
+  "results": {
+    "pop": {
+      "ndcg@10": 0.22184996899982315,
+      "recall@10": 0.202616746031746,
+      "recall@100": 0.45981217917690964,
+      "coverage@10": 0.00825670857571777
+    },
+    "knn": {
+      "ndcg@10": 0.2662681920601876,
+      "recall@10": 0.24804595238095234,
+      "recall@100": 0.5473566988011767,
+      "coverage@10": 0.045974854569337587
+    },
+    "svd": {
+      "ndcg@10": 0.18352949406561603,
+      "recall@10": 0.1720957142857143,
+      "recall@100": 0.41048470817284505,
+      "coverage@10": 0.06436479639707263
+    },
+    "two_stage": {
+      "ndcg@10": 0.3269807064720513,
+      "recall@10": 0.31095603174603176,
+      "recall@100": null,
+      "coverage@10": 0.10827547382248076,
+      "candidate_recall": 0.6686450138988841,
+      "avg_candidates": 157.1332
+    }
+  },
+  "eval_users": 5000,
+  "ranker_train_rows": 2290996,
+  "retriever_fit_seconds": 2.6,
+  "ranker_train_seconds": 17.9,
+  "feature_importance": {
+    "svd_score": 38849.0,
+    "svd_rank": 76080.7,
+    "knn_score": 23765.5,
+    "knn_rank": 211230.3,
+    "in_both": 8278.4,
+    "item_pop_log": 33518.1,
+    "item_avg_hours_log": 24072.9,
+    "price": 11464.4,
+    "is_free": 335.8,
+    "year": 14155.3,
+    "genre_affinity": 14594.3,
+    "user_n_items_log": 12409.9
+  }
+}

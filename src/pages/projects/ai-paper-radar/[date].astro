@@ -1,5 +1,5 @@
 ---
-import Head from '../../../components/Head.astro';
+import Base from '../../../layouts/Base.astro';
 import PaperList from '../../../components/PaperList.astro';
 
 export async function getStaticPaths() {
@@ -21,41 +21,8 @@ const generated = new Date(day.generated_at);
 const generatedLabel = generated.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <Head
-      title={`ai paper radar — ${day.date}`}
-      description={`arXiv AI papers ranked by Jev for ${day.date} — relevance and novelty, no manual curation.`}
-    />
-    <style>
-      .day-nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 12.5px;
-        margin-bottom: 12px;
-      }
-      .day-nav a { color: var(--green); text-decoration: none; }
-      .day-nav a:hover { text-decoration: underline; }
-      .day-nav .disabled { color: var(--muted); }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar">
-      <a href="/" class="navbar-path">
-        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
-      </a>
-      <ul class="navbar-nav">
-        <li><a href="/">blog</a></li>
-        <li><a href="/projects" class="active">projects</a></li>
-        <li><a href="/deck">deck</a></li>
-        <li><a href="/jev">jev</a></li>
-        <li><a href="/about">about</a></li>
-      </ul>
-    </nav>
+<Base title={`ai paper radar — ${day.date}`} description={`arXiv AI papers ranked by Jev for ${day.date} — relevance and novelty, no manual curation.`} active="work">
 
-    <main class="container">
       <a href="/projects/ai-paper-radar" class="back-link">← cd ..</a>
 
       <p class="cmd">
@@ -77,9 +44,16 @@ const generatedLabel = generated.toLocaleDateString('en-GB', { day: 'numeric', m
       </div>
 
       <PaperList papers={day.papers} />
-    </main>
-
-    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
-    <script defer src="/_vercel/insights/script.js"></script>
-  </body>
-</html>
+  <style>
+      .day-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12.5px;
+        margin-bottom: 12px;
+      }
+      .day-nav a { color: var(--green); text-decoration: none; }
+      .day-nav a:hover { text-decoration: underline; }
+      .day-nav .disabled { color: var(--muted); }
+    </style>
+</Base>

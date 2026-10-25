@@ -1,28 +1,9 @@
 ---
-import Head from '../components/Head.astro';
+import Base from '../layouts/Base.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <Head title="404 — not found" />
-    <meta name="robots" content="noindex" />
-  </head>
-  <body>
-    <nav class="navbar">
-      <a href="/" class="navbar-path">
-        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
-      </a>
-      <ul class="navbar-nav">
-        <li><a href="/">blog</a></li>
-        <li><a href="/projects">projects</a></li>
-        <li><a href="/deck">deck</a></li>
-        <li><a href="/jev">jev</a></li>
-        <li><a href="/about">about</a></li>
-      </ul>
-    </nav>
+<Base title="404 — not found" noindex>
 
-    <main class="container">
       <p class="cmd">
         <span class="dollar">$</span>
         <span class="command"> cd</span>
@@ -30,10 +11,7 @@ import Head from '../components/Head.astro';
       </p>
       <p>cd: no such file or directory</p>
       <a href="/" class="back-link">← cd ~</a>
-    </main>
-
-    <script>
-      document.getElementById('path').textContent = window.location.pathname;
+  <script>
+      document.getElementById('path')!.textContent = window.location.pathname;
     </script>
-  </body>
-</html>
+</Base>

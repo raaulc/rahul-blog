@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+
+const posts = (await getCollection('posts'))
+  .filter((p) => p.data.type === 'post')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Base title="writing" description="Writing on AI system design: taking models to production, ranking, agents, inference cost and evaluation." active="writing" ogImage="/og/writing.png">
+  <h1 class="sr-only">Writing</h1>
+  <p class="cmd"><span class="dollar">$</span><span class="command"> ls</span><span class="flag"> -lt</span><span class="arg"> ./writing</span></p>
+  <p class="page-lede">
+    Notes on AI system design: what it takes to get models into production, keep them fast and cheap, and know
+    whether they are helping.
+  </p>
+  <PostList posts={posts} />
+  <p class="cmd" style="margin-top: 48px"><span class="dollar">$</span><span class="command"> ls</span><span class="arg"> ./lab-notebooks</span></p>
+  <p class="page-lede">
+    Earlier learning projects, kept for reference: <a href="/llm-architecture">model internals</a> and
+    <a href="/rag-system">RAG systems</a>.
+  </p>
+</Base>

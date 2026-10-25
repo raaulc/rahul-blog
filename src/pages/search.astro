@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="search" description="Search Rahul Rathod's writing and work." noindex>
+  <Fragment slot="head">
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  </Fragment>
+  <h1 class="sr-only">Search</h1>
+  <p class="cmd"><span class="dollar">$</span><span class="command"> grep</span><span class="flag"> -ri</span><span class="arg"> ./</span></p>
+  <div id="search"></div>
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      const ui = new PagefindUI({ element: '#search', showSubResults: true, showImages: false, resetStyles: false });
+      const q = new URLSearchParams(location.search).get('q');
+      if (q) ui.triggerSearch(q);
+      document.querySelector('#search input')?.focus();
+    });
+  </script>
+</Base>
+
+<style is:global>
+  #search {
+    --pagefind-ui-primary: var(--accent);
+    --pagefind-ui-text: var(--text);
+    --pagefind-ui-background: var(--surface);
+    --pagefind-ui-border: var(--border);
+    --pagefind-ui-tag: var(--surface);
+    --pagefind-ui-font: var(--font-sans);
+    --pagefind-ui-border-radius: 6px;
+  }
+  #search mark { background: var(--sel); color: var(--bright); }
+</style>

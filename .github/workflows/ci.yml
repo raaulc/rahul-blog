@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    paths-ignore: ['src/data/papers/**']  # daily radar commits only change data
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Type check
+        run: npx astro check
+      - name: Build
+        run: npm run build
+      - name: Check internal links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --offline --no-progress --exclude '/_vercel/' --root-dir .vercel/output/static --exclude-path .vercel/output/static/deck --exclude-path .vercel/output/static/notebooks '.vercel/output/static/**/*.html'
+          fail: true

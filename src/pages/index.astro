@@ -1,172 +1,67 @@
 ---
 import { getCollection } from 'astro:content';
-import Head from '../components/Head.astro';
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import WorkCard from '../components/WorkCard.astro';
+import PostList from '../components/PostList.astro';
+import pic from '../assets/pic.jpg';
+import { career, selected } from '../data/work';
 
 const posts = (await getCollection('posts'))
   .filter((p) => p.data.type === 'post')
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-function readingTime(post) {
-  const words = post.body.split(/\s+/).length;
-  return Math.max(1, Math.round(words / 200));
-}
-
-function fmtDate(d) {
-  return d.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: '2-digit' });
-}
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5);
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <Head
-      title="rahul — AI systems, from prototype to production"
-      description="AI engineer with 15+ years in software. I take AI from prototype to production and write about the system design behind it."
-    />
-  </head>
-  <body>
-    <nav class="navbar">
-      <a href="/" class="navbar-path">
-        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
-      </a>
-      <ul class="navbar-nav">
-        <li><a href="/">blog</a></li>
-        <li><a href="/projects">projects</a></li>
-        <li><a href="/deck">deck</a></li>
-        <li><a href="/jev">jev</a></li>
-        <li><a href="/about">about</a></li>
-      </ul>
-    </nav>
-
-    <main class="container">
-
-      <!-- Intro -->
-      <p class="intro">
-        <span class="hi">Rahul</span> — AI engineer in the UK with 15+ years of shipping software.
-        I take AI from prototype to production, and write about the system design behind it.
-      </p>
-
-      <!-- Whois -->
-      <div class="section">
-        <p class="cmd">
-          <span class="dollar">$</span>
-          <span class="command"> whois</span>
-          <span class="arg"> rahul</span>
-        </p>
-        <div class="bio-layout">
-          <div class="bio-photo">
-            <img src="/images/pic.jpg" alt="Rahul" />
-          </div>
-          <div class="bio-fields">
-            <div class="bio-field">
-              <span class="bio-key">name</span>
-              <span class="bio-sep">:</span>
-              <span class="bio-val bright">Rahul</span>
-            </div>
-            <div class="bio-field">
-              <span class="bio-key">role</span>
-              <span class="bio-sep">:</span>
-              <span class="bio-val orange">AI engineer @ Flutter UK&amp;I</span>
-            </div>
-            <div class="bio-field">
-              <span class="bio-key">location</span>
-              <span class="bio-sep">:</span>
-              <span class="bio-val">Sheffield, UK</span>
-            </div>
-            <div class="bio-field">
-              <span class="bio-key">focus</span>
-              <span class="bio-sep">:</span>
-              <span class="bio-val">AI system design · agents &amp; harnesses · ranking · evals</span>
-            </div>
-            <div class="bio-field">
-              <span class="bio-key">before</span>
-              <span class="bio-sep">:</span>
-              <span class="bio-val">Marks &amp; Spencer · Best Buy · Capgemini (tech lead)</span>
-            </div>
-            <div class="chips">
-              <a class="chip" href="https://github.com/raaulc" target="_blank" rel="noopener">◈ github</a>
-              <a class="chip" href="/about">✦ about me</a>
-              <a class="chip" href="/projects">⬡ projects</a>
-            </div>
-          </div>
-        </div>
+<Base
+  title="Rahul Rathod — AI systems, from prototype to production"
+  description="AI engineer with 15+ years in software. I take AI from research prototype to production: recommendation and ranking, LLM agents, and evaluation."
+>
+  <section class="hero">
+    <p class="cmd"><span class="dollar">$</span><span class="command"> whois</span><span class="arg"> rahul</span></p>
+    <div class="hero-id">
+      <Picture src={pic} alt="Rahul Rathod" width={88} height={88} formats={['avif', 'webp']} class="hero-photo" loading="eager" />
+      <div>
+        <h1 class="hero-name">Rahul Rathod</h1>
+        <p class="hero-role">AI engineer · 15+ years shipping software · Sheffield, UK</p>
       </div>
+    </div>
+    <p class="hero-lede">
+      I take AI from research prototype to production: recommendation and ranking, LLM agents, and the evaluation
+      that tells you whether any of it works. Currently an AI engineer at Flutter UK &amp; Ireland; before that,
+      a technical lead and consultant at Capgemini, Best Buy and Marks &amp; Spencer.
+    </p>
+    <div class="cta-row">
+      <a class="btn primary" href="/projects">selected work →</a>
+      <a class="btn" href="/about">about &amp; career</a>
+      <a class="btn" href="https://www.linkedin.com/in/raaulc/">linkedin</a>
+    </div>
+  </section>
 
-      <!-- Blog posts -->
-      <div class="section">
-        <p class="cmd">
-          <span class="dollar">$</span>
-          <span class="command"> ls</span>
-          <span class="flag"> -lt</span>
-          <span class="arg"> ./blog/</span>
-          <span class="pipe"> | head</span>
-        </p>
-        <ul class="post-list">
-          {posts.map((post) => (
-            <li class="post-entry">
-              <span class="post-date">{fmtDate(post.data.date)}</span>
-              <a href={`/posts/${post.slug}`} class="post-link">{post.data.title}</a>
-              <span class="post-mins">{readingTime(post)}m</span>
-            </li>
-          ))}
-          {posts.length === 0 && <p class="empty-msg">// no posts yet — check back soon</p>}
-        </ul>
-        <p class="empty-msg">// older lab notebooks: <a href="/llm-architecture">model internals</a> · <a href="/rag-system">rag systems</a></p>
-      </div>
+  <section class="section">
+    <p class="cmd"><span class="dollar">$</span><span class="command"> ls</span><span class="flag"> --selected</span><span class="arg"> ./work</span></p>
+    <div class="work-grid">
+      {selected.map((item) => <WorkCard item={item} />)}
+    </div>
+    <a class="more-link" href="/projects">all work, experiments and notebooks →</a>
+  </section>
 
-      <!-- Shell launcher -->
-      <div class="terminal-section">
-        <span class="t-label">shell</span>
-        <div class="t-row">
-          <span class="t-prompt">rahul@home:~$</span>
-          <input class="t-input" type="text" placeholder="type 'help' — or a page name to jump" autocomplete="off" spellcheck="false" id="t-input" />
-        </div>
-        <div class="t-output" id="t-output"></div>
-      </div>
+  <section class="section">
+    <p class="cmd"><span class="dollar">$</span><span class="command"> ls</span><span class="flag"> -lt</span><span class="arg"> ./writing</span><span class="pipe"> | head</span></p>
+    <PostList posts={posts} />
+    <a class="more-link" href="/writing">all writing →</a>
+  </section>
 
-    </main>
-
-    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
-
-    <script defer src="/_vercel/insights/script.js"></script>
-
-    <script>
-      const input = document.getElementById('t-input');
-      const output = document.getElementById('t-output');
-
-      // page name -> path
-      const routes = {
-        blog: '/',
-        home: '/',
-        projects: '/projects',
-        deck: '/deck',
-        about: '/about',
-        presentations: '/presentations',
-        'llm-architecture': '/llm-architecture',
-        'rag-system': '/rag-system',
-        github: 'https://github.com/raaulc',
-        linkedin: 'https://www.linkedin.com/in/raaulc/',
-      };
-
-      const help =
-        "  jump: " + Object.keys(routes).join(', ') + "\n" +
-        "  other: help, clear";
-
-      input.addEventListener('keydown', (e) => {
-        if (e.key !== 'Enter') return;
-        const val = input.value.trim().toLowerCase();
-        input.value = '';
-        if (!val) return;
-
-        if (val === 'clear') { output.textContent = ''; return; }
-        if (val === 'help') { output.textContent = help; return; }
-        if (routes[val]) {
-          output.textContent = '  → ' + routes[val];
-          window.location.href = routes[val];
-          return;
-        }
-        output.textContent = "  not found: " + val + " — type 'help'";
-      });
-    </script>
-  </body>
-</html>
+  <section class="section">
+    <p class="cmd"><span class="dollar">$</span><span class="command"> cat</span><span class="arg"> career.log</span></p>
+    <ol class="timeline">
+      {career.map((c) => (
+        <li>
+          <span class="tl-years">{c.years}</span>
+          <span class="tl-org">{c.org}</span>
+          <span class="tl-role">{c.role}</span>
+        </li>
+      ))}
+    </ol>
+  </section>
+</Base>

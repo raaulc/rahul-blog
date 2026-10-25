@@ -1,4 +1,6 @@
 ---
+import { getImage } from 'astro:assets';
+import pic from '../assets/pic.jpg';
 import '@fontsource/ibm-plex-mono/300.css';
 import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
@@ -11,6 +13,7 @@ interface Props {
   publishedAt?: Date;
   stylesheet?: string;
   bare?: boolean;
+  ogImage?: string;
 }
 
 const {
@@ -19,20 +22,21 @@ const {
   type = 'website',
   publishedAt,
   stylesheet,
-  bare = false,
+  ogImage: ogPath,
 } = Astro.props;
 
 const SITE = 'https://www.raaulc.com';
 const canonical = new URL(Astro.url.pathname, SITE).href;
 const fullTitle = title.toLowerCase().includes('rahul') ? title : `${title} — rahul`;
-const ogImage = `${SITE}/og-default.png`;
+const personImage = await getImage({ src: pic, width: 400, format: 'jpeg' });
+const ogImage = new URL(ogPath ?? '/og-default.png', SITE).href;
 
 const person = {
   '@type': 'Person',
   '@id': `${SITE}/#person`,
   name: 'Rahul Rathod',
   url: `${SITE}/`,
-  image: `${SITE}/images/pic.jpg`,
+  image: new URL(personImage.src, SITE).href,
   jobTitle: 'AI Engineer',
   worksFor: { '@type': 'Organization', name: 'Flutter UK & Ireland' },
   address: { '@type': 'PostalAddress', addressLocality: 'Sheffield', addressCountry: 'GB' },
@@ -82,5 +86,4 @@ const jsonLd = type === 'article'
 
 <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 <link rel="alternate" type="application/rss+xml" title="rahul" href="/rss.xml" />
-{!bare && <link rel="stylesheet" href="/styles/global.css" />}
 {stylesheet && <link rel="stylesheet" href={stylesheet} />}

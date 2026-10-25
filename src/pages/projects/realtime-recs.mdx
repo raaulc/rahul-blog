@@ -1,0 +1,80 @@
+---
+layout: ../../layouts/CaseStudy.astro
+title: Real-time game recommender
+description: A two-stage recommender taken from a Python research prototype to a TypeScript service, with real-time updates, a latency budget and guardrails. Try it below.
+path: ./realtime-recs
+ogImage: /og/projects/realtime-recs.png
+status: in progress
+stack: [TypeScript, Python, LightGBM, Node, AWS (next)]
+metrics:
+  - { value: '+23%', label: 'NDCG@10 over the best single model' }
+  - { value: '3.97 ms', label: 'p99 in-process latency' }
+  - { value: '25 / 25', label: 'players pass the Python parity test' }
+---
+import RecsDemo from '../../components/RecsDemo.astro';
+
+## Try it
+
+Pick a player profile, then log some play time. Every change sends one request to the same TypeScript ranker described below, running as a serverless function.
+
+<RecsDemo />
+
+## The problem
+
+Most recommendation work fails between the notebook and production. A prototype shows a lift offline, then has to be rebuilt for live traffic: under a latency budget, against data that changes with every play, with rules about what must never be shown. This project does both halves on public data, so the trade-offs are visible.
+
+**Data:** the UCSD Steam dataset: 52,857 players, 5,329 games and 3.15 million plays, keeping players with 10+ games and games with 20+ players.
+
+## Stage 1: the research prototype
+
+Two retrievers each produce 100 candidates. A learned ranker reorders their union (about 157 games per player).
+
+| Model | NDCG@10 | Recall@10 | Coverage@10 |
+|---|---|---|---|
+| Popularity | 0.222 | 0.203 | 0.8% |
+| Item-kNN (cosine, top-100 neighbours) | 0.266 | 0.248 | 4.6% |
+| PureSVD (64 factors) | 0.184 | 0.172 | 6.4% |
+| **Two-stage: kNN + SVD → LightGBM LambdaRank** | **0.327** | **0.311** | **10.8%** |
+
+*Evaluated on 5,000 held-out players.*
+
+- The ranker beats the best single model by **23% on NDCG@10**, and recommends from **2.3×** as much of the catalogue.
+- Popularity is a strong baseline that shows only 0.8% of the catalogue. That echo chamber is invisible if you only track accuracy.
+- Retrieval finds 67% of each player's held-out games, which caps what the ranker can ever do. The next gain is in retrieval, not ranking.
+
+**Caveat:** the dataset has no timestamps, so the test set is a random 20% of each player's games, not their most recent ones. Offline numbers are optimistic, and an online test would be the real decision.
+
+## Stage 2: the production service
+
+```
+play event ──► player state ──► retrieval ──────────► ranking ──────────► guardrails ──► response
+               (history,        SVD fold-in +         300 LightGBM trees   cooldown,        + reason codes
+                session)        kNN sums, top-100     over ~157 candidates  exclusions,      + Server-Timing
+                                each                                        diversity
+```
+
+- **Real-time by construction.** Both retrievers score from play history alone: the SVD user vector is a weighted sum of item vectors, and kNN sums neighbour lists. A play event changes the next response with no retraining and no per-user model state.
+- **The ranker runs in plain TypeScript.** The 300 trees are loaded from LightGBM's JSON dump into flat typed arrays, with no native dependencies, so the serverless bundle stays small.
+- **Parity is a test, not a hope.** A fixture from the Python prototype checks that the service reproduces the candidates, all 12 features and the ranker scores for 25 players.
+- **Guardrails are first-class.** Every response lists which rules fired:
+  - **Cooldown:** above 20 plays or 180 minutes in an hour, show nothing and nudge a break.
+  - **Exclusions:** a global blocklist, plus genres and games the player has excluded.
+  - **Diversity:** at most 4 games per genre in a response.
+  - **Cold start:** popular games, still filtered.
+
+## Latency
+
+| Stage | p50 | p99 |
+|---|---|---|
+| Retrieval (5,329 games) | 0.98 ms | 1.43 ms |
+| Ranking (300 trees × ~157 candidates) | 2.23 ms | 2.78 ms |
+| Guardrails | 0.02 ms | 0.04 ms |
+| **Total, in-process** | **3.25 ms** | **3.97 ms** |
+
+The work is CPU-bound, and that shapes the deployment. One Node process serves about 320 requests a second. With one request in flight, p99 over HTTP is 4.3 ms; at 8 concurrent it is 40 ms, and at 32 it is 164 ms, all of it queueing. The budget is met by running one request per instance, or one process per core, not by making a single process faster.
+
+## What's next
+
+- Deploy on AWS with CDK: Lambda behind API Gateway, DynamoDB for player state, CloudWatch dashboards and X-Ray traces, and a CI/CD pipeline.
+- A champion/challenger harness that replays logged sessions, so a model change is judged on more than offline NDCG.
+- Better retrieval, the current ceiling.

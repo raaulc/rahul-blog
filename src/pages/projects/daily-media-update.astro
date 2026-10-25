@@ -1,32 +1,11 @@
 ---
 import briefings from '../../data/briefings.json';
-import Head from '../../components/Head.astro';
+import Base from '../../layouts/Base.astro';
 const entries = [...briefings].reverse(); // newest first
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <Head
-      title="daily media update"
-      description="Daily morning briefing — GPT-4o writes a John Oliver-style monologue from emails, AI news, and reminders. Read aloud by OpenAI TTS."
-    />
-  </head>
-  <body>
-    <nav class="navbar">
-      <a href="/" class="navbar-path">
-        <span class="p-tilde">~/</span><span class="p-name">rahul</span>
-      </a>
-      <ul class="navbar-nav">
-        <li><a href="/">blog</a></li>
-        <li><a href="/projects" class="active">projects</a></li>
-        <li><a href="/deck">deck</a></li>
-        <li><a href="/jev">jev</a></li>
-        <li><a href="/about">about</a></li>
-      </ul>
-    </nav>
+<Base title="daily media update" description="Daily morning briefing — GPT-4o writes a John Oliver-style monologue from emails, AI news, and reminders. Read aloud by OpenAI TTS." active="work">
 
-    <main class="container">
       <a href="/projects" class="back-link">← cd ..</a>
 
       <p class="cmd">
@@ -73,9 +52,4 @@ const entries = [...briefings].reverse(); // newest first
           </details>
         </div>
       ))}
-    </main>
-
-    <footer class="site-footer"><a href="/privacy">privacy policy</a></footer>
-    <script defer src="/_vercel/insights/script.js"></script>
-  </body>
-</html>
+</Base>
