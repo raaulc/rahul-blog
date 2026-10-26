@@ -11,7 +11,7 @@
       <button type="button" data-preset="105600,413150,212680" aria-pressed="false">indie player</button>
     </div>
     <div class="demo-search">
-      <input id="demo-q" type="search" list="demo-games" placeholder="add a game they played…" autocomplete="off" aria-label="Add a game the player has played" />
+      <input id="demo-q" type="search" list="demo-games" placeholder="add a game they played" autocomplete="off" aria-label="Add a game the player has played" />
       <datalist id="demo-games"></datalist>
     </div>
     <ul class="demo-chips" id="demo-history" aria-label="Games played"></ul>
@@ -20,7 +20,7 @@
   <div class="demo-panel demo-out" aria-live="polite">
     <p class="demo-step"><span>2</span> Recommendations</p>
     <div id="demo-notice" class="demo-notice" hidden></div>
-    <ol class="demo-recs" id="demo-recs"><li class="demo-empty">Loading…</li></ol>
+    <ol class="demo-recs" id="demo-recs"><li class="demo-empty">Loading</li></ol>
     <div class="demo-latency" id="demo-latency" hidden>
       <div class="lat-bar" aria-hidden="true">
         <span class="lat-retrieval" id="lat-retrieval"></span><span class="lat-ranking" id="lat-ranking"></span><span class="lat-policy" id="lat-policy"></span>
@@ -30,11 +30,11 @@
   </div>
 
   <div class="demo-panel demo-play">
-    <p class="demo-step"><span>3</span> Play, and watch it react</p>
-    <p class="demo-hint">Each tap logs 30 minutes this session. The next request reflects it. Past 180 minutes in an hour, the cooldown guardrail stops recommendations.</p>
+    <p class="demo-step"><span>3</span> Play and watch it react</p>
+    <p class="demo-hint">Each tap logs 30 minutes of play in this session and the list updates straight away. After 180 minutes in an hour the cooldown guardrail stops recommending.</p>
     <div class="demo-session" id="demo-session"></div>
     <div class="session-meter" aria-hidden="true"><span id="session-fill"></span></div>
-    <p class="demo-hint" id="demo-session-total">Session: 0 of 180 minutes.</p>
+    <p class="demo-hint" id="demo-session-total">Session so far is 0 of 180 minutes.</p>
     <div class="demo-row">
       <label class="demo-exclude">
         <span>Player excludes genre</span>
@@ -111,16 +111,16 @@
     const mins = session.reduce((t, s) => t + s.minutes, 0);
     $('session-fill').style.width = `${Math.min(100, (mins / SESSION_LIMIT) * 100)}%`;
     $('session-fill').classList.toggle('over', mins > SESSION_LIMIT);
-    $('demo-session-total').textContent = `Session: ${mins} of ${SESSION_LIMIT} minutes${session.length ? ` across ${session.length} plays` : ''}.`;
+    $('demo-session-total').textContent = `Session so far is ${mins} of ${SESSION_LIMIT} minutes${session.length ? ` over ${session.length} plays` : ''}.`;
   }
 
   function renderResult(r: Result, rtt: number) {
     const msgs: string[] = [];
     for (const g of r.guardrails) {
-      if (g.code === 'cooldown') msgs.push(`Cooldown: ${g.sessionMinutes} minutes played this hour, so nothing is recommended and the player is nudged to take a break.`);
-      if (g.code === 'diversity') msgs.push(`Diversity: ${g.demoted} game(s) moved down so one genre does not fill the list.`);
-      if (g.code === 'excluded') msgs.push(`Exclusions: ${g.count} games filtered out before ranking.`);
-      if (g.code === 'cold_start') msgs.push('Cold start: no history, so these are popular games.');
+      if (g.code === 'cooldown') msgs.push(`Cooldown. ${g.sessionMinutes} minutes played this hour, so nothing is recommended and the player is nudged to take a break.`);
+      if (g.code === 'diversity') msgs.push(`Diversity. ${g.demoted === 1 ? 'One game was' : `${g.demoted} games were`} moved down so one genre does not fill the list.`);
+      if (g.code === 'excluded') msgs.push(`Exclusions. ${g.count} games were filtered out before ranking.`);
+      if (g.code === 'cold_start') msgs.push('Cold start. There is no history yet, so these are popular games.');
     }
     const notice = $('demo-notice');
     notice.hidden = !msgs.length;

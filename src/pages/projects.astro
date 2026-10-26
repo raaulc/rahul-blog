@@ -4,10 +4,10 @@ import WorkCard from '../components/WorkCard.astro';
 import { experiments, notebooks, selected } from '../data/work';
 ---
 
-<Base title="work" description="Selected AI systems by Rahul Rathod: a real-time recommender, a daily ranking pipeline and typed AI decisions, plus experiments and notebooks." active="work" ogImage="/og/projects.png">
+<Base title="work" description="AI systems built by Rahul Rathod, including a real time recommender you can try, a daily ranking pipeline and typed AI decisions." active="work" ogImage="/og/projects.png">
   <h1 class="sr-only">Work</h1>
   <p class="cmd"><span class="dollar">$</span><span class="command"> ls</span><span class="flag"> --selected</span><span class="arg"> ./work</span></p>
-  <p class="page-lede">Systems built end to end, with measured results.</p>
+  <p class="page-lede">Things I built from start to finish, with the numbers to show how they do.</p>
   <h2 class="sr-only">Selected work</h2>
   <div class="work-grid">
     {selected.map((item) => <WorkCard item={item} />)}

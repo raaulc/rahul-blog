@@ -14,7 +14,7 @@ const posts = (await getCollection('posts'))
 ---
 
 <Base
-  title="Rahul Rathod — AI systems, from prototype to production"
+  title="Rahul Rathod, AI engineer"
   description="AI engineer with 16+ years in software. I build AI systems and get them into production, mostly recommendations, ranking and LLM agents."
 >
   <section class="hero">
@@ -44,13 +44,13 @@ const posts = (await getCollection('posts'))
     <div class="work-grid">
       {selected.map((item) => <WorkCard item={item} />)}
     </div>
-    <a class="more-link" href="/projects">all work, experiments and notebooks →</a>
+    <a class="more-link" href="/projects">see all my work →</a>
   </section>
 
   <section class="section">
     <h2 class="section-title">Writing</h2>
     <PostList posts={posts} />
-    <a class="more-link" href="/writing">all writing →</a>
+    <a class="more-link" href="/writing">read all writing →</a>
   </section>
 
   <section class="section">

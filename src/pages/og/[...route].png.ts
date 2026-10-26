@@ -12,10 +12,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
     })),
     {
       route: 'projects/realtime-recs',
-      card: { kicker: 'work', title: 'Real-time game recommender: prototype to production', footer: '+23% NDCG@10 · p99 3.87 ms · live demo' },
+      card: { kicker: 'work', title: 'Real time game recommender, from prototype to production', footer: '+23% NDCG@10 · p99 3.87 ms · live demo' },
     },
-    { route: 'projects', card: { kicker: 'work', title: 'Selected work: AI systems with measured results', footer: 'Rahul Rathod · AI engineer' } },
-    { route: 'writing', card: { kicker: 'writing', title: 'Writing on AI system design', footer: 'Rahul Rathod · AI engineer' } },
+    { route: 'projects', card: { kicker: 'work', title: 'Selected work by Rahul Rathod', footer: 'Rahul Rathod · AI engineer' } },
+    { route: 'writing', card: { kicker: 'writing', title: 'Writing about AI system design', footer: 'Rahul Rathod · AI engineer' } },
   ];
   return cards.map(({ route, card }) => ({ params: { route }, props: { card } }));
 };

@@ -1,11 +1,11 @@
 ---
 // Request path of the realtime-recs service. Horizontal on desktop, vertical on phones.
 const stages = [
-  { name: 'Play event', detail: 'POST /events updates history and the session window', kind: 'io' },
-  { name: 'Retrieval', detail: 'SVD fold-in + item-kNN sums, top 100 each', time: '0.9 ms', kind: 'retrieval' },
-  { name: 'Ranking', detail: '300 LightGBM trees over ~157 candidates, 12 features', time: '2.2 ms', kind: 'ranking' },
-  { name: 'Guardrails', detail: 'cooldown, exclusions, diversity, explanations', time: '0.1 ms', kind: 'policy' },
-  { name: 'Response', detail: 'items, reasons, rule codes, Server-Timing', kind: 'io' },
+  { name: 'Play event', detail: 'A play updates the player history and the current session', kind: 'io' },
+  { name: 'Retrieval', detail: 'SVD and item kNN each pick their top 100 games', time: '0.9 ms', kind: 'retrieval' },
+  { name: 'Ranking', detail: '300 LightGBM trees score about 157 candidates on 12 features', time: '2.2 ms', kind: 'ranking' },
+  { name: 'Guardrails', detail: 'Cooldown, exclusions, diversity and a reason for each pick', time: '0.1 ms', kind: 'policy' },
+  { name: 'Response', detail: 'Games, reasons, the rules that fired and timings', kind: 'io' },
 ];
 ---
 
@@ -19,5 +19,5 @@ const stages = [
       </li>
     ))}
   </ol>
-  <figcaption>No per-player model state: retrieval scores from play history alone, so each event changes the very next response.</figcaption>
+  <figcaption>There is no per player model to update. Retrieval works from play history alone, so every play changes the very next response.</figcaption>
 </figure>
