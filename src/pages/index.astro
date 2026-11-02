@@ -5,12 +5,16 @@ import Base from '../layouts/Base.astro';
 import WorkCard from '../components/WorkCard.astro';
 import PostList from '../components/PostList.astro';
 import pic from '../assets/pic.jpg';
+import NoteList from '../components/NoteList.astro';
 import { career, selected } from '../data/work';
+import { getSections } from '../lib/sections';
 
 const posts = (await getCollection('posts'))
   .filter((p) => p.data.type === 'post')
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 5);
+const notes = (await getCollection('notes')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 6);
+const overview = (await getSections()).filter((s) => s.count > 0);
 ---
 
 <Base
@@ -39,6 +43,12 @@ const posts = (await getCollection('posts'))
     </div>
   </section>
 
+  <nav class="overview" aria-label="Everything on this site">
+    {overview.map((s) => (
+      <a href={s.href}><b>{s.count}</b> {s.count === 1 ? s.one : s.noun}</a>
+    ))}
+  </nav>
+
   <section class="section">
     <h2 class="section-title">Selected work</h2>
     <div class="work-grid">
@@ -52,6 +62,14 @@ const posts = (await getCollection('posts'))
     <PostList posts={posts} />
     <a class="more-link" href="/writing">read all writing →</a>
   </section>
+
+  {notes.length > 0 && (
+    <section class="section">
+      <h2 class="section-title">Recent notes</h2>
+      <NoteList notes={notes} />
+      <a class="more-link" href="/notes">read all notes →</a>
+    </section>
+  )}
 
   <section class="section">
     <h2 class="section-title">Career</h2>

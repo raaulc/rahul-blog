@@ -51,6 +51,8 @@ if (!fs.existsSync(vaultPath)) {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, '..');
 const postsOutDir = path.join(projectRoot, 'src', 'content', 'posts');
+// Short takeaways tagged #note go to their own collection.
+const notesOutDir = path.join(projectRoot, 'src', 'content', 'notes');
 const imagesOutDir = path.join(projectRoot, 'public', 'images');
 const attachmentsDir = path.join(vaultPath, attachmentsFolderName);
 
@@ -131,12 +133,19 @@ function serializeFrontmatter(data) {
  *   - frontmatter tags array (as "publish" or "#publish")
  *   - body text as the literal string #publish
  */
-function isPublished(frontmatter, body) {
+function hasTag(frontmatter, body, tag) {
   const tags = frontmatter.tags || [];
-  if (tags.some((t) => t === 'publish' || t === '#publish')) return true;
-  // Match #publish only when it appears on its own line (Obsidian tag convention)
-  if (/^#publish\s*$/m.test(body)) return true;
-  return false;
+  if (tags.some((t) => t === tag || t === `#${tag}`)) return true;
+  // Match the tag only when it appears on its own line (Obsidian tag convention)
+  return new RegExp(`^#${tag}\\s*$`, 'm').test(body);
+}
+
+function isPublished(frontmatter, body) {
+  return hasTag(frontmatter, body, 'publish');
+}
+
+function isNote(frontmatter, body) {
+  return hasTag(frontmatter, body, 'note');
 }
 
 /**
@@ -144,11 +153,14 @@ function isPublished(frontmatter, body) {
  * Used to resolve wikilinks.
  */
 function buildSlugMap(notes) {
+  // name -> URL path, so wikilinks can point at a post or a note.
   const map = new Map();
-  for (const { filename, frontmatter } of notes) {
+  for (const { filename, frontmatter, kind } of notes) {
     const baseName = path.basename(filename, '.md');
     const slug = frontmatter.slug || slugify(baseName);
-    map.set(baseName.toLowerCase(), slug);
+    const href = `/${kind === 'note' ? 'notes' : 'posts'}/${slug}`;
+    map.set(baseName.toLowerCase(), href);
+    if (frontmatter.title) map.set(String(frontmatter.title).toLowerCase(), href);
   }
   return map;
 }
@@ -161,14 +173,13 @@ function buildSlugMap(notes) {
  * Strip #publish from body text and from frontmatter tags array.
  */
 function stripPublishTag(frontmatter, body) {
+  const control = ['publish', '#publish', 'note', '#note'];
   const newFrontmatter = { ...frontmatter };
   if (newFrontmatter.tags) {
-    newFrontmatter.tags = newFrontmatter.tags.filter(
-      (t) => t !== 'publish' && t !== '#publish'
-    );
+    newFrontmatter.tags = newFrontmatter.tags.filter((t) => !control.includes(t));
   }
   const newBody = body
-    .replace(/^#publish\s*$/gm, '')
+    .replace(/^#(publish|note)\s*$/gm, '')
     .replace(/\n{3,}/g, '\n\n') // collapse extra blank lines
     .trim();
   return { frontmatter: newFrontmatter, body: newBody };
@@ -183,9 +194,10 @@ function stripPublishTag(frontmatter, body) {
 function transformWikilinks(body, slugMap) {
   // Non-image wikilinks (no ! prefix)
   return body.replace(/(?<!!)\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (_, target, alias) => {
-    const slug = slugMap.get(target.toLowerCase()) || slugify(target);
+    const href = slugMap.get(target.toLowerCase());
     const label = alias || target;
-    return `[${label}](/posts/${slug})`;
+    // Links to notes that are not published stay as plain text, never a dead link.
+    return href ? `[${label}](${href})` : label;
   });
 }
 
@@ -247,6 +259,7 @@ function collectMarkdownFiles(dir) {
 
 function run() {
   ensureDir(postsOutDir);
+  ensureDir(notesOutDir);
   ensureDir(imagesOutDir);
 
   // 1. Scan vault for all markdown files
@@ -260,11 +273,12 @@ function run() {
     return { filepath, filename: filepath, frontmatter, body };
   });
 
-  // 3. Filter to published notes only
-  const toPublish = parsed.filter(({ frontmatter, body }) =>
-    isPublished(frontmatter, body)
-  );
-  console.log(`Publishing ${toPublish.length} of ${allFiles.length} notes`);
+  // 3. Keep only what is tagged for the site: #publish (post) or #note (short note)
+  const toPublish = parsed
+    .map((n) => ({ ...n, kind: isNote(n.frontmatter, n.body) ? 'note' : isPublished(n.frontmatter, n.body) ? 'post' : null }))
+    .filter((n) => n.kind);
+  const noteCount = toPublish.filter((n) => n.kind === 'note').length;
+  console.log(`Publishing ${toPublish.length - noteCount} posts and ${noteCount} notes of ${allFiles.length} files`);
 
   // 4. Build slug map from all published notes
   const slugMap = buildSlugMap(toPublish);
@@ -272,7 +286,7 @@ function run() {
   // 5. Transform and write each note
   const referencedImages = new Set();
 
-  for (const { filepath, frontmatter, body } of toPublish) {
+  for (const { filepath, frontmatter, body, kind } of toPublish) {
     const baseName = path.basename(filepath, '.md');
     const slug = frontmatter.slug || slugify(baseName);
 
@@ -293,10 +307,11 @@ function run() {
       ...(cleanFm.description ? { description: cleanFm.description } : {}),
       ...(cleanFm.tags && cleanFm.tags.length > 0 ? { tags: cleanFm.tags } : {}),
       ...(cleanFm.type ? { type: cleanFm.type } : {}),
+      ...(cleanFm.category ? { category: cleanFm.category } : {}),
     };
 
     const output = `${serializeFrontmatter(outputFm)}\n\n${transformed}\n`;
-    const outPath = path.join(postsOutDir, `${slug}.md`);
+    const outPath = path.join(kind === 'note' ? notesOutDir : postsOutDir, `${slug}.md`);
     fs.writeFileSync(outPath, output, 'utf8');
     console.log(`  ✓ ${baseName} → ${slug}.md`);
   }

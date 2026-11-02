@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const papers = (await getCollection('papers')).map((p) => p.data).sort((a, b) => b.added.valueOf() - a.added.valueOf());
+const topics = [...new Set(papers.map((p) => p.topic))].sort();
+const implemented = papers.filter((p) => p.implemented).length;
+---
+
+<Base title="papershelf" description="Research papers Rahul Rathod has read or implemented, with a one line take on each." active="papershelf">
+  <h1 class="sr-only">Papershelf</h1>
+  <p class="cmd"><span class="dollar">$</span><span class="command"> ls</span><span class="arg"> ./papershelf</span></p>
+  <p class="page-lede">Papers I have read, with a line on why each one matters. {implemented > 0 && <>I have implemented {implemented} of them.</>}</p>
+  {papers.length === 0 && <p class="empty-msg">The shelf is being filled.</p>}
+  {topics.map((t) => (
+    <section class="section">
+      <h2 class="section-title">{t}</h2>
+      <ul class="shelf-list">
+        {papers.filter((p) => p.topic === t).map((p) => (
+          <li>
+            <a href={p.url} class="shelf-title">{p.title}</a>{p.year && <span class="shelf-meta"> {p.year}</span>}
+            {p.implemented && <a href={p.implemented} class="shelf-badge">implemented</a>}
+            {p.take && <p class="shelf-take">{p.take}</p>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Base>

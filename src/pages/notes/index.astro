@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import NoteList from '../../components/NoteList.astro';
+
+const notes = (await getCollection('notes')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const years = [...new Set(notes.map((n) => n.data.date.getFullYear()))];
+const categories = [...new Set(notes.map((n) => n.data.category))].sort();
+---
+
+<Base title="notes" description="Short notes on AI systems, engineering and the things I learn along the way." active="notes">
+  <h1 class="sr-only">Notes</h1>
+  <p class="cmd"><span class="dollar">$</span><span class="command"> ls</span><span class="arg"> ./notes</span><span class="pipe"> | wc -l</span><span class="flag"> {notes.length}</span></p>
+  <p class="page-lede">Short notes, one idea each. Things I learn at work, from papers and from building. <a href="/notes/rss.xml">RSS</a></p>
+  {notes.length === 0 && <p class="empty-msg">The first notes are on their way.</p>}
+  {categories.length > 1 && (
+    <div class="filter-chips" role="group" aria-label="Filter by category">
+      <button type="button" class="chip-btn" aria-pressed="true" data-filter="">all</button>
+      {categories.map((c) => <button type="button" class="chip-btn" aria-pressed="false" data-filter={c}>{c}</button>)}
+    </div>
+  )}
+  {years.map((y) => (
+    <section class="year-group">
+      <h2 class="section-title">{y}</h2>
+      <NoteList notes={notes.filter((n) => n.data.date.getFullYear() === y)} />
+    </section>
+  ))}
+  <script>
+    const chips = document.querySelectorAll<HTMLButtonElement>('.chip-btn');
+    chips.forEach((chip) =>
+      chip.addEventListener('click', () => {
+        chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+        const want = chip.dataset.filter;
+        document.querySelectorAll<HTMLElement>('.note-list li').forEach((li) => {
+          li.hidden = !!want && li.dataset.category !== want;
+        });
+        document.querySelectorAll<HTMLElement>('.year-group').forEach((g) => {
+          g.hidden = ![...g.querySelectorAll('li')].some((li) => !li.hidden);
+        });
+      }),
+    );
+  </script>
+</Base>

@@ -1,13 +1,14 @@
 ---
+import { getNavSections, type NavId } from '../lib/sections';
+
 interface Props {
-  active?: 'writing' | 'work' | 'about';
+  active?: NavId;
 }
 const { active } = Astro.props;
 const links = [
-  { id: 'work', href: '/projects', label: 'work' },
-  { id: 'writing', href: '/writing', label: 'writing' },
-  { id: 'about', href: '/about', label: 'about' },
-] as const;
+  ...(await getNavSections()).map((s) => ({ id: s.id as NavId, href: s.href, label: s.label })),
+  { id: 'about' as NavId, href: '/about', label: 'about' },
+];
 const CV = '/cv/Rahul_Rathod_CV.pdf';
 ---
 
@@ -19,8 +20,10 @@ const CV = '/cv/Rahul_Rathod_CV.pdf';
     {links.map((l) => (
       <li><a href={l.href} class:list={{ active: active === l.id }} aria-current={active === l.id ? 'page' : undefined}>{l.label}</a></li>
     ))}
-    <li><a href={CV} class="nav-cv">cv</a></li>
-    <li><a href="/search" class="nav-search" aria-label="Search" title="Search (press /)">⌕</a></li>
-    <li><button type="button" class="theme-toggle" aria-label="Toggle colour theme" title="Toggle theme">◐</button></li>
   </ul>
+  <div class="navbar-tools">
+    <a href={CV} class="nav-cv">cv</a>
+    <a href="/search" class="nav-search" aria-label="Search" title="Search (press /)">⌕</a>
+    <button type="button" class="theme-toggle" aria-label="Toggle colour theme" title="Toggle theme">◐</button>
+  </div>
 </nav>

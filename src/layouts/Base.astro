@@ -1,6 +1,7 @@
 ---
 import Head from '../components/Head.astro';
 import Nav from '../components/Nav.astro';
+import type { NavId } from '../lib/sections';
 import '../styles/global.css';
 
 interface Props {
@@ -8,7 +9,7 @@ interface Props {
   description?: string;
   type?: 'website' | 'article';
   publishedAt?: Date;
-  active?: 'writing' | 'work' | 'about';
+  active?: NavId;
   noindex?: boolean;
   ogImage?: string;
 }

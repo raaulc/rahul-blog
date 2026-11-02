@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+  notes: CollectionEntry<'notes'>[];
+}
+const { notes } = Astro.props;
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+---
+
+<ul class="post-list note-list">
+  {notes.map((n) => (
+    <li class="post-entry" data-category={n.data.category}>
+      <time class="post-date" datetime={n.data.date.toISOString()}>{fmt(n.data.date)}</time>
+      <a href={`/notes/${n.id}`} class="post-link">{n.data.title}</a>
+      <span class="post-mins note-cat">{n.data.category}</span>
+    </li>
+  ))}
+</ul>

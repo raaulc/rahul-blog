@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const videos = (await getCollection('videos')).map((v) => v.data).sort((a, b) => b.published.valueOf() - a.published.valueOf());
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: '2-digit' });
+---
+
+<Base title="videos" description="Video walkthroughs of AI systems Rahul Rathod has built." active="videos">
+  <h1 class="sr-only">Videos</h1>
+  <p class="cmd"><span class="dollar">$</span><span class="command"> ls</span><span class="arg"> ./videos</span></p>
+  <p class="page-lede">Walkthroughs of things I have built, and how they work.</p>
+  {videos.length === 0 && <p class="empty-msg">The first video is on its way.</p>}
+  <div class="video-grid">
+    {videos.map((v) => (
+      <a class="video-card" href={`https://www.youtube.com/watch?v=${v.youtube}`}>
+        <img src={`https://i.ytimg.com/vi/${v.youtube}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" />
+        <span class="video-title">{v.title}</span>
+        <time class="video-date" datetime={v.published.toISOString()}>{fmt(v.published)}</time>
+      </a>
+    ))}
+  </div>
+</Base>

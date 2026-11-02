@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const books = (await getCollection('books')).map((b) => b.data).sort((a, b) => b.added.valueOf() - a.added.valueOf());
+---
+
+<Base title="bookshelf" description="Books Rahul Rathod recommends, with a one line take on each." active="bookshelf">
+  <h1 class="sr-only">Bookshelf</h1>
+  <p class="cmd"><span class="dollar">$</span><span class="command"> ls</span><span class="arg"> ./bookshelf</span></p>
+  <p class="page-lede">Books I would recommend, and what I took from each.</p>
+  {books.length === 0 && <p class="empty-msg">The shelf is being filled.</p>}
+  <ul class="shelf-list">
+    {books.map((b) => (
+      <li>
+        {b.url ? <a href={b.url} class="shelf-title">{b.title}</a> : <span class="shelf-title">{b.title}</span>}
+        <span class="shelf-meta"> by {b.author}</span>
+        {b.take && <p class="shelf-take">{b.take}</p>}
+      </li>
+    ))}
+  </ul>
+</Base>
