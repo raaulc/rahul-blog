@@ -1,0 +1,233 @@
+{
+  "date": "2026-11-03",
+  "generated_at": "2026-11-03T14:46:04.355230+00:00",
+  "interest": "LLM agents, tool use, and structured/typed model outputs",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "papers": [
+    {
+      "title": "VeriHarm-Bench: Measuring Harmful Success in LLM Coding Agents Verifiably",
+      "summary": "Large language model (LLM) coding agents increasingly operate with shell access, allowing them to write scripts, move files, alter permissions, and modify system configurations. However, an agent may achieve a user's goal while causing unintended harm, such as deleting unrelated files, weakening access controls, or corrupting data, in response to benign inputs without explicit jailbreaking. This failure mode is particularly important because apparent task success may reassure users that an agent behaved correctly, causing harmful side effects to go unnoticed. We call this harmful success: the agent successfully completes the intended benign task while simultaneously causing unintended harm. Despite its importance, harmful success is difficult to measure because conventional task-success metrics overlook harmful behaviors, while existing safety evaluations are often designed solely to assess harmful outcomes. We introduce VeriHarm, an automatic framework for constructing programmatically verifiable benchmarks that directly measure harmful success. VeriHarm minimally perturbs coding tasks to elicit unintended harmful behavior while maintaining the benignity of the task and preserving the original task objective. It then synthesizes executable harm tests that, together with the original task-correctness tests, evaluate both task accuracy and harmful outcomes. Frontier agents, including GPT-5.6-Sol and Claude-Opus-5, achieve an average task accuracy of 95% on our curated VeriHarm-Bench, yet still struggle to complete tasks safely: their safe success rate, the fraction of tasks completed successfully without triggering the designated harm, averages only 37%. These results suggest that successful task completion can frequently coexist with unintended harm, and that task-success metrics alone may substantially understate the potential safety risks of coding agents.",
+      "link": "http://arxiv.org/abs/2611.03575v1",
+      "published": "2026-11-02T18:27:55Z",
+      "category": "cs.CL",
+      "worth_reading": 0.86,
+      "novelty": 1.93,
+      "kind": "benchmark_or_eval",
+      "priority": 0.795
+    },
+    {
+      "title": "MCP Tool Poisoning in Agentic AI Frameworks: A Cross-Framework Measurement Study",
+      "summary": "The Model Context Protocol (MCP) lets agentic AI frameworks connect language models to external tool providers, but it carries attacker-controlled content (tool descriptions, schema fields, and response data) into model context without validation. Prior benchmarks measure model compliance with poisoned instructions without confirming real execution. We present the first cross-framework measurement of MCP tool poisoning with real tool execution. A 25-class root-cause taxonomy unifies prior classifications, and the open-source tool mcpvenom drives a 9,720-cell susceptibility matrix across 12 frameworks, 18 models, and 45 attack scenarios, with a dual oracle that confirms exfiltration via canary HTTP receipt. The overall attack success rate is 22.9% (2,113 vulnerable cells). Of these, 64.9% dispatch an attacker tool call, 23.0% contact the attacker endpoint, and 12.1% verifiably exfiltrate a secret. Resistance is model-level: nine core frameworks cluster within 23 to 26% (chi-squared = 3.30, p = 0.91), and no framework implements intentional defense. Incidental framework properties mitigate in specific cases, and a regex description scanner rejects 20 of 45 scenarios at a 7.2% false-positive rate, so metadata scanning alone is a partial control. Model ASR ranges from 0.4% to 49.7%. Claude Opus 4.8 is vulnerable in 8 of 530 cells while issuing 223 explicit refusals. A code-level audit finds no intentional defense across twelve frameworks, and all five coordinated disclosures across four vendors were rejected.",
+      "link": "http://arxiv.org/abs/2611.03555v1",
+      "published": "2026-11-02T18:17:08Z",
+      "category": "cs.AI",
+      "worth_reading": 0.88,
+      "novelty": 1.76,
+      "kind": "benchmark_or_eval",
+      "priority": 0.792
+    },
+    {
+      "title": "Strategist: Evolving Reasoning with Agents",
+      "summary": "A model is only half of an AI agent system. The other half is the inference strategy: the reasoning procedure that turns model calls into a response. Today that second half is written by hand, and the experience of building one strategy never carries to the next. We introduce Strategist, a meta-agent that evolves inference strategies across tasks. Each strategy is written as a blueprint,executable code that other strategies can reuse, and together the blueprints form a library. Given a task and a small development set, Strategist retrieves related blueprints, writes candidate strategies, tests them on real samples, and revises them from the results. Every candidate then enters the library, so later tasks build on earlier discoveries. On 30 benchmarks, Strategist beats the strongest baseline on 24 and matches its average accuracy (74.7% vs.74.0%) at 39% lower inference cost. Its strategies also transfer to unseen tasks and other models without further search. The part of an AI system that is not improved on its own now does.",
+      "link": "http://arxiv.org/abs/2611.03618v1",
+      "published": "2026-11-02T18:51:04Z",
+      "category": "cs.AI",
+      "worth_reading": 0.85,
+      "novelty": 1.96,
+      "kind": "new_method",
+      "priority": 0.791
+    },
+    {
+      "title": "Cloudra: Geometric Reasoning and Scientific Validation for Autonomous Reaction Mechanism Exploration",
+      "summary": "Autonomous reaction-mechanism exploration requires proposing reaction steps, preparing three-dimensional structures, and determining which reactant and product a computed saddle point connects. Large language model (LLM) agents can misjudge spatial relationships and confuse a computed structure with the species or step they intended to study.   We present Cloudra, a multi-agent framework that constrains mechanistic output through a Delivery DAG of chemical objects. Species nodes carry geometries and bonding topology; elementary-step edges carry transition states and reaction connections between species. Cheminformatics algorithms establish molecular identities and atom correspondences. Deterministic routines measure and transform structures to prepare candidate geometries. Frequency and IRC calculations determine the stationary points found and the species they connect. Agents use these objects to test proposed steps, compare pathways, and revise the mechanism.   CloudraBench evaluates the framework's end-to-end mechanism-calculation capability across 50 tasks covering elementary reactions, multistep mechanisms, stereochemical competition, and computational method limitations. Across 200 runs under four workflow configurations, the primary Guided workflow achieves a mean composite score of 0.805, compared with 0.584 for the same-model Standard baseline. On Hard-tier tasks, the Guided mean increases from 0.689 under Standard to 0.958. Under Guided, the self-consistency component reaches its maximum score in 24 of the 40 non-Impossible tasks, compared with seven under Standard. Behavioral analyses examine how the agents use bond and dihedral measurements, optimized structures, and IRC endpoints to revise local mechanistic assignments.",
+      "link": "http://arxiv.org/abs/2611.02909v1",
+      "published": "2026-11-02T10:42:24Z",
+      "category": "cs.MA",
+      "worth_reading": 0.86,
+      "novelty": 1.76,
+      "kind": "new_method",
+      "priority": 0.778
+    },
+    {
+      "title": "Coati: Host-Grounded Execution for Installable Mobile GUI Agents",
+      "summary": "Mobile GUI agents can carry out tasks across apps, yet most run on a separate computer that drives a phone over the Android Debug Bridge (ADB), out of reach of ordinary users and of the apps through which most people reach Web services. We present Coati, a source-available agent that users install as an Android app. Its runtime on the phone, the host, records what a model alone cannot see: the effect of each action at its target, result screens across apps, and the progress of repeated steps. VerifyLoop checks action outcomes and completion claims against host evidence and reports a completion it cannot audit as unverified. AppMemory builds per-app procedural memory from observations that the interface supports and reuses it on later visits. A routed fast executor lets a lightweight selection model take simple, confident steps and lets the host repeat loops of simple steps that the large model plans once. On all 116 AndroidWorld tasks, with Gemini 3.8 Flash as every agent's backbone, Coati succeeds on 86.5% of the tasks over three trials, ahead of the strongest open-source agent Artemis (77.6% with the same accessibility-only access, 76.5% even when allowed ADB) and far ahead of FinalRun and Midscene (about 59%), and VerifyLoop cuts false completion claims by about a third at comparable success. In everyday use, the fast executor cuts the median time of phone tasks by 39% at comparable success and runs three of four loop tasks 2.8-5.4x faster with 6-9x fewer model tokens, while AppMemory shortens a repeated deep route in an unfamiliar app from 18.5 steps to 6-7. On an Android 16 phone, routed execution completes all 27 benchmark runs with 76% fewer Reasoning calls on the critical path. Host evidence, not model self-assessment, makes an installable agent reliable and fast.",
+      "link": "http://arxiv.org/abs/2611.02644v1",
+      "published": "2026-11-02T07:06:26Z",
+      "category": "cs.MA",
+      "worth_reading": 0.84,
+      "novelty": 1.85,
+      "kind": "applied_system",
+      "priority": 0.773
+    },
+    {
+      "title": "WebHarbor: Docking Real Websites for Evolving GUI Agent Environments",
+      "summary": "GUI web agents require realistic and interactive environments that remain stable during both evaluation and training. Live website evaluation suffers from changing content, access restrictions, and limited coverage of authenticated workflows, while existing synthetic environments for training often lack functional depth and visual fidelity. We propose WebHarbor, a suite of 153 executable and dockerized website environments that faithfully reconstruct the visual interfaces, content, and functional workflows of real-world web services under deterministic control. We build WebHarbor through task-driven human-agent collaboration, where environments evolve as new tasks expand their functional scope, coding agents implement the required changes, and human contributors audit visual fidelity, functional correctness, and task validity. The resulting suite comprises 3,518 tasks spanning multi-step and post-authentication workflows, where existing works often fail to cover. Beyond reliable evaluation, WebHarbor provides high-fidelity synthetic web environments for cost-efficient reinforcement learning (RL). We demonstrate that a Qwen 4B-level GUI agent trained with RL in WebHarbor generalizes to unseen tasks and performs competitively with leading open-source GUI web agents across four benchmarks. The code and data are publicly available at https://github.com/aiming-lab/WebHarbor.",
+      "link": "http://arxiv.org/abs/2611.03634v1",
+      "published": "2026-11-02T18:57:36Z",
+      "category": "cs.AI",
+      "worth_reading": 0.8,
+      "novelty": 1.79,
+      "kind": "benchmark_or_eval",
+      "priority": 0.739
+    },
+    {
+      "title": "FedReady: Bounded Agents for Federation Formation",
+      "summary": "Federated learning (FL) runtimes standardize aggregation and deployment, but each new study still requires federation formation: selecting task-eligible sites and preparing their local data and task code for federated training or analysis. This preparation recurs when the target changes, while raw records and site-private mappings are excluded from cross-site FL messages. We present FedReady, a system that performs federation formation with bounded LLM agents. Agents propose shared contracts, local adapters, and task code; the runtime owns workflow state and accepts artifacts only after checks tied to their digests. Candidate site discovery prioritizes recall; local eligibility verification checks task support before site admission. Once participating sites and artifacts are fixed, conventional federated training or analysis proceeds without readiness agents. Across 39 simulated retinal sites and four tasks, discovery reaches recall 1.00 at precision 0.65; local eligibility verification removes all 17 false positives without losing an eligible site-task pair. The participating sites supply 45,575 task-record instances and complete four 100-round jobs, including one with a runtime-generated contract. Across ten patient cohorts, preparation supports seven patient populations and holds endpoints at three sources as unsupported. Comparison with manually prepared reference populations and analysis (the manual reference) gives a maximum survival-curve difference of 0.001133. We also analyze 19 development failures, targeted classification ablations, and standalone and heterogeneous agent configurations. These results establish the feasibility of task-specific data preparation before ordinary FL training or analysis.",
+      "link": "http://arxiv.org/abs/2611.03586v1",
+      "published": "2026-11-02T18:32:43Z",
+      "category": "cs.AI",
+      "worth_reading": 0.78,
+      "novelty": 1.88,
+      "kind": "applied_system",
+      "priority": 0.734
+    },
+    {
+      "title": "Multi-Modal Multi-Agent System for Bridge Operation and Maintenance based on Large Language Model",
+      "summary": "Bridges are critical transportation infrastructure, and reliable operation and maintenance (O&M) is essential for traffic safety and long-term structural performance. However, bridge O&M faces key bottlenecks: no unified architecture coordinates heterogeneous resources; model inferences lack clear links to physical-mechanical laws; and experts' tacit knowledge remains difficult to formalize. This study proposes a knowledge-enhanced autonomy formalization methodology and apply it to construct the Bridge O&M Multi-Modal Multi-Agent System (BOMMA), which integrates heterogeneous diagnostic actions, physics-mechanics-informed representations, long-term memory, and structured experiential knowledge within a coordinated multi-agent workflow, enabling interpretable and traceable scheduling, analysis, and decision-making. On 3,492 multi-source instructions, the proposed method achieves scheduling recalls of 85.37% for simple and 99.40% for composite tasks, with 95.35% BERT F1-score for O&M action reasoning. Ablation studies confirm the contributions of the components in the autonomy. This study bridges general LLM reasoning and specialized bridge O&M requirements.",
+      "link": "http://arxiv.org/abs/2611.02738v1",
+      "published": "2026-11-02T08:26:24Z",
+      "category": "cs.MA",
+      "worth_reading": 0.8,
+      "novelty": 1.74,
+      "kind": "new_method",
+      "priority": 0.734
+    },
+    {
+      "title": "Can LLM Agents Be Forward-Deployed Engineers? Requirement Discovery and Delivery for Enterprise Text-to-SQL",
+      "summary": "LLM coding agents can increasingly automate model post-training, but whether they can act as forward-deployed engineer (FDE) agents, discovering customer requirements and turning them into deployment decisions, remains unclear. We study this on a real enterprise text-to-SQL engagement: a simulated customer, grounded in the real use case's requirements, starts with an ambiguous request. An agent must discover acceptance criteria, data permissions, and hardware constraints in the discovery phase, then plan and execute a post-training recipe in the delivery phase. Across 15 models, the strongest discover over 80% of withheld requirements and open-weight models discover 40-50%; in the delivery phase, only 25% of runs across eight coding-agent configurations pass all acceptance criteria. We identify four bottlenecks in this engagement: (1) incomplete discovery, with 40% of withheld requirements missing or misrepresented; (2) unreliable execution; (3) underused compute budgets and a lack of systematic comparisons across base models and post-training methods; and (4) benchmark accuracy does not guarantee production readiness. We suggest human review of discovered requirements, monitoring of the agent's plan during execution, and an explicit experiment-environment specification covering hardware, budget scope, and production checks.",
+      "link": "http://arxiv.org/abs/2611.03551v1",
+      "published": "2026-11-02T18:13:38Z",
+      "category": "cs.CL",
+      "worth_reading": 0.81,
+      "novelty": 1.65,
+      "kind": "benchmark_or_eval",
+      "priority": 0.732
+    },
+    {
+      "title": "From Natural Language to Exact Cover: A Neuro-Symbolic Approach to Zebra Puzzles",
+      "summary": "Chain-of-Thought (CoT) generation has substantially improved the performance of Large Language Models (LLMs) on complex reasoning tasks, including code generation, data analysis, and exam-style question answering. Despite these advances, purely neural LLMs continue to struggle with elementary logical reasoning problems and lack the determinism, soundness, and reliability characteristic of symbolic reasoning systems. Conversely, classical symbolic methods such as SAT solving and exact cover guarantee correctness and completeness, but require problems to be expressed in highly specialized formal encodings, limiting their applicability to natural language inputs. In this work, we present a synergistic neuro-symbolic framework that bridges this gap by combining neural semantic parsing with deterministic exact cover reasoning. Given a Zebra-style logic puzzle in natural language, an LLM translates entities and constraints into structured tool calls that construct an exact cover instance. A symbolic solver then computes the solution and provides feedback to iteratively refine invalid, under- or overconstrained encodings, exploiting the uniqueness property of Zebra puzzles. We conduct a comprehensive empirical evaluation across multiple parameter scales, post-training paradigms, and LLM families. The results demonstrate that our hybrid approach consistently outperforms strong plain neural baselines, including CoT prompting, as well as recent neuro-symbolic methods.",
+      "link": "http://arxiv.org/abs/2611.03641v1",
+      "published": "2026-11-02T18:58:21Z",
+      "category": "cs.AI",
+      "worth_reading": 0.86,
+      "novelty": 1.13,
+      "kind": "new_method",
+      "priority": 0.715
+    },
+    {
+      "title": "Optimize the Harness, Not the Model: Fitting a Minimal Agent to a Self-Hostable LLM for Investigative Analysis",
+      "summary": "Government intelligence teams need LLM agents that can analyze large, messy evidence collections, but security and cost constraints often rule out hosted frontier models and broad, hard-to-audit tool surfaces. We report CLEO: Constrained Loop for Environment Optimization, a method for fitting a minimal agent harness to a fixed, self-hostable LLM. Given an expert-validated dataset, CLEO admits only the tools, guardrails, memory policies, and loop components that improve accuracy while remaining general and auditable. On our held-out dataset, the CLEO harness reaches an 83.8% pass rate, within 1.2 points of the strongest out-of-the-box Claude Code SDK baseline, while being two orders of magnitude smaller.",
+      "link": "http://arxiv.org/abs/2611.03434v1",
+      "published": "2026-11-02T16:53:29Z",
+      "category": "cs.CL",
+      "worth_reading": 0.8,
+      "novelty": 1.51,
+      "kind": "new_method",
+      "priority": 0.711
+    },
+    {
+      "title": "DiabAgent: Toward Agentic Physiological Control",
+      "summary": "As pretraining scales, medical language models have advanced rapidly in clinical question answering. Their ability to achieve effective physiological control through sustained intervention still lacks systematic quantitative evaluation. Type 1 diabetes provides a concrete setting: impaired insulin secretion creates dependence on exogenous insulin, with dosing continually adjusted using information about meals, exercise, illness, and glucose measurements. We introduce DiabAgent, a research suite for agentic physiological control comprising the Agentic Physiological Control (APC) framework, the DiabetSim simulator, and the SweetBench benchmark. APC controls glucose through medical-device tools, using ongoing observations to infer individual states, accumulate personal experience, and choose treatment actions. We build DiabetSim to simulate different patients, events, and device conditions for scalable virtual testing and training. Using DiabetSim, we construct SweetBench by instantiating 32 scenario designs as 212 glucose-control tasks. With Claude Opus 5.5 and a fixed decision interval of one hour, APC achieves a COGI of 73.5, compared with 71.2 for the open-source closed-loop baseline OpenAPS. Ablations further show that individual adaptation and contextual information improve glucose control. Combining high-frequency rule-based control with lower-frequency agent decisions shows potential for balancing control performance and computational cost. Our work provides a framework, simulator, and evaluation foundation for agents to participate in human physiological control.",
+      "link": "http://arxiv.org/abs/2611.03601v1",
+      "published": "2026-11-02T18:41:02Z",
+      "category": "cs.AI",
+      "worth_reading": 0.79,
+      "novelty": 1.55,
+      "kind": "applied_system",
+      "priority": 0.708
+    },
+    {
+      "title": "NitiBench+: A Temporal Thai Legal Question Answering Benchmark Across 17 Domains",
+      "summary": "Law changes over time. A court decides a case under the law in force on that day, and legal QA benchmarks grade answers against today's law. We checked 156,650 decisions of four Thai courts. Up to 67% of them cite law that has since been amended or repealed. We introduce NitiBench+, the sequel of our NitiBench, a Thai legal QA benchmark with 1,670 items across 17 domains, built from decisions of three courts. For each cited section it holds both the text in force on the decision date and the current text, and its retrieval corpus holds every dated version of every Thai statute section. Answers are graded on the Thai Bar Council rubric, the Bar-standard score, and on the overlap between the cited sections and the court's. The report has two parts. Part I measures the cost of the wrong text on 13 open-weight models. Reading the current text of amended law drops the Bar-standard score by 0.25 and missing repealed law drops it by 0.79. The penalty comes from rule changes, 0.45 on the 428 rule-changed items and none on the 331 wording-only items, and Citation F1 does not see it. The text in force is the fair setting. Part II benchmarks today's models on that setting. A public leaderboard ranks 26 models on a held-out test split of 500 items stratified by domain, with a validation split of the same shape released for public use, from memory alone, with the court's sections provided, and as a retrieval agent over the law in force, with the cost per item and the hallucinated citations. The best model scores 7.78 out of 10 and the best open-weight model 6.39. Without a search tool only five open-weight models recall any Thai law, and with it twenty of the 26 models gain and six lose. Leaderboard will take new models as they are released. Legal benchmarks must track dates, and on the right text today's models still leave a wide gap on Thai law.",
+      "link": "http://arxiv.org/abs/2611.03576v1",
+      "published": "2026-11-02T18:28:39Z",
+      "category": "cs.CL",
+      "worth_reading": 0.77,
+      "novelty": 1.63,
+      "kind": "benchmark_or_eval",
+      "priority": 0.702
+    },
+    {
+      "title": "Four Bridges: Measuring Deception Propensity in a Multi-Agent Game",
+      "summary": "AI agents are increasingly deployed in settings where they interact and coordinate with other agents, yet honesty is mostly measured in single-turn, single-agent benchmarks that pressure the model to deceive. We study deception that emerges in multi-agent interaction without any instruction to deceive. We introduce Kradle, a platform for evaluating AI models, and Four Bridges, an information asymmetry game in which four agents distribute across four rooms: one is the death room, the others hold food worth more if not shared. One agent, the informed agent, knows which room is the death room and can withhold or disclose that information. We evaluate eight frontier models as the informed agent. Deceptive behavior appears in every model and in 73% of all runs (6% to 100% per model), and does not decrease with capability tier within a model family. When the informed agent does disclose, the warning is often challenged, and agents that challenge it enter the death room twice as often as those that do not. Telling all agents that one of them knows the death room collapses deception in six of eight models; telling the informed agent that the room is permanently fatal moves only one. On an open-weight model, an honesty steering vector reduces deception to 0% and adversarial honesty training to 6%. The platform and game provide a testbed for measuring deceptive behavior and comparing interventions.",
+      "link": "http://arxiv.org/abs/2611.03600v1",
+      "published": "2026-11-02T18:40:47Z",
+      "category": "cs.AI",
+      "worth_reading": 0.75,
+      "novelty": 1.75,
+      "kind": "benchmark_or_eval",
+      "priority": 0.7
+    },
+    {
+      "title": "SelfImprove-Bench: Evaluating Generalization in Self-Improving Agents",
+      "summary": "Recursively self-improving (RSI) systems are increasingly viewed as a promising means of accelerating progress toward artificial general intelligence. They aim to autonomously improve their capabilities by refining their working pipelines and recursively improving the strategies that guide subsequent refinements, with gains generalizing to unseen scenarios.However, existing evaluations lack reliable metrics to distinguish capability gains from scenario fitting, sustainable and extensible protocols for unseen tasks and difficulties, and fine-grained attribution of improvement to evolution traces. To this end, we propose SelfImprove-Bench,an RSI evaluation framework that organizes tasks into three primary capabilities (i.e., Exploring, Planning, Reasoning) as scenarios for guiding model evolution. We instantiated the tasks on games for controllability and reproducibility, and pairs them with scalable generation and orchestration driven by task templates and difficulty coefficients. Beyond task-level scores, SelfImprove-Bench organizes evaluation into generalization ladder levels G0 to G4 that measure how far gains transfer from training conditions. Experiments reveal that the evolutionary gains of existing RSI methods are inconsistent across generalization levels.",
+      "link": "http://arxiv.org/abs/2611.02797v1",
+      "published": "2026-11-02T09:08:12Z",
+      "category": "cs.MA",
+      "worth_reading": 0.76,
+      "novelty": 1.46,
+      "kind": "benchmark_or_eval",
+      "priority": 0.678
+    },
+    {
+      "title": "IdeaTaste: Do LLMs Share the Research Taste of Human Researchers?",
+      "summary": "Research taste, the judgment of what to read, which problems to pursue, and which methods to try, increasingly shapes the work of AI scientists, yet it remains far less understood than their ability to execute research. We introduce IdeaTaste, a benchmark that scores an LLM by how closely the research proposals it writes from a literature snapshot frozen at 2025 match the work the same communities published in 2026. Our experiments span six contemporary language models and four research areas from established to emerging fields, covering more than 90{,}000 proposals in total. LLM agents fall well short of human communities in both the literature they cite and the ideas they state, reaching about 26\\% of the human level on citation matching and only 18\\% on idea matching. Their populations can cite as diversely as a community and take up its tasks and methods, yet rarely arrive at the concrete approaches and research plans it pursues. Neither richer field context nor larger populations substantially close this gap. In blinded expert review, AI proposals trail the 2026 papers least in presentation and most in expected success, echoing their gap in concrete approaches, and those whose ideas no human paper shares fare worst, suggesting weaker directions rather than overlooked opportunities. These results indicate that the main bottleneck in AI research taste lies less in finding the directions a community works on than in turning them into the concrete approaches it goes on to pursue. We release IdeaTaste as an open, continuously updated leaderboard (https://cxcscmu.github.io/IdeaTaste) that benchmarks contemporary AI proposals against future publication cycles.",
+      "link": "http://arxiv.org/abs/2611.03424v1",
+      "published": "2026-11-02T16:45:03Z",
+      "category": "cs.CL",
+      "worth_reading": 0.61,
+      "novelty": 1.94,
+      "kind": "benchmark_or_eval",
+      "priority": 0.621
+    },
+    {
+      "title": "D&A: Decoupling Description and Assessment Enables VLMs as Zero-Shot Robotic Reward Models",
+      "summary": "Vision-Language Models (VLMs) hold promise for zero-shot video task-progress estimation in robot learning, yet existing frameworks frequently suffer from confirmation bias, hallucinating progress in failed executions due to implicit success assumptions or relative temporal ranking designs. Naive prompting of frontier models collapses into a binary success detector that fails to capture nuanced, non-linear progress and failures. While post-training approaches can mitigate this through explicit training, they demand expensive real-world robotics data and require computationally intensive post-training for every individual base model. To resolve these limitations, we introduce D&A (Describe & Assess): our approach decouples progress estimation into an objective, task-grounded textual description of scene dynamics followed by an assessment phase using explicit rubrics. By compelling the VLM to synthesize an explicit, text-based definition of absolute success before scoring, the framework anchors evaluations to an external, global criterion rather than the video's internal timeline. Empirical results demonstrate that our method calibrates zero-shot estimates and mitigates confirmation bias, providing fine-grained, partial progress metrics that accurately penalize failed executions while correctly interpolating successful runs. Being purely prompt-based, D&A generalizes across tasks, embodiments, and benchmarks---matching or surpassing post-trained reward models---and its reward estimates enable efficient downstream reinforcement learning.",
+      "link": "http://arxiv.org/abs/2611.03622v1",
+      "published": "2026-11-02T18:52:11Z",
+      "category": "cs.AI",
+      "worth_reading": 0.63,
+      "novelty": 1.76,
+      "kind": "new_method",
+      "priority": 0.617
+    },
+    {
+      "title": "Not All Reasoning Generalizes: A Case Study on Learning Generalizable Reasoning Strategies in RLVR",
+      "summary": "Reinforcement learning with verifiable rewards (RLVR) can enable generalizable improvement for large language model (LLM) reasoning. This paper studies how to incentivize such generalization via reasoning strategies. We study this question with a controllable equation-solving framework: finding multiple inputs x for equations f(x)=y, where f is a non-bijective string function. This setting makes reasoning strategies observable while supporting a clear definition of easy-to-hard out-of-distribution (OOD) shifts, e.g., more solutions, longer y, etc. We uncover a subtle RLVR failure: it teaches the model to solve in-distribution tasks with high accuracy and structured step-by-step derivation, yet under OOD shifts, the same model abandons derivation and collapses to ineffective brute-force enumeration, causing sharp accuracy drops. This observation reveals the deeper challenges of RLVR generalization as it is neither incapable base model nor reward hacking, since the model succeeds in-distribution with the correct reasoning strategy. The key to mitigating this failure is an indirect intervention that surprisingly helps: co-training with bijective inversion tasks. Although these bijective tasks are actually not uniformly harder and even further from the non-bijective OOD evaluation, they make derivation more certain and substantially restore the correct strategy and accuracy under OOD shifts. This effect further motivates our theoretical analysis: outcome-only RLVR can shape reasoning processes through implicitly crediting the effective reasoning strategies more, even without process supervision. To conclude, our analysis framework and findings systematically reveal the crucial role and incentivization of reasoning strategies in RLVR generalization under OOD shifts. Code is available at https://github.com/ziqipang/rl_meta_thinking.",
+      "link": "http://arxiv.org/abs/2611.03627v1",
+      "published": "2026-11-02T18:53:54Z",
+      "category": "cs.LG",
+      "worth_reading": 0.58,
+      "novelty": 1.8,
+      "kind": "benchmark_or_eval",
+      "priority": 0.586
+    },
+    {
+      "title": "VIAS: Value-Isolating Activation Steering for Multi-Value Alignment and Compliance for Organisations",
+      "summary": "Organisations increasingly deploy large language model agents that must follow organisational values. We check whether activation steering, which adds vectors to a model's internal activations during generation without changing its weights, can improve compliance beyond prompting alone. Since most scenarios involve several values at once, we focus on multi-value steering. A simple way to build these vectors is to contrast responses that follow all values relevant to a scenario with responses that violate them. However, this gives nearly identical vectors for different values: they capture a general compliance signal rather than individual values, which limits their use when combining several values. We propose Value-Isolating Activation Steering (VIAS), which contrasts responses to the same scenario under two prompts, one listing all relevant values and one omitting a single target value. We keep a pair only if the target value changes from compliant to non-compliant and both responses still meet a minimum compliance level on the other values. We evaluate VIAS on PROTECT, a workplace compliance dataset where each scenario is tagged with relevant values from a 21-value taxonomy. VIAS reduces overlap between value vectors, making them better suited for multi-value steering, although this alone does not lead to independent control over each value. Combined with prompting, VIAS complies with every tagged value on 69.6% of scenarios for Qwen2.5-7B, 75.2% for Mistral-7B, and 72.6% for Phi-3.5-mini, outperforming prompting alone for all three models.",
+      "link": "http://arxiv.org/abs/2611.03518v1",
+      "published": "2026-11-02T17:53:26Z",
+      "category": "cs.CL",
+      "worth_reading": 0.61,
+      "novelty": 1.27,
+      "kind": "new_method",
+      "priority": 0.554
+    },
+    {
+      "title": "Library of Layers (LoL): Adaptively Ordering Transformer Layers at Runtime",
+      "summary": "Computer programmers chain together the same reusable computational primitives, for example, conditional statements or loops, but in different orders to implement different algorithms. In contrast, existing language model architectures always execute their layers in the same order. We introduce Library of Layers (LoL), an architecture that dynamically orders its layers during inference to solve the problem at hand. LoL has a single hyperparameter, the size of its global library of transformer blocks, that allows it to transition seamlessly between parameter reuse and sparsity, generalizing the parameter-efficiency and FLOPs-efficiency tradeoffs of dense, depth-recurrent, and mixture of experts architectures in one unified family. We show that LoL achieves competitive performance with all three above baselines when pretrained on text data. On synthetic sudoku and maze data, we observe that the model employs distinct layer orderings to implement different solution strategies, and we can intervene on routing to force a model to apply a specific solution strategy to a problem instance. In a multilingual natural language setting, we find that LoL chooses different layer order patterns based on language and script. Similarly, we train LoL on safety data and fit probes to its router outputs, finding that these probes distinguish safe from unsafe text with high AUROC. LoL provides a path toward a future in which models dynamically compose their own computational graph, enabling more efficient and controllable reasoning.",
+      "link": "http://arxiv.org/abs/2611.03526v1",
+      "published": "2026-11-02T17:57:53Z",
+      "category": "cs.CL",
+      "worth_reading": 0.5,
+      "novelty": 1.99,
+      "kind": "new_method",
+      "priority": 0.549
+    }
+  ]
+}
