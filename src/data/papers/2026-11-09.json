@@ -1,0 +1,233 @@
+{
+  "date": "2026-11-09",
+  "generated_at": "2026-11-09T16:59:36.167616+00:00",
+  "interest": "LLM agents, tool use, and structured/typed model outputs",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "papers": [
+    {
+      "title": "Discovering formally verified quantum programs with AI",
+      "summary": "The timeline by which quantum computers can solve breakthrough problems in science depends on improved quantum algorithms as much as on better hardware. Such algorithmic advances are typically achieved through many years of expert human collaboration. In mathematics and computer science, large language models have accelerated progress through automated discovery loops. However, quantum algorithms can only be evaluated by classical computers on restricted or small instances. Here we demonstrate automated discovery of quantum programs beyond these regimes including order-of-magnitude improvements on scientific applications. To achieve this, we build a quantum program library in the Lean theorem prover in which large language model agents synthesize novel programs against formal problem specifications and verify their correctness and cost. Agent teams collaborate, sharing results and knowledge through wikis and discussing ideas at organized conferences. Our results improve on prior baselines for parallel search (up to 1.4x), quantum arithmetic (290x), and simulations relevant to fusion, photochemistry and drug-metabolism by 11x, 8x and 2.5x respectively. Combining human and artificial intelligence at scale, under the rigor of mathematical proof, lets researchers design algorithms that today's classical and quantum computers cannot test, shortening the path to practical quantum computation.",
+      "link": "http://arxiv.org/abs/2611.09822v1",
+      "published": "2026-11-06T18:08:06Z",
+      "category": "cs.AI",
+      "worth_reading": 0.81,
+      "novelty": 2.25,
+      "kind": "new_method",
+      "priority": 0.792
+    },
+    {
+      "title": "ODD+LLM: Specifying LLM-Agent Behavior for Reproducible Social Simulation",
+      "summary": "The ODD protocol is the de facto standard for describing agent-based models, but it lacks vocabulary for the components that determine LLM-agent behavior: prompt assembly, memory serialization, parsing, and retry logic. We propose ODD+LLM, a backward-compatible extension adding five documentation blocks grounded in the CoALA cognitive-architecture framework. To show that the gap matters, we conduct a multiverse analysis [Steegen et al., 2016] of a published LLM naming-game simulation, varying six specification choices a reimplementer must make. Variants that are defensible readings of the paper stay within statistical noise of our baseline reconstruction. Missing one instruction that the paper states but is easy to overlook (that the model answers as an outside observer rather than as a player) raises the share of runs settling on the convention agents individually favor from 0.35 to 1.00 and makes convergence three times faster, in a reimplementation that uses a different model from the original. We complement the demonstration with a reconstruction-sufficiency review of 28 published LLM-agent simulations, finding that the details of how prompts are built and how model outputs are parsed are undetermined in 77% of cases, and that no paper fully specifies its main LLM call. ODD+LLM gives the field a standard home for information it already produces but currently scatters across code repositories, supplementary files, and undocumented defaults.",
+      "link": "http://arxiv.org/abs/2611.08932v1",
+      "published": "2026-11-06T03:21:50Z",
+      "category": "cs.MA",
+      "worth_reading": 0.85,
+      "novelty": 1.86,
+      "kind": "new_method",
+      "priority": 0.781
+    },
+    {
+      "title": "Phantom Consensus: Measuring Social Reasoning in Multi-Agent LLM Decision-Making",
+      "summary": "Multi-agent LLM systems increasingly aggregate judgments across model instances, but reasoning about other agents can itself introduce failure. We study a setting in which LLMs shift their public decisions after observing ambiguous social signals while reporting inaccurate estimates of what other agents privately judged, even when the group's recorded private judgments do not support the apparent consensus. We call this failure phantom consensus and study it as a pluralistic-ignorance-style pattern in controlled LLM collectives. To measure this phenomenon, we introduce PHANTOM-Bench, a benchmark that separates isolated private judgments, public decisions after ambiguous social signals, elicited estimates of the group's private judgment, transparency-based recovery, and controls for neutral public text and explicit vote-following. Across nine closed- and open-weight models, ambiguous public signals consistently degrade decision quality and can turn correct private group judgments into incorrect public collective outcomes. Public accuracy drops by as much as 47.8 percentage points, and collective rationality failures reach 47.3% in the most susceptible setting. We observe substantial errors in reported group-private beliefs alongside public-stage failures, while control conditions reveal model-dependent differences in susceptibility to ambiguous and explicit peer signals. Revealing the agents' recorded private decisions repairs many failures without revealing the gold label, although recovery varies across models. Our results show that evaluating multi-agent LLM systems requires measuring not only final agreement, but whether that agreement reflects independently measured private judgments or an apparent consensus.",
+      "link": "http://arxiv.org/abs/2611.08971v1",
+      "published": "2026-11-06T04:33:59Z",
+      "category": "cs.MA",
+      "worth_reading": 0.8,
+      "novelty": 1.95,
+      "kind": "benchmark_or_eval",
+      "priority": 0.755
+    },
+    {
+      "title": "AIM: Adaptive Interaction in Multi-Agent Debate for Multimodal LLM Inference",
+      "summary": "Multi-Agent Debate (MAD) improves reasoning on multimodal tasks, but its accuracy and token efficiency depend on how agents interact during debate. A largely overlooked design choice is which interaction modalities agents use to exchange evidence. Existing methods rely on fixed text- or graph-based interaction, which fails to convey fine-grained multimodal evidence and thus degrades accuracy while inflating token cost due to verbose descriptions. To address this, we propose Adaptive Interaction in Multi-Agent Debate (AIM), an adaptive routing framework that dynamically selects the optimal modality combination for inter-agent interaction in multimodal MAD. Beyond text and graph, AIM introduces task-dependent modality interaction, where agents exchange targeted regions of interest from the task-specific multimodal input, such as image regions, audio segments, or spatio-temporal video clips. To determine the best combination for each instance, AIM first generates a structured baseline response and extracts interpretable routing features that capture which evidence the instance requires, how confident the baseline agent is, and how much new evidence each modality would add beyond the baseline response. A lightweight router then uses these routing features to select a modality combination that avoids both under-fusion (i.e., agents miss decisive evidence) and over-fusion (i.e., redundant modalities inflate token cost) risks. Across eight benchmarks spanning three multimodal task families, \\name achieves the highest accuracy. Combining modalities improves accuracy by up to 6.4\\% over the best single-modality baseline, and adapting the combination per instance adds up to 4.2\\% over the most accurate fixed combination of each benchmark with up to 53.4\\% fewer tokens.",
+      "link": "http://arxiv.org/abs/2611.08950v1",
+      "published": "2026-11-06T03:58:34Z",
+      "category": "cs.MA",
+      "worth_reading": 0.82,
+      "novelty": 1.8,
+      "kind": "new_method",
+      "priority": 0.754
+    },
+    {
+      "title": "Knowing When to Intervene: Causal Evaluation of AI Agents",
+      "summary": "Current evaluations of agentic AI systems primarily rely on benchmarks. However, the static nature of benchmarks makes them uninformative about the value of auditing interventions at deployment time. For reliable deployment, we often need to determine within an agent's trajectory whether or not to intervene, e.g., by verifying the agent's current output or steering it toward different behavior, using either human review or more costly models or time-consuming agentic supervision. The value of such interventions is fundamentally a causal inference question, asking whether the causal effect of such an intervention is beneficial for the final outcome. Estimating this causal effect is particularly challenging due to the dynamic nature of the problem: the impact of an intervention depends on the current context and environment, as well as the agent's future behavior. We develop the first methodologically grounded framework for evaluating the causal effects of randomized interventions within agent trajectories. By leveraging a relatively small dataset of agent trajectories collected under randomized interventions such as verification or screening, we can estimate the dynamic causal effect of a rich class of (contextual) intervention policies. The structural parameters that we estimate can also be used to construct safety leaderboards that capture the risk of various agentic actions, which can be used by practitioners for audit prioritization. Applying our methods to tau-bench Retail, ToolSandbox, and ImpossibleBench, we find that intervention effects vary substantially across agent actions and states. More broadly, our work suggests a rich research agenda at the intersection of causal inference and agentic evaluation, which we believe is essential for the reliable and safe deployment of AI agents in the real world.",
+      "link": "http://arxiv.org/abs/2611.09792v1",
+      "published": "2026-11-06T17:46:53Z",
+      "category": "cs.LG",
+      "worth_reading": 0.79,
+      "novelty": 1.99,
+      "kind": "new_method",
+      "priority": 0.752
+    },
+    {
+      "title": "Computer-Use Agents Are Embodied Generalists",
+      "summary": "In many areas of AI, general-purpose models have increasingly replaced handcrafted methods and specialized architectures. We argue that embodied AI is poised for a similar shift. Our key claim is that embodied tasks can be formulated as interaction with digital software. Specifically, we build software that renders an agent's view of a physical environment on a screen and provides controls for acting in it. A computer-use agent (CUA) can then perform embodied tasks through the same screenshots and keyboard and mouse actions that it uses to operate ordinary software. Using a single CUA design and changing only the software, our entries win first-, second-, third-, and sixth-place prizes across four ECCV workshop competitions, without any competition-specific agent tuning. These results suggest that the skills CUAs learn on software, such as visual grounding, precise clicking, and exploration, already carry over to embodied tasks, giving CUAs a far broader scope in embodied AI than previously realized. We therefore advocate that computer-use agents can be embodied generalists. Further, we advocate that, by following the training strategy that made computer-use agents general, embodied AI can converge on a single general model as well, ushering in a new era of general embodied AI. Website: https://pranjal2041.github.io/cua-embodied",
+      "link": "http://arxiv.org/abs/2611.09847v1",
+      "published": "2026-11-06T18:31:17Z",
+      "category": "cs.LG",
+      "worth_reading": 0.77,
+      "novelty": 2.1,
+      "kind": "survey_or_position",
+      "priority": 0.749
+    },
+    {
+      "title": "CPU-ARC: Agentic Reasoning Caching for on-CPU Reasoning Reuse",
+      "summary": "Large language models reinvent the wheel all the time. They conflate task-solving with the execution of the solutions, which forces them to solve every problem from scratch. We show that once a task has been reasoned through, the application of its solution to a new problem instance can be done very efficiently and with little involvement from language models. We introduce agentic reasoning caching, a method for constructing robust CPU-executable agentic reasoning caches (ARCs) from LLM reasoning traces. ARCs show on-par performance with frontier LLMs across a range of difficult mathematical and scientific tasks, are fully explainable, continually trainable, robust to input perturbations, and 16-291x cheaper to invoke than the source model.",
+      "link": "http://arxiv.org/abs/2611.09891v1",
+      "published": "2026-11-06T18:58:50Z",
+      "category": "cs.AI",
+      "worth_reading": 0.8,
+      "novelty": 1.84,
+      "kind": "new_method",
+      "priority": 0.744
+    },
+    {
+      "title": "Divide, Diagnose, and Compose: Optimizing Agentic Pipelines and Harnesses",
+      "summary": "Building agentic pipelines that achieve high task performance while keeping cost and latency low requires jointly optimizing heterogeneous and coupled design choices, including prompts, topology, model selection, and tool policies. Manually searching this combinatorial design space is expensive and time-consuming, while existing automated optimizers typically operate within a predefined subset of this space, modify the pipeline monolithically, or provide little structured evidence for pipeline changes. To mitigate these challenges, we introduce the Decomposed Credit-Assignment Framework (DeCAF), which adapts the design space to the given benchmark and pipeline, optimizes each dimension separately, and generates reasoning traces for every decision. Given a task specification, benchmark examples, and a seed pipeline, DeCAF identifies relevant optimization dimensions and generates diverse experimental hypotheses for each. Independent coding-agent sessions then optimize each dimension under a restricted edit scope, jointly evaluating performance, inference cost, and latency while recording all hypotheses, edits, and outcomes of each experiment. A final synthesis session combines compatible findings across all dimensions and uses a component-level trajectory evaluator, which derives role-specific rubrics from each agent's instructions, to localize underperforming components and guide cross-dimension revisions. Across a diverse suite of agentic benchmarks, DeCAF improves average task performance by 2.58 percentage points, while reducing inference cost by 4.30% and end-to-end latency by 42.45% compared to the best overall baseline.",
+      "link": "http://arxiv.org/abs/2611.08723v1",
+      "published": "2026-11-05T21:16:05Z",
+      "category": "cs.MA",
+      "worth_reading": 0.83,
+      "novelty": 1.63,
+      "kind": "new_method",
+      "priority": 0.744
+    },
+    {
+      "title": "CrowdDirector: Runtime Orchestration of Crowd Simulation through Natural-Language Directives",
+      "summary": "Natural language offers an intuitive way to direct a virtual crowd while a simulation is running. Handwritten rules execute efficiently but cannot respond flexibly to varied instructions, whereas asking a large language model (LLM) to control the crowd at every update introduces repeated latency, cost, and the risk of unsupported actions. We present CrowdDirector, a framework that uses an LLM only when the user adds or changes an instruction. The LLM translates the request into a structured instruction, and a scene validator checks whether the entities and actions it references exist in the current Unity scene. Accepted instructions are stored and remain continuously active as the simulation is running. At each simulation tick, a graph neural network uses the current scene state and active instruction to choose an available action and target for each agent, while Unity handles movement, interactions, and animation. The network is trained offline on simulated scenarios, with LLM guidance on how agents should respond to instructions. Our evaluations show the scene validator's feasibility decisions matched human judgements more often than the LLM's own assessment, and on a behavioural benchmark CrowdDirector follows user instructions more closely than handwritten rules while avoiding repeated LLM calls. It therefore provides a practical middle ground between fixed rules and continuous LLM control.",
+      "link": "http://arxiv.org/abs/2611.08763v1",
+      "published": "2026-11-05T22:18:10Z",
+      "category": "cs.MA",
+      "worth_reading": 0.82,
+      "novelty": 1.69,
+      "kind": "new_method",
+      "priority": 0.743
+    },
+    {
+      "title": "On Agentic Manipulation Policies",
+      "summary": "Recent work on robot manipulation has focused on specialist policies trained on demonstrations. We show that generalist AI models can control manipulators more reliably than specialist policies such as vision-language-action models (VLAs) and world-action models (WAMs). We systematically analyze agentic manipulation policies (AMPs), in which a generalist AI model commands the manipulator directly, adapting its actions as the task unfolds. We present AMP1, a reference harness that runs unchanged across single-arm, bimanual, and mobile manipulation. AMP1 achieves state-of-the-art results on the RoboLab-120 and CaP-Gym benchmarks, with no demonstrations or task-specific training. On RoboLab-120, AMP1 reaches an 85.6\\% success rate zero-shot, compared to 49.2\\% and 42.9\\% for leading VLA and WAM policies. The agent succeeds zero-shot in 104 of 108 real-world trials spanning twelve tasks and three robot instances, reducing failure rates by 20x and 15x relative to strong VLA and WAM baselines. The basic harness supplies no grasping, pushing, or placing skills; the agent develops its own strategies, such as searching for hidden objects, using objects as tools, and calibrating its cameras. With the addition of a persistent memory store, the agent can also learn from experience: an augmented harness with a memory representation that is carried across episodes lowers the failure rate on RoboDojo bimanual manipulation tasks by 4.6x relative to zero-shot deployment. Our analysis suggests that AMPs are substantially more general and robust than specialist manipulation policies, providing a promising foundation for robot manipulation.",
+      "link": "http://arxiv.org/abs/2611.09892v1",
+      "published": "2026-11-06T18:59:34Z",
+      "category": "cs.AI",
+      "worth_reading": 0.79,
+      "novelty": 1.87,
+      "kind": "new_method",
+      "priority": 0.74
+    },
+    {
+      "title": "When Instruction Files Go Stale: Documentation Debt and Hidden Cost in Coding Agents",
+      "summary": "LLM-based coding agents such as Claude Code are guided by repository instruction files (also called context files or agent configuration files) like AGENTS.md and CLAUDE.md, which are read in every agent session. As any documentation artifact, these files can fall behind the code and become stale (e.g., a test folder moves, but the file still points to the old one). In technical debt terms, such a stale instruction is documentation debt, and its interest is the cost it adds to every later agent session. Evaluations that check only task success can miss this cost, and the stale file can persist. In this study, we ask what leads agents to act on a stale instruction, how it affects their behavior and at what cost, and how they recover. We study three real-world stale instructions from active open-source repositories in depth, each a different kind of guidance: a test command, a code location, and a procedure for adding a component. Agents fix 22 maintenance tasks under three versions of each instruction (left stale, corrected to the current path, and removed), with the code and the task held fixed, and we analyze 732 trajectories of two models at the level of individual tool calls. We find that agents follow stale guidance when it is relevant to their tasks, sometimes even when correct information is available elsewhere. On the stale test command, Claude Sonnet 5.5 needed about two extra tool calls per run, a third more than with the corrected command; in the other cases, we could not detect a difference. Although agents generally recovered from the immediate failures, none repaired the underlying instruction file. Correcting the instructions eliminated operations on obsolete paths, while removing them prevented most. Our findings show that task success alone can hide the costs of documentation debt, highlighting the need to evaluate agent behavior beyond final outcomes.",
+      "link": "http://arxiv.org/abs/2611.09802v1",
+      "published": "2026-11-06T17:54:01Z",
+      "category": "cs.AI",
+      "worth_reading": 0.81,
+      "novelty": 1.59,
+      "kind": "benchmark_or_eval",
+      "priority": 0.726
+    },
+    {
+      "title": "Can Agentic Systems Close the Gap in Radiology with Production AI Tools?",
+      "summary": "Radiology AI has developed along two paths: specialized models that perform well on narrow tasks but cover few clinical findings, and generalist models that address a broader range of tasks but remain prone to hallucination and inaccurate measurements. Combining the two through agentic systems offers a route towards comprehensive radiology reporting, but published systems are tied to one modality or body part. We describe a radiology agentic framework that standardizes how an orchestrator calls modular tools to produce a structured report, and use it to measure what such a system can do with the tools from FDA-cleared radiology AI devices. Report generation is simulated on a large multi-modality report corpus, with the orchestrator given either a catalog of finding classes consolidated from the cleared devices, each available on the modalities it is cleared for, or an unlimited catalog in which any class can be requested, and planning either from the clinical indication or from the target report. Tool outputs are simulated from the reference report, so the comparison isolates tool availability and orchestration from tool error. With the cleared catalog and the indication alone, the orchestrator recovers under a third of the clinically actionable findings; recovery improves substantially with the unlimited catalog, and further when the plan is written from the target report. Attributing every missed finding to a cause shows that most are classes no cleared device offers for the study's modality, and that a third are classes or tools that were offered and not called. Adding the most frequently missing tools closes most of the gap to the unlimited catalog on held-out reports, whereas a smaller orchestrator with the unlimited catalog gives up the whole gain. Tool availability and effective orchestration are thus complementary constraints on comprehensive AI-assisted radiology reporting.",
+      "link": "http://arxiv.org/abs/2611.09836v1",
+      "published": "2026-11-06T18:23:14Z",
+      "category": "cs.AI",
+      "worth_reading": 0.84,
+      "novelty": 1.36,
+      "kind": "benchmark_or_eval",
+      "priority": 0.724
+    },
+    {
+      "title": "Test-Time Compute Scales Better with Parallel Agent Teams",
+      "summary": "Test-time scaling improves the performance of a fixed model by spending more computation at inference. There are two common ways to spend it on agents when a verifier can score every attempt. Best-of-N sampling runs many independent agents and keeps the best result but saturates quickly. One large team of collaborating agents can score higher but stops improving as it grows. Can we get the best of both? Our method, parallel agent teams, does so by sampling many small teams in parallel and keeping the best team's result. We test it on 12 long-horizon tasks from GPU kernels and formal proofs to exploit development. With a 27B model and a budget of 100 agents, parallel teams of ten beat parallel agents on 10 of 12 tasks and beat one team of 100 on all four tasks where we ran such large teams. At equal dollar cost the same parallel teams beat a frontier model on half the tasks. A simple statistical model shows that individual agents lose because their many samples have a low mean and that one large team loses because a single sample gets no gain from variance. Sampling many small teams in parallel balances a high mean with the gain from variance. Parallel agent teams thus offer a more effective way to scale test-time compute.",
+      "link": "http://arxiv.org/abs/2611.09798v1",
+      "published": "2026-11-06T17:53:07Z",
+      "category": "cs.AI",
+      "worth_reading": 0.8,
+      "novelty": 1.49,
+      "kind": "new_method",
+      "priority": 0.709
+    },
+    {
+      "title": "MemoryDojo: Benchmarking Poisoning Through LLM Agent Memory",
+      "summary": "LLM agents benefit from using memory systems to improve performance on long-horizon, multi-session tasks. However, memory introduces a critical attack surface. Malicious instructions encountered in one session may be stored and propagated through memory before being retrieved and acted upon in later sessions. Because memory systems differ in how they process and retrieve information, the downstream effects of poisoning can vary significantly across systems. To quantify the effects of poisoning across different memory architectures, we introduce MemoryDojo, a benchmark for tracing the lifecycle of poisoned information through agent memory and measuring its influence on subsequent agent behavior. MemoryDojo is easily extensible, consists of 155 multi-session long-horizon trajectories covering four domains, and supports five different memory systems. Through our evaluation, we find that all memory systems are susceptible to memory poisoning, with substantial variation in downstream effects. We further propose a memory-aware poison optimization process that increases the poisoning efficacy, highlighting differences between memory architectures. We hope that MemoryDojo will support research on understanding and mitigating agentic memory risks.",
+      "link": "http://arxiv.org/abs/2611.09721v1",
+      "published": "2026-11-06T17:00:09Z",
+      "category": "cs.CL",
+      "worth_reading": 0.76,
+      "novelty": 1.64,
+      "kind": "benchmark_or_eval",
+      "priority": 0.696
+    },
+    {
+      "title": "ReSUM: Reasoning-Driven Multi-Agent Framework for Query-Focused Summarization",
+      "summary": "LLMs excel at language tasks, but long-meeting QFS remains difficult due to complex speaker dynamics, sparse key information, and limited data. Meetings involve disfluencies, long transcripts and complex discourse. QFS have high risk of information omission, hallucination, even for advanced models such as GPT-4-mini and Gemini. Existing end-to-end methods compress retrieval, evidence extraction, and summary generation into a single pass, failing to handle the complex reasoning required for targeted meeting summaries. We propose ReSUM, a modular multi-LLM framework coordinated by a planner that orchestrates retrieval and summarization agents. By distilling teacher reasoning into query- and plan-conditioned retrievers and summarizers, ReSUM enhances long-context robustness, minimizes irrelevant exploration, and generates more faithful and comprehensive query-focused summaries. Experiments show consistent gains on query-focused meeting summarization benchmarks.",
+      "link": "http://arxiv.org/abs/2611.09349v1",
+      "published": "2026-11-06T11:45:14Z",
+      "category": "cs.MA",
+      "worth_reading": 0.79,
+      "novelty": 1.09,
+      "kind": "new_method",
+      "priority": 0.662
+    },
+    {
+      "title": "Enabling Privacy-Preserving Natural Language Access to Industrial Smart Meter Data",
+      "summary": "Energy management officers and grid operators increasingly rely on smart meter data for anomaly detection, performance monitoring, and strategic decision-making. However, extracting actionable insights from large-scale, heterogeneous telemetry databases requires advanced SQL and data engineering expertise, creating a critical bottleneck for non-technical personnel. Furthermore, the strict data privacy regulations and security constraints inherent to critical energy infrastructure often prohibit the routing of sensitive consumer data through cloud-based Large Language Models (LLMs). To address these challenges, we present OpenMeter, a schema-agnostic Multi-Agent System (MAS) designed to translate natural language queries into executable code and human-readable insights. This architecture lowers the technical barrier for day-to-day utility operations by empowering non-expert personnel to interact with complex databases through intuitive natural language dialogue, transforming raw telemetry into a highly valuable tool for routine grid workflows and strategic decisions. Multi-scenario ablation studies over this environment demonstrate that full multi-agent orchestration shows its largest observed accuracy gains on resource-constrained local hardware (+6.1 pp EX-R over the strongest single-agent configuration); at frontier scale, individual components retain value but should be enabled selectively, indicating that the cost of full orchestration is justified specifically where privacy demands local execution.",
+      "link": "http://arxiv.org/abs/2611.09372v1",
+      "published": "2026-11-06T12:11:34Z",
+      "category": "cs.MA",
+      "worth_reading": 0.75,
+      "novelty": 1.16,
+      "kind": "applied_system",
+      "priority": 0.641
+    },
+    {
+      "title": "Sharing the Road: LLM-Based Bargaining in Mixed-Autonomy Traffic",
+      "summary": "Mixed-autonomy traffic involves heterogeneous driving populations competing for shared road space. Previous studies have shown the existence and emergence of collective rationality using game-theoretic and reinforcement learning approaches, which rely on explicitly specified behavioral assumptions or reward functions for driving agents. However, how bargaining behaviors between driving agents evolve and lead to collective outcomes based on richer agent characteristics and language-based reasoning remains less understood. To fill this gap, we develop a bargaining framework based on large language models (LLMs) in which population-level autonomous vehicle (AV) and human-driven vehicle (HV) agents negotiate road-space allocations under heterogeneous objectives and private information. Through controlled experiments varying traffic composition, agent objectives, and traffic-domain knowledge, we examine bargaining behavior, coordination, and resource utilization. Results show that negotiated allocations respond to relative traffic density without strictly following proportional sharing, while density-balanced states exhibit greater coordination difficulty. Fairness-oriented objectives substantially improve agreement rates but do not necessarily yield equally high road-space utilization. Furthermore, domain knowledge affects bargaining outcomes differently across objective configurations, shaping both coordination and the role-dependent effects of fairness. These findings demonstrate the potential of LLM-based bargaining for modeling and designing interactions among driving agents in mixed-autonomy traffic.",
+      "link": "http://arxiv.org/abs/2611.09004v1",
+      "published": "2026-11-06T05:27:51Z",
+      "category": "cs.MA",
+      "worth_reading": 0.64,
+      "novelty": 1.82,
+      "kind": "new_method",
+      "priority": 0.63
+    },
+    {
+      "title": "Incentive Pathologies in a Live LLM Agent Arena: An Empirical Study of Concentration, Reward-Rule Implementation Discrepancy, and Network Dilution",
+      "summary": "We audit one live LLM agent arena (AITRAP; 22 autonomous agent seats, ~96,000 reasoning nodes) over nine days (Oct 16-25, 2026), during which the platform deployed two bundled incentive changes: a progressive tax reform (V2.9.3, Oct 19) and a seed-inversion with explorer-side action update (V3.0, Oct 21). These serve as before-and-after markers, not cleanly isolated interventions. Four exploratory predictions are tested against ten data frames (F1-F10) using the Gini coefficient, Top-K concentration share, code-level reconstruction of the continuation-bonus mechanism, and the Mann-Kendall trend test. The Gini analysis is inconclusive at 95% confidence (bootstrap intervals straddle 0.7). The Top-4 node-activity-score share falls from 97.2% (Oct 19, pre-V2.9.3) to 49.4% (Oct 25, post-V3.0; 56.7% under a merge-seat assumption). The continuation bonus, announced as depth-based x10, resolves at code level to a four-condition anti-abuse gate paying x2.85 in the typical case and permanently blocking the self-continuation it superficially rewards; the gate was active ~40 hours before the V3.0 announcement. The events-per-node ratio declines significantly (Mann-Kendall S=-45, z=-3.94, p=8.3e-5) from 7.36 to 7.069. We discuss implications for incentive designers, the announcement-implementation gap, and public peer review as an event record.",
+      "link": "http://arxiv.org/abs/2611.09445v1",
+      "published": "2026-11-06T13:19:48Z",
+      "category": "cs.MA",
+      "worth_reading": 0.66,
+      "novelty": 1.62,
+      "kind": "benchmark_or_eval",
+      "priority": 0.624
+    },
+    {
+      "title": "s$^3$: Simple Scaling of Swarms via Cooperative Multi-agent RL",
+      "summary": "Groups can achieve more than individuals in the same amount of time, but only if their members coordinate: they must decide who works on what and what to share. However, this organization in multi-agent systems today usually comes from arbitrary, static harnesses designed a priori without adapting to agent behaviors or task specifications. We ask whether agents can instead learn to organize themselves. We introduce s$^3$, the first multi-agent reinforcement learning method in which agents decide for themselves how long to work alone and when to share findings or read teammates' messages, with no predefined organization or roles. Our s$^3$ agents learn to take different approaches, read each other's work, exhibit emergent roles that complement each other in the swarm, and generalize to bigger teams. We study both coordination, where agents must combine private information, and parallel exploration, where sharing discoveries can make search more efficient. With matched training and inference budgets, s$^3$, swarms evaluated with twice as many agents as in training solve over 25$\\times$ more coordination problems than the strongest baseline, and in exploration, communicating agents reduce repeated work by nearly 50% and outperform best-of-N by up to 9.4 percentage points. Rather than being designed in advance, s$^3$ enables organization to emerge from a shared goal. This opens the door to capable systems built from many models that learn to work together.",
+      "link": "http://arxiv.org/abs/2611.08615v1",
+      "published": "2026-11-05T19:07:15Z",
+      "category": "cs.MA",
+      "worth_reading": 0.59,
+      "novelty": 1.97,
+      "kind": "new_method",
+      "priority": 0.61
+    },
+    {
+      "title": "Language as Trait, Politeness as Strategy: Controlled Tests of Linguistic Effects in LLM Social-Deduction Agents",
+      "summary": "Large language model (LLM) agents coordinate through conversation, and the same message can be phrased in simpler or more complex language, bluntly or politely. We test whether such differences change how other agents judge and act, using the LURK Werewolf framework, which separates each utterance's speech-act predicate from its natural-language realization. We rewrite only the realization, check that the game content is preserved, and replay each game day from saved checkpoints against a re-sampled control. We vary linguistic range consistently across a speaker's messages and politeness strategy per utterance. Across 30 games and 4,335 replays, neither manipulation changes the trust other agents place in the speaker, and no effect on votes or night actions survives correction for multiple comparisons; the largest uncorrected effect is that shifting range away from a neutral paraphrase changes about 4 percentage points more of the other players' votes. In natural play, 88% of face-threatening speech is bald on-record regardless of role.",
+      "link": "http://arxiv.org/abs/2611.09768v1",
+      "published": "2026-11-06T17:31:01Z",
+      "category": "cs.CL",
+      "worth_reading": 0.68,
+      "novelty": 1.31,
+      "kind": "benchmark_or_eval",
+      "priority": 0.607
+    }
+  ]
+}
