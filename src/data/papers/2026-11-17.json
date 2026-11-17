@@ -1,0 +1,233 @@
+{
+  "date": "2026-11-17",
+  "generated_at": "2026-11-17T16:35:31.575689+00:00",
+  "interest": "LLM agents, tool use, and structured/typed model outputs",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "papers": [
+    {
+      "title": "When Tool Names Are Not Identities: Measuring Provider Misbinding in MCP-Based AI Agents",
+      "summary": "Large language model (LLM) applications increasingly act as agents that select and invoke external tools. The Model Context Protocol (MCP) standardizes this interaction by allowing clients to compose tools advertised by multiple servers. However, tool metadata used for discovery and selection is not, by itself, necessarily bound to a verified provider identity. This paper studies this gap as tool-provider misbinding: a failure in which a request intended for a legitimate provider is instead resolved to an attacker-controlled tool. The attacker does not compromise the host, LLM, legitimate server, or network channel; it only operates another MCP server that advertises tools with chosen metadata. We formulate tool provider misbinding as an attacker-controlled tool-selection optimization problem and evaluate it in a controlled MCP environment across five LLM-based clients. The results show that interactions drive misbinding. The strongest failures occur when exact-name collision, task-aligned description, and compatible schema reinforce one another, but authority-enhanced descriptions with compatible schema can also cause wrong-provider execution or unresolved provider ambiguity without name collision. Different models expose the same provider-binding weakness differently, including attacker-controlled provider selection, clarification requests, and unstable or inconsistent provider resolution.",
+      "link": "http://arxiv.org/abs/2611.21577v1",
+      "published": "2026-11-16T18:49:37Z",
+      "category": "cs.AI",
+      "worth_reading": 0.86,
+      "novelty": 1.91,
+      "kind": "benchmark_or_eval",
+      "priority": 0.793
+    },
+    {
+      "title": "SciResearch-Eval: Evaluating Scientific Judgment in Autonomous Experimental Agents",
+      "summary": "We introduce SciResearch-Eval, an interactive benchmark of scientific judgment built on a standard laboratory problem: measuring a material's thermal properties by heating it and fitting a heat-conduction simulator. An agent designs its own experiments, uses a supplied simulator that may be under-resolved or physically wrong, and reports each property with a 95% interval. To our knowledge it is the first benchmark to combine agent-designed experiments, a deliberately flawed simulator, and proper scoring of calibrated intervals against exact ground truth. On a held-out split (93 tasks, 9 models, 2,511 episodes), models handle procedural traps. When the simulator is missing physics, most report wrong values while stating they are 95% sure: their ranges contain the truth in 20-62% of cases, against 94% for GPT-6 Astra and 99% for Claude Fable 5.2. At default effort the failing Claude 5.5 models rarely diagnose the missing physics (Opus in 35% of episodes, against 66% for Astra), and even when they do, their ranges often miss; Astra and Fable design experiments in which the flawed simulator is accurate, such as gentle heating, which keeps Astra calibrated even when it does not name the cause. Asking for wider intervals does not help; stating the strategy improves interval scores 1.6-2.5-fold, replicated on a pre-registered fresh split, but coverage barely moves. A pre-registered effort ablation shows that the correction is latent in the Claude 5.5 models: at maximum effort Opus improves more than tenfold and is no longer detectably behind Astra at default, but only with 13-31 times more reasoning; older and open-weight models gain nothing. Fable 5.2 is the most accurate model at default effort (interval score 1.9 times better than Astra's) but writes 6 times as many tokens, and at Astra's token count it falls short. We release the environment, graders and harness.",
+      "link": "http://arxiv.org/abs/2611.21541v1",
+      "published": "2026-11-16T18:27:09Z",
+      "category": "cs.AI",
+      "worth_reading": 0.85,
+      "novelty": 1.94,
+      "kind": "benchmark_or_eval",
+      "priority": 0.789
+    },
+    {
+      "title": "Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning",
+      "summary": "Code-generating language models produce user interfaces that build and run, but the pages are often weak in hierarchy, spacing, typography and composition. We study whether a small code model can learn design taste through reinforcement learning in verifiable synthetic environments. The method has three components. First, a layered verification framework splits design quality into hard gates, render-grounded metrics, rubric judges, within-group relative preference and a blinded expert panel. A signal enters the reward only if it passes an admission protocol that tests agreement with experts, causal sensitivity, resistance to hack traps and stability. Second, following SCALER [1], synthetic design environments are parameterised generators with measured difficulty ladders: base pages are written once by an agentic coder, and instances are produced by syntax-tree perturbation operators and constraint samplers, scheduled by an adaptive curriculum with a quarantine rule against reward over-optimisation. Third, a 4B code model is trained with agentic reinforcement learning over multi-turn episodes in which it edits and builds a repository and reads a textual report of its own render, while hidden graders compute the reward. The admission protocol admits 7 of 16 render signals and 6 of 10 rubric dimensions. On TD-Bench, agentic training raises the Taste Index from 0.630 to 0.795 in-family and from 0.598 to 0.700 on held-out families, and wins 0.600 of blinded expert comparisons against the base model and 0.569 against a single-turn control. Most of the advantage depends on the inference-time loop, and cross-brief distinctiveness falls slightly below that of the base model, the only success criterion not met.",
+      "link": "http://arxiv.org/abs/2611.20612v1",
+      "published": "2026-11-16T06:37:24Z",
+      "category": "cs.MA",
+      "worth_reading": 0.82,
+      "novelty": 1.82,
+      "kind": "new_method",
+      "priority": 0.756
+    },
+    {
+      "title": "Safe Resemblance, Silent Propagation: Limits of Text-Similarity Guardrails for AI Agent Safety",
+      "summary": "When AI agents relay information to one another, an output can preserve an injected instruction's effect on downstream agents even after its wording changes, yet legitimate quotation and template reuse can produce high textual overlap with the source, so text-similarity guardrails that attempt to flag the former risk conflating these two cases. We test this distinction using DonkeyRail, a public classifier combining BLEU, ROUGE-L, and METEOR features, deployed in a controlled three-agent email relay, defining a behavioral measure in which an output counts as functional (the injected procedure induces fresh computations in two subsequent agents) independent of the detector's score, alongside legitimate controls that explicitly authorize quotation and reuse. At its default threshold the classifier misses 8 of 19 functional outputs while flagging 70 of 192 legitimate replies, with every completed quotation and template-reuse reply triggering a false alert; calibrating for low false positives on one template set does not transfer, as the recalibrated threshold detects only one functional output and still produces 15 false alerts on new templates. We also identify an operating-point error in all 21 published classifier configurations, where ROC interpolation replaces direct threshold application, and show formally that high AUC against a surface-level text criterion provides no distribution-free guarantee of high AUC against the behavioral target, while the existing evaluation labels lack the joint observations needed to estimate the gap. An authorization analysis further shows that identical visible transcripts can require different safety decisions depending on the governing policy, a distinction no observation-only classifier can resolve. These results argue for behavioral and policy-grounded evaluation over text-similarity guardrails.",
+      "link": "http://arxiv.org/abs/2611.21520v1",
+      "published": "2026-11-16T18:13:01Z",
+      "category": "cs.AI",
+      "worth_reading": 0.8,
+      "novelty": 1.95,
+      "kind": "benchmark_or_eval",
+      "priority": 0.755
+    },
+    {
+      "title": "Language-model agents' beliefs can be manipulated via truthful evidence in open channel",
+      "summary": "Language-model agents' beliefs can be manipulated through open channels such as social media, even when the information they receive is truthful. When agents fill gaps between fragments with self-induced relationships, they may accept those relationships as established facts and pass the resulting rumours to others. Drawing on cognitive theory of narrative understanding and film theory of montage, we introduce Generative Montage to operationalize this failure, termed narrative overfitting, by coordinating agents to arrange truthful fragments into misleading narratives. Across 1,090 rumour targets from six Twitter events, agents often accepted rumours overconfidently, with overall acceptance exceeding 65 percent in twelve of fourteen models. Acceptance remained above 50 percent after majority voting or review of the same evidence, showing how errors can reach downstream decisions. To explain this susceptibility, fragment interventions identify posts that influence belief within complete narratives. Synthetic controls then show that similar response patterns arise from valid evidence, separating belief influence from evidential support. This distinction motivates Grounded Monitor, a proof-of-concept neuro-symbolic runtime monitor that checks direct evidential support to guide agents' judgements, improving decision accuracy by 5.6 to 29.0 percentage points across original and anonymized settings. These findings expose a cognitive route to rumour amplification and support monitoring inferred relationships before agent-generated conclusions guide public decisions.",
+      "link": "http://arxiv.org/abs/2611.21235v1",
+      "published": "2026-11-16T15:20:18Z",
+      "category": "cs.MA",
+      "worth_reading": 0.79,
+      "novelty": 1.95,
+      "kind": "new_method",
+      "priority": 0.748
+    },
+    {
+      "title": "Procedure without Judgment: What Small Language Models Learn under an Exact Verifier",
+      "summary": "When an authorization policy blocks an agent's tool call, the audit log should name the facts that forced the decision and nothing more. For an executable policy over an enumerable context space this minimal sufficient reason can be computed exactly, so an explanation is scored against ground truth rather than a proxy for it. We use that exactness to ask what a model can learn from a verifier that has no error in it. The explainer sees one request and one decision, never the policy, and has thirty turns in which it may call the policy on altered requests and ask whether a candidate set of facts is sufficient. Frontier models find the exact reason about half the time with the tools alone, and one sentence telling them to shrink the answer lifts Haiku 4.5 from 58% to 75%. A 4B model fine-tuned on 2000 traces of the deletion algorithm reaches 92% on the policy it was trained on. Teacher kind is what moves this: at matched data size the algorithm-taught student leads the frontier-taught one in all three training seeds, and the two arms never overlap. What the student learns is a fixed schedule of sufficiency checks, and the schedule does not travel. On three public policies it never saw, its answers stay sufficient (94%) and stop being minimal (48%), while Haiku under the same sentence is exact on all 47 episodes. Reinforcement learning from the exact reward leaves held-out accuracy where it was and inverts the strategy, from probing the policy to spending the entire budget on sufficiency checks. The oracle made the effect of training legible, but it did not make training better.",
+      "link": "http://arxiv.org/abs/2611.21529v1",
+      "published": "2026-11-16T18:20:09Z",
+      "category": "cs.AI",
+      "worth_reading": 0.8,
+      "novelty": 1.82,
+      "kind": "benchmark_or_eval",
+      "priority": 0.742
+    },
+    {
+      "title": "ScenarioForge: Resource-Grounded Generation and Execution Validation of Cyber Exercises",
+      "summary": "Cyber-range and capture-the-flag scenario construction remains labor-intensive because authors must coordinate infrastructure, vulnerable services, attack paths, artifacts, and success conditions. LLMs can propose detailed exercises, but plausible descriptions do not guarantee deployable software or verifiable objectives. We present ScenarioForge, which turns high-level requirements into resource-grounded topologies, services, traffic, segmentation, and challenge chains, then instantiates and validates them in the Common Open Research Emulator (CORE). The ScenarioForge Execution Dataset contains 226 materialized scenarios covering 294 Vulhub images and all 85 custom-built challenge-resource generators developed with our AI-assisted scaffolding. All 226 passed construction, preview, sequencing, deployment, strict runtime validation, and live artifact checks; their 867 steps, each an individually verifiable challenge objective, comprise 457 vulnerability-backed and 410 generated-resource-backed instances. In a separate 50-prompt matched benchmark, ScenarioForge+Qwen3.8 and ScenarioForge+GPT5.6 each achieved 50/50 (100%) topology/build success and 160/160 intent fields; direct frontier generation reached 41/50 builds and 147/160 fields only with the full cumulative scaffold: structure, vocabulary, policy, and container-image guidance. The test still omitted ScenarioForge's downstream challenge-resource generation, dependency/flag sequencing, deployment, and live validation. The artifacts support operationally rich, reproducible exercises for training and evaluation.",
+      "link": "http://arxiv.org/abs/2611.21579v1",
+      "published": "2026-11-16T18:49:56Z",
+      "category": "cs.AI",
+      "worth_reading": 0.81,
+      "novelty": 1.71,
+      "kind": "applied_system",
+      "priority": 0.738
+    },
+    {
+      "title": "LEDGER: Auditable Agent Memory Under Change",
+      "summary": "Agent memory systems are mostly evaluated on fixed histories, and only their final answers are scored. In real use, facts change, sources differ in reliability, and users ask the agent to forget things. We present LEDGER, a memory layer in which a language model proposes facts and explicit rules decide which value is current, which source to trust, and what to delete. Each fact keeps its source and the period in which it held. LEDGER+EP adds a search over raw conversation turns for questions the ledger does not cover, and scrubs these turns on deletion. We compare both against no memory, full-history replay, retrieval over raw transcripts, and Mem0, with the same answering model and prompt, on a synthetic multi-session coding-agent workload and a 210-question subset of LongMemEval, and we score both the evidence each memory sends to the model and the answer. On the coding workload, LEDGER+EP in fallback mode answers 94.3% of questions correctly on five development seeds and 91.1% on five held-out seeds, against 82.1% and 83.3% for full replay, the strongest baseline. When a deletion request only describes the fact, no deleted value reached our systems' evidence in any evaluated probe. On LongMemEval, LEDGER+EP in augment mode has the same observed accuracy as full replay (74.8%) with 1% of its context. The main limitation is that the coding workload is synthetic and built by us; on LongMemEval, the differences between the strongest systems are within the confidence intervals.",
+      "link": "http://arxiv.org/abs/2611.20927v1",
+      "published": "2026-11-16T11:37:23Z",
+      "category": "cs.MA",
+      "worth_reading": 0.81,
+      "novelty": 1.59,
+      "kind": "new_method",
+      "priority": 0.726
+    },
+    {
+      "title": "ViRA: Toward Ultra-High-Resolution Visual Agents via Cross-Input Relative Policy Optimization",
+      "summary": "Visual agents answer questions about ultra-high-resolution photos by zooming into the relevant regions. However, existing agents often answer from common sense instead of reading the evidence. Reinforcement learning (RL) on the final answer cannot correct this, because a guess earns the same reward as reading. We propose Cross-Input Relative Policy Optimization (CrossRPO), which trains agents on contrast sets. A contrast set asks one question about several versions of an image that differ only in a small region with the evidence and have different answers, so only reading the evidence solves the whole set. CrossRPO rewards solving the whole set, and we prove that it does not reinforce a set answered from common sense. We build contrast sets for training (ViRA-Train) and evaluation (ViRA-Bench) by editing one small object in images of 21 to 120 megapixels, and we photograph further sets with real changes (ViRA-Bench-Real) to exclude editing traces. We train two Visual Reasoning Agents, ViRA-9B and ViRA-27B, with CrossRPO on only about 3,500 items of ViRA-Train each. CrossRPO achieves 63.3% set accuracy on ViRA-Bench at the maximum resolution, against 59.3% for GRPO. ViRA-9B is the most accurate open model of its size on all benchmarks, and ViRA-27B outperforms Claude Haiku 5.5 and GPT-6-Luna, both at their highest thinking level, on most benchmarks.",
+      "link": "http://arxiv.org/abs/2611.21605v1",
+      "published": "2026-11-16T18:59:04Z",
+      "category": "cs.AI",
+      "worth_reading": 0.76,
+      "novelty": 1.92,
+      "kind": "new_method",
+      "priority": 0.724
+    },
+    {
+      "title": "Jetriever: Shifting Agent Memory Retrieval from Similarity to Utility",
+      "summary": "A useful memory need not resemble the question it helps answer. Jetriever ranks each stored memory by Jev's decision score for its usefulness to the current question, replacing similarity search with full-pool utility scoring. On InMind's 125 indirect-query tasks, it places the gold exchange first in 84.8% of cases; matched BM25 and MiniLM controls reach 1.6% and 0.0% when indexing user turns. A 20-question comparison separates finding evidence from ranking it: Jev and Qwen3.5 9B each find 90% of gold exchanges by rank 50, while Laya finds 30%; at rank one, Jev reaches 85% and Qwen3.5 9B 40%. On a dimension-proportional random sample of 60 MemoryAgentBench questions, Jetriever's four-dimension score is 55.4%, against 44.3% for ReFind on the same questions. Jev retrieval costs USD 0.00834 per InMind question and USD 0.03103 per MAB question on average. These results show the value of world knowledge, scores that rank decisive memories first, and affordable full-pool scoring.",
+      "link": "http://arxiv.org/abs/2611.21478v1",
+      "published": "2026-11-16T17:50:53Z",
+      "category": "cs.CL",
+      "worth_reading": 0.77,
+      "novelty": 1.71,
+      "kind": "new_method",
+      "priority": 0.71
+    },
+    {
+      "title": "OpenMAS-GApp: A Comprehensive Benchmark for Domain-Adaptive Multi-Agent Application Construction",
+      "summary": "Constructing multi-agent system (MAS) applications across domains requires translating diverse requirements into executable systems, involving task decomposition, agent and tool selection, and execution organization. Existing studies have explored individual aspects of MAS construction, including agent generation, architecture design, workflow generation, and component selection. However, these methods are often developed and evaluated independently, using different task specifications, component resources, and execution settings. This makes it difficult to compare their construction capabilities or determine how they can be applied to different domains. To address this problem, we propose OpenMAS-GApp, a One-for-All benchmark for MAS application construction across diverse domains. It standardizes task inputs, component resources, construction interfaces, and execution environments to support MAS construction under consistent conditions. Within OpenMAS-GApp, we provide Graph Harness as a reference construction method that derives task dependencies, selects compatible agents and tools, and organizes their interactions into executable graphs. We evaluate construction methods across 19 benchmark datasets under 20 evaluation settings spanning four application types and four professional domains.",
+      "link": "http://arxiv.org/abs/2611.20997v1",
+      "published": "2026-11-16T12:25:56Z",
+      "category": "cs.MA",
+      "worth_reading": 0.76,
+      "novelty": 1.57,
+      "kind": "benchmark_or_eval",
+      "priority": 0.689
+    },
+    {
+      "title": "Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle",
+      "summary": "Reinforcement learning from verifiable rewards inherits whatever its verifier gets wrong. Outside mathematics and code the verifier is a proxy, a rubric, a learned judge or a hand-written checker, and its distance from the true objective is never measured, so a rising reward cannot be told apart from a hack. We build a setting where the true reward is exactly computable at the process level: executable authorization policies over 124,416 contexts admit an oracle that lists every minimal sufficient reason for every decision. We compile these policies into exact process rewards, degrade the verifier along seven realistic axes (outcome-only, sufficiency, recall-only, extraction noise, coarse taxonomy, stale policy, LLM judge), and train against each while the exact verifier scores every rollout. Four phenotypes appear. Optimistic verifiers are hacked by padding: the sufficiency proxy ends at 0.940 while true faithfulness falls from 0.731 to 0.667 on 96 held-out episodes. Outcome-only verifiers saturate and stop teaching, noise dilutes, and ranking-preserving gaps do no harm. A model-free audit of the verifier, its selection error and gap sign, together with a short saturation pilot, anticipates which phenotype a run will produce. Across nine configurations spanning two frameworks, two model vendors, two adapter sizes, three precisions, two initialisations and two seeds, the phenotypes recur, sufficiency damage is positive in all 10 replication cells and beyond two standard errors in 7, and optimistic gaps remain the steeper branch. The damage magnitude does not replicate, and five pre-registered attempts to explain it are reported as they fell. We release the testbed, the training instrumentation, and 14 real public policies (Cedar, OPA, Gatekeeper) ported to executable oracles.",
+      "link": "http://arxiv.org/abs/2611.21538v1",
+      "published": "2026-11-16T18:25:42Z",
+      "category": "cs.AI",
+      "worth_reading": 0.7,
+      "novelty": 1.94,
+      "kind": "benchmark_or_eval",
+      "priority": 0.684
+    },
+    {
+      "title": "Evaluating Authorization and Trust Boundaries in Agentic Orchestration Frameworks",
+      "summary": "Agentic AI systems extend large language models with tools, memory, and multi-agent collaboration, introducing security risks at orchestration boundaries. These risks depend on how identities are represented, operations are authorized, and instructions or information propagate between components. We evaluate LangChain, LangGraph, AutoGen, and OpenClaw through twelve experiments mapped to the OWASP Top 10 for Agentic Applications using a common LLM (gpt-4o-mini). The experiments cover prompt injection, unauthorized resource access and command execution, memory poisoning, and inter-agent trust and identity attacks. Adversarial inputs induced unauthorized tool invocation, while tool chaining, stale filesystem validation, encoded instructions, and inter-agent delegation exposed weaknesses in authorization across component boundaries. Memory poisoning showed that untrusted state can influence responses, a risk distinct from conventional access-control violations. In the evaluated protected configurations, explicit authorization, controlled capability assignment, filesystem containment, and execution safeguards prevented specific unauthorized operations. The findings emphasize preserving authorization and information-trust boundaries throughout agentic workflows rather than treating framework capabilities or model-level instructions as sufficient security guarantees.",
+      "link": "http://arxiv.org/abs/2611.21259v1",
+      "published": "2026-11-16T15:33:50Z",
+      "category": "cs.MA",
+      "worth_reading": 0.84,
+      "novelty": 0.84,
+      "kind": "benchmark_or_eval",
+      "priority": 0.672
+    },
+    {
+      "title": "Hivemind: A Federated Protocol for AI-Mediated Tacit Knowledge Sharing in Organisations",
+      "summary": "This paper presents Hivemind, a federated protocol that enables AI agents to exchange tacit knowledge on behalf of their users, asynchronously and without requiring any direct human interaction. Individual AI memory systems capture the decisions, reasoning, and contextual knowledge that surface during AI-assisted work. Hivemind creates the shared space in which this captured knowledge can flow between individuals across team and departmental boundaries, addressing a structural gap that neither centralised knowledge repositories nor existing AI tooling closes, even where partial solutions such as expert-finding systems exist. The paper evaluates centralised versus decentralised design approaches, proposes a federated architecture grounded in Nonaka and Takeuchi's (1995) Socialisation, Externalisation, Combination and Internalisation (SECI) model, and demonstrates a proof-of-concept implementation using Design Science Research (DSR) methodology. Measuring the enterprise benefit of federated tacit expertise sharing remains an open task for future work.",
+      "link": "http://arxiv.org/abs/2611.20988v1",
+      "published": "2026-11-16T12:19:14Z",
+      "category": "cs.MA",
+      "worth_reading": 0.64,
+      "novelty": 1.94,
+      "kind": "new_method",
+      "priority": 0.642
+    },
+    {
+      "title": "Right Reason, Wrong Advice: Evaluating Recourse in LLM Explanations of Denied Requests",
+      "summary": "Language models increasingly write the explanations people receive when a rule system denies their request. If several rules deny the request independently, an explanation can name a true reason and still leave the person denied after they fix it. We call the missing property recourse validity: changing what the explanation cites, without changing what was asked for, can flip the decision. We compute it exactly, and a hitting-set argument predicts from the policy alone when a correct reason fails. In six of seven rule systems ported from access control and US benefit eligibility, a single correct reason almost never gives recourse when several reasons apply. Across 20 LLMs, checks of whether the cited reasons are correct, computed or asked of an LLM judge, are close to chance at spotting this failure, as the argument predicts. A strong judge asked whether acting on the explanation would work does spot it. Stronger and reasoning models do better but still fail on many denials with four or more independent reasons. Asking for every rule helps every open model with room to improve. Explanations of eligibility decisions should be built from the decision function and judged by whether acting on them works.",
+      "link": "http://arxiv.org/abs/2611.21545v1",
+      "published": "2026-11-16T18:30:11Z",
+      "category": "cs.AI",
+      "worth_reading": 0.62,
+      "novelty": 1.97,
+      "kind": "benchmark_or_eval",
+      "priority": 0.631
+    },
+    {
+      "title": "Stream of Belief: Eliciting Collective Intelligence through Latent Belief Dynamics",
+      "summary": "In this work, we view multi-agent reasoning as a process of seeking a collective equilibrium of implicit belief dynamics and introduce Stream of Belief (SoB), where agents maintain continuous latent beliefs and iteratively refine them through communication and reflection. Our method seeks a collective belief state of a multi-agent system where further communication induces no meaningful information propagation. Through extensive experiments, we demonstrate the generalization of SoB across tasks and model families. More Broadly, our results suggest a new perspective on scaling multi-agent reasoning from belief dynamics.",
+      "link": "http://arxiv.org/abs/2611.21250v1",
+      "published": "2026-11-16T15:28:04Z",
+      "category": "cs.MA",
+      "worth_reading": 0.63,
+      "novelty": 1.72,
+      "kind": "new_method",
+      "priority": 0.613
+    },
+    {
+      "title": "From Vision to Interaction: Evaluating Dynamic Social Intelligence of VLM Agents in ALIVE-World",
+      "summary": "As AI agents are increasingly deployed in real-world applications and take on social roles, dynamic social intelligence, the ability to continuously perceive multimodal cues, infer latent cognitive states, intervene through embodied actions, and ultimately achieve social goals, has become essential. However, existing evaluations largely fragment social intelligence into text-based abstractions, static reasoning tasks, or embodied simulators that lack social dynamics. These approaches fail to capture the multimodal, continuous, and interpersonal complexity of authentic human interactions. To bridge this gap, we introduce ALIVE-World, an embodied simulation environment supporting dynamic multimodal interactions encompassing egocentric vision, language, and non-verbal action. To provide socially grounded interactive feedback, we populate this environment with counterpart agents driven by a profile-conditioned, dual-system (intuitive-affective and logical-cognitive) architecture. Building upon this platform, we propose ALIVE-Bench to transform the assessment of social intelligence into a trackable quantitative framework. By deeply leveraging underlying environmental states and agents' internal variables, ALIVE-Bench systematically evaluates Vision-Language Model (VLM) agents across four critical dimensions: perception, understanding, influence, and outcome. Extensive evaluations reveal that dynamic social intelligence is fundamentally multi-dimensional and scenario-dependent. We identify a critical bottleneck between upstream perception and downstream social intervention, exposing VLM vulnerabilities in fine-grained proxemic awareness, adaptive intervention, and multi-party coordination. By uncovering these limitations and the diverse interaction strategies they produce, this benchmark provides actionable insights for the future behavioral alignment of multimodal agents.",
+      "link": "http://arxiv.org/abs/2611.20956v1",
+      "published": "2026-11-16T12:04:29Z",
+      "category": "cs.MA",
+      "worth_reading": 0.6,
+      "novelty": 1.87,
+      "kind": "benchmark_or_eval",
+      "priority": 0.607
+    },
+    {
+      "title": "How VLMs Plan What's Next",
+      "summary": "When a vision-language model describes an image, it names one object at a time and it rarely repeats itself, yet how the model plans this order is far from obvious. We characterize the mechanism a VLM uses to decide where to look before it looks. The mechanism has four main parts. First, binding heads match the relevant text tokens against the image and resolve them into pointers to the matched image region. Second, the same binding heads bind each written answer to the region it came from, and the model turns it into a progress signal: a cursor, the position in the image up to which the list has been written. Third, a select step chooses the nearest unwritten region after the cursor, or stops. Finally, gaze heads execute the chosen pointer and return a concept of what is drawn there, which language heads and the late MLPs turn into a word in the language of the question. We validate each part of this mechanism through causal patching in Qwen3-VL models on a synthetic visual retrieval task, and test our mechanisms against alternative hypotheses. We further show that the mechanism holds across input formats, natural photographs, and languages, and that its binding, relay, and gaze heads appear at every model size from 2B to 32B. This work allows us to investigate how a VLM turns a question and an image into a sequence of answers, layer by layer and token by token. More broadly, it opens a way to study how models plan over complex multi-step tasks with long rollouts. Our project is available at https://plan.baulab.info/",
+      "link": "http://arxiv.org/abs/2611.21600v1",
+      "published": "2026-11-16T18:58:30Z",
+      "category": "cs.CL",
+      "worth_reading": 0.58,
+      "novelty": 1.89,
+      "kind": "new_method",
+      "priority": 0.595
+    },
+    {
+      "title": "Detection-Efficient Watermarking for Vision--Language Agents via Risk-Constrained Strength Allocation",
+      "summary": "Vision--language agents generate descriptions, decisions, and instructions that may be reused by users, downstream agents, and automated workflows, creating a need for provenance mechanisms that support content authenticity and post-deployment auditing without unnecessarily degrading response quality. We present a risk-aware semantic watermarking framework that combines predictive uncertainty with a zero-shot multimodal relevance-risk proxy to allocate watermark strength during decoding. A single risk penalty $\u03bb$ exposes a continuous operating frontier, allowing deployment-time selection of a detection--quality trade-off without model retraining. At a selected operating point, mean watermark strength is reduced by approximately 59.4\\% relative to fixed-strength watermarking, while perplexity change falls from 0.3634 to 0.1689 and clean/paraphrased ROC-AUC reaches 0.9552/0.9459. A matched-strength analysis shows that this advantage reflects the allocation policy rather than lower average intervention: at comparable mean strength, risk-constrained allocation achieves substantially higher ROC-AUC than fixed, entropy-only, and criticality-only policies, identifying it as detection-efficient rather than quality-dominant. We further show that threshold calibration on finite samples produces substantial false-positive-rate drift, motivating calibration variance reporting as standard practice for auditable provenance.",
+      "link": "http://arxiv.org/abs/2611.21488v1",
+      "published": "2026-11-16T17:56:12Z",
+      "category": "cs.CL",
+      "worth_reading": 0.63,
+      "novelty": 1.53,
+      "kind": "new_method",
+      "priority": 0.594
+    },
+    {
+      "title": "Premise Recovery in Software Design: What Does This Decision Rest On?",
+      "summary": "Design decisions shape software architecture, and writing them down preserves the reasons behind it. Architecture decision records (ADRs) capture them, each with its context, choice, and consequences. A decision can depend on earlier ones: reversing one of them would force its review. We call these its premises. Yet ADRs do not always name their premises. When a decision is reversed, engineers supersede its ADR and search by hand for what it affects. That search can miss ADRs resting on an unnamed premise. We frame this as premise recovery: given an ADR with identifiers masked, find its premises among earlier records. We collect 1,060 ADRs from 36 repositories and label 1,529 candidate pairs for 60 target ADRs. Two LLM annotators agree at \\k{appa} = 0.859. An independent human annotator, blind to their labels, agrees with the stated/implicit tag on 30 of 32 premises (\\k{appa} = 0.875). We compare 7 open-weight models with 2 baselines that use no LLM. Qwen3.8-27B reaches F1 0.756, against 0.466 for word overlap; 2 models added post hoc score similarly. On the 11 premises whose titles barely overlap the target, it finds 0.758, while word overlap finds none. Reasoning raises its recall of implicit premises but not its F1. Word overlap with as many predictions gains 69% as much. We find only 2 to 3 stale dependents, though we searched for unlinked ones in only 30 of 66 supersessions. Open models could thus suggest unwritten premises when a decision is reversed, with precision between 0.68 and 0.78.",
+      "link": "http://arxiv.org/abs/2611.21367v1",
+      "published": "2026-11-16T16:35:10Z",
+      "category": "cs.MA",
+      "worth_reading": 0.52,
+      "novelty": 1.81,
+      "kind": "benchmark_or_eval",
+      "priority": 0.545
+    }
+  ]
+}
