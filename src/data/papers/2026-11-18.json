@@ -1,0 +1,233 @@
+{
+  "date": "2026-11-18",
+  "generated_at": "2026-11-18T16:04:48.906809+00:00",
+  "interest": "LLM agents, tool use, and structured/typed model outputs",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "papers": [
+    {
+      "title": "Inference after coding agents",
+      "summary": "Empirical research is changing rapidly as AI coding agents are becoming increasingly proficient in every step of it, from writing code to manipulating data. We argue that while the potential of coding agents for science is vast, their use in hypothesis testing poses a substantial threat to classical inference, as these agents enable a supercharged form of selective inference. In particular, we argue that coding agents carrying out empirical research introduce a new type of post-selection inference that combines human-like, open-ended search over an implicit space of estimators with programmatic replayability of both the selection and the estimation process. Indeed, we find that on simulated data with zero effects, four frontier agents report significant p-values between 54% and 98% of the time when asked to produce a compelling finding. We propose a simple procedure for detecting and correcting these distortions. After an agent has completed its analysis, we reset and replay it on subsamples of the data to estimate the agent's relative probability of selecting that analysis when it looks statistically favorable. For agents with stable selection behavior, the resulting corrected test is asymptotically valid and consistent conditional on selection. Importantly, the correction is learned from the black-box agent's actual choices rather than a model of how it searches, so it remains valid even as AI technology continues to evolve rapidly. In simulations, the correction robustly lowers the high false rejection rates to near the nominal 5%. We illustrate the method on applications from two published papers.",
+      "link": "http://arxiv.org/abs/2611.23174v1",
+      "published": "2026-11-17T18:22:01Z",
+      "category": "cs.AI",
+      "worth_reading": 0.8,
+      "novelty": 2.1,
+      "kind": "new_method",
+      "priority": 0.77
+    },
+    {
+      "title": "The Resolution Hypothesis: Agent Evolution's Key Is Identifying Improvements",
+      "summary": "Agent evolution follows a simple loop: a proposer writes candidate artifacts (prompts, skills, memories) and selection accepts those that score higher. This loop has shown promise, yet practitioners face a puzzle: methods trade wins across papers, and evolution often fails to bootstrap on certain tasks. We trace this puzzle to the Resolution Hypothesis: agent evolution stalls not because methods fail to propose better artifacts, but because noisy evaluations cannot reliably identify them. Across seven evolution methods and six models (over 10M LLM calls), we find support for the hypothesis at both levels where evaluation scores are used. At the candidate level (choosing artifacts), helpful candidate artifacts exist, but selection is no better than random at telling them from harmful ones, so errors accumulate across rounds. At the method level (ranking methods), typical margins of a few percentage points are smaller than the difference between two independent runs of the same method, so published rankings often rest on luck. Together, these findings indicate that agent evolution is often bottlenecked by reliably identifying improvements. This calls for a shift in how we develop and evaluate self-improving agents, from designing ever more candidate improvement systems to making true improvements detectable and accumulable.",
+      "link": "http://arxiv.org/abs/2611.23068v1",
+      "published": "2026-11-17T16:57:03Z",
+      "category": "cs.CL",
+      "worth_reading": 0.8,
+      "novelty": 1.89,
+      "kind": "survey_or_position",
+      "priority": 0.749
+    },
+    {
+      "title": "Surfacing Disagreement Beats Resolving It: A Gated Ablation Study of Provenance-Weighted Memory for Multi-Agent Debate",
+      "summary": "Shared memory for multi-agent debate is usually built to resolve inconsistency: retrieval returns one winning fact and the disagreement disappears before any agent sees it. We ask whether that is correct. In DebateGraph, four backends share one contract (read/write/snapshot), so five mechanisms from the agent-memory literature can be removed independently under a fixed budget, each gated on a pre-declared threshold. Across 39 runs one survives: preserving contradictions and passing the ranked conflict set to the debate, rather than collapsing it to a winner, improves F1 by +0.340 (95% CI [+0.267, +0.414]) and cuts attack success from 22 to 7 of 122 poisoned items (McNemar exact p=0.0003), at equal cost. Reaching it meant fixing a bottleneck in our harness: conflict sets are built only over retrieved edges, and our pre-declared cap left three quarters of planted contradictions unretrievable, first measuring the mechanism at +0.084. The effect replicates on two retrieval substrates and directionally on HotpotQA documents. No other mechanism survives, and two are worse than inert: once contradictions reach the prompt, a write trust-gate and the router's provenance features each cost accuracy (-0.075 and -0.096 F1). The gate fails structurally: poisoned objects are always entities the graph already contains, against 53% of gold, so groundedness scores the lie above a truthful first mention. We release the harness, attack set, and logs, and argue that silently reconciling memory is the assumption worth abandoning.",
+      "link": "http://arxiv.org/abs/2611.22461v1",
+      "published": "2026-11-17T09:23:13Z",
+      "category": "cs.MA",
+      "worth_reading": 0.79,
+      "novelty": 1.95,
+      "kind": "benchmark_or_eval",
+      "priority": 0.748
+    },
+    {
+      "title": "OAK-Mind: Zero-Training Mental Health Change Inference from Passive Sensing via Knowledge-Grounded Multi-Agent LLMs",
+      "summary": "Wearable and smartphone sensors capture behavioral signals associated with mental health, yet inferring mental health outcomes from these signals has traditionally relied on supervised models requiring labeled data and offering limited insight into their predictions. Large language models (LLMs) offer new opportunities to reason over behavioral evidence, but existing LLM-based approaches to passive sensing have largely continued to rely on task-specific fine-tuning or sensor-specific pretraining. In this paper, we introduce OAK-Mind, a zerO-training, multi-Agent, Knowledge-grounded LLM pipeline for inferring mental health changes from passive sensing data. The pipeline organizes sensing data into behavioral dimensions including sleep, physical activity, location mobility, and smartphone use, and orchestrates specialized agents grounded in mental health literature to interpret longitudinal behavioral changes. It synthesizes their assessments and applies questionnaire-based symptom rating to infer changes relative to an individual's baseline assessment with human-readable rationale grounded in observed behavioral patterns and domain knowledge. Across datasets and prediction tasks, while without task-specific training, OAK-Mind achieves comparable or better performance than the most predictive supervised baselines trained on additional labeled samples. It also demonstrate consistent improvement upon direct prompting across four tested LLM backbones. Ablation analyses support the benefits of combining behavioral interpretation with symptom rating, distributing analysis across domain-specific agents, and incorporating domain knowledge. Our findings highlight the potential of knowledge-grounded, multi-agent LLMs for training-free inference of mental health changes from passive sensing data.",
+      "link": "http://arxiv.org/abs/2611.22248v1",
+      "published": "2026-11-17T05:52:52Z",
+      "category": "cs.MA",
+      "worth_reading": 0.79,
+      "novelty": 1.83,
+      "kind": "new_method",
+      "priority": 0.736
+    },
+    {
+      "title": "Do LLM Agents Still Need to Be Told How to Self-Improve?",
+      "summary": "LLM agents increasingly drive their own learning. Self-improvement methods delegate various components of model optimization to the models themselves. As models become more capable, this motivates a basic question: do these increasingly capable models still need us to specify how they should self-improve? In this paper we study an autonomous paradigm in which, given basic primitives, resources, and a general goal for self-improvement, agents construct their own self-learning algorithm for context-based optimization. Using the setting of gameplay as a testbed, a frozen LLM agent is given a compute budget and tools for collecting experience and updating text documents, and allowed to freely experiment without an externally imposed loop or access to real-world data. We find that sufficiently capable models do self-improve under these conditions, demonstrating strategies that align with classic cognitive frameworks for self-regulated learning and constructs from machine learning literature on self-generated curricula. Furthermore, we study the extent to which the learned text artifacts transfer to external benchmarks, observing improvement across different game horizons, mechanics, and 3D navigation.",
+      "link": "http://arxiv.org/abs/2611.23219v1",
+      "published": "2026-11-17T18:57:10Z",
+      "category": "cs.AI",
+      "worth_reading": 0.8,
+      "novelty": 1.71,
+      "kind": "new_method",
+      "priority": 0.731
+    },
+    {
+      "title": "Multi-Agent Memory Inconsistency: Where Factual Conflicts Disappear in LLM Agents",
+      "summary": "Multi-agent delegation lets LLM systems distribute evidence collection across workers with separate contexts. This creates a consistency challenge: facts retrieved by workers may be missing from the evidence available to the lead for a joint conclusion. We introduce a benchmark and evidence-flow profiler for studying multi-agent memory inconsistency through controlled factual conflicts in Harvey LAB document-review tasks. Pooled across three models with comparable generation spending, requiring delegation increases retrieval of both conflicting claims from 50.2% to 68.7% relative to single-agent execution, yet conflict detection falls from 16.2% to 13.2%. Within this setting, workers report both claims for only 35.2% of retrieved pairs, and pooled matched comparisons show higher detection than single-agent execution when one worker reads both claims but lower detection when the claims are split across workers. Worker-to-lead handoffs are a central target for improving conflict detection in multi-agent LLMs.",
+      "link": "http://arxiv.org/abs/2611.22245v1",
+      "published": "2026-11-17T05:47:01Z",
+      "category": "cs.MA",
+      "worth_reading": 0.81,
+      "novelty": 1.61,
+      "kind": "benchmark_or_eval",
+      "priority": 0.728
+    },
+    {
+      "title": "Runtime Verification of Multiple Natural Language Criteria for Agent Governance",
+      "summary": "AI agents are governed by hundreds of natural language criteria, yet existing verifiers cannot efficiently evaluate an agent's output against a large set of such criteria and report which are satisfied, violated, or inapplicable. We introduce the VFM, a tree-attention verifier that encodes the shared context and target text, and scores N natural language criteria in parallel, returning independent per-criterion ternary verdicts. The VFM is pretrained on CriteriaBank, a corpus of 394K (context, target, criterion, verdict) tuples spanning over 321K distinct criterion strings. A finetuned VFM-4B outperforms GPT-5.4 on a synthetic governance benchmark. On the DynaBench multi-criterion benchmark, it outperforms DynaGuard-4B on trace-level failure detection, and its per-criterion verdicts localize the violated rule and support focused escalation to a larger chain-of-thought judge. We show that CriteriaBank pretraining improves cross-domain transfer, particularly in the low-data regime, while matching a strong direct-finetuning control at full data. On a single H100, VFM-4B evaluates 1,000 criteria against a 4K-token context in under 2s at <11 GB VRAM, making it suitable for runtime verification.",
+      "link": "http://arxiv.org/abs/2611.23074v1",
+      "published": "2026-11-17T17:01:00Z",
+      "category": "cs.CL",
+      "worth_reading": 0.79,
+      "novelty": 1.61,
+      "kind": "new_method",
+      "priority": 0.714
+    },
+    {
+      "title": "Agent Trust Infrastructure (ATI): A Federated Identity, Trust, Attestation, and Accountability Architecture for Cross-Organization Autonomous AI Agents",
+      "summary": "AI agents increasingly collaborate across organizational boundaries, invoking tools and interacting with agents operated by independent entities. Although existing agent frameworks support planning and coordination, they lack a common mechanism for verifying cross-organizational agent identity, execution integrity, and authorization. We propose the Agent Trust Infrastructure (ATI), a framework-independent security architecture built on Public Key Infrastructure (PKI), Zero Trust Architecture (ZTA), and remote attestation. ATI establishes federated trust through peer organizational certificate authorities (AgentCAs), eliminating the need for a shared root authority. Before executing requests, ATI validates agent certificates, verifies approved model, tool, and system-prompt configurations, and enforces authorization through three policy checks. We implement ATI as an external security enforcement layer that integrates with existing agent frameworks without modifying their underlying models. We evaluate ATI in a simulated federation of eight organizations using six agent frameworks, each deploying a five-agent team. Security experiments involve two organizations and assess 14 attack scenarios and six benign tasks across five agent models, using five attack variations and three repetitions per variation. A panel of judge models evaluates the experimental outcomes. With all enforcement mechanisms enabled, attack containment increases from 43% to 84% (40% to 80% for the 11 attack scenarios evaluated consistently across all configurations), while enforcement introduces approximately 174 microseconds of overhead per request. ATI is released as an open-source, framework-independent package that uses IETF WIMSE workload token formats for identity and request verification and Entity Attestation Tokens for model, tool, and system-prompt integrity verification.",
+      "link": "http://arxiv.org/abs/2611.23202v1",
+      "published": "2026-11-17T18:44:25Z",
+      "category": "cs.AI",
+      "worth_reading": 0.78,
+      "novelty": 1.64,
+      "kind": "new_method",
+      "priority": 0.71
+    },
+    {
+      "title": "StringQFT: A Multiuse Textbook Resource for AI-Assisted Theoretical Physics",
+      "summary": "We present StringQFT as a textbook collection for string constructions of quantum field theory and as infrastructure for AI-assisted theoretical physics. The collection comprises 18 volumes, 190 chapters and 3,795 pages, covering brane probes, brane webs, geometric engineering, F-theory constructions, wrapped M5-branes and exact worldsheet constructions. Its open-book benchmark inventory contains 1,073 items, including 499 with automatic finite-answer checking. For retrieval-augmented generation, it provides 1,371 section records linked to textbook sources and PDF locations, together with a local lexical retriever. Training-data preparation is illustrated by 21 private, source-linked examples. For agents, it exposes 19 calculation tools with specified inputs and finite domains, connecting tool use to textbook derivations. We illustrate these uses through specific questions, retrieved passages and finite calculations. The textbook collection and accompanying resources are available at https://github.com/xingyang-yu/StringQFT.",
+      "link": "http://arxiv.org/abs/2611.23225v1",
+      "published": "2026-11-17T18:58:40Z",
+      "category": "cs.AI",
+      "worth_reading": 0.76,
+      "novelty": 1.74,
+      "kind": "applied_system",
+      "priority": 0.706
+    },
+    {
+      "title": "RagHarnessDebugger: Jev-Guided Agentic RAG in Contract Inference Repair Auditing",
+      "summary": "Agentic systems using retrieval-augmented generation (RAG) must repair their own answers by gathering more evidence, testing alternative policies and deciding if, when, and what repairs are needed. Yet how do we know if a system's repairs are working when metrics like accuracy can be misleading? We present RagHarnessDebugger, a framework that records every repair decision in a Jev-guided harness for contract inference and audits the record to facilitate complete debugging of all decisions taken during a RAG repair journey. RagHarnessDebugger checks that each trace is intact, that each validation applies to the candidate it is counted for, and which answers the acceptance rule can reach. We tested our approach on ContractNLI non-disclosure agreements with two reader models and a replication set of separate contracts. Our debugger's audit layer exposed failure patterns that were hidden under aggregate metrics, policies acceptance cost of repairs vs regressions and policy acceptance gap of 77% and 76% of available but unrealised repairs on development and replication sets. Our audit, together with a labeled error analysis and replay mechanism, allowed following the execution path all the way to the terminal decision - uncovering where missing repairs became lost. Our revised harness improved accuracy over the initial BM25-only baseline by 3.6 points on development contracts and 3.7 points on the replication set, and even improved our full contract access reference score by 1.1 on development and 2.4 on replication set. While our work here demonstrates how the debugger can conduct decision root-cause analysis for missed repairs, the true value lies with providing this debugger for judgment visibility serving continuous improvement of RAG decisions and their explainability.   Keywords: agentic RAG, AI evidence repair, harness explainability, counterfactual replay, Jev, ContractNLI",
+      "link": "http://arxiv.org/abs/2611.22991v1",
+      "published": "2026-11-17T16:07:17Z",
+      "category": "cs.MA",
+      "worth_reading": 0.76,
+      "novelty": 1.67,
+      "kind": "new_method",
+      "priority": 0.699
+    },
+    {
+      "title": "Mind the Gap: A Deployed Multi-Agent System for Documentation Maintenance",
+      "summary": "The \"AI revolution\" has enabled teams across the technology industry to deliver software features at unprecedented velocity. While code evolves faster than ever, customer-facing documentation often struggles to stay up to speed. As users increasingly rely on LLM-based agents that consume documentation as their primary interface, the impact of this documentation gap worsens: stale information propagates and is treated as authoritative. Signals for identifying where documentation has fallen behind already exist in abundance, both explicit (e.g., resolved support tickets revealing what documentation lacks) and implicit (e.g., code-documentation discrepancies detectable from automated loops). We deploy a multi-agent system, built around a triage agent we call \"TriAgent,\" that continuously extracts these signals and repairs documentation drift. Over 43 days of shadow-mode operation, our system triaged 499 tickets and surfaced 92 gaps in the documentation. Using a panel of LLM judges from independent model families, 81.1% of TriAgent's verifiable assertions were correct (245 of the 302 assertions the human resolution addresses; majority of three judges); on length-comparable pairs the panel preferred TriAgent's response in 70.5% of pairs and the human engineer's in 23.2% (the rest had no judge majority). Importantly, agent- and human-sourced replies tended to be complementary, with the human often surfacing insights that were either buried within the existing documentation or missing from it entirely; our system turns each such insight into a documentation gap and, after human review, a fix. Repairing a gap measurably improved the agent's later answer: when the agent re-answered the same ticket after the repair, blinded judges preferred the post-repair answer over its own pre-repair answer 71.4% of the time (n=35). A blinded human audit confirms strong alignment on self-improvement.",
+      "link": "http://arxiv.org/abs/2611.23142v1",
+      "published": "2026-11-17T17:59:13Z",
+      "category": "cs.AI",
+      "worth_reading": 0.81,
+      "novelty": 1.31,
+      "kind": "applied_system",
+      "priority": 0.698
+    },
+    {
+      "title": "Values Shape What Self-Improving Coding Agents Build",
+      "summary": "Self-improving agents are typically optimized for the results they produce, with less attention to how they produce them. Their instructions give designers limited ways to shape how they work, especially when the task is open-ended. This paper studies whether a short value statement in an agent's persistent instruction file changes not only how well the agent performs but also what it builds. Four higher-order value types in Schwartz's theory of basic human values were evaluated: openness to change, conservation, self-enhancement, and self-transcendence. Across diverse coding tasks, the values were held fixed within each run over multiple iterations of self-improvement. Three findings emerged: (1) Values matter for performance across a diverse set of tasks. The openness values increase performance on held-out data, whereas the opposite conservation values result in scores below those of an agent given no values. (2) Values change what agents build, producing solution algorithms that differ in size, complexity and approach. (3) Human oversight is still needed for designing values. Allowing the agent to revise its own values narrows the differences between sets of values, and values distilled from the AI literature provide no detectable gain over having no values. Properly designed values can thus influence what a self-improving coding agent builds and, where the task permits, how well it performs.",
+      "link": "http://arxiv.org/abs/2611.23067v1",
+      "published": "2026-11-17T16:56:46Z",
+      "category": "cs.MA",
+      "worth_reading": 0.76,
+      "novelty": 1.61,
+      "kind": "benchmark_or_eval",
+      "priority": 0.693
+    },
+    {
+      "title": "Groups of AI agents underuse resources despite shared evidence of increased capacity",
+      "summary": "When AI agents share limited resources, such as computing services or public infrastructure, their individual choices affect how much work they complete as a group. Can sharing evidence of what is available let a group make full use of its resources after capacity changes? We tested this with language-model agents choosing between two simulated servers. One server recovered while its status report still listed it as unavailable. Each server had limited capacity per round, so rejected jobs required another attempt before the deadline. Telling agents that recovery was possible reduced missed deadlines. In controlled tests with Anthropic's Claude Haiku 5.5, no agent tried the recovered server after a rule reminder, yet all chose it when shown a successful request record. After sharing, all five models tested left capacity unused. Keeping the success record fixed, we gave agents numbers without instructions, using each value equally often but giving group members either identical or distinct numbers. With OpenAI's GPT-6.1 Sol or Google's Gemini 3.5 Flash-Lite, distinct numbers spread simultaneous requests across servers and increased job completions even though overall choice frequencies barely changed. Telling AI agents which resources are available leaves a second design challenge: helping them spread demand across those resources.",
+      "link": "http://arxiv.org/abs/2611.22632v1",
+      "published": "2026-11-17T11:50:26Z",
+      "category": "cs.MA",
+      "worth_reading": 0.77,
+      "novelty": 1.51,
+      "kind": "benchmark_or_eval",
+      "priority": 0.69
+    },
+    {
+      "title": "Bad Apples in the Kitchen: How LLM Teams Detect, Correct, and Calibrate Against Their Misaligned Members",
+      "summary": "What protects an LLM team when one teammate quietly goes wrong? Most multi-agent LLM work assumes cooperative partners and inspects chat between turns before acting. Real-time embodied cooperation does not allow this pause: chat runs alongside action, so a teammate whose words stay cooperative while behavior diverges can cause damage faster than the team can name what is happening. We study this case by injecting three theory-grounded misaligned agents into a custom four-player Overcooked environment, each stressing a different joint-action layer (speech-action mismatch, role invasion, and aggregate-progress disruption), and decompose robustness into three sequential gates of detection, correction, and calibration through a 3x4x2 design (n=720 episodes). Nearly all trolls are eventually named, but recovery follows only when attribution and situational diagnosis appear in the same utterance; direct source-attribution prompting improves the hardest case only by degrading the troll-free baseline by 37.5%. Robustness, then, depends less on detection alone than on whether team chat combines attribution with diagnosis in a single utterance, suggesting that sensitivity to misalignment should be targeted rather than uniformly raised.",
+      "link": "http://arxiv.org/abs/2611.22342v1",
+      "published": "2026-11-17T07:51:55Z",
+      "category": "cs.MA",
+      "worth_reading": 0.71,
+      "novelty": 1.84,
+      "kind": "benchmark_or_eval",
+      "priority": 0.681
+    },
+    {
+      "title": "Operating an Agent-Driven Dataset Factory: Discovery, Construction, and Public Release",
+      "summary": "Turning public data into prediction datasets requires connecting source discovery, task definition, construction, and distribution. We deployed Dataset Factory to perform these steps continuously under a standing release policy. Bounded language-model tasks interpret sources, write construction code, and review task meaning; deterministic software manages state, workers, retries, and publication. Over 81.53 hours, the factory published 14 datasets at an estimated recurring operating expenditure of about \\$2.74 per publication. The accounting includes failed attempts, inference, workers, and hosting. Separate agents completed prediction experiments on all twelve evaluated releases. Source review nevertheless identified a task whose construction filters contradicted its population declaration. The original reviewer accepted later-record exclusions without reconciling them with the published selection rule. This experience documents an operating source-to-release workflow and shows why successful execution and consumer use need separate checks of task meaning.",
+      "link": "http://arxiv.org/abs/2611.21957v1",
+      "published": "2026-11-16T22:39:18Z",
+      "category": "cs.MA",
+      "worth_reading": 0.77,
+      "novelty": 1.37,
+      "kind": "applied_system",
+      "priority": 0.676
+    },
+    {
+      "title": "Dynamic Task Allocation with Dialogue",
+      "summary": "Effective multi-agent collaboration requires agents to adapt task allocation as goals and responsibilities evolve. Prior task-allocation frameworks often assume static goals, full observability, or rely on large language models (LLMs) without explicit, verifiable beliefs about task allocation or intent. These assumptions limit their applicability to real-world collaboration, where agents often lack full information about each other's actions, progress, or local environment. To support dynamic task allocation under partial observability, we introduce a communication-augmented Bayesian task-allocation framework. Our agent uses dialogue to reduce uncertainty about the environment and collaborators, while keeping decisions grounded in explicit probabilistic beliefs. We evaluate our framework in an Overcooked domain extended with dynamically arriving tasks under both full and partial object-space observability. Our communication agent consistently outperforms a vanilla LLM agent in both settings. Additionally, our framework performs comparably to a non-communicating task-allocation baseline under full observability, but substantially outperforms it under partial observability as task complexity increases by an average speed up of 0.585 and completes on average 18 timesteps faster. These results indicate that our agent is more efficient in dynamic task allocation than baselines in partially observable environments, and that communication is important as available information decreases.",
+      "link": "http://arxiv.org/abs/2611.23119v1",
+      "published": "2026-11-17T17:37:17Z",
+      "category": "cs.CL",
+      "worth_reading": 0.68,
+      "novelty": 1.26,
+      "kind": "new_method",
+      "priority": 0.602
+    },
+    {
+      "title": "The Only Edge Was Memorized in Training: LLM Trading Agents Around Earnings and Bad News",
+      "summary": "Large language model (LLM) trading agents are tested on news, but news reaches stock prices within minutes, and a benchmark that replays headlines at their publication time finds no alpha in trading on them. Money can then remain in two places, before news whose date is known, such as earnings announcements, and after bad news, if the market's fall went too far. However, studies of LLMs and earnings read documents published with or after the announcement, and studies of reversal sort monthly portfolios, so neither tells whether an agent can trade these moments after costs. In this paper, we test LLM agents at both moments on the same look-ahead-free benchmark, before 598 earnings announcements and after 409 bad-news drops of large US stocks. Every input is cut at the decision close, staged agents are compared with single calls, simple rules and a logistic regression, and every decision is made with and without the stock's name. Across five models from four vendors, no agent beat the simple bets. Before earnings, the agents mostly bought and earned what buying before every announcement earned, and after bad news, a Gemini-based agent called almost every fall an overreaction while no agent picked better dips than buying them all. The only gains came from what the models had memorized in training. Given only the ticker and the dates, a GPT-based model called the direction of 59.2% of the announcements before its training cutoff and 53.3% after it. Agent builders should therefore compare an event agent with the simple bet and test it blind after the training cutoff.",
+      "link": "http://arxiv.org/abs/2611.22177v1",
+      "published": "2026-11-17T04:13:18Z",
+      "category": "cs.MA",
+      "worth_reading": 0.62,
+      "novelty": 1.45,
+      "kind": "benchmark_or_eval",
+      "priority": 0.579
+    },
+    {
+      "title": "Natural Language Programming: Rethinking Language, Memory, and Cognition in the Era of Generative AI",
+      "summary": "Generative Artificial Intelligence is transforming the role of natural language in computational systems. In classical Natural Language Processing (NLP), language was treated as an object of computation: something to analyse, classify, translate, or generate. Large Language Models (LLMs) challenge this perspective, enabling natural language to function increasingly as an executable cognitive medium through which humans structure reasoning, orchestrate problem solving, and regulate hybrid human/AI workflows.   This paper introduces Natural Language Programming (NLPg) as a theoretical and epistemological extension of traditional NLP. Rather than focusing on language understanding alone, NLPg conceptualises prompts as dynamic cognitive artefacts that externalise goals, constraints, assumptions, validation criteria, and intermediate reasoning states. Prompting is thus not merely a technical interaction technique, but a form of dialogic cognitive programming operating within distributed human/AI memory architectures.   Building on theories of distributed cognition, extended mind, metacognition, and dialogic learning, the paper proposes the notion of Dialogic Working Memory, describing how prompts and conversational states function as temporary external memory structures supporting reasoning continuity and reflective regulation. We further map existing memory architectures (BTMA, SKGE, RMR) onto this framework, illustrating how episodic, semantic, and metacognitive layers support long-horizon conversational coherence.   Finally, implications for computational linguistics and AI/mediated knowledge systems are discussed, suggesting a post symbolic and post interface paradigm in which natural language operates simultaneously as communication medium, executable specification, cognitive scaffold, and distributed memory architecture.",
+      "link": "http://arxiv.org/abs/2611.23106v1",
+      "published": "2026-11-17T17:27:01Z",
+      "category": "cs.CL",
+      "worth_reading": 0.53,
+      "novelty": 1.96,
+      "kind": "survey_or_position",
+      "priority": 0.567
+    },
+    {
+      "title": "The Illusion of Grounding: Do Vision-Language Models Weigh Retrieved Text and Images Like an Ideal Observer?",
+      "summary": "Retrieval-augmented vision-language models (VLMs) answer from two sources of evidence that can each fail: the retrieved text can be wrong or noisy, and the image can be degraded or contradicted. We introduce GIB-200K, 200,000 image-question items built from COCO and Visual Genome, each expanded into controlled stress conditions: hard-negative retrieval noise (1-20 documents), visual ambiguity (Gaussian and motion blur, low-resource crops) and cross-modal conflict with counterfactual flip pairs. Instead of only measuring degradation, we ask how models combine the two modalities. From ideal Bayesian cue combination we derive a testable prediction that yields formal definitions of Knowledge Inertia (text over-weighted relative to the model's own image evidence) and Sensory Capture (the reverse), and we estimate the weights with a measurement-error-corrected regression whose recovery of known weights we verify. A counterfactual flip decomposition separates modality bias from concept priors, and a Grounding Illusion Score measures how much clean accuracy is not grounded in the image. We evaluate 4 open models on one frozen, seeded evaluation split of 2,000 GIB-200K items. All models are accurate on clean inputs (92.5%-94.2%) but adverse accuracy falls to 41.3%-59.9%. The two LLaVA models over-weight the text (Knowledge Inertia, w_T/w_I = 1.229 and 1.322), whereas InternVL3 favours the image (w_T/w_I = 0.680); between 34.8% and 71.4% of the clean answers that are correct are abandoned when the document lies. A training-free consistency check that compares the answer with and without retrieval trades coverage for accuracy under misleading documents, while falling back to the image fails when the image is heavily degraded. All per-instance outputs, code, and an audit that recomputes every reported open-model number are released.",
+      "link": "http://arxiv.org/abs/2611.23127v1",
+      "published": "2026-11-17T17:45:28Z",
+      "category": "cs.CL",
+      "worth_reading": 0.52,
+      "novelty": 1.95,
+      "kind": "benchmark_or_eval",
+      "priority": 0.559
+    },
+    {
+      "title": "Nunchi: Ears Help Eyes in Multi-Party Conversations",
+      "summary": "Identifying whom a person looks at is central to understanding multi-party conversations, yet gaze geometry alone becomes ambiguous as more people appear. Conversations offer cues that geometry lacks, such as who is speaking and what is said, but no gaze dataset provides them for many multi-party scenes. We introduce SORBET, a benchmark of 3,340 samples from 1,578 clips with synchronized speech, transcripts, and attended person labels, covering more multi-party scenes than existing gaze datasets. Prior gaze models struggle to use these cues, which come in different forms, must be linked to the right person, and can conflict with gaze geometry. We propose Nunchi, a framework that constructs a text prompt from the transcript and the outputs of gaze and speaker models, links every cue to the candidates with shared labels, and lets a vision-language model (VLM) weigh gaze geometry against conversational cues to identify the attended person. Nunchi outperforms the strongest existing method by 4.8 percentage points. On SORBET, conversational cues help whereas additional visual cues do not, and the gains hold across three VLMs, with automatic transcripts, and on two existing datasets.",
+      "link": "http://arxiv.org/abs/2611.23115v1",
+      "published": "2026-11-17T17:35:07Z",
+      "category": "cs.CL",
+      "worth_reading": 0.55,
+      "novelty": 1.74,
+      "kind": "new_method",
+      "priority": 0.559
+    }
+  ]
+}
