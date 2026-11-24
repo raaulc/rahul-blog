@@ -1,0 +1,233 @@
+{
+  "date": "2026-11-24",
+  "generated_at": "2026-11-24T18:29:08.500272+00:00",
+  "interest": "LLM agents, tool use, and structured/typed model outputs",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "papers": [
+    {
+      "title": "AgentBouncer: Defending Software Engineering Agents via Dynamic System-Call Mediation",
+      "summary": "Software engineering (SE) agents can complete diverse engineering tasks by interacting with the development environment via tools that access files, run commands, and download resources. Unfortunately, the same ability that makes SE agents useful also makes them prone to performing unintended malicious actions through prompt injections, malicious tools, or supply-chain attacks. Existing defenses that analyze the agent trajectory may fail to detect such attacks, as they inspect only the initial prompt and the sequence of tool calls, but not the actual actions that are executed in the environment. This paper presents AgentBouncer, a novel runtime enforcement system that prevents SE agents from performing malicious actions by mediating, and if necessary denying, system calls that agents trigger via tool calls. The core of AgentBouncer is an LLM arbiter that judges system calls along two axes, necessity and safety for the current task. It denies unsafe system calls, and the less necessary a system call appears, the more certain the arbiter has to be about its safety to allow it. To manage runtime overhead, preseeded policy rules and hierarchy-aware caching ensure that the LLM arbiter is only invoked for key decisions. We evaluate AgentBouncer on a dataset of 340 attacks on the development environment, covering four attack vectors, combined with benign issue resolution tasks from SWE-bench Verified. AgentBouncer reduces the attack success rate from 99.41% for an unsupervised agent to 10.59%, which is 18.23-73.53 percentage points lower than competitive state-of-the-art defenses. At the same time, AgentBouncer preserves the task success rate of the agent, with only 0.25% failed benign tool calls. Per benign task, AgentBouncer adds 47 seconds and USD 0.0036 in LLM costs to an unsupervised agent, whereas the closest existing runtime defense adds 4.5x as much time and 9.6x as much cost.",
+      "link": "http://arxiv.org/abs/2611.30621v1",
+      "published": "2026-11-23T12:54:45Z",
+      "category": "cs.MA",
+      "worth_reading": 0.86,
+      "novelty": 1.75,
+      "kind": "new_method",
+      "priority": 0.777
+    },
+    {
+      "title": "ToolSmith: An Automatic Tool-Generation Framework for Multimodal Search Agents",
+      "summary": "Recent multimodal search agents use reasoning, vision, and live web search across many turns to answer questions beyond parametric knowledge by orchestrating a small library of hand-crafted search and visual tools. However, the library is laborious to create and maintain, and frozen when new query types, evidence formats, and failure modes are encountered in the wild. Human practitioners, by contrast, cope with insufficient tools by fashioning new ones from familiar parts and reusing them across tasks. Inspired by this, we propose ToolSmith, an automatic tool-generation framework that grows and reuses modules on top of a lean base tool library. We evaluate ToolSmith on three in-domain multimodal search benchmarks and ten out-of-domain benchmarks under a VLM-as-a-Judge protocol. ToolSmith consistently improves over the base library across deployed agents of varying scales, with larger backbones reaping greater gains, demonstrating the scalability of the approach. Our code and data are available at https://threesr.github.io/toolsmith/.",
+      "link": "http://arxiv.org/abs/2611.31198v1",
+      "published": "2026-11-23T18:48:02Z",
+      "category": "cs.AI",
+      "worth_reading": 0.85,
+      "novelty": 1.68,
+      "kind": "new_method",
+      "priority": 0.763
+    },
+    {
+      "title": "CO-GRAFT: Attributing Reinforcement Learning Gains in Search Agents via Role-Level Policy Grafting",
+      "summary": "Reinforcement learning (RL) improves large language model search agents by up to 32 exact-match (EM) points over their pre-RL initializations, yet overall accuracy gains do not identify which underlying functional capabilities improve or interact during training. We introduce CO-GRAFT, a reward-agnostic interventional attribution framework in which an RL-trained agent and its pre-RL initialization jointly generate a single trajectory under closed-loop execution with live retrieval. Each policy controls a mutually exclusive subset of four functional roles: intermediate reasoning, search-or-answer decision, search query generation, and final answer extraction. Evaluating all 2^4=16 role assignments without modifying weights or retraining defines a cooperative game whose Shapley values decompose the total RL gain across roles, while M\"obius interaction terms distinguish standalone role improvements from multi-role coupling. Applying CO-GRAFT to Search-R1 agents across Qwen2.5 and Llama-3.2 models (spanning two sizes, base and instruction-tuned initializations, GRPO and PPO optimizers, and NQ and HotpotQA datasets), we show that query generation never exceeds 15% of the total gain; instead, gains are governed by pre-RL answer validity, search retention, model scale, and fixed task-level search budgets, shifting credit from reasoning toward answer extraction in larger or well-formatted answer response checkpoints while smaller base models rely on reasoning--decision coupling.",
+      "link": "http://arxiv.org/abs/2611.31185v1",
+      "published": "2026-11-23T18:38:53Z",
+      "category": "cs.AI",
+      "worth_reading": 0.81,
+      "novelty": 1.95,
+      "kind": "new_method",
+      "priority": 0.762
+    },
+    {
+      "title": "Needwise: Generation-Free Conversational Recommendation from Need-Level Typed Decisions",
+      "summary": "Conversational recommenders must rank items against needs that catalogs record only in part, while users add, withdraw and reverse needs and switch between requests. LLM rankers re-read the dialogue at every turn: they are slow, and their ordering does not show which needs an item meets. We show that a conversational recommender can be built from typed decisions instead: named questions over fixed options, answered with option probabilities rather than generated text. On each turn, one typed request maps the message onto the catalog's fields, keeps what no field expresses in the user's words, and decides how the turn changes each earlier need. Needwise then ranks candidates must-first: the needs on the kind of item, its place and its price form a tier, and within it one holistic decision and need-level verdicts (supported, contradicted or unknown) are combined with equal weight (Needwise-HF). With the graded attributes withheld from the records, so that needs must be inferred from names, descriptions and reviews, Needwise-HF ranks Google Local requests significantly better than GPT-6 Sol (0.383 against 0.343 nDCG@10) and is not significantly different from the strongest LLM ranker on Google Local and Yelp; these comparisons keep their sign under every treatment of unrecorded attributes we test. It costs a fraction of GPT-6 Sol's API price and answers in 2.5 s at the median on Google Local, against 5.6 s for GPT-6 Sol. In conversations, the typed state keeps the ranking across switches and returns, but it recognizes only 19-27% of withdrawn needs.",
+      "link": "http://arxiv.org/abs/2611.31175v1",
+      "published": "2026-11-23T18:32:04Z",
+      "category": "cs.AI",
+      "worth_reading": 0.82,
+      "novelty": 1.88,
+      "kind": "new_method",
+      "priority": 0.762
+    },
+    {
+      "title": "RoboUniverse-10K: Toward the Scaling Era of Agentic Robotics via Real-to-Sim Environments",
+      "summary": "Agentic Robotics, in which foundation models act as coding agents to control robots through executable programs, has emerged as a compelling paradigm for embodied intelligence. Yet unlike software engineering, where massive executable environments power post-training, robotics remains constrained by small, manual benchmarks and in-distribution evaluation. To bridge this gap, we introduce RoboUniverse-10K, 10,807 interactive, resettable, and verifiable physics environments built from real-world videos via an automated Real2Sim and quality assurance pipeline. Each runs in an isolated, Harbor-compatible harness that hides privileged states and grading logic to mirror real-world sensing. From the same pipeline, we hold out 500 unseen tasks to establish RoboUniverse-Verified, an expert-verified zero-shot benchmark. Evaluating 11 closed- and open-source models reveals a huge gap: frontier models reach 85.8\\% success, while open-source baselines lag at 2.6\\% to 10.0\\%, bottlenecked by low-level grasping, deformable-object manipulation, and post-contact physical control. Finally, we collect about 17K multi-turn trajectories totaling 0.79B tokens with GPT-6 Astra and perform full-parameter supervised fine-tuning on Qwen3.6-35B-A3B, yielding RoboUniverse-35B-A3B. Our model achieves substantial zero-shot gains on RoboUniverse-Verified, lifting the success rate from 0.8\\% to 21.2\\%, while achieving zero-shot task completions across LIBERO-MAX, RoboCasa, RoboTwin 2.0, and a real Franka arm. We open-source the RL-ready environments and model to lay the foundation for large-scale reinforcement learning in Agentic Robotics.",
+      "link": "http://arxiv.org/abs/2611.31002v1",
+      "published": "2026-11-23T16:53:57Z",
+      "category": "cs.CL",
+      "worth_reading": 0.77,
+      "novelty": 2.07,
+      "kind": "benchmark_or_eval",
+      "priority": 0.746
+    },
+    {
+      "title": "From Local Errors to System Failures: Modeling and Benchmarking Error Propagation in Multi-Agent LLM Systems",
+      "summary": "In multi-agent systems (MAS) built on large language models (LLMs), errors can propagate through intermediate messages and compromise final answers. However, outcome-based evaluation obscures how agents amplify, attenuate, or correct these errors. We propose Response-Aware Error Propagation among Agents (REPA), a structural model that connects measured local responses to system-level error propagation. REPA separately estimates input assembly and agent processing across multiple error channels, while theoretical analysis relates local modeling errors to endpoint prediction error. Experiments span three Qwen base models, six MAS workflows, and ten knowledge and reasoning settings in ErrPropBench-10. REPA achieves a mean condition-level Spearman correlation of 0.84 across base models, compared with 0.47 for direct regression. Controlled experiments also demonstrate its utility for targeted recovery. REPA-guided retrieval-augmented generation (RAG) improves accuracy over no retrieval by an average of 19 percentage points with 16% additional tokens. By linking local agent behavior to system susceptibility, REPA provides an interpretable foundation for studying error propagation and developing targeted optimization in MAS.",
+      "link": "http://arxiv.org/abs/2611.31063v1",
+      "published": "2026-11-23T17:20:43Z",
+      "category": "cs.MA",
+      "worth_reading": 0.81,
+      "novelty": 1.77,
+      "kind": "new_method",
+      "priority": 0.744
+    },
+    {
+      "title": "Language Models Steer on Injected Uncertainty Tokens, but Fail to Self-Monitor In Situ",
+      "summary": "Prompting language models to verbalize stepwise numerical confidence during generation is an increasingly popular approach for triggering backtracking and error correction in agentic reasoning. This strategy presupposes two capabilities: (1) in-situ monitoring fidelity (does confidence drop when an error occurs?) and (2) downstream steering control (does an uncertainty token causally steer the model to repair its error?). We evaluated four open-weights models (Qwen2.5-7B, Llama-3.1-8B, Mistral-7B, and Phi-4, 14.7B) across 15,200 math benchmark attempts, isolating 2,017 reasoning errors within each model's capability frontier. Applying 27,568 counterfactual continuations across these failure points, we demonstrate a consistent decoupling between monitoring and control.   On monitoring, all four models fail to detect their own errors. Verbalized confidence does not distinguish mistake steps from sound reasoning, yielding near-chance within-position AUROCs between 0.500 and 0.561. Even at a model's first reasoning error, trajectory confidence remains saturated at 95.1% to 99.9%, with noticeable drops ($\\ge 10$ points) appearing on fewer than 9% of errors in Llama and under 1.6% in the other three models. In contrast, models respond readily to external uncertainty: injecting a low-confidence tag (10%) at the error step significantly increases downstream correction across all models (+3.7 to +22.5 points over format-matched 95% certainty; all $p \\le 0.0022$), reaching up to 38.5% under active rethinking instructions. However, injecting doubt onto already-correct steps causes models to discard valid reasoning, reducing solve rates by up to 22.8 points. Inference-time self-correction is thus bottlenecked by in-situ error detection rather than downstream repair capacity: models readily steer toward recovery when prompted with doubt, yet fail to self-monitor during generation.",
+      "link": "http://arxiv.org/abs/2611.31228v1",
+      "published": "2026-11-23T18:58:52Z",
+      "category": "cs.AI",
+      "worth_reading": 0.8,
+      "novelty": 1.67,
+      "kind": "benchmark_or_eval",
+      "priority": 0.727
+    },
+    {
+      "title": "Know When to Abstain: Conformal Confidence Estimation for Text-to-SQL",
+      "summary": "Text-to-SQL systems often return queries that execute successfully but answer the wrong question. Detecting these errors at deployment is hard because execution correctness is defined against a gold query, which exists only in labeled data. We formulate confidence estimation for Text-to-SQL as probabilistic query validation under a latent correctness variable that is observable at calibration time through gold-SQL execution and latent at deployment. Our estimator separates generation from validation. A generator LLM writes and executes the query, and a different critic LLM judges the query and its execution result. The critic's validation and execution-grounded alignment scores are fused with the generator's verbalized confidence, token-level uncertainty, and SQL-structural features in a Random Forest, using two sequential LLM calls. Two calibration steps give finite-sample guarantees. A Learn-then-Test threshold ensures, with probability $1-\u03b4$, that the error rate among accepted queries stays below a user-chosen budget. A conformal p-value bounds the false abstention rate. On Spider we use GPT-OSS-120B as generator and Gemma-4-31B as critic. The estimator obtains an AUARC of 0.899. Without abstention, 22.6% of queries are wrong. With a 15% risk budget ($\u03b4=0.1$), a threshold is certified on all 10 resampled splits, and the system accepts 52.4% of queries on average with 9.1% observed error. Five different critic models give similar results. In a controlled comparison on Spider with Olmo-3-32B as generator, the estimator obtains an AUARC of 89.5, compared with 81.2 for the strongest logit-based baseline. Applied to BIRD without retraining, the confidence scores remain informative (AUROC 0.72, against 0.79 on Spider), but the risk guarantee does not transfer, as expected without exchangeability.",
+      "link": "http://arxiv.org/abs/2611.31190v1",
+      "published": "2026-11-23T18:42:54Z",
+      "category": "cs.AI",
+      "worth_reading": 0.82,
+      "novelty": 1.52,
+      "kind": "new_method",
+      "priority": 0.726
+    },
+    {
+      "title": "Causal Evidence for the Emergence and Spread of Reward Hacking in AI Agent Swarms",
+      "summary": "Autonomous AI agents that coordinate and collaborate among each other have become pervasive across domains ranging from scientific research to finance and engineering. The opportunity to share messages and build upon each other's work also creates the potential for misaligned behaviors to spread across AI agents. We provide causal evidence that mere exposure to reward hacking, cheating on a task to pass an automated check, is enough to spread the behavior among AI agents, even after the cheat has been rejected. We conducted 17 preregistered experiments with six frontier models (n = 20,111 agents). First, we show that cheating emerges spontaneously. When agents were told that work passing the visible tests is accepted, 33% cheated in the first round, when the shared record of teammates' submissions was empty. Second, we show that agents who rarely cheat when working alone cheat most of the time after seeing a teammate's cheat, as 94% of teammates who saw an accepted cheat cheated. Third, we show that rejection of reward-hacked solutions offers little protection, using experiments that changed only the label on the cheat. Most agents copied a cheat labeled rejected, 34% of agents cheated after an AI reviewer had rejected the cheat, and nearly every agent copied a cheat labeled accepted. Fourth, we show that cheating generalizes to new tasks. On a new problem with an empty collaboration record, 70% of agents who had earlier seen an accepted cheat cheated again, compared with 32% of agents who had seen an empty record. Fifth, we show that cheating spreads from neighbor to neighbor through networks of 256 agents. In the networks, 44% of agents with a cheating neighbor cheated, compared with 2% of other agents. Together, the results suggest that mere exposure can spread misaligned behavior among AI agents, and that catching a cheat is insufficient once other agents have seen the cheat.",
+      "link": "http://arxiv.org/abs/2611.30185v1",
+      "published": "2026-11-23T07:30:56Z",
+      "category": "cs.MA",
+      "worth_reading": 0.78,
+      "novelty": 1.79,
+      "kind": "benchmark_or_eval",
+      "priority": 0.725
+    },
+    {
+      "title": "Parsing Visual Latents for Multimodal Spatial Reasoning",
+      "summary": "Spatial reasoning across multiple views requires inferring the 3D relations between objects and the camera from 2D observations, which depends on cross-view correspondence and scene geometry that vision-language models (VLMs) do not reliably extract. Pretrained vision encoders already capture this information in their latent features, with CLIP linking objects to image regions, DINOv3 matching semantics across views, and VGGT encoding multi-view geometry. However, VLMs do not benefit from these features when we present them directly in context as grayscale feature images. We therefore propose LatentParse, a training-free framework that parses latent features into explicit spatial evidence for VLMs. In LatentParse, an analyst VLM probes the features of all three encoders with predefined tools that locate objects, track them across views, and measure motion between views. It then distills the results into a concise text report, which is provided together with the images to the VLM to answer the question. We evaluate LatentParse on MMSI-Bench, MV-RoboBench and SPAR-Bench, where it improves all five VLMs over the photo-only baseline by 0.7-2.4 percentage points on average. On MMSI-Bench, it raises Qwen3.8-27B from 34.4% to 39.5%, with the largest improvements of 19.2 percentage points on the camera-related questions. These results suggest that latent features become useful for spatial reasoning once they are parsed into relation evidence, without training. Code is available at https://github.com/Harvard-AI-and-Robotics-Lab/LatentParse.",
+      "link": "http://arxiv.org/abs/2611.31021v1",
+      "published": "2026-11-23T17:02:00Z",
+      "category": "cs.CL",
+      "worth_reading": 0.79,
+      "novelty": 1.69,
+      "kind": "new_method",
+      "priority": 0.722
+    },
+    {
+      "title": "ARRANGE: Agentic Skills for Layering Vocals",
+      "summary": "Adding a singing voice to an existing piano recording requires decisions about melody, syllable placement, pronunciation, timing, and vocal register. ARRANGE organizes this work as a sequence of agent skills with readable intermediate artifacts and composer approval checkpoints. An LLM translates instructions in plain English, notes played on a keyboard, and vocal references into local edits; deterministic scripts validate and apply those edits before open audio models render the result. The Score Canvas makes note, syllable, and pronunciation decisions inspectable and editable. In a benchmark of 16 revision requests, three draws per request, and five LLMs, typed edits achieved exact-change correctness of 0.83-0.98, compared with 0.33-0.69 for whole-plan rewriting without ARRANGE instructions. A separate score-editing benchmark and a first-person worked example examine the interaction between representations and corrections. Author listening evaluations further explore voice transfer and register selection, including 185 listening presentations across eight copied voices. These evaluations support the value of constrained editing and expose limits of both model execution and listening measures. The contribution is an interaction architecture for retaining musical decisions through inspectable intermediate representations, rather than a new singing model or evidence of general usability.",
+      "link": "http://arxiv.org/abs/2611.29283v1",
+      "published": "2026-11-22T07:11:03Z",
+      "category": "cs.MA",
+      "worth_reading": 0.81,
+      "novelty": 1.52,
+      "kind": "applied_system",
+      "priority": 0.719
+    },
+    {
+      "title": "ACAP: Asynchronous Coding Agents for Efficient Robot Control",
+      "summary": "Coding agents can construct and revise robot behavior during execution, but using one agent for the whole robot can delay otherwise independent work. We introduce Asynchronous Coding Agents as Policy (ACAP), an asynchronous framework that organizes one robot as a team of persistent agents. Each member reasons and acts for a configurable control group, such as an arm with its gripper or the torso and chassis, enabling asynchronous reasoning and execution. However, different robot components often have physical dependencies that require coordination. To address this challenge, ACAP introduces a hyper-agent that assigns tasks, coordinates dependencies, and dynamically allocates control between the lead and member agents. This allows independent work to progress concurrently while supporting tightly coupled manipulation when necessary. Across 72 real-world rollouts covering 25 task/platform settings, ACAP reduces task-balanced time cost by 28.2% compared with a single-agent Direct Policy, with improvements across Fully Parallel, Parallel-Sequential, and Collaborative tasks. Across all eight Collaborative settings, ACAP also achieves lower mean time cost than Fixed Delegation, where only member agents can control their assigned groups. An additional 90-rollout study shows lower mean 30-minute-capped time cost than Direct on all six tasks. We further demonstrate mobile manipulation using the same member interface for chassis and torso control. We present the framework and a real-world rollout dataset containing observations, generated programs, actions, and feedback to support research on how coding agents reason and act in the physical world.",
+      "link": "http://arxiv.org/abs/2611.31205v1",
+      "published": "2026-11-23T18:52:19Z",
+      "category": "cs.MA",
+      "worth_reading": 0.76,
+      "novelty": 1.79,
+      "kind": "new_method",
+      "priority": 0.711
+    },
+    {
+      "title": "Agentic AI for Intent Management and Control in Autonomous Communication Networks",
+      "summary": "Artificial intelligence (AI)-driven automation will help future mobile networks translate high-level network intents into concrete network optimization or control actions. However, existing approaches often focus on intent management and orchestration, leaving the adaptation of underlying network optimization and control functions largely unaddressed. This article proposes a triadic agentic AI framework that co-designs intent management and intent fulfillment through three agents: an interpreter, powered by a language model, that translates and refines intents into machine-readable optimization templates; an optimizer that adapts controller policies to intent specifications; and a controller that performs fast decision-making. We discuss the design space of each agent and how the workflow can be embedded across network architectural domains. Finally, we develop a concrete realization combining a language-model interpreter with Bayesian optimization for the optimizer and multi-objective reinforcement learning for the controller, and evaluate it in a radio resource management case study for differentiated connectivity. Results demonstrate how the agentic AI framework can connect high-level intents with runtime network control, showing adaptability of intent specifications and control policies to service requirements and changing network conditions.",
+      "link": "http://arxiv.org/abs/2611.31223v1",
+      "published": "2026-11-23T18:57:32Z",
+      "category": "cs.LG",
+      "worth_reading": 0.78,
+      "novelty": 1.64,
+      "kind": "new_method",
+      "priority": 0.71
+    },
+    {
+      "title": "Seeking in Space: Benchmarking Purposeful Active Exploration of Vision-Language Models for Spatial Reasoning",
+      "summary": "Humans explore unfamiliar spaces with purpose, deciding where to look until they have gathered the evidence a spatial question requires. However, can vision-language models (VLMs), which reason increasingly well over curated images and videos, also seek in space when the evidence is not handed to them? We present ActSpace-Bench, a benchmark of 994 questions across 234 exploration episodes in 72 real-scanned indoor scenes, where a model starts from a single view, navigates real captured frames, and must gather evidence before answering. To assess whether such exploration is purposeful, we introduce a controlled evaluation protocol that fixes each model as the reasoner and compares its own exploration against a same-budget random walk and an oracle route, separating evidence seeking from spatial reasoning. Every question is verified to require exploration and answered from 3D annotations, masked-evidence questions test whether models know when to abstain, and over 95% of sampled questions are confirmed correct by human verification. Evaluations of 23 proprietary, open-weight, and spatially specialized VLMs reveal that the strongest models do seek evidence with purpose but lose much of it to limited memory, whereas weaker and specialized models explore no better than a random walk or fail to reason over the evidence they are given, pointing to memory and evidence-grounded reasoning as the next targets for active spatial intelligence.",
+      "link": "http://arxiv.org/abs/2611.31215v1",
+      "published": "2026-11-23T18:55:44Z",
+      "category": "cs.AI",
+      "worth_reading": 0.73,
+      "novelty": 1.89,
+      "kind": "benchmark_or_eval",
+      "priority": 0.7
+    },
+    {
+      "title": "TowerBridge: Bridging the Dual-Encoder Modality Gap via Weight-Space Programming",
+      "summary": "CLIP-style dual encoders map images and text through two separate towers into a shared embedding space, where the two modalities occupy distinct regions separated by a modality gap. Retrieval fails when wrong matches, or hard negatives, outrank the correct one, and the gap is the usual suspect. Yet removing it post hoc degrades retrieval on every CLIP checkpoint we test. We introduce a paired statistic that identifies directions where the two towers agree more on hard negatives than on matched pairs. Mildly attenuating these directions improves retrieval while largely preserving the gap. We arrive at this correction through weight-space programming: guided by the statistic, an LLM agent inspects both towers and writes closed-form weight edits without backpropagation. Free to edit any component, the agent improves COCO test retrieval on all 13 CLIP checkpoints and edits an output projection in 12 of the 13. We distill and refine its recurring correction into TowerBridge, a closed-form recipe motivated by a first-order analysis of the hard-negative margin. Computed in seconds from 25,000 labelled pairs, it requires no model-specific tuning and leaves the architecture and inference cost unchanged. TowerBridge improves COCO test retrieval by 16.8 RSUM and Flickr30k test retrieval by 6.6 on average across all 21 evaluated CLIP checkpoints, including 8 unseen by the agent, while limiting any drop in ImageNet zero-shot accuracy to 0.5 points. It also reduces hubness on all 21 checkpoints and improves retrieval on 4 of 5 dual encoders from other families.",
+      "link": "http://arxiv.org/abs/2611.31233v1",
+      "published": "2026-11-23T18:59:13Z",
+      "category": "cs.LG",
+      "worth_reading": 0.73,
+      "novelty": 1.89,
+      "kind": "new_method",
+      "priority": 0.7
+    },
+    {
+      "title": "Social Interaction Breaks Replicate Independence in Controlled-Clone LLM Agents",
+      "summary": "Multi-agent LLM evaluations and social simulations create many agents from one model and treat them as independent replicates, even after the agents interact. This assumption remains untested with matched controls. We introduce SocCogEval, a controlled-clone assay for Social Cognitive Transfer (SCT). Clones share the base model, system prompt, and decoding parameters and differ only in a private brief, and a factorial protocol separates the brief, 30 rounds of interaction, and initialization noise. On Qwen3-122B-FP8, interaction with the briefs held fixed raises off-topic BFI-10 response-profile drift by $\\bar\u0394=+0.917$ and $+0.912$ in two topically disjoint scenarios (exact $p=0.0008$ and $0.0039$). The drift is larger than under the brief alone, persists under temperature-zero re-probing, and stays positive without typed memory extraction in exploratory tests. Matched solo generation reproduces part of it, and social interaction remains highest. Across five more model variants, every scenario-averaged interaction contrast is positive. Each interacting population is therefore one replicate, and treating its agents as independent requires paired no-interaction controls. Our code and data are publicly available at https://github.com/koanatakiyo/SocCogEval.",
+      "link": "http://arxiv.org/abs/2611.29581v1",
+      "published": "2026-11-22T16:08:12Z",
+      "category": "cs.MA",
+      "worth_reading": 0.71,
+      "novelty": 1.95,
+      "kind": "benchmark_or_eval",
+      "priority": 0.692
+    },
+    {
+      "title": "AEP:Towards Trustworthy Agent Communication, Networking, and Collaboration",
+      "summary": "As privately owned agents become increasingly capable, collaboration in open agent networks is limited by partial topology knowledge, ownership boundaries, and the risk of exposing or contaminating private context. Existing agent-to-agent protocols are useful when collaborators are already known, while shared-memory and broadcast-based systems rely on visibility and trust assumptions that do not hold in decentralized, low-trust environments. We introduce Open Private Agent Collaboration (OPAC), an asset-centric paradigm for cooperation among private agents with open membership, partial observability, and ownership-aware access control. Rather than treating collaboration as the exchange of final responses, OPAC enables agents to selectively discover, exchange, audit, and integrate policy-controlled context assets. This shifts the unit of cooperation from transient messages to reusable external context, while keeping disclosure and integration subject to privacy and security constraints. We instantiate OPAC with the Agent Exchange Protocol (AEP), a decentralized framework that combines semantic discovery, demand-driven coordination, safety-gated asset exchange, and ledger-backed evidence derivation. By distinguishing physical topology from each agent's local cognitive topology, AEP allows agents to discover task-conditioned collaborators under an unknown network structure, release only admissible assets, and update future cooperation decisions from auditable interaction evidence. AEP therefore provides a middle ground between pure request-response interaction and globally shared memory, offering a practical foundation for trustworthy agent-native networking through selective, auditable reuse of distributed context assets.",
+      "link": "http://arxiv.org/abs/2611.29598v1",
+      "published": "2026-11-22T16:36:30Z",
+      "category": "cs.MA",
+      "worth_reading": 0.7,
+      "novelty": 1.94,
+      "kind": "new_method",
+      "priority": 0.684
+    },
+    {
+      "title": "Reducing Order Sensitivity in Decision Models",
+      "summary": "Decision models are emerging as fast components of larger AI systems. Yet recent decision models, such as Jev, process options sequentially, leading to different predictions based on their ordering. Across ten open- and closed-source decision models, we find that \\emph{order-sensitivity} is pervasive, causing substantial accuracy degradation and unreliable decision-making. These effects become more pronounced as the number of options grows and can compound across multi-step decisions. To address this problem, we systematically compare eight methods for mitigating order sensitivity in terms of robustness, predictive accuracy, and inference efficiency. Among these methods, we find that \\emph{tree attention} is a surprisingly effective and efficient method. It achieves order invariance by processing options as parallel branches of a shared context. When used during training, it matches the baseline's average accuracy. Applied to the baseline without retraining, it also eliminates order sensitivity with only a 1.1-point drop in accuracy. Our findings demonstrate that order invariance can be enforced directly in decision models with little or no loss in predictive accuracy.",
+      "link": "http://arxiv.org/abs/2611.31174v1",
+      "published": "2026-11-23T18:31:54Z",
+      "category": "cs.AI",
+      "worth_reading": 0.75,
+      "novelty": 1.51,
+      "kind": "benchmark_or_eval",
+      "priority": 0.676
+    },
+    {
+      "title": "TRAE: Trustworthy Automated ESG Annotation via Multi-Agent Consensus and Confidence Assessment",
+      "summary": "With the growing demand for ESG disclosure and evaluation, constructing high-quality datasets for automatically extracting ESG-related information from large-scale documents has become essential. However, ESG annotation remains challenging due to strong context dependence, ambiguous label boundaries, and the need for domain expertise, resulting in high annotation cost and limited scalability. To address these challenges, we propose TRAE (TRustworthy Automated ESG annotation), a multi-agent framework for scalable and reliable ESG data construction. Unlike direct LLM-based annotation, TRAE evaluates annotation reliability by modeling agreement, confidence, and reasoning consistency among multiple agents through a structured multi-step reasoning process. Experimental results demonstrate that TRAE improves annotation performance compared with existing automated annotation strategies. Furthermore, TRAE supports a hybrid human-AI annotation strategy that assigns expert labeling only to uncertain samples, reducing annotation cost while preserving data quality. Using TRAE, we construct a high-quality ESG dataset containing approximately 20,000 instances with complete reasoning traces, intermediate agent outputs, and reliability information to enhance transparency and reproducibility. Overall, this work provides a practical and scalable framework for trustworthy ESG data construction. The code and data are publicly available at: https://github.com/nowzer0/TRAE.",
+      "link": "http://arxiv.org/abs/2611.30035v1",
+      "published": "2026-11-23T04:44:25Z",
+      "category": "cs.MA",
+      "worth_reading": 0.79,
+      "novelty": 1.06,
+      "kind": "new_method",
+      "priority": 0.659
+    },
+    {
+      "title": "UMAMI: A Multimodal Benchmark Dataset for Evidence-Grounded Dietary Decisions",
+      "summary": "Dietary decisions require identifying a food's nutrient content and considering individual dietary needs, but recognizing food from an image alone does not provide this information. Visually similar foods can have different nutrient profiles, so selecting the wrong food record can lead to incorrect decisions even when nutrient rules are applied correctly. Furthermore, satisfying nutrient constraints does not necessarily establish a food's relevance to a person's intake. Evaluating these challenges together requires connecting food images, nutrient records, and individual intake histories. To support this evaluation, we introduce UMAMI (Unified Multimodal Assessment of Meals and Intake), a multimodal dataset and benchmark linking independently collected food images with nutrient profiles and respondent health and intake records. Using this dataset, we construct three diagnostic tasks covering visual nutrient question answering, personalized food recommendation, and condition-aware food substitution. Paired instances and input controls examine how visual identity and respondent context affect decisions. Our experiments identify errors in both food-record selection and nutrient-rule application, while showing that higher rule compliance does not necessarily improve alignment with subsequent recorded intake. These findings highlight the need to evaluate how multimodal systems select and use structured evidence for dietary decisions. The dataset, code, and dashboard are available at https://umami-benchmark.github.io.",
+      "link": "http://arxiv.org/abs/2611.31068v1",
+      "published": "2026-11-23T17:23:52Z",
+      "category": "cs.CL",
+      "worth_reading": 0.68,
+      "novelty": 1.79,
+      "kind": "benchmark_or_eval",
+      "priority": 0.655
+    }
+  ]
+}
