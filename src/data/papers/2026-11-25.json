@@ -1,0 +1,233 @@
+{
+  "date": "2026-11-25",
+  "generated_at": "2026-11-25T17:42:34.053399+00:00",
+  "interest": "LLM agents, tool use, and structured/typed model outputs",
+  "categories": [
+    "cs.AI",
+    "cs.CL",
+    "cs.LG",
+    "cs.MA"
+  ],
+  "papers": [
+    {
+      "title": "CoT-Proxy: Cross-Format Transfer for Distilling Long-Horizon Policies",
+      "summary": "Reasoning models become long-horizon agents through reinforcement learning or, more cheaply, through fine-tuning on a stronger teacher's trajectories, which contain the teacher's chain-of-thought as well as its actions. The standard fine-tuning approach imitates both, yet the strongest teachers are closed models whose chain-of-thought is hidden behind an API. We show that the chain-of-thought can be left out altogether and that the long-horizon policy can be distilled from the teacher's actions alone. The student is trained on these trajectories with its reasoning block left empty, while a KL loss on a replay buffer of its own generations limits drift from its initial model. Surprisingly, the policy learned from these trajectories with an empty reasoning block carries over to inference with thinking enabled, where the student reasons in its own style while acting like the teacher, an effect we call cross-format transfer. Distilling the actions of Qwen3.6-27B raises the task success of Qwen3-4B on AppWorld from 7% to 18% and that of Qwen3-32B from 12% to 25%. We further introduce CoT-proxies, short summaries of the teacher's reasoning placed after the empty reasoning block, which raise Qwen3-4B further, to 35%. Since neither actions nor CoT-proxies need the hidden chain-of-thought, the recipe applies unchanged to closed teachers. Distilling GPT-5.6 Luna from its visible outputs and the reasoning summaries its API returns raises Qwen3-4B from 7% to 48% on AppWorld and from 3% to 28% on SWE-bench Verified.",
+      "link": "http://arxiv.org/abs/2611.33148v1",
+      "published": "2026-11-24T18:58:53Z",
+      "category": "cs.CL",
+      "worth_reading": 0.84,
+      "novelty": 1.95,
+      "kind": "new_method",
+      "priority": 0.783
+    },
+    {
+      "title": "Recursive Collective Intelligence: Emergence on an Equal-Budget Ladder in Multi-Agent LLM Systems",
+      "summary": "Large language models increasingly work as teams of agents, and a team is expected to solve problems beyond the reach of any single member. Most evaluations credit a team for outperforming a single agent, without accounting for the additional computation: a team may consume many times the tokens of one agent, and a plain vote over independent answers already explains most of the reported gain. Two questions therefore remain open: When does interaction itself make a group smarter, and can a group improve its next generation by learning from its own work? We answer both with the equal-budget ladder, which grades a group against independent agents at three levels: outperforming a single agent, a compute-matched majority vote, and compute-matched pass@n. On this ladder we define Recursive Collective Intelligence (RCI) as a group whose own output, without a teacher or external labels, makes its next generation smarter at equal cost. Three findings follow. First, interaction improves collective intelligence when it moves information across agents: forwarding split facts lifts groups above pass@n at three model scales, by about a third at 27B. Second, organization emerges spontaneously: identical 27B agents form hubs and improve accuracy by 18 percentage points; encoding their organization in a prompt enables them to reach level 3 at less than half the token budget in a descriptive comparison. Third, groups recursively improve themselves: Two label-free generations progressively climb the ladder, the second 9B generation surpassing both pass@$n$ and a control trained on base-model turns; on PlanBench, HiddenBench and Hanabi, each generation outperforms its predecessor on unseen problems for four to six generations. A group therefore outperforms its members when it forwards useful information more efficiently than it spends tokens on coordination, and learns to do so from its own work.",
+      "link": "http://arxiv.org/abs/2611.32606v1",
+      "published": "2026-11-24T13:37:54Z",
+      "category": "cs.MA",
+      "worth_reading": 0.8,
+      "novelty": 1.95,
+      "kind": "benchmark_or_eval",
+      "priority": 0.755
+    },
+    {
+      "title": "TimeTravelContainer: A Live Forking Sandbox for Stateful Agent Exploration",
+      "summary": "LLM agents that drive stateful tools (e.g., interactive shells, design environments, simulation engines) frequently need to clone, backtrack, and parallelize live sessions to support exploration. However, cloning a live session today requires serializing the tool's in-memory state to disk or relaunching from scratch, both prohibitively slow for interactive exploration. Existing agent sandboxes based on microVMs or kernel patches either serialize full guest memory to storage or require privileged deployment, limiting use on shared compute farms, personal computers, and other restricted environments. We present TimeTravelContainer (TTC), a rootless container runtime that live-forks an entire running container, including processes, memory, filesystem, and network, with copy-on-write (CoW) semantics. Because the bulk of a tool session's memory is typically read-only after the fork point, clones share it automatically and only diverged pages consume additional memory. TTC requires no kernel modifications, hardware virtualization, or root privileges, and runs on all major platforms including Linux, macOS (Apple Silicon), and Windows (WSL 2), making it deployable as a portable foundation for agent harnesses. We evaluate TTC on two agentic electronic design automation (EDA) flows as representative stateful-tool workloads: MAGE (Innovus) and EvoDRC (KLayout). TTC achieves 84.1$\\times$ environment cloning speedup, 31--72% memory reduction, and 1.7--9.4$\\times$ end-to-end speedup, demonstrating that live forking removes a scaling barrier for agent-driven exploration of stateful tool environments.",
+      "link": "http://arxiv.org/abs/2611.32255v1",
+      "published": "2026-11-24T09:29:45Z",
+      "category": "cs.MA",
+      "worth_reading": 0.8,
+      "novelty": 1.76,
+      "kind": "new_method",
+      "priority": 0.736
+    },
+    {
+      "title": "AIChipBench: Benchmarking LLM Agents for Automated AI Accelerator Design",
+      "summary": "A language-model decoder carries state between decoding steps, and in hardware a wrong state update can leave the current token correct and corrupt the output several tokens later, so a design can pass output tests and still be wrong. AIChipBench asks what LLM coding agents need to build such hardware correctly. Agents implement quantized Qwen3.5, Gemma 3, Gemma 4, and Llama 3.2 decoders in synthesizable register-transfer-level (RTL) code against an executable integer reference that specifies the outputs and the stored state at every decoding step. They debug against public tests under fixed budgets; their frozen designs are graded on held-out token sequences, resets, memory stalls, and synthesis, and a second track asks them to speed up a correct design at nearly fixed area. Across 9,136 attempts by four coding agents, the difficulty lies in stored state. Feedback that points to the first state mismatch raises acceptance over output-only feedback in all 12 agent--task cells of a matched study, by 25.0 to 46.9 percentage points, and halves the agent-hours per accepted design. Regraded on new sequences and conditions, 45 of 69 accepted designs fail within the 32 steps their tests required. More than a third of attempts to speed up a correct design end without one. An overall score ranks Sol 5.6 and Fable 5.1 above Astra 6 and Opus 5.5, and both halves of the instances give this order in all 200 random splits. Hardware agents therefore need debugging feedback that exposes stored state, and their benchmarks need final tests well beyond the development cases.",
+      "link": "http://arxiv.org/abs/2611.33093v1",
+      "published": "2026-11-24T18:28:41Z",
+      "category": "cs.AI",
+      "worth_reading": 0.77,
+      "novelty": 1.92,
+      "kind": "benchmark_or_eval",
+      "priority": 0.731
+    },
+    {
+      "title": "BriConstrain: Geometrically Constrained Decoding for Autoregressive Brick Assembly Generation",
+      "summary": "Language models can generate LEGO$^\\circledR$ assemblies from text, but their builds often contain parts that collide or attach to nothing. The usual approach of rejecting and resampling invalid placements discards decoded tokens without guaranteeing a valid build. We present BriConstrain, a constrained decoding method that restricts a pretrained language model's next-token probabilities before sampling, steering it towards valid placements. Because the validity of a brick placement depends on the non-predetermined build state, it cannot be compiled into a fixed grammar and must be checked dynamically. However, checking the validity of a brick before sampling is challenging as the space of valid placements is combinatorially large and cannot be enumerated exhaustively. Our key idea is to narrow the search space by constraining how parts attach rather than which parts attach to each other. Concretely, given the model's predictions of the currently placed part, and the previously placed parent it wants to connect to, we constrain the model's choice of how they attach. This allows us to span the space of part attachments, using a precomputed geometric oracle, and to effectively filter out colliding options. With valid attachment candidates in hand, we bias the model's next-token distribution towards the remaining valid candidates. We evaluate our method on two LEGO$^\\circledR$ formats and models: BrickNet, which annotates connectivity explicitly, and our proposed Implicit Connectivity LDraw Format (ICLF), which uses numeric values for placements and leaves connectivity implicit. Our method raises collision-free builds from 31% to 91% on BrickNet and from 15% to 65% on ICLF, and outperforms rejection sampling on both formats at about 60% of its decoding cost.",
+      "link": "http://arxiv.org/abs/2611.33135v1",
+      "published": "2026-11-24T18:54:38Z",
+      "category": "cs.CL",
+      "worth_reading": 0.77,
+      "novelty": 1.84,
+      "kind": "new_method",
+      "priority": 0.723
+    },
+    {
+      "title": "Can LLM Judges Catch Unsafe Clinical Actions? A Fault-Injection Study",
+      "summary": "As clinical AI agents begin to interact with electronic health records (EHRs), large language models (LLMs) are increasingly used to evaluate their actions. But how reliably can these judges recognize clinically dangerous mistakes, especially when an agent appears to have completed its task successfully? We investigate this question using MedAgentBench by introducing controlled clinical errors into verified agent trajectories. The experiments include 416 faulty trajectories, eight error categories, and six open-weight LLM judges. By comparing each faulty trajectory with its correct counterpart, we measure whether judges genuinely recognize errors rather than simply flagging more actions as unsafe. The findings show that access to clinical evidence significantly improves judge reliability. When shown only the final answer, judges cannot distinguish errors that leave it unchanged, while flagging 56% of correct trajectories. With full trajectory information, the ability to distinguish unsafe actions from correct ones reaches a score of 0.75, and providing actual EHR responses improves discrimination by 0.39. Surprisingly, including the agent's reasoning does not improve overall performance and reduces detection of incorrectly reported clinical values by 0.18, which remain the hardest errors to detect. MedGemma performed worse than the general-purpose model and was the only judge to miss potentially dangerous medication overdoses. We also find that the benchmark's original grader accepts all 38 trajectories with an intentionally skipped laboratory check, while combining LLM judges with a rule-based checker informed by the full EHR record detects 97% of injected faults.",
+      "link": "http://arxiv.org/abs/2611.33012v1",
+      "published": "2026-11-24T17:32:40Z",
+      "category": "cs.AI",
+      "worth_reading": 0.81,
+      "novelty": 1.52,
+      "kind": "benchmark_or_eval",
+      "priority": 0.719
+    },
+    {
+      "title": "Leto: Utility-Centric Agent Memory",
+      "summary": "Large language model (LLM) agents rely on external memory to retain and reuse information across interactions. Existing memory systems treat memory as a record of the past and evaluate it by fidelity to the conversation. However, the value of memory lies in whether it improves the agent's response. A memory system decides what to memorize and what to serve before that response exists, and fidelity checks neither decision against it. Faithful memory can therefore fail to improve the response. We instead view memory as a prediction problem and present \\textbf{\\emph{\\leto{}}}, a memory system for LLM agents that focuses on the utility of memory to the future rather than on its fidelity to the past. Because future requests are unknown, \\emph{\\leto{}} preserves access to conversation details through memory indexing, allowing information to remain available through its sources. When a request arrives, memory replay draws on this index to anticipate and supply the context the agent needs beyond what the request explicitly states. The utility of the served context remains uncertain until the response is generated, motivating a utility loop that uses response outcomes to refine future memory selection. We evaluate our system against six memory systems on five benchmarks across three scenarios. In personalization, it outperforms the strongest compared memory system by 16.3 percentage points in accuracy on PrefEval and by 3.1 points in task completion on PERMA. For long-horizon tasks, it achieves the best overall performance on MemoryArena averaged over five environments with a gain that increases with the chain depth. In long-context understanding, it is on par with retrieval over the raw history while serving fewer context tokens.",
+      "link": "http://arxiv.org/abs/2611.33005v1",
+      "published": "2026-11-24T17:30:06Z",
+      "category": "cs.CL",
+      "worth_reading": 0.76,
+      "novelty": 1.86,
+      "kind": "new_method",
+      "priority": 0.718
+    },
+    {
+      "title": "FOL-Proof: Verifying LLM Text-to-Logic Translations via Deterministic Semantics",
+      "summary": "Large Language Models (LLMs) are increasingly used to translate natural-language statements into first-order logic (FOL) to improve reasoning. However, LLMs are prone to errors, and so a semantically unfaithful FOL formula could corrupt downstream reasoning. We present FOL-Proof, a semantic firewall pipeline that validates LLM-generated FOL translations against independently derived linguistic interpretations. FOL-Proof operates by deterministically obtaining a pool of candidate translations via semantic analysis tools, such as the English Resource Grammar and Minimal Recursion Semantics; then applying an SMT solver to check each derived reading for logical equivalence to the LLM-generated formula. If the translation is faithful it is accepted; otherwise, it is rejected, or optionally repaired via repeated invocations to the LLM. The procedure is conservative: incomplete search, unsupported constructions, or inconclusive checks yield abstention rather than false rejection. We evaluated FOL-Proof on established benchmarks (ProofWriter, RuleTaker and PrOntoQA), and also on a new adversarial benchmark (LongFaithCheck). Our experiments show that FOL-Proof attains near perfect selective accuracy, while direct LLM judges and round-trip baselines show substantially worse performance.",
+      "link": "http://arxiv.org/abs/2611.33078v1",
+      "published": "2026-11-24T18:13:28Z",
+      "category": "cs.CL",
+      "worth_reading": 0.8,
+      "novelty": 1.53,
+      "kind": "new_method",
+      "priority": 0.713
+    },
+    {
+      "title": "AgentDRC: Multi-Agent Algorithms for Spatially-Aware Automated DRC Correction",
+      "summary": "Design Rule Checking (DRC) error fixing remains a time-consuming bottleneck in physical design, often requiring manual intervention despite advanced EDA optimizations. Existing LLM-agent approaches fall short due to redundant contextual shapes, limited spatial reasoning over raw coordinates, and inefficient flat layout representations. We propose AgentDRC, which formulates iterative DRC correction as a multi-agent algorithm and introduces a spatial-aware verification and correction algorithm that reconstructs structured spatial relations among critical shapes and validates fixes through geometric and semantic constraint checking. The system coordinates four specialized agents to perceive multi-level, multi-modal geometric features, filter irrelevant shapes, and iteratively correct violations. Experiments show that AgentDRC achieves up to 30.4% pass@1 and 55.7% pass@5 on challenging violations, with 13.8% pass@5 improvement over the best baseline. We will open-source all code and benchmark tasks upon acceptance.",
+      "link": "http://arxiv.org/abs/2611.31876v1",
+      "published": "2026-11-24T03:30:08Z",
+      "category": "cs.MA",
+      "worth_reading": 0.78,
+      "novelty": 1.66,
+      "kind": "new_method",
+      "priority": 0.712
+    },
+    {
+      "title": "MetaFORGE: A Meta-Learning Framework for Harness Optimization in Automated Code Generation for Parallel Computing",
+      "summary": "Large language models (LLMs) can generate parallel programs, but their correctness and performance depend strongly on the instructions that guide generation. We present \\textsc{MetaFORGE}, an execution-grounded meta-learning framework that iteratively optimizes persistent natural-language skill specifications for MPI C code generation. \\textsc{MetaFORGE} combines correctness testing, compiler diagnostics, static-analysis findings, runtime measurements, and rank-level load-imbalance profiles into a scalar reward that drives textual-gradient refinement, while an external memory distills and retrieves reward-supported optimization knowledge across runs.   Across six MPI tasks and three workload sizes, \\textsc{MetaFORGE} improves static-analysis quality, runtime, and load balance relative to zero-shot generation and generally exceeds the evaluated \\textsc{TextGrad} iterative baseline. A model-matched refinement ablation shows that the MetaFORGE advantage persists when its refinement model is reduced to \\texttt{gpt-4o}. An expanded retrieval ablation across all 18 task--workload configurations shows consistent runtime benefit and broad static-analysis and load-balance benefit from retrieved context. Leakage-controlled held-out and zero-update experiments further provide evidence that optimization knowledge persists in both the transferred skill and external memory under the evaluated protocol.",
+      "link": "http://arxiv.org/abs/2611.33119v1",
+      "published": "2026-11-24T18:49:19Z",
+      "category": "cs.AI",
+      "worth_reading": 0.8,
+      "novelty": 1.48,
+      "kind": "new_method",
+      "priority": 0.708
+    },
+    {
+      "title": "Reproducible Social Structure Emerges From Free-Form Interaction Among LLM Agents",
+      "summary": "Multi-agent LLM simulations are increasingly used as models of social systems, but most published findings are anecdotal, i.e., drawn from a single run. It is therefore unclear which observed phenomena are robust findings of the simulated system itself, and which were random events in one particular run. Here, we introduce a repeatable, goal-free, proactive multi-agent framework in which fifty persona-conditioned agents with persistent memory choose whether, with whom, and how to communicate across three social platforms. The framework supports non-perturbative measurements across temporal snapshots and repetitions. Running the same world ten times from identical initial conditions for a total of 700 hours, we find that most measured network- and agent-level parameters are stable across repetitions. Throughout a run, initially broad communication contracts into sparse sustained dyads in all ten worlds. Importantly, we find that many identical dyads re-form across worlds significantly more often than expected by chance or from agent-specific sociability alone. Static personality similarity largely fails to predict these dyads. Instead, alignment and extremity in the emotions and traits expressed during first contact predict whether a pair later forms a sustained dyad. Additionally, individual agents' emotion and trait expression in their chain-of-thought predicts their future behavior. Finally, swapping either persona prompts or accumulated memories between agents causes recipients to exhibit behavior more similar to donors. Both kinds of transplant move the recipients about 60% of the way toward its donor personality, and state-transplanted agents start behaving similar to their donor agent from their next turn on. Overall, we show that repeated worlds enable robust, statistically-grounded conclusions about emergent within-configuration behavior in agent societies.",
+      "link": "http://arxiv.org/abs/2611.31543v1",
+      "published": "2026-11-23T20:51:57Z",
+      "category": "cs.MA",
+      "worth_reading": 0.76,
+      "novelty": 1.66,
+      "kind": "new_method",
+      "priority": 0.698
+    },
+    {
+      "title": "Can a Frontier LLM Repair a Quantized Network by Tool-Free Weight-Space Programming?",
+      "summary": "We give four large language models (LLMs) of the Claude family the complete weights of a 20k-parameter CIFAR-10 CNN as text and ask them to produce a 4-bit network without tools, data or the ability to run inference. Standard round-to-nearest (RTN) quantization to 4 bit lowers the test accuracy from 81.4% to 60.4%. We design four evaluation protocols that differ in the input and task description given to the LLMs and analyze their responses. In the first two protocols the LLMs are given the float and the 4-bit RTN network and are told that the accuracy has dropped significantly. In the last two they receive only the float network and the task to quantize it, which tests whether they apply an optimization on their own or fall back to plain RTN. Our analysis shows that a frontier LLM can recover most of the lost accuracy. Given one answer per layer, Opus 5.5 raises the accuracy of the 4-bit network to 77.95% by balancing the rounding errors within each 3x3 kernel, reasoning over the integer weights without tools. This is 3.5 pp below the float network and 2.8 pp below AdaRound, which learns the rounding from calibration data. Given only the float network, the LLMs name error-cancelling corrections but do not apply them and fall back to plain RTN, at most with mildly clipped scales, which still lifts Fable 5.2's quantized network to 70.0%. We analyze in detail what the LLMs did and why it works. Code and prompts can be found at https://github.com/urbste/weight-space-programming-ptq",
+      "link": "http://arxiv.org/abs/2611.33031v1",
+      "published": "2026-11-24T17:43:09Z",
+      "category": "cs.AI",
+      "worth_reading": 0.71,
+      "novelty": 1.95,
+      "kind": "benchmark_or_eval",
+      "priority": 0.692
+    },
+    {
+      "title": "Delegent: A Multi-Agent Harness That Reduces Cost without Sacrificing Performance",
+      "summary": "Agents built on frontier language models are expensive. At every step, the frontier model re-reads its entire context and executes every subtask regardless of its difficulty. This paper explores the simple thesis that much of this cost can be removed by delegating easy subtasks to a small language model, or SLM, that runs on hardware one already owns. To test it, we build Delegent, a simple and effective agent harness built on Claude Code, in which the frontier model stays in charge of every task but hands focused subtasks, such as investigating code, running tests, and searching a corpus, to SLM subagents. Existing approaches such as cascades and model routers usually choose which model executes the entire task, whereas in Delegent, the frontier model always leads the execution and delegates easy subtasks to the SLM. No router or model is trained, so either model can be swapped freely. With the help of a 27B FP8 SLM, Delegent reduces the frontier cost of long-horizon coding by 67% and of agentic search by 59%, with no loss in task performance, and even a 2B SLM that fits on a laptop reduces the coding cost by 66%. The savings grow with the legwork that the frontier model would otherwise do itself, and a short instruction, which leaves the main coding tasks to the frontier model, accounts for most of the saving and keeps the 2B SLM from losing tasks. Code: https://github.com/castorini/delegent",
+      "link": "http://arxiv.org/abs/2611.33098v1",
+      "published": "2026-11-24T18:34:40Z",
+      "category": "cs.AI",
+      "worth_reading": 0.82,
+      "novelty": 1.14,
+      "kind": "applied_system",
+      "priority": 0.688
+    },
+    {
+      "title": "RecordRoute: Auditing Agent Failures with Localization-Guided Diagnosis",
+      "summary": "Auditing failed agent executions requires identifying the responsible actor, the earliest decisive step, and the error mode. Representative supervised methods either focus on step localization or predict multiple attribution targets from shared trajectory representations. These methods do not use the localization result to select the text for mode diagnosis. To address this limitation, we propose RecordRoute, which couples comparative localization with local diagnosis. Specifically, it represents each record with word and character features and learns to rank records through comparisons within each trajectory. The selected record supplies the actor and step, while its text and metadata drive mode prediction. On controlled-injection Who&When Pro, RecordRoute outperforms StepFinder and ASCon on all four official metrics. With actor and step predictions fixed, local diagnosis reaches 77.47% pooled joint accuracy versus 69.28% for full-trace diagnosis. On natural failures from TraceElephant and CatchBench POST, it outperforms these baselines and three open LLMs in localization.",
+      "link": "http://arxiv.org/abs/2611.33022v1",
+      "published": "2026-11-24T17:37:25Z",
+      "category": "cs.AI",
+      "worth_reading": 0.77,
+      "novelty": 1.36,
+      "kind": "new_method",
+      "priority": 0.675
+    },
+    {
+      "title": "Provenance-Isolated Epistemic Quorums: Execution-Bound Evidence Certification and Plausible-World Safety Gating in Agentic Control Planes",
+      "summary": "Agreement among large language models is not physical evidence for mutating production infrastructure. Because generative models share pretraining priors and conform to peer rationales during deliberation, voting ensembles correlate errors instead of providing independent fault tolerance; yet attaching rigid deterministic checks to unconstrained agent outputs paralyzes incident remediation. We present Provenance-Isolated Epistemic Quorums (PIEQ), an execution-bound certification layer that keeps every language model strictly outside the trusted computing base. PIEQ unifies assumption-based truth maintenance, physical provenance isolation, control-theoretic plausible-world safety shielding, and linearizable concurrency governance around three distinct obligations: certifying diagnostic preconditions from disjoint physical failure domains, gating candidate mutations across all unrefuted fault worlds while falling back to read-only diagnostic probes under ambiguity, and binding admission certificates to target execution through snapshot barriers, revision checks, authorization freshness, trusted temporal-precondition policies, and capability-tiered enforcement.   Across formal guarantees, automated etcd fault suites, frozen software benchmarks, and live language-model runs, PIEQ achieves zero within-assumption unsafe admissions and zero false-precondition commits, converting occasional agent proof omissions into recoverable false blocks rather than unsafe actions. On a physical PostgreSQL/Patroni cluster, PIEQ gates supervised failovers alongside Patroni and etcd's native split-brain protection and enforces a full Tier E2 contract inside a single serializable PostgreSQL transaction for bounded capacity reservations. All benchmarks are author-labeled, live model snapshots are unpinned, and Tier E2 physical failover promotion as well as multi-host hardware fault isolation remain open work.",
+      "link": "http://arxiv.org/abs/2611.32032v1",
+      "published": "2026-11-24T06:13:55Z",
+      "category": "cs.MA",
+      "worth_reading": 0.68,
+      "novelty": 1.96,
+      "kind": "new_method",
+      "priority": 0.672
+    },
+    {
+      "title": "CANON: Agent-Assisted Construction of Canonical Differential Equations for Feynman Integrals",
+      "summary": "The construction of canonical basis is an important procedure in the calculation of multi-loop Feynman integrals via the canonical differential equation methods. Currently, there are various different methods for this purpose. Among them, no single method is universally applicable. Thus, obtaining a valid basis often requires repeated attempts and verification. In this paper, we present CANON, an agent-assisted framework designed to make this search-and-verification process more convenient and more efficient. In this workflow, the agent selects methods and calls the corresponding tools to revise the basis proposal or the associated differential-equation system. Independent programs then verify whether the agent's result is valid and ask the agent to retry if verification fails. This framework contains a specific state-management tool to supports long-range basis searching works which requires multiple sub-agents. Its modular architecture enables future extensions to the framework itself. In this paper, we demonstrate this framework by applying it to some two-loop and three-loop integral families.",
+      "link": "http://arxiv.org/abs/2611.33100v1",
+      "published": "2026-11-24T18:35:05Z",
+      "category": "cs.MA",
+      "worth_reading": 0.72,
+      "novelty": 1.46,
+      "kind": "applied_system",
+      "priority": 0.65
+    },
+    {
+      "title": "MRBench: Benchmarking Physical Necessity Reasoning in Heterogeneous Multi-Robot Manipulation",
+      "summary": "Recent advances in multi-robot manipulation have shown how robots can collaborate to accomplish complex tasks. However, successful coordination does not reveal which robots are actually needed. The same task may require different teams as robot capabilities change, resources become unavailable, or objects replace robotic support. We argue that reliable multi-robot manipulation requires physical necessity reasoning: understanding what a task demands, which resources can fulfill those demands, and which are truly necessary. We introduce MRBench, a benchmark for physical necessity reasoning in heterogeneous multi-robot manipulation. It comprises eight tasks with distinct concurrency and reach constraints, each evaluated under five configurations that change the required resources while preserving the task goal. Our evaluation reveals that existing coordination agents perform well with reference teams but struggle when robot embodiments change or passive objects can replace robotic support. To address this gap, we propose MRScissors, which separates task requirements from measured physical capabilities and identifies minimal feasible teams through constrained search. Across two model backbones, MRScissors achieves 85.4% and 91.2% team-selection accuracy, outperforming the strongest baselines by 10.4 and 9.5 points, respectively. Together, these findings expose a critical gap between coordinating robots and understanding their physical necessity.",
+      "link": "http://arxiv.org/abs/2611.32803v1",
+      "published": "2026-11-24T15:25:53Z",
+      "category": "cs.MA",
+      "worth_reading": 0.65,
+      "novelty": 1.9,
+      "kind": "benchmark_or_eval",
+      "priority": 0.645
+    },
+    {
+      "title": "Exploring Multi-Player Social Games as Verifiable Training Grounds for Large Language Models",
+      "summary": "The training of socially intelligent language models often relies on large language model (LLM) judges, which are expensive, noisy, and vulnerable to reward hacking. Multi-player social games offer a natural alternative: they require open-ended communication to coordinate with teammates and infer hidden roles, while their rules provide an objective outcome which can serve as a verifiable reward for training. Using three social games, we explore how much social intelligence Qwen3 models can acquire through supervised fine-tuning (SFT) and reinforcement learning with verifiable rewards (RLVR). Results show that against a much stronger Gemma-3-27B model, SFT and RLVR raise the win rate of Qwen3-4B from 33% to 81% on the three trained games, and from 39% to 54% on three additional held-out games. In contrast, in-context strategies such as prompting improve the win rate of Qwen3-4B by only about 6 pp across the same games we train and evaluate on. Furthermore, we show that the gains from SFT and RLVR hold across the model sizes 1.7B, 4B, and 32B. Qualitative analyses of agent behavior show signs of stronger social intelligence; for example, trained agents tend to share information more openly, check each other's claims against public evidence, and coordinate their votes. More broadly, our results demonstrate that training LLMs on verifiable outcomes in social games can cultivate generalizable social behaviors, which offers a scalable path for building socially intelligent agents.",
+      "link": "http://arxiv.org/abs/2611.31821v1",
+      "published": "2026-11-24T02:15:30Z",
+      "category": "cs.MA",
+      "worth_reading": 0.64,
+      "novelty": 1.48,
+      "kind": "benchmark_or_eval",
+      "priority": 0.596
+    },
+    {
+      "title": "The Paradox of Agency-Preserving AI: Negotiating Learner Agency in Layered Human-AI Interactions",
+      "summary": "Generative AI is increasingly used by learners in cognitively demanding tasks, but its capacity to provide immediate solutions raises concerns about decreased learner agency. Meta-level AI systems that provide reflective and metacognitive scaffolding have emerged as a promising approach to supporting learners' self-regulation. However, these systems introduce a fundamental paradox: AI intended to preserve learner agency can itself constrain that agency by regulating when, how, and why learners should reflect. To investigate this challenge, we conducted a co-design workshop with 18 students engaged in programming and academic writing tasks using ChatGPT extended with ChatWise, a meta-level AI system providing self-regulated learning-aligned feedback. Drawing on 185 prompt-feedback entries, 174 written reflections, and participants' design artifacts (17 storyboards and 5 group design proposals), we identified four interconnected design tensions: assistance vs reflection, immediate intervention vs space for self-regulation, visibility vs attention competition, and system adaptation vs user control. The study contributes a multidimensional account of learner agency that includes task, cognitive, and interaction agency, along with empirically grounded interaction-design mechanisms to negotiate these tensions.",
+      "link": "http://arxiv.org/abs/2611.31573v1",
+      "published": "2026-11-23T21:15:09Z",
+      "category": "cs.MA",
+      "worth_reading": 0.58,
+      "novelty": 1.75,
+      "kind": "applied_system",
+      "priority": 0.581
+    },
+    {
+      "title": "U-Statistics-Powered LLM Reasoning",
+      "summary": "Since its introduction by DeepSeek, group relative policy optimization (GRPO) has been widely adopted for training large reasoning models and agents, spurring a proliferation of its variants. Yet the group size, a crucial hyperparameter in these GRPO-type algorithms, remains largely chosen by trial and error. Exploiting the U-statistic structure of GRPO's policy gradient, we recast the selection of the group size as a classical statistical problem of variance ratio estimation. This problem is particularly challenging when the denominator of the ratio is small, rendering naive plug-in estimators unstable. To address this challenge, we propose a pessimistic ratio estimator that accounts for the denominator's estimation uncertainty. We characterise the statistical properties of this estimator across three sample-size regimes. Empirically, using %a jackknife-based pessimistic rule on synthetic tasks from Reasoning Gym and real-world benchmarks covering both mathematical reasoning and code generation, we show that our adaptive group size selection reduces the mean squared error of the resulting policy gradient and improves policy optimisation over fixed-group-size baselines, with modest additional computational cost.",
+      "link": "http://arxiv.org/abs/2611.33064v1",
+      "published": "2026-11-24T18:05:01Z",
+      "category": "cs.LG",
+      "worth_reading": 0.53,
+      "novelty": 1.84,
+      "kind": "new_method",
+      "priority": 0.555
+    }
+  ]
+}
